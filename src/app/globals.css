@@ -1,26 +1,144 @@
 @import "tailwindcss";
 
+/* SmartComms NZ design tokens — SCNZ brand package (2026-09-05) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --sc-navy: #0b2d5b;        /* trust / primary */
+  --sc-slate: #46536a;        /* muted body text (not the brand slate swatch) */
+  --sc-slate-brand: #3b6ea5;  /* brand slate blue */
+  --sc-teal: #2cb1a5;        /* connection / accent */
+  --sc-charcoal: #1f2937;    /* body text */
+  --sc-grey: #e5e7eb;        /* borders / soft fills */
+
+  --sc-blue-900: #0b2d5b;
+  --sc-blue-700: #2a5286;
+  --sc-blue-600: #3b6ea5;
+  --sc-blue-500: #4a7fb5;
+  --sc-blue-100: #dce7f2;
+  --sc-blue-50: #eff4f9;
+  --sc-slate-text: #46536a;
+  --sc-border: #e5e7eb;
+  --sc-accent: #3b6ea5;
+  --sc-accent-hover: #2a5286;
+  --sc-teal-accent: #2cb1a5;
+  --sc-teal-hover: #239187;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: var(--sc-charcoal);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--sc-blue-600);
+}
+
+a:hover {
+  color: var(--sc-blue-700);
+}
+
+.sc-container {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 72rem;
+  padding-inline: 1.5rem;
+}
+
+.sc-prose {
+  line-height: 1.75;
+}
+
+.sc-prose h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--sc-blue-900);
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.sc-prose h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--sc-blue-900);
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.sc-prose p {
+  margin-bottom: 1rem;
+}
+
+.sc-prose ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.sc-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.925rem;
+}
+
+.sc-prose th {
+  text-align: left;
+  background: var(--sc-blue-50);
+  color: var(--sc-blue-900);
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--sc-border);
+}
+
+.sc-prose td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--sc-border);
+}
+
+.sc-card {
+  border: 1px solid var(--sc-border);
+  border-radius: 0.75rem;
+  background: #fff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sc-card:hover {
+  border-color: var(--sc-blue-500);
+  box-shadow: 0 4px 16px rgba(37, 99, 168, 0.10);
+}
+
+.sc-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--sc-accent);
+  color: #fff;
+  border-radius: 9999px;
+  padding: 0.625rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.sc-btn-primary:hover {
+  background: var(--sc-accent-hover);
+}
+
+.sc-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--sc-blue-600);
+  color: var(--sc-blue-700);
+  border-radius: 9999px;
+  padding: 0.625rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.sc-btn-secondary:hover {
+  background: var(--sc-blue-50);
 }
