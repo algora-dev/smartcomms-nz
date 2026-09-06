@@ -5,7 +5,7 @@ export const site = {
   locale: "en-NZ",
   country: "NZ",
   currency: "NZD",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://smartcomms.co.nz",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.smartcomms.co.nz",
   description:
     "Independent New Zealand resource for understanding, planning and budgeting IP paging, school bell, PA, intercom and integrated communication systems.",
 } as const;
