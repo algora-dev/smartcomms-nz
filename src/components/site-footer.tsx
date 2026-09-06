@@ -12,10 +12,12 @@ export function SiteFooter() {
         <div>
           <p className="font-semibold text-[var(--sc-blue-900)]">Explore</p>
           <ul className="mt-2 space-y-1 text-[var(--sc-slate)]">
+            <li><Link href="/systems">System types</Link></li>
             <li><Link href="/guides">Guides</Link></li>
             <li><Link href="/pricing">NZ Cost Index</Link></li>
             <li><Link href="/tools">Tools</Link></li>
             <li><Link href="/compare">System comparisons</Link></li>
+            <li><Link href="/funding">Funding options</Link></li>
           </ul>
         </div>
         <div>
@@ -24,6 +26,7 @@ export function SiteFooter() {
             <li><Link href="/about">About SmartComms</Link></li>
             <li><Link href="/about/methodology">Research methodology</Link></li>
             <li><Link href="/about/disclosure">Commercial relationships</Link></li>
+            <li><Link href="/about/editorial-policy">Editorial policy</Link></li>
             <li><Link href="/contact">Contact</Link></li>
           </ul>
         </div>

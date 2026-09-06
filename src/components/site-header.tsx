@@ -2,11 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 
 const NAV = [
+  { href: "/systems", label: "Systems" },
   { href: "/guides", label: "Guides" },
   { href: "/pricing", label: "Pricing" },
   { href: "/tools", label: "Tools" },
-  { href: "/products", label: "Products" },
   { href: "/compare", label: "Compare" },
+  { href: "/funding", label: "Funding" },
   { href: "/about", label: "About" },
 ];
 

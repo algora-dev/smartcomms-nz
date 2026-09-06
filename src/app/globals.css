@@ -142,3 +142,18 @@ a:hover {
 .sc-btn-secondary:hover {
   background: var(--sc-blue-50);
 }
+
+/* Hero schematic: subtle signal-flow pulse on connector lines */
+@keyframes sc-flow-pulse {
+  0%, 100% { stroke-dasharray: 0 200; stroke-opacity: 1; }
+  50% { stroke-dasharray: 8 8; stroke-opacity: 0.75; }
+}
+
+.sc-flow {
+  animation: sc-flow-pulse 3.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-flow { animation: none; }
+  html { scroll-behavior: auto; }
+}
