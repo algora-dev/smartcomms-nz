@@ -44,3 +44,5 @@
 .sc-hero[data-sc-reduced="true"] .sc-terms>span{font-size:14px;letter-spacing:0}
 @media(max-width:760px){.sc-hero .sc-context{margin-top:28px;padding:18px 0;gap:12px}.sc-hero .sc-terms>span{padding:7px 6px}.sc-hero .sc-context-row{gap:8px;padding-inline:8px}}
 @media(max-width:480px){.sc-hero .sc-context{grid-template-columns:1fr;gap:0}.sc-hero .sc-context-row+.sc-context-row{border-left:0;border-top:1px solid var(--sc-grey);padding-top:20px;margin-top:8px}}
+
+/* v2026-09-06b rebuild */
