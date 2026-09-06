@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SmartcommsHero } from "@/components/home/smartcomms-hero";
+import { SystemVideo } from "@/components/home/system-video";
 import { Reveal } from "@/components/home/reveal";
 import { site } from "@/lib/site";
 
@@ -75,6 +76,9 @@ export default function HomePage() {
     <>
       {/* Section 1 — Rebuilt animated hero (handoff 2026-09-06) */}
       <SmartcommsHero />
+
+      {/* System overview video */}
+      <SystemVideo />
 
       {/* Section 2 — Pricing */}
       <section className="sc-container py-16">
