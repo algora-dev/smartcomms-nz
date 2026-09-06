@@ -19,16 +19,17 @@ export function SiteHeader() {
 
   return (
     <header className="border-b border-[var(--sc-border)] bg-white sticky top-0 z-40">
-      <div className="sc-container flex items-center justify-between h-16">
-        <Link href="/" className="flex items-center gap-2" aria-label="SmartComms NZ home">
+      <div className="sc-container flex items-center justify-between h-20">
+        <Link href="/" className="flex items-center gap-3" aria-label="SmartComms NZ home">
           <Image
             src="/brand/scnz-logo-colour.png"
             alt="SmartComms New Zealand"
             width={180}
             height={44}
-            className="h-10 w-auto"
+            className="h-[3.75rem] w-auto"
             priority
           />
+          <span className="text-xl font-bold tracking-tight text-[var(--sc-blue-900)]">SCNZ</span>
         </Link>
         <div className="flex items-center gap-3">
           <Link

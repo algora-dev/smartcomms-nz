@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SmartcommsHero } from "@/components/home/smartcomms-hero";
-import { HeroSchematic } from "@/components/home/hero-schematic";
 import { Reveal } from "@/components/home/reveal";
 import { site } from "@/lib/site";
 
@@ -51,24 +50,6 @@ const INTENT_CARDS = [
     href: "/tools",
     title: "Build a budget or requirements brief",
     desc: "Use our tools to shape an indicative architecture and a practical brief before you request quotes.",
-  },
-];
-
-const SYSTEM_TYPES = [
-  {
-    href: "/systems#traditional",
-    title: "Traditional / 100V PA",
-    desc: "Simpler amplifier-to-speaker architecture. Often suits basic or existing setups, with lower network requirements.",
-  },
-  {
-    href: "/systems#ip",
-    title: "Full IP / PoE",
-    desc: "Network-based endpoints with flexible zoning, distributed control and rich scheduling features.",
-  },
-  {
-    href: "/systems#hybrid",
-    title: "Hybrid",
-    desc: "IP control layer combined with retained 100V infrastructure. Useful for staged upgrades and tighter budgets.",
   },
 ];
 
@@ -193,51 +174,7 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      {/* Section 5 — How the system fits together */}
-      <section className="border-t border-[var(--sc-border)] bg-[var(--sc-blue-50)]">
-        <div className="sc-container py-16">
-          <Reveal>
-            <h2 className="text-3xl font-bold tracking-tight text-[var(--sc-blue-900)]">
-              How a modern communication system fits together
-            </h2>
-            <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_1.2fr] lg:items-center">
-              <div>
-                <p className="text-lg text-[var(--sc-slate)]">
-                  Modern systems can combine live paging, scheduled bells, zoning, emergency alerts
-                  and two-way communication across one connected platform. In some cases, existing
-                  infrastructure can be reused in a hybrid design.
-                </p>
-                <Link href="/systems" className="sc-btn-primary mt-6">See system types</Link>
-              </div>
-              <div className="sc-card p-6 bg-white">
-                <HeroSchematic />
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Section 6 — Three system paths */}
-      <section className="sc-container py-16">
-        <Reveal>
-          <h2 className="text-3xl font-bold tracking-tight text-[var(--sc-blue-900)]">
-            Which type of system are you looking at?
-          </h2>
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {SYSTEM_TYPES.map((c) => (
-              <Link key={c.title} href={c.href} className="sc-card p-6 group">
-                <h3 className="font-semibold text-[var(--sc-blue-900)] group-hover:text-[var(--sc-blue-700)]">
-                  {c.title} <span aria-hidden>→</span>
-                </h3>
-                <p className="mt-2 text-sm text-[var(--sc-slate)]">{c.desc}</p>
-              </Link>
-            ))}
-          </div>
-          <Link href="/systems" className="sc-btn-secondary mt-6">Compare system architectures</Link>
-        </Reveal>
-      </section>
-
-      {/* Section 7 — Tools */}
+      {/* Section 5 — Tools */}
       <section className="border-t border-[var(--sc-border)] bg-[var(--sc-blue-50)]">
         <div className="sc-container py-16">
           <Reveal>

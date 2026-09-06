@@ -24,6 +24,13 @@ const SCENES = [
 
 const SYSTEMS = ["Paging & PA", "Bells", "Intercom", "Emergency alerts", "Access"];
 const PLACES = ["Schools", "Hospitals", "Aged care facilities", "Corrections", "Campuses & large facilities"];
+const FLOW_LINES = [
+  "M0 50 H20 C50 50 50 10 80 10 H100",
+  "M0 50 H20 C50 50 50 30 80 30 H100",
+  "M0 50 H100",
+  "M0 50 H20 C50 50 50 70 80 70 H100",
+  "M0 50 H20 C50 50 50 90 80 90 H100",
+];
 const CHAPTERS = [
   { jump: 0, num: "01", label: "The systems" },
   { jump: 2400, num: "02", label: "The places" },
@@ -31,10 +38,11 @@ const CHAPTERS = [
 ];
 
 /**
- * Rebuilt SmartComms animated hero (handoff 2026-09-06).
- * Static accessible markup renders server-side; the 10s timeline
- * (headline phases + paired systems/places rotation) runs in this effect
- * with full cleanup, and never initialises during SSR.
+ * SmartComms animated hero — audience-flow version (handoff 2026-09-06).
+ * 20s loop: one audience at a time on the left, all five systems on the right,
+ * connected by five teal paths revealed spatially via a single shared clock.
+ * Static accessible markup renders server-side; the timeline runs in this
+ * effect with full cleanup and never initialises during SSR.
  */
 export function SmartcommsHero() {
   const heroRef = useRef<HTMLElement>(null);
@@ -47,19 +55,22 @@ export function SmartcommsHero() {
     const scenes = [...hero.querySelectorAll<HTMLElement>("[data-sc-scene]")];
     const systems = [...hero.querySelectorAll<HTMLElement>('[data-sc-terms="systems"] > span')];
     const places = [...hero.querySelectorAll<HTMLElement>('[data-sc-terms="places"] > span')];
+    const flowLines = [...hero.querySelectorAll<SVGPathElement>("[data-sc-flow-line]")];
+    const flowSvg = hero.querySelector<SVGSVGElement>(".sc-flow-lines");
     const chapterBtns = [...hero.querySelectorAll<HTMLButtonElement>("[data-sc-jump]")];
     const pauseBtn = hero.querySelector<HTMLButtonElement>("[data-sc-pause]");
     const replayBtn = hero.querySelector<HTMLButtonElement>("[data-sc-replay]");
     const progress = hero.querySelector<HTMLElement>(".sc-progress > div");
-    if (!progress || !pauseBtn || !replayBtn) return;
+    if (!progress || !pauseBtn || !replayBtn || !flowSvg) return;
     const pause = pauseBtn;
     const replay = replayBtn;
+    const flow = flowSvg;
     const progressEl = progress;
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const duration = 10000;
+    const duration = 20000;
     const starts = [0, 2400, 5600];
-    const ends = [2400, 5600, duration];
+    const ends = [2400, 5600, 10000];
     let time = reduced.matches ? 7800 : 0;
     let playing = !reduced.matches;
     let visible = true;
@@ -71,38 +82,47 @@ export function SmartcommsHero() {
       const x = Math.max(0, Math.min(1, v));
       return x * x * (3 - 2 * x);
     };
-    const pairs = systems.map((system, index) => [system, places[index]].filter(Boolean));
 
-    function paintPairs() {
-      const slot = duration / pairs.length;
-      const active = Math.min(pairs.length - 1, Math.floor(time / slot));
+    // Each audience sends the same signal to ALL systems. No per-system timers.
+    function paintFlow() {
+      const slot = duration / places.length;
+      const active = Math.min(places.length - 1, Math.floor(time / slot));
       const local = time % slot;
       const reveal = smooth(local / 500);
-      const exit = 1 - smooth((local - (slot - 300)) / 300);
-      const pulseTime = (local - 550) / 900;
-      hero.dataset.scPair = String(active);
-      pairs.forEach((pair, i) => {
-        const pulse =
-          reduced.matches || i !== active || pulseTime < 0 || pulseTime > 1
-            ? 0
-            : Math.pow(Math.sin(Math.PI * pulseTime), 2);
-        pair.forEach((term) => {
-          term.style.opacity = String(reduced.matches ? 1 : Number(i === active) * reveal * exit);
-          term.style.transform = reduced.matches ? "none" : `translateY(${(1 - reveal) * 8}px)`;
-          term.style.color = `rgb(${Math.round(11 + pulse * 48)}, ${Math.round(45 + pulse * 65)}, ${Math.round(91 + pulse * 74)})`;
-          term.style.backgroundColor = `rgba(44,177,165,${pulse * 0.08})`;
-          term.style.textShadow = `0 0 16px rgba(44,177,165,${pulse * 0.22})`;
-          term.style.setProperty("--sc-term-pulse", String(pulse));
-        });
+      const fade = 1 - smooth((local - 3250) / 450);
+      const draw = smooth((local - 550) / 900);
+      const arrive = smooth((local - 1450) / 400);
+      const pulse =
+        arrive *
+        (0.75 + 0.25 * Math.sin(Math.PI * Math.min(1, Math.max(0, (local - 1750) / 1500))));
+      hero.dataset.scAudience = String(active);
+      places.forEach((term, i) => {
+        term.style.opacity = String(reduced.matches ? 1 : Number(i === active) * reveal * fade);
+        term.style.transform = reduced.matches ? "none" : `translateX(${(1 - reveal) * -8}px)`;
+      });
+      systems.forEach((term) => {
+        term.style.opacity = String(reduced.matches ? 1 : reveal * fade);
+        term.style.backgroundColor = `rgba(44,177,165,${reduced.matches ? 0.08 : pulse * 0.14})`;
+        term.style.borderColor = `rgba(44,177,165,${reduced.matches ? 0.5 : 0.18 + pulse * 0.7})`;
+        term.style.boxShadow = `0 0 20px rgba(44,177,165,${reduced.matches ? 0 : pulse * 0.12})`;
+      });
+      // Reveal solid paths spatially. Normalised dashes with non-scaling strokes
+      // can leave gaps when this SVG stretches to fit different viewport sizes.
+      // Remove the clip entirely on arrival and hold all five complete connections.
+      flow.style.clipPath =
+        draw >= 1 ? "none" : `inset(-3px ${(1 - draw) * 100}% -3px 0)`;
+      flowLines.forEach((line) => {
+        line.style.opacity = String(reduced.matches ? 0 : fade * Number(local > 550));
       });
     }
 
     function paint() {
       hero.dataset.scReduced = String(reduced.matches);
-      const phase = time < 2400 ? 0 : time < 5600 ? 1 : 2;
+      const headlineTime = time % 10000;
+      const phase = headlineTime < 2400 ? 0 : headlineTime < 5600 ? 1 : 2;
       scenes.forEach((scene, i) => {
-        const enter = smooth((time - starts[i]) / 800);
-        const leave = 1 - smooth((time - (ends[i] - 450)) / 450);
+        const enter = smooth((headlineTime - starts[i]) / 800);
+        const leave = 1 - smooth((headlineTime - (ends[i] - 450)) / 450);
         scene.style.opacity = String(reduced.matches ? Number(i === phase) : enter * leave);
         scene.style.transform = reduced.matches ? "none" : `translateY(${(1 - enter) * 8}px)`;
       });
@@ -110,12 +130,12 @@ export function SmartcommsHero() {
         if (i === phase) button.setAttribute("aria-current", "step");
         else button.removeAttribute("aria-current");
       });
-      paintPairs();
+      paintFlow();
       progressEl.style.transform = `scaleX(${time / duration})`;
       hero.dataset.scPulse = String(
-        (phase === 0 && time > 500 && time < 2100) ||
-          (phase === 1 && time > 2800 && time < 4400) ||
-          (phase === 2 && time > 6100 && time < 7700)
+        (phase === 0 && headlineTime > 500 && headlineTime < 2100) ||
+          (phase === 1 && headlineTime > 2800 && headlineTime < 4400) ||
+          (phase === 2 && headlineTime > 6100 && headlineTime < 7700)
       );
     }
 
@@ -293,22 +313,28 @@ export function SmartcommsHero() {
           </div>
         </div>
       </div>
-      <div className="sc-context">
-        <div className="sc-context-row">
-          <p>SYSTEMS</p>
-          <div className="sc-terms" data-sc-terms="systems" aria-hidden="true">
-            {SYSTEMS.map((s) => (
-              <span key={s}>{s}</span>
-            ))}
-          </div>
+      <div className="sc-audience-flow" aria-hidden="true">
+        <p className="sc-flow-label sc-flow-label-left">BUILT FOR</p>
+        <p className="sc-flow-label sc-flow-label-right">SYSTEMS</p>
+        <div className="sc-flow-audiences" data-sc-terms="places">
+          {PLACES.map((p) => (
+            <span key={p}>{p}</span>
+          ))}
         </div>
-        <div className="sc-context-row">
-          <p>BUILT FOR</p>
-          <div className="sc-terms" data-sc-terms="places" aria-hidden="true">
-            {PLACES.map((p) => (
-              <span key={p}>{p}</span>
-            ))}
-          </div>
+        <svg
+          className="sc-flow-lines"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          fill="none"
+        >
+          {FLOW_LINES.map((d) => (
+            <path data-sc-flow-line d={d} key={d} />
+          ))}
+        </svg>
+        <div className="sc-flow-systems" data-sc-terms="systems">
+          {SYSTEMS.map((s) => (
+            <span key={s}>{s}</span>
+          ))}
         </div>
       </div>
       <div className="sc-playback">
@@ -326,7 +352,7 @@ export function SmartcommsHero() {
           <button type="button" data-sc-replay>
             Replay <span aria-hidden="true">↻</span>
           </button>
-          <span className="sc-time-label">10 SEC</span>
+          <span className="sc-time-label">20 SEC</span>
         </div>
       </div>
       <div className="sc-progress" aria-hidden="true">
