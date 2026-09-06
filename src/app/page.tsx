@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AudienceRotator } from "@/components/home/audience-rotator";
+import { SmartcommsHero } from "@/components/home/smartcomms-hero";
 import { HeroSchematic } from "@/components/home/hero-schematic";
 import { Reveal } from "@/components/home/reveal";
 import { site } from "@/lib/site";
@@ -92,43 +92,8 @@ const QUOTE_LINKS = [
 export default function HomePage() {
   return (
     <>
-      {/* Section 1 — Hero */}
-      <section className="bg-gradient-to-b from-[var(--sc-blue-50)] to-white border-b border-[var(--sc-border)]">
-        <div className="sc-container py-16 md:py-24 grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--sc-blue-600)]">
-              IP Paging · School Bells · PA · Intercom · New Zealand
-            </p>
-            <h1 className="mt-4 text-4xl md:text-5xl font-bold tracking-tight text-[var(--sc-blue-900)] leading-tight">
-              Plan the right communication system for your site.
-            </h1>
-            <p className="mt-3 text-lg font-medium text-[var(--sc-blue-700)]">
-              Connected communication for <AudienceRotator />
-            </p>
-            <p className="mt-4 text-lg text-[var(--sc-slate)]">
-              SmartComms helps New Zealand schools, hospitals, corrections facilities and other
-              large sites understand, compare and plan paging, bell, PA, intercom and emergency
-              communication systems.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link href="/tools/system-planner" className="sc-btn-primary">
-                Estimate your system
-              </Link>
-              <Link href="/guides" className="sc-btn-secondary">
-                Explore guides
-              </Link>
-            </div>
-            <p className="mt-4 text-sm text-[var(--sc-slate)]">
-              NZ-focused system guidance, practical planning tools and pricing research.
-            </p>
-          </div>
-          <Reveal>
-            <div className="sc-card p-6 bg-white/80">
-              <HeroSchematic />
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      {/* Section 1 — Rebuilt animated hero (handoff 2026-09-06) */}
+      <SmartcommsHero />
 
       {/* Section 2 — Pricing */}
       <section className="sc-container py-16">
