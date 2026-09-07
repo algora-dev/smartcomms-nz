@@ -11,6 +11,7 @@ export const routes: { path: string; priority: number }[] = [
   { path: "/funding", priority: 0.8 },
   { path: "/tools", priority: 0.9 },
   { path: "/tools/system-planner", priority: 0.9 },
+  { path: "/tools/funding-check", priority: 0.9 },
   { path: "/compare", priority: 0.8 },
   { path: "/about", priority: 0.5 },
   { path: "/about/methodology", priority: 0.4 },

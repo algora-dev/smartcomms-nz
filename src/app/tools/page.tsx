@@ -21,6 +21,17 @@ export default function ToolsPage() {
       </p>
       <div className="mt-10 space-y-6">
         <div className="sc-card p-6">
+          <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">Funding Pre-Qualification Check</h2>
+          <p className="mt-2 text-[var(--sc-slate)]">
+            A free 60-second check for NZ schools: see whether your paging, PA, bell or communications
+            project may have a Ministry 5YA funding pathway, which parts of your project fit strongly,
+            and what still needs confirmation.
+          </p>
+          <Link href="/tools/funding-check" className="sc-btn-primary mt-4">
+            Check your funding pathway
+          </Link>
+        </div>
+        <div className="sc-card p-6">
           <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">System Estimator</h2>
           <p className="mt-2 text-[var(--sc-slate)]">
             Answer a few questions about your site and get an indicative architecture, equipment
