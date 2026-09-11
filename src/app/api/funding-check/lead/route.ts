@@ -84,7 +84,7 @@ export async function POST(req: Request) {
   if (!apiKey) {
     console.error("[funding-check/lead] RESEND_API_KEY is not configured.");
     return NextResponse.json(
-      { ok: false, error: "The enquiry service is temporarily unavailable. Please email insights@t3labs.co.uk." },
+      { ok: false, error: "The enquiry service is temporarily unavailable. Please try again shortly or use our contact form." },
       { status: 503 },
     );
   }

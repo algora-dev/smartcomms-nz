@@ -38,7 +38,7 @@ export default function PricingPage() {
             <Link href="/pricing-tool" className="sc-btn-primary">Calculate your site</Link>
             <Link href="/tools/funding-check" className="sc-btn-secondary">Check school funding potential</Link>
           </div>
-          <p className="mt-4 text-xs text-[var(--sc-slate)]">Indicative only, ex GST. Pricing assumptions last reviewed {pricingConfig.reviewedAtLabel}.</p>
+          <p className="mt-4 text-xs text-[var(--sc-slate)]">Indicative only, ex GST. Pricing is gathered from two to three independent sources and is not based on any single provider, which is why we show ranges rather than exact prices. Assumptions last reviewed {pricingConfig.reviewedAtLabel}. See <Link href="/about/methodology">how we get our pricing</Link>.</p>
         </div>
       </div>
 

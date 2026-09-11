@@ -29,6 +29,10 @@ export default function AboutPage() {
       <p>
         SmartComms NZ is operated by {site.operator}. Technical, pricing and specification content is reviewed by {authors.shaun.name} ({authors.shaun.role}). {authors.shaun.note}
       </p>
+      <h2>How we get our pricing</h2>
+      <p>
+        Indicative pricing for the features and products in our tools is gathered from two to three independent sources, including supplier rate cards and installation quotes. It is not based on any one particular provider, which is why we publish indicative price ranges rather than exact prices. Final pricing always depends on the site, the completed design and the installer.
+      </p>
       <h2>Our standards</h2>
       <p>
         We separate indicative calculator assumptions from formal quotes, link funding guidance back to official sources, and avoid presenting configuration examples as market averages. See our <Link href="/about/methodology">research methodology</Link>, <Link href="/about/disclosure">commercial relationships</Link> and <Link href="/about/editorial-policy">editorial policy</Link> for more detail.

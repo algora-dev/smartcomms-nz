@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
@@ -28,7 +29,7 @@ export default function PrivacyPage() {
       </p>
       <h2>Corrections and deletion</h2>
       <p>
-        To ask about information you have submitted, request a correction or request deletion, contact <a href="mailto:insights@t3labs.co.uk">insights@t3labs.co.uk</a>.
+        To ask about information you have submitted, request a correction or request deletion, <Link href="/contact">send us a message through the contact form</Link> and we will respond to the email address you provided.
       </p>
     </div>
   );

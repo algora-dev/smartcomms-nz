@@ -24,7 +24,7 @@ export default function MethodologyPage() {
       </ul>
       <h2>Pricing methodology</h2>
       <p>
-        The current ballpark calculator uses a central pricing configuration with disclosed installation assumptions. Those outputs are labelled indicative and are not represented as market averages. Where we later publish benchmarks based on completed projects, we will state the sample, period and limitations separately.
+        The current ballpark calculator uses a central pricing configuration with disclosed installation assumptions. Indicative pricing for each feature and product is gathered from two to three independent sources and is not based on any single provider, which is why outputs are indicative ranges rather than exact prices. Those outputs are not represented as market averages. Where we later publish benchmarks based on completed projects, we will state the sample, period and limitations separately.
       </p>
       <h2>Funding methodology</h2>
       <p>
