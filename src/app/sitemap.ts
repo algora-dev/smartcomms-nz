@@ -8,6 +8,7 @@ export const routes: { path: string; priority: number }[] = [
   { path: "/systems/traditional-vs-ip", priority: 0.8 },
   { path: "/guides", priority: 0.9 },
   { path: "/pricing", priority: 0.9 },
+  { path: "/pricing-tool", priority: 0.9 },
   { path: "/funding", priority: 0.8 },
   { path: "/tools", priority: 0.9 },
   { path: "/tools/system-planner", priority: 0.9 },
