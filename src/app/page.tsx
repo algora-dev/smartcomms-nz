@@ -115,7 +115,7 @@ export default function HomePage() {
                   on your site and feature requirements.
                 </p>
               </div>
-              <Link href="/tools/system-planner" className="sc-btn-primary mt-6 self-start">
+            <Link href="/pricing-tool" className="sc-btn-primary mt-6 self-start">
                 Estimate your system
               </Link>
             </div>
@@ -192,7 +192,7 @@ export default function HomePage() {
                   Get an indicative architecture and, once pricing data is available, a likely
                   price range.
                 </p>
-                <Link href="/tools/system-planner" className="sc-btn-primary mt-4">Estimate your system</Link>
+          <Link href="/pricing-tool" className="sc-btn-primary mt-4">Estimate your system</Link>
               </div>
               <div className="sc-card p-6 bg-white opacity-90">
                 <h3 className="text-lg font-semibold text-[var(--sc-blue-900)]">

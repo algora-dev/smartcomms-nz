@@ -33,7 +33,7 @@ export function SiteHeader() {
         </Link>
         <div className="flex items-center gap-3">
           <Link
-            href="/tools/system-planner"
+            href="/pricing-tool"
             className="sc-btn-primary text-sm hidden sm:inline-flex"
           >
             Estimate your system
@@ -93,7 +93,7 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link
-              href="/tools/system-planner"
+          href="/pricing-tool"
               onClick={() => setOpen(false)}
               className="sc-btn-primary mt-4 justify-center sm:hidden"
             >

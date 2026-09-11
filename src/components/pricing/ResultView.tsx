@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { CalculatorState, EstimateResult } from "@/lib/pricing/types";
 import { formatNZD, pricingConfig } from "@/lib/pricing/config";
 import { packageLabel } from "@/lib/pricing/calculate";
+import { InquiryModal, type InquiryMode } from "./InquiryModal";
 
 const pdfLabel = "SmartComms NZ ballpark system estimate";
 
@@ -17,6 +18,7 @@ export function ResultView({
   onEdit: () => void;
 }) {
   const [breakdownOpen, setBreakdownOpen] = useState(false);
+  const [inquiry, setInquiry] = useState<InquiryMode | null>(null);
 
   const tierText =
     state.tier === "A" ? "New build"
@@ -145,7 +147,8 @@ export function ResultView({
           <span className="ml-2 align-middle text-sm font-normal text-[var(--sc-slate)]">ex GST</span>
         </div>
         <p className="mt-3 text-sm text-[var(--sc-slate)]">
-          Indicative only. Final pricing depends on site conditions, final design and installation requirements.
+          This is just an estimate. The final price could be substantially lower or higher depending
+          on multiple factors, so the best next step is to request an accurate quote.
         </p>
       </div>
 
@@ -239,18 +242,20 @@ export function ResultView({
           Send us this estimate and one of our trusted installation partners can review the site and provide a proper project quote.
         </p>
         <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            href="/contact"
+          <button
+            type="button"
+            onClick={() => setInquiry("quote")}
             className="w-full rounded-full bg-[var(--sc-teal)] px-6 py-3 text-center text-sm font-semibold text-white hover:bg-[var(--sc-teal-hover)] hover:shadow-lg transition-all sm:w-auto cursor-pointer"
           >
             Get an accurate quote
-          </a>
-          <a
-            href="/contact"
+          </button>
+          <button
+            type="button"
+            onClick={() => setInquiry("assessment")}
             className="w-full rounded-full border border-white/40 px-6 py-3 text-center text-sm font-semibold text-white hover:bg-white/10 transition-all sm:w-auto cursor-pointer"
           >
             Book a site assessment
-          </a>
+          </button>
         </div>
       </div>
 
@@ -275,6 +280,13 @@ export function ResultView({
       <div className="mt-8 rounded-xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-5 text-xs leading-relaxed text-[var(--sc-slate)]">
         {disclaimer} Prices shown are ex GST. The standard system allowance covers up to {pricingConfig.endpointWarningThreshold} IP endpoints.
       </div>
+      <InquiryModal
+        open={inquiry !== null}
+        mode={inquiry ?? "quote"}
+        onClose={() => setInquiry(null)}
+        estimateSummary={`${formatNZD(estimate.low)} - ${formatNZD(estimate.high)}`}
+        estimateLink={typeof window !== "undefined" ? window.location.href : undefined}
+      />
     </div>
   );
 }

@@ -237,7 +237,7 @@ export function SmartcommsHero() {
             intercom and integrated communication systems.
           </p>
           <div className="sc-actions">
-            <Link className="sc-button sc-button-primary" href="/tools/system-planner">
+            <Link className="sc-button sc-button-primary" href="/pricing-tool">
               Estimate your system <span aria-hidden="true">↗</span>
             </Link>
             <Link className="sc-button sc-button-secondary" href="/systems">
