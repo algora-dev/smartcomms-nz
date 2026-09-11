@@ -21,6 +21,8 @@
   --sc-accent-hover: #2a5286;
   --sc-teal-accent: #2cb1a5;
   --sc-teal-hover: #239187;
+  --sc-teal-strong: #1f7f77;   /* accessible background for white text */
+  --sc-teal-strong-hover: #17665f;
 }
 
 html {
@@ -39,6 +41,11 @@ a {
 
 a:hover {
   color: var(--sc-blue-700);
+}
+
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid rgba(42, 82, 134, 0.35);
+  outline-offset: 2px;
 }
 
 .sc-container {

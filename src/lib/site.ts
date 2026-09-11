@@ -1,16 +1,15 @@
 export const site = {
   name: "SmartComms NZ",
   legalName: "SmartComms NZ",
-  operator: "T3 Labs", // confirmed by Shaun 2026-09-05
+  operator: "T3 Labs",
   locale: "en-NZ",
   country: "NZ",
   currency: "NZD",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.smartcomms.co.nz",
   description:
-    "Independent New Zealand resource for understanding, planning and budgeting IP paging, school bell, PA, intercom and integrated communication systems.",
+    "New Zealand information and planning resource for IP paging, PA, bell, intercom and integrated communication systems, including pricing and school funding tools.",
 } as const;
 
-// Locale config: day-one AU fork support
 export const locale = {
   market: "NZ",
   currency: "NZD",
@@ -18,7 +17,6 @@ export const locale = {
   countryName: "New Zealand",
 } as const;
 
-// Real contributors only (v2 rule: no fabricated experts)
 export const authors = {
   shaun: {
     name: "Shaun Carter",

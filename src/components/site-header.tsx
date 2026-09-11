@@ -6,11 +6,10 @@ import Image from "next/image";
 
 const NAV = [
   { href: "/systems", label: "Systems" },
-  { href: "/guides", label: "Guides" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/tools", label: "Tools" },
-  { href: "/compare", label: "Compare" },
   { href: "/funding", label: "Funding" },
+  { href: "/tools", label: "Tools" },
+  { href: "/guides", label: "Guides" },
   { href: "/about", label: "About" },
 ];
 
@@ -18,9 +17,9 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="border-b border-[var(--sc-border)] bg-white sticky top-0 z-40">
-      <div className="sc-container flex items-center justify-between h-20">
-        <Link href="/" className="flex items-center gap-3" aria-label="SmartComms NZ home">
+    <header className="sticky top-0 z-40 border-b border-[var(--sc-border)] bg-white/95 backdrop-blur">
+      <div className="sc-container flex h-20 items-center justify-between gap-6">
+        <Link href="/" className="flex shrink-0 items-center gap-3" aria-label="SmartComms NZ home">
           <Image
             src="/brand/scnz-logo-colour.png"
             alt="SmartComms New Zealand"
@@ -29,14 +28,24 @@ export function SiteHeader() {
             className="h-[3.75rem] w-auto"
             priority
           />
-          <span className="text-xl font-bold tracking-tight text-[var(--sc-blue-900)]">SCNZ</span>
+          <span className="hidden text-xl font-bold tracking-tight text-[var(--sc-blue-900)] xl:inline">SCNZ</span>
         </Link>
+
+        <nav aria-label="Main navigation" className="hidden items-center gap-5 lg:flex">
+          {NAV.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-sm font-medium text-[var(--sc-slate)] transition-colors hover:text-[var(--sc-blue-900)]"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
         <div className="flex items-center gap-3">
-          <Link
-            href="/pricing-tool"
-            className="sc-btn-primary text-sm hidden sm:inline-flex"
-          >
-            Estimate your system
+          <Link href="/pricing-tool" className="sc-btn-primary hidden text-sm sm:inline-flex">
+            Get a ballpark price
           </Link>
           <button
             type="button"
@@ -44,7 +53,7 @@ export function SiteHeader() {
             aria-expanded={open}
             aria-controls="sc-nav-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--sc-border)] text-[var(--sc-blue-900)] hover:bg-[var(--sc-blue-50)] transition-colors"
+            className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--sc-border)] text-[var(--sc-blue-900)] transition-colors hover:bg-[var(--sc-blue-50)] lg:hidden"
           >
             <svg
               width="20"
@@ -75,29 +84,22 @@ export function SiteHeader() {
           </button>
         </div>
       </div>
+
       {open && (
-        <nav
-          id="sc-nav-menu"
-          aria-label="Main navigation"
-          className="border-t border-[var(--sc-border)] bg-white"
-        >
-          <div className="sc-container py-4 flex flex-col">
+        <nav id="sc-nav-menu" aria-label="Mobile navigation" className="border-t border-[var(--sc-border)] bg-white lg:hidden">
+          <div className="sc-container flex flex-col py-4">
             {NAV.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="py-3 text-base font-medium text-[var(--sc-slate)] hover:text-[var(--sc-blue-700)] border-b border-[var(--sc-grey)] last:border-0 transition-colors"
+                className="border-b border-[var(--sc-grey)] py-3 text-base font-medium text-[var(--sc-slate)] transition-colors last:border-0 hover:text-[var(--sc-blue-700)]"
               >
                 {item.label}
               </Link>
             ))}
-            <Link
-          href="/pricing-tool"
-              onClick={() => setOpen(false)}
-              className="sc-btn-primary mt-4 justify-center sm:hidden"
-            >
-              Estimate your system
+            <Link href="/pricing-tool" onClick={() => setOpen(false)} className="sc-btn-primary mt-4 justify-center sm:hidden">
+              Get a ballpark price
             </Link>
           </div>
         </nav>

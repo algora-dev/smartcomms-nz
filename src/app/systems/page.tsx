@@ -69,7 +69,7 @@ export default function SystemsPage() {
         ))}
       </div>
       <div className="mt-10">
-        <Link href="/tools/system-planner" className="sc-btn-primary">Estimate your system</Link>
+        <Link href="/pricing-tool" className="sc-btn-primary">Estimate your system</Link>
       </div>
     </div>
   );

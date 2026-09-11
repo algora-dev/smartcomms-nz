@@ -139,7 +139,7 @@ export function PricingTool() {
 
   useEffect(() => {
     if (!hydrated) return;
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(window.location.search);
     params.set("cfg", encodeURIComponent(JSON.stringify(state)));
     const url = `${window.location.pathname}?${params.toString()}`;
     window.history.replaceState(null, "", url);
@@ -174,7 +174,7 @@ export function PricingTool() {
                 step >= n - 1 && step <= 2
                   ? "bg-[var(--sc-navy)] text-white"
                   : step === 3 || n - 1 < step
-                    ? "bg-[var(--sc-teal)] text-white"
+                    ? "bg-[var(--sc-teal-strong)] text-white"
                     : "bg-[var(--sc-blue-100)] text-[var(--sc-slate)]"
               }`}
             >
@@ -272,7 +272,7 @@ export function PricingTool() {
                 <div className="flex items-center justify-between">
                   <div className="font-semibold text-[var(--sc-navy)]">{p.name}</div>
                   {p.value === "safety" && (
-                    <span className="rounded-full bg-[var(--sc-teal)] px-2.5 py-1 text-xs font-medium text-white">Most common</span>
+                    <span className="rounded-full bg-[var(--sc-teal-strong)] px-2.5 py-1 text-xs font-medium text-white">Most common</span>
                   )}
                 </div>
                 <div className="mt-0.5 text-sm text-[var(--sc-slate)]">{p.tagline}</div>
@@ -376,7 +376,7 @@ export function PricingTool() {
             <button
               type="button"
               onClick={() => setStep(3)}
-              className="rounded-full bg-[var(--sc-teal)] px-8 py-3 text-sm font-semibold text-white hover:bg-[var(--sc-teal-hover)] hover:shadow-lg transition-all cursor-pointer"
+              className="rounded-full bg-[var(--sc-teal-strong)] px-8 py-3 text-sm font-semibold text-white hover:bg-[var(--sc-teal-strong-hover)] hover:shadow-lg transition-all cursor-pointer"
             >
               See my estimate
             </button>
@@ -394,7 +394,7 @@ export function PricingTool() {
             <div>
               <div className="text-xs text-[var(--sc-slate)]">Estimated range so far</div>
               <div className="text-lg font-bold text-[var(--sc-navy)]">
-                {formatK(estimate.low)} – {formatK(estimate.high)} <span className="text-xs font-normal text-[var(--sc-slate)]">ex GST</span>
+                {formatK(estimate.low)} – {formatK(estimate.high)}{estimate.overThreshold ? "+" : ""} <span className="text-xs font-normal text-[var(--sc-slate)]">ex GST</span>
               </div>
             </div>
           </div>

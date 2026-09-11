@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "sw
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "SmartComms NZ — IP paging, bell & PA system guidance for New Zealand",
+    default: "SmartComms NZ | IP paging, bell & PA system guidance for New Zealand",
     template: "%s | SmartComms NZ",
   },
   description: site.description,

@@ -3,53 +3,45 @@ import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Tools: System Estimator & Requirements Builder",
+  title: "Free Paging, PA & School Funding Tools NZ",
   description:
-    "Free NZ planning tools: estimate an indicative communication system architecture or build a requirements brief.",
+    "Free SmartComms tools: get a ballpark installed system price or check whether an NZ school communications project may have a 5YA funding pathway.",
   path: "/tools",
 });
 
 export default function ToolsPage() {
   return (
-    <div className="sc-container py-16 max-w-3xl">
-      <h1 className="text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">
-        SmartComms tools
-      </h1>
-      <p className="mt-4 text-lg text-[var(--sc-slate)]">
-        Practical tools to help you scope, plan and budget a communication system before you talk
-        to providers.
+    <div className="sc-container max-w-4xl py-16">
+      <h1 className="text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">SmartComms tools</h1>
+      <p className="mt-4 max-w-3xl text-lg text-[var(--sc-slate)]">
+        Two quick tools to answer the questions that most often stop a communications project early: what might it cost, and for NZ state schools, could parts of it potentially be funded?
       </p>
-      <div className="mt-10 space-y-6">
+
+      <div className="mt-10 grid gap-6 md:grid-cols-2">
         <div className="sc-card p-6">
-          <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">School Communications Funding Check</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">30-60 seconds</p>
+          <h2 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Ballpark Cost Calculator</h2>
           <p className="mt-2 text-[var(--sc-slate)]">
-            A free 30-45 second check for NZ schools: see which parts of a paging, PA, bell, intercom or communications project may have a potential Ministry 5YA funding pathway.
+            Describe the site, areas to cover and desired capability level to get an indicative installed range. No technical design knowledge is required.
           </p>
-          <Link href="/tools/funding-check" className="sc-btn-primary mt-4">
-            Check potential funding
-          </Link>
+          <Link href="/pricing-tool" className="sc-btn-primary mt-5">Get a ballpark price</Link>
         </div>
+
         <div className="sc-card p-6">
-          <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">System Estimator</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">NZ schools</p>
+          <h2 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">School Communications Funding Check</h2>
           <p className="mt-2 text-[var(--sc-slate)]">
-            Answer a few questions about your site and get an indicative architecture, equipment
-            categories and, once pricing data is available, a likely price range.
+            See which parts of a paging, PA, bell, intercom or communications project may have a potential Ministry 5YA / 10YPP funding pathway.
           </p>
-          <Link href="/tools/system-planner" className="sc-btn-primary mt-4">
-            Estimate your system
-          </Link>
+          <Link href="/tools/funding-check" className="sc-btn-primary mt-5">Check potential funding</Link>
         </div>
-        <div className="sc-card p-6">
-          <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">
-            Requirements Builder{" "}
-            <span className="ml-2 rounded-full bg-[var(--sc-blue-100)] px-2.5 py-1 text-xs font-medium text-[var(--sc-blue-700)]">
-              In development
-            </span>
-          </h2>
-          <p className="mt-2 text-[var(--sc-slate)]">
-            Build a practical communication-system brief to guide quotes and planning.
-          </p>
-        </div>
+      </div>
+
+      <div className="mt-8 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6">
+        <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">The tools work together</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[var(--sc-slate)]">
+          A school can start by checking funding and then estimate the likely project cost, or start with a budget and discover that fixed communications work may have a funding pathway. Both tools are indicative and designed to make the next conversation with a provider, Property Advisor or project team easier.
+        </p>
       </div>
     </div>
   );

@@ -4,37 +4,35 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Research Methodology",
   description:
-    "How SmartComms NZ researches, verifies and publishes information about communication systems and pricing.",
+    "How SmartComms NZ researches, verifies and labels technical, funding and indicative pricing information.",
   path: "/about/methodology",
 });
 
 export default function MethodologyPage() {
   return (
-    <div className="sc-container py-16 max-w-3xl sc-prose">
-      <h1 className="text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">
-        Research methodology
-      </h1>
+    <div className="sc-container max-w-3xl py-16 sc-prose">
+      <h1 className="text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">Research methodology</h1>
       <p className="mt-4 text-lg text-[var(--sc-slate)]">
-        Everything published on SmartComms NZ follows one rule: if we cannot support it, we do not
-        publish it.
+        SmartComms NZ distinguishes between verified rules, indicative assumptions and formal project information so users can see how much confidence to place in a claim.
       </p>
-      <h2>How we research</h2>
+      <h2>Technical and funding research</h2>
       <ul>
-        <li>Published technical documentation from manufacturers and providers</li>
-        <li>Publicly available standards and guidance relevant to New Zealand sites</li>
-        <li>Real project pricing, only when we have enough verified samples to be meaningful</li>
-        <li>Practical experience from designing and delivering communication systems</li>
+        <li>Published manufacturer and provider documentation</li>
+        <li>Official New Zealand government guidance and property/funding information</li>
+        <li>Practical input from people involved in communication-system projects</li>
+        <li>Project examples and completed-job data as they become available and can be verified</li>
       </ul>
-      <h2>Pricing data standards</h2>
+      <h2>Pricing methodology</h2>
       <p>
-        Any pricing figures we publish will state the sample size, the date, the assumptions and
-        the limitations of the data. Where we do not yet have real data, we say so plainly rather
-        than publishing estimates dressed up as averages.
+        The current ballpark calculator uses a central pricing configuration with disclosed installation assumptions. Those outputs are labelled indicative and are not represented as market averages. Where we later publish benchmarks based on completed projects, we will state the sample, period and limitations separately.
+      </p>
+      <h2>Funding methodology</h2>
+      <p>
+        The funding checker identifies whether the nature of a proposed communications project appears consistent with publicly available Ministry guidance. It does not determine eligibility or approval. Final funding decisions remain with the school and the relevant property/funding process.
       </p>
       <h2>Corrections</h2>
       <p>
-        If something on this site is wrong, we want to fix it. Use the contact page to tell us
-        what and why.
+        If something on this site is wrong or out of date, use the contact page to tell us what needs changing and why.
       </p>
     </div>
   );

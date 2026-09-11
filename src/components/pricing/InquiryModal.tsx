@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 export type InquiryMode = "quote" | "assessment";
 
@@ -50,6 +51,13 @@ export function InquiryModal({
       fd.set("mode", mode);
       if (estimateSummary) fd.set("estimate", estimateSummary);
       if (estimateLink) fd.set("estimateLink", estimateLink);
+      fd.set("pageUrl", window.location.href);
+      fd.set("referrer", document.referrer);
+      const params = new URLSearchParams(window.location.search);
+      for (const key of ["utm_source", "utm_medium", "utm_campaign", "partner"]) {
+        const value = params.get(key);
+        if (value) fd.set(key, value);
+      }
       const res = await fetch("/api/inquiry", { method: "POST", body: fd });
       if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || "Send failed");
       setDone(true);
@@ -112,6 +120,9 @@ export function InquiryModal({
               </button>
             </div>
             <form ref={formRef} onSubmit={submit} className="mt-5 space-y-4">
+              <div className="hidden" aria-hidden="true">
+                <label>Website<input name="company_website" tabIndex={-1} autoComplete="off" /></label>
+              </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="block text-sm">
                   <span className="font-medium text-[var(--sc-charcoal)]">Contact name *</span>
@@ -170,18 +181,18 @@ export function InquiryModal({
                   accept=".pdf,.png,.jpg,.jpeg,.webp,.dwg,.heic"
                   className="mt-1 w-full cursor-pointer rounded-lg border border-dashed border-[var(--sc-border)] px-3 py-2.5 text-sm text-[var(--sc-slate)] file:mr-3 file:cursor-pointer file:rounded-full file:border-0 file:bg-[var(--sc-blue-50)] file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-[var(--sc-navy)] hover:border-[var(--sc-teal)]"
                 />
-                <span className="mt-1 block text-xs text-[var(--sc-slate)]">PDFs, images or plans. Up to 8MB per file.</span>
+                <span className="mt-1 block text-xs text-[var(--sc-slate)]">PDFs, images or plans. Up to 8MB per file and 20MB total.</span>
               </label>
               {error && <p className="rounded-lg bg-[#fdf3ec] p-3 text-sm text-[#7a3413]">{error}</p>}
               <button
                 type="submit"
                 disabled={sending}
-                className="w-full rounded-full bg-[var(--sc-teal)] px-6 py-3 text-sm font-semibold text-white hover:bg-[var(--sc-teal-hover)] hover:shadow-lg transition-all cursor-pointer disabled:opacity-50"
+                className="w-full rounded-full bg-[var(--sc-teal-strong)] px-6 py-3 text-sm font-semibold text-white hover:bg-[var(--sc-teal-strong-hover)] hover:shadow-lg transition-all cursor-pointer disabled:opacity-50"
               >
                 {sending ? "Sending…" : mode === "quote" ? "Send enquiry" : "Request site assessment"}
               </button>
-              <p className="text-center text-xs text-[var(--sc-slate)]">
-                We will only use your details to respond to this enquiry.
+              <p className="text-center text-xs leading-relaxed text-[var(--sc-slate)]">
+                We use your details to respond to this enquiry. If you request installation or a formal quote, relevant project details may be shared with a trusted installation partner. <Link href="/privacy" className="underline">Privacy</Link>.
               </p>
             </form>
           </>

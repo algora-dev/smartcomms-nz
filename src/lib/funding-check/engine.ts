@@ -32,7 +32,7 @@ export interface ComponentBreakdown {
   weak: string[];
 }
 
-export type PathwayKind = "five_ya" | "state_integrated" | "private" | "new_build";
+export type PathwayKind = "five_ya" | "state_integrated" | "private" | "new_build" | "unknown";
 
 export interface AssessmentResult {
   pathway: PathwayKind;
@@ -160,6 +160,9 @@ function confirmationsNeeded(pathway: PathwayKind): string[] {
   if (pathway === "new_build") {
     return ["Whether the communications requirements are already included in the project specification", "Final technical scope and budget"];
   }
+  if (pathway === "unknown") {
+    return ["Whether the school is state, state-integrated or private", "The relevant property / capital funding pathway"];
+  }
   return ["Available capital / grant funding options", "Final technical scope and indicative project cost"];
 }
 
@@ -168,6 +171,7 @@ export function runAssessment(answers: AssessmentAnswers): AssessmentResult {
   if (answers.schoolType === "state_integrated") pathway = "state_integrated";
   else if (answers.schoolType === "private") pathway = "private";
   else if (answers.projectStatus === "new_build") pathway = "new_build";
+  else if (answers.schoolType === "unsure_school") pathway = "unknown";
   else pathway = "five_ya";
 
   const components = componentBreakdown(answers.features);
@@ -180,6 +184,7 @@ export function runAssessment(answers: AssessmentAnswers): AssessmentResult {
   if (pathway === "state_integrated") headline = RESULT_COPY.stateIntegrated.headline;
   else if (pathway === "private") headline = RESULT_COPY.private.headline;
   else if (pathway === "new_build") headline = RESULT_COPY.newBuild.headline;
+  else if (pathway === "unknown") headline = RESULT_COPY.unknownSchool.headline;
   else if (caseTier === "strong" && hasStrong) headline = RESULT_COPY.headline.strong;
   else if (hasStrong) headline = RESULT_COPY.headline.partialStrong;
   else headline = RESULT_COPY.headline.investigate;

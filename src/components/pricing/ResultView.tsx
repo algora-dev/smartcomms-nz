@@ -5,6 +5,7 @@ import type { CalculatorState, EstimateResult } from "@/lib/pricing/types";
 import { formatNZD, pricingConfig } from "@/lib/pricing/config";
 import { packageLabel } from "@/lib/pricing/calculate";
 import { InquiryModal, type InquiryMode } from "./InquiryModal";
+import { ToolCrossSell } from "@/components/tool-cross-sell";
 
 const pdfLabel = "SmartComms NZ ballpark system estimate";
 
@@ -25,6 +26,8 @@ export function ResultView({
     : state.tier === "B" ? "Existing site, cabling available"
     : state.tier === "C" ? "Existing site, new cabling required"
     : "Existing site, cabling not yet known";
+
+  const rangeSuffix = estimate.overThreshold ? "+" : "";
 
   const disclaimer =
     state.tier === "A"
@@ -75,7 +78,7 @@ export function ResultView({
 
     doc.setFont("helvetica", "bold");
     doc.setFontSize(14);
-    doc.text(`Estimated installed range: ${formatNZD(estimate.low)} - ${formatNZD(estimate.high)} ex GST`, W / 2, y, { align: "center" });
+    doc.text(`Estimated installed range: ${formatNZD(estimate.low)} - ${formatNZD(estimate.high)}${rangeSuffix} ex GST`, W / 2, y, { align: "center" });
     y += 26;
 
     doc.setFontSize(11);
@@ -143,12 +146,11 @@ export function ResultView({
       <h2 className="text-2xl font-bold text-[var(--sc-navy)]">Your ballpark installed price</h2>
       <div className="mt-4 rounded-2xl border border-[var(--sc-border)] bg-white p-8 text-center shadow-sm">
         <div className="text-4xl font-bold tracking-tight text-[var(--sc-navy)] sm:text-5xl">
-          {formatNZD(estimate.low)} – {formatNZD(estimate.high)}
+          {formatNZD(estimate.low)} – {formatNZD(estimate.high)}{rangeSuffix}
           <span className="ml-2 align-middle text-sm font-normal text-[var(--sc-slate)]">ex GST</span>
         </div>
         <p className="mt-3 text-sm text-[var(--sc-slate)]">
-          This is just an estimate. The final price could be substantially lower or higher depending
-          on multiple factors, so the best next step is to request an accurate quote.
+          This is a ballpark estimate based on standard installation assumptions. A site review can confirm the final equipment quantities, cabling requirements and installed price.
         </p>
       </div>
 
@@ -224,7 +226,7 @@ export function ResultView({
             ))}
             <div className="mt-2 flex justify-between border-t border-[var(--sc-border)] pt-3 text-sm font-semibold text-[var(--sc-navy)]">
               <span>Subtotal</span>
-              <span>{formatNZD(estimate.low)} (range up to {formatNZD(estimate.high)})</span>
+              <span>{formatNZD(estimate.low)} (range up to {formatNZD(estimate.high)}{rangeSuffix})</span>
             </div>
             <p className="mt-2 text-xs text-[var(--sc-slate)]">
               {estimate.basis === "unsure"
@@ -235,8 +237,10 @@ export function ResultView({
         )}
       </div>
 
-      {/* CTAs */}
-      <div className="mt-10 rounded-2xl bg-[var(--sc-navy)] p-8 text-center">
+      <ToolCrossSell variant="pricing-to-funding" />
+
+      {/* Quote / assessment CTAs */}
+      <div className="mt-8 rounded-2xl bg-[var(--sc-navy)] p-8 text-center">
         <div className="text-lg font-semibold text-white">Want a proper number?</div>
         <p className="mx-auto mt-2 max-w-md text-sm text-white/80">
           Send us this estimate and one of our trusted installation partners can review the site and provide a proper project quote.
@@ -245,7 +249,7 @@ export function ResultView({
           <button
             type="button"
             onClick={() => setInquiry("quote")}
-            className="w-full rounded-full bg-[var(--sc-teal)] px-6 py-3 text-center text-sm font-semibold text-white hover:bg-[var(--sc-teal-hover)] hover:shadow-lg transition-all sm:w-auto cursor-pointer"
+            className="w-full rounded-full bg-[var(--sc-teal-strong)] px-6 py-3 text-center text-sm font-semibold text-white hover:bg-[var(--sc-teal-strong-hover)] hover:shadow-lg transition-all sm:w-auto cursor-pointer"
           >
             Get an accurate quote
           </button>
@@ -284,7 +288,7 @@ export function ResultView({
         open={inquiry !== null}
         mode={inquiry ?? "quote"}
         onClose={() => setInquiry(null)}
-        estimateSummary={`${formatNZD(estimate.low)} - ${formatNZD(estimate.high)}`}
+        estimateSummary={`${formatNZD(estimate.low)} - ${formatNZD(estimate.high)}${rangeSuffix}`}
         estimateLink={typeof window !== "undefined" ? window.location.href : undefined}
       />
     </div>

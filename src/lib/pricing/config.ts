@@ -7,6 +7,8 @@ export const tierCMultiplier = 1.25;
 export const estimateHighMultiplier = 1.2;
 
 export const pricingConfig = {
+  reviewedAt: "2026-09-11",
+  reviewedAtLabel: "11 September 2026",
   headendPrice: 4995,
   tierCMultiplier,
   estimateHighMultiplier,

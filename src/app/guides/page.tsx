@@ -3,45 +3,56 @@ import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Guides: Paging, Bells, PA & Intercom for NZ Sites",
+  title: "Guides: IP Paging, PA, Bells & Funding NZ",
   description:
-    "Practical NZ guides to IP paging, school bells, PA replacement, zoning, emergency communication and network requirements.",
+    "Practical New Zealand guides to paging system architecture, replacing old PA systems, installed pricing and school communications funding.",
   path: "/guides",
 });
 
 const GUIDES = [
-  { title: "IP Paging vs Traditional 100V PA Systems", desc: "How the two architectures differ and when each makes sense.", status: "In development" },
-  { title: "Can Existing Speakers and Cabling Be Reused?", desc: "What can carry over to a new system and what usually gets replaced.", status: "In development" },
-  { title: "IP Paging Network Requirements for NZ Schools", desc: "VLANs, PoE budgets and bandwidth basics for school networks.", status: "In development" },
-  { title: "How to Design Paging Zones", desc: "Splitting a site into zones for bells, announcements and alerts.", status: "In development" },
-  { title: "Does It Still Work if the Internet Goes Down?", desc: "What happens to paging, bells and emergency features during outages.", status: "In development" },
-  { title: "School Lockdown & Emergency Paging Basics", desc: "Lockdown alerts, tone standards and communication planning.", status: "In development" },
+  {
+    title: "Traditional, IP and Hybrid Paging Systems",
+    desc: "Understand the three common architectures and where each approach makes sense.",
+    href: "/systems",
+  },
+  {
+    title: "Replacing an Old PA System",
+    desc: "What may be reusable, what usually changes and how to plan the replacement.",
+    href: "/systems/traditional-vs-ip",
+  },
+  {
+    title: "What Do Paging and Intercom Systems Cost?",
+    desc: "Indicative NZ installed ranges, the main cost drivers and a calculator for your own site.",
+    href: "/pricing",
+  },
+  {
+    title: "5YA Funding for NZ School Communications",
+    desc: "How fixed paging, bells, emergency communication, intercoms and cabling may fit the 5YA / 10YPP property process.",
+    href: "/funding",
+  },
 ];
 
 export default function GuidesPage() {
   return (
-    <div className="sc-container py-16 max-w-4xl">
-      <h1 className="text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">Guides</h1>
-      <p className="mt-4 text-lg text-[var(--sc-slate)]">
-        Plain-language guides to planning, buying and running communication systems in New Zealand
-        schools and large facilities.
+    <div className="sc-container max-w-4xl py-16">
+      <h1 className="text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">Practical guides</h1>
+      <p className="mt-4 max-w-3xl text-lg text-[var(--sc-slate)]">
+        Plain-language resources for planning, pricing and reviewing paging, PA, bell, intercom and emergency communication systems in New Zealand.
       </p>
       <div className="mt-10 grid gap-6 sm:grid-cols-2">
-        {GUIDES.map((g) => (
-          <div key={g.title} className="sc-card p-6">
-            <h2 className="font-semibold text-[var(--sc-blue-900)]">{g.title}</h2>
-            <p className="mt-2 text-sm text-[var(--sc-slate)]">{g.desc}</p>
-            <span className="mt-3 inline-block rounded-full bg-[var(--sc-blue-100)] px-2.5 py-1 text-xs font-medium text-[var(--sc-blue-700)]">
-              {g.status}
-            </span>
-          </div>
+        {GUIDES.map((guide) => (
+          <Link key={guide.href} href={guide.href} className="sc-card group p-6">
+            <h2 className="font-semibold text-[var(--sc-blue-900)] group-hover:text-[var(--sc-blue-700)]">
+              {guide.title} <span aria-hidden>→</span>
+            </h2>
+            <p className="mt-2 text-sm text-[var(--sc-slate)]">{guide.desc}</p>
+          </Link>
         ))}
       </div>
-      <p className="mt-8 text-sm text-[var(--sc-slate)]">
-        New guides are published as they are completed. In the meantime, see{" "}
-        <Link href="/systems">system architectures</Link> or try the{" "}
-        <Link href="/tools/system-planner">system estimator</Link>.
-      </p>
+      <div className="mt-10 flex flex-wrap gap-3">
+        <Link href="/pricing-tool" className="sc-btn-primary">Get a ballpark price</Link>
+        <Link href="/tools/funding-check" className="sc-btn-secondary">Check school funding</Link>
+      </div>
     </div>
   );
 }

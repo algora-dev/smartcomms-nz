@@ -9,7 +9,7 @@ export function defaultState(): CalculatorState {
   return {
     tier: "unsure",
     areas: {
-      standardIndoor: 10,
+      standardIndoor: 0,
       largeIndoor: 0,
       outdoor: 0,
       largeOutdoor: 0,
@@ -93,10 +93,11 @@ export function presetSummaries(): PresetSummary[] {
     const tierLabel =
       p.state.tier === "A" ? "new build" : p.state.tier === "B" ? "existing site, cabling available" : "existing site, new cabling required";
     detail.push(tierLabel);
+    if (r.overThreshold) detail.push("Large-system configuration: additional central hardware may be required");
     return {
       title: p.title,
       blurb: p.blurb,
-      range: `${formatNZD(r.low)} – ${formatNZD(r.high)} ex GST`,
+      range: `${formatNZD(r.low)} – ${formatNZD(r.high)}${r.overThreshold ? "+" : ""} ex GST`,
       detailLines: detail,
     };
   });

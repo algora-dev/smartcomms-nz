@@ -8,6 +8,8 @@
  */
 
 import { useState, type ReactNode } from "react";
+import Link from "next/link";
+import { ToolCrossSell } from "@/components/tool-cross-sell";
 import {
   CABLING_STATUS,
   CABLING_TOOLTIP,
@@ -26,7 +28,6 @@ import {
   type AssessmentResult,
 } from "@/lib/funding-check/engine";
 
-const TOTAL_SCREENS = 4;
 
 interface LeadForm {
   name: string;
@@ -125,7 +126,7 @@ export function FundingCheckTool() {
   }
 
   function next() {
-    setScreen((current) => Math.min(TOTAL_SCREENS - 1, current + 1));
+    setScreen((current) => Math.min(totalScreens - 1, current + 1));
     if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -147,7 +148,7 @@ export function FundingCheckTool() {
       const response = await fetch("/api/funding-check/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ answers, lead, result }),
+        body: JSON.stringify({ answers, lead, source: { url: window.location.href, referrer: document.referrer } }),
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok || !data.ok) throw new Error(data.error || "Submission failed");
@@ -159,13 +160,16 @@ export function FundingCheckTool() {
     }
   }
 
+  const isNewBuild = answers.projectStatus === "new_build";
+  const totalScreens = isNewBuild ? 3 : 4;
+
   const canContinue =
     (screen === 0 && Boolean(answers.schoolType && answers.projectStatus)) ||
     (screen === 1 && answers.reasons.length > 0) ||
     (screen === 2 && answers.features.length > 0) ||
     (screen === 3 && Boolean(answers.currentSystem && answers.cablingStatus));
 
-  const progress = result ? 100 : Math.round(((screen + 1) / TOTAL_SCREENS) * 100);
+  const progress = result ? 100 : Math.round(((Math.min(screen, totalScreens - 1) + 1) / totalScreens) * 100);
 
   if (result) {
     const caseLabel = result.caseTier === "strong" ? "Strong" : result.caseTier === "moderate" ? "Potential" : "Needs supporting evidence";
@@ -176,7 +180,9 @@ export function FundingCheckTool() {
           ? RESULT_COPY.stateIntegrated.heading
           : result.pathway === "private"
             ? RESULT_COPY.private.heading
-            : RESULT_COPY.newBuild.heading;
+            : result.pathway === "unknown"
+              ? RESULT_COPY.unknownSchool.heading
+              : RESULT_COPY.newBuild.heading;
     const pathwayBody =
       result.pathway === "five_ya"
         ? RESULT_COPY.pathway5yaBody
@@ -184,7 +190,9 @@ export function FundingCheckTool() {
           ? RESULT_COPY.stateIntegrated.body
           : result.pathway === "private"
             ? RESULT_COPY.private.body
-            : RESULT_COPY.newBuild.body;
+            : result.pathway === "unknown"
+              ? RESULT_COPY.unknownSchool.body
+              : RESULT_COPY.newBuild.body;
 
     return (
       <div>
@@ -207,8 +215,8 @@ export function FundingCheckTool() {
             <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--sc-slate)]">
               {result.pathway === "new_build"
                 ? "Communications scope worth including"
-                : result.pathway === "private"
-                  ? "Strong fixed communications scope"
+                : result.pathway === "private" || result.pathway === "unknown"
+                  ? "Strong fixed communications scope to review"
                   : "What could potentially be funded"}
             </h2>
             <ul className="mt-3 space-y-2">
@@ -236,11 +244,15 @@ export function FundingCheckTool() {
           )}
         </div>
 
-        <div className="sc-card mt-6 p-6">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--sc-slate)]">Existing infrastructure</h2>
-          <p className="mt-2 font-semibold text-[var(--sc-blue-900)]">{result.infrastructureSummary.heading}</p>
-          <p className="mt-1 text-[var(--sc-slate)]">{result.infrastructureSummary.body}</p>
-        </div>
+        {answers.projectStatus !== "new_build" && (
+          <div className="sc-card mt-6 p-6">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--sc-slate)]">Existing infrastructure</h2>
+            <p className="mt-2 font-semibold text-[var(--sc-blue-900)]">{result.infrastructureSummary.heading}</p>
+            <p className="mt-1 text-[var(--sc-slate)]">{result.infrastructureSummary.body}</p>
+          </div>
+        )}
+
+        <ToolCrossSell variant="funding-to-pricing" />
 
         <div className="mt-8 sc-card p-6">
           <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">{RESULT_COPY.ctaPrimary}</h2>
@@ -265,7 +277,9 @@ export function FundingCheckTool() {
                     ? RESULT_COPY.private.cta
                     : result.pathway === "new_build"
                       ? RESULT_COPY.newBuild.cta
-                      : RESULT_COPY.ctaPrimary}
+                      : result.pathway === "unknown"
+                        ? RESULT_COPY.unknownSchool.cta
+                        : RESULT_COPY.ctaPrimary}
               </button>
               <button
                 type="button"
@@ -337,7 +351,7 @@ export function FundingCheckTool() {
                 </select>
               </label>
               <div className="sm:col-span-2">
-                <p className="text-xs text-[var(--sc-slate)]">Your funding-check answers are attached automatically.</p>
+                <p className="text-xs text-[var(--sc-slate)]">Your funding-check answers are attached automatically. If you request a quote or project review, relevant details may be shared with a trusted installation partner. <Link href="/privacy" className="underline">Privacy</Link>.</p>
                 <button type="submit" disabled={sending} className="sc-btn-primary mt-3 disabled:opacity-50">
                   {sending ? "Sending..." : "Send my request"}
                 </button>
@@ -364,6 +378,8 @@ export function FundingCheckTool() {
             setResult(null);
             setSent(false);
             setShowLead(false);
+            setAnswers({ reasons: [], features: [] });
+            setLead({ name: "", school: "", email: "", phone: "", contactMethod: "email", cta: "review" });
             setScreen(0);
           }}
         >
@@ -377,7 +393,7 @@ export function FundingCheckTool() {
     <div>
       <div className="mb-6">
         <div className="flex items-center justify-between text-xs font-medium text-[var(--sc-slate)]">
-          <span>Step {screen + 1} of {TOTAL_SCREENS}</span>
+          <span>Step {screen + 1} of {totalScreens}</span>
           <span>Takes about 30-45 seconds</span>
         </div>
         <div className="mt-2 h-1.5 w-full rounded-full bg-[var(--sc-grey)]">
@@ -412,7 +428,7 @@ export function FundingCheckTool() {
                   key={option.id}
                   label={option.label}
                   selected={answers.projectStatus === option.id}
-                  onClick={() => setAnswers({ ...answers, projectStatus: option.id })}
+                  onClick={() => setAnswers({ ...answers, projectStatus: option.id, ...(option.id === "new_build" ? { currentSystem: undefined, cablingStatus: undefined } : {}) })}
                 />
               ))}
             </div>
@@ -477,7 +493,7 @@ export function FundingCheckTool() {
         </fieldset>
       )}
 
-      {screen === 3 && (
+      {screen === 3 && !isNewBuild && (
         <fieldset>
           <legend className="text-2xl font-bold tracking-tight text-[var(--sc-blue-900)]">What is already there?</legend>
 
@@ -518,9 +534,9 @@ export function FundingCheckTool() {
           type="button"
           className="sc-btn-primary disabled:cursor-not-allowed disabled:opacity-50"
           disabled={!canContinue}
-          onClick={screen === TOTAL_SCREENS - 1 ? finish : next}
+          onClick={screen === totalScreens - 1 ? finish : next}
         >
-          {screen === TOTAL_SCREENS - 1 ? "Show my funding check" : "Next"}
+          {screen === totalScreens - 1 ? "Show my funding check" : "Next"}
         </button>
       </div>
     </div>

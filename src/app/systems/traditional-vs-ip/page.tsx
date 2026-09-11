@@ -39,7 +39,7 @@ export default function ReplacePaPage() {
       </p>
       <h2>Next step</h2>
       <p>
-        Use the <Link href="/tools/system-planner">system estimator</Link> to get an indicative
+        Use the <Link href="/pricing-tool">ballpark cost calculator</Link> to get an indicative
         architecture based on your site.
       </p>
     </div>

@@ -187,6 +187,12 @@ export const RESULT_COPY = {
     body: "For a new state-school or major new-building project, the communications system is better addressed inside the wider project design and specification rather than treated as a normal existing-school 5YA upgrade.",
     cta: "Get the communications scope reviewed",
   },
+  unknownSchool: {
+    headline: "A funding pathway may be available",
+    heading: "School type needs confirming",
+    body: "The fixed communications scope is worth reviewing. If this is a state school, 5YA / 10YPP may be the relevant pathway. If it is state-integrated or private, a different property or capital funding route will apply.",
+    cta: "Request a funding pathway review",
+  },
   positiveOverride:
     "We found fixed communications elements with a strong potential funding fit. The overall case may simply need better supporting evidence before it is put forward.",
   ctaPrimary: "Get a Funding-Ready Project Review",
