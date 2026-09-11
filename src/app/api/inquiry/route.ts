@@ -56,7 +56,7 @@ export async function POST(req: Request) {
       .filter((l) => l !== null)
       .join("\n");
 
-    await resend.emails.send({
+    const send = await resend.emails.send({
       from: "SmartComms NZ <onboarding@resend.dev>",
       to: [TO_EMAIL],
       replyTo: email,
@@ -64,6 +64,10 @@ export async function POST(req: Request) {
       text: body,
       attachments,
     });
+    if (send.error) {
+      console.error("resend error", send.error);
+      return NextResponse.json({ error: "Email provider rejected the message: " + (send.error.message ?? "unknown") }, { status: 500 });
+    }
 
     return NextResponse.json({ ok: true });
   } catch (err) {
