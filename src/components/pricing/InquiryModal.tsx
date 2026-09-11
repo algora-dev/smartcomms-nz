@@ -193,7 +193,7 @@ export function InquiryModal({
                 disabled={sending}
                 className="w-full rounded-full bg-[var(--sc-teal-strong)] px-6 py-3 text-sm font-semibold text-white hover:bg-[var(--sc-teal-strong-hover)] hover:shadow-lg transition-all cursor-pointer disabled:opacity-50"
               >
-                {sending ? "Sending…" : mode === "quote" || mode === "message" ? "Send enquiry" : "Request site assessment"}
+              {sending ? "Sending…" : mode === "quote" || mode === "message" ? "Send enquiry" : "Request site assessment"}
               </button>
               <p className="text-center text-xs leading-relaxed text-[var(--sc-slate)]">
                 We use your details to respond to this enquiry. If you request installation or a formal quote, relevant project details may be shared with a trusted installation partner. <Link href="/privacy" className="underline">Privacy</Link>.

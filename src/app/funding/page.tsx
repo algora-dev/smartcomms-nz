@@ -5,7 +5,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "5YA Funding for School PA, Paging & Bell Systems NZ",
   description:
-    "How New Zealand state schools can investigate 5YA / 10YPP funding for fixed paging, PA, bell, intercom and communications infrastructure.",
+    "How NZ state schools can investigate 5YA / 10YPP funding for paging, PA and bell systems, with published examples of Ministry-funded school projects.",
   path: "/funding",
 });
 
@@ -27,6 +27,10 @@ const faqs = [
   {
     q: "Does a strong funding fit mean the project will be approved?",
     a: "No. It means the project appears worth putting through the relevant property process. The school and Ministry property process determine whether the project is accepted and how it is funded.",
+  },
+  {
+    q: "Are there real examples of New Zealand schools using Ministry funding for PA or bell upgrades?",
+    a: "Yes. Public school financial statements include examples such as Tāmaki Primary School&#39;s MOE 5YA - PA/Bell project and Lincoln High School&#39;s MOE 5YA Bell/PA Upgrade. These examples show precedent, but they do not guarantee approval for another school.",
   },
 ];
 
@@ -78,6 +82,62 @@ export default function FundingPage() {
         <p>
           Ministry school-design guidance also recognises public-address and safety-warning functions including school bells, voiced announcements, paging and emergency communication. That does not make every project automatically funded, but it provides a strong basis for the school to put the need through its property-planning process.
         </p>
+
+        <h2>Published New Zealand school funding examples</h2>
+        <p>
+          Public school financial reports provide useful real-world evidence that bell, paging and PA work has been funded through Ministry capital programmes. These examples do not guarantee that another school will receive funding, but they show that this type of communications infrastructure has been accepted as capital work in practice.
+        </p>
+        <div className="not-prose my-7 overflow-x-auto rounded-2xl border border-[var(--sc-border)] bg-white">
+          <table className="w-full min-w-[680px] text-left text-sm">
+            <thead className="bg-[var(--sc-blue-50)] text-[var(--sc-blue-900)]">
+              <tr>
+                <th className="px-4 py-3 font-semibold">School</th>
+                <th className="px-4 py-3 font-semibold">Published project</th>
+                <th className="px-4 py-3 font-semibold">Published amount</th>
+                <th className="px-4 py-3 font-semibold">Funding route</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[var(--sc-border)] text-[var(--sc-slate)]">
+              <tr>
+                <td className="px-4 py-3 font-medium text-[var(--sc-blue-900)]">Tāmaki Primary School</td>
+                <td className="px-4 py-3">MOE 5YA - PA/Bell</td>
+                <td className="px-4 py-3">$38,392 in Ministry receipts reported for 2022</td>
+                <td className="px-4 py-3">5YA</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-medium text-[var(--sc-blue-900)]">Lincoln High School</td>
+                <td className="px-4 py-3">MOE 5YA Bell/PA Upgrade</td>
+                <td className="px-4 py-3">$108,492 capital commitment reported at 31 Dec 2024</td>
+                <td className="px-4 py-3">5YA</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-medium text-[var(--sc-blue-900)]">Greenhithe School</td>
+                <td className="px-4 py-3">MOE SIP Bell/Paging</td>
+                <td className="px-4 py-3">$7,143 in Ministry receipts reported during 2022</td>
+                <td className="px-4 py-3">SIP (not 5YA)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          The first two examples are especially relevant because the schools&#39; own audited or annual financial statements explicitly name the projects as 5YA PA/bell upgrades. Greenhithe is included as a separate example of bell/paging work funded through another Ministry capital programme, the School Investment Package (SIP).
+        </p>
+        <ul>
+          <li><a href="https://www.tamakiprimary.school.nz/wp-content/uploads/sites/80/2023/06/Ta%CC%84maki-Primary-Annual-Report-to-31.12.22.pdf">Tāmaki Primary School annual report to 31 December 2022</a></li>
+          <li><a href="https://www.lincoln.school.nz/assets/PDF-Financials/Lincoln-High-School-YE-31-December-2024-Audited-Accounts.pdf">Lincoln High School 2024 audited financial statements</a></li>
+          <li><a href="https://www.greenhithe.school.nz/wp-content/uploads/sites/63/2024/04/Greenhithe-School-Final-Adjusted-Annual-Report-2022.pdf">Greenhithe School 2022 annual report</a></li>
+        </ul>
+        <div className="not-prose my-8 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6">
+          <p className="text-sm font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">What this means for your school</p>
+          <h3 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">There is documented precedent for funding PA and bell infrastructure.</h3>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">
+            Your own project still needs to fit your property plan, available allocation and Ministry process. The useful next step is to identify the fixed-infrastructure components and build a clear project case.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Link href="/tools/funding-check" className="sc-btn-primary">Check your project</Link>
+            <Link href="/pricing-tool" className="sc-btn-secondary">Estimate project cost</Link>
+          </div>
+        </div>
 
         <h2>What tends to have the strongest funding fit</h2>
         <table>
