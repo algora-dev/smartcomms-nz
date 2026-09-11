@@ -57,7 +57,7 @@ export async function POST(req: Request) {
       .join("\n");
 
     const send = await resend.emails.send({
-      from: "SmartComms NZ <onboarding@resend.dev>",
+      from: "SmartComms NZ <insights@t3labs.co.uk>",
       to: [TO_EMAIL],
       replyTo: email,
       subject: `SmartComms enquiry: ${mode} - ${name}`,
