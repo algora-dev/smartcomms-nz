@@ -3,6 +3,7 @@ import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
 import { presetSummaries } from "@/lib/pricing/presets";
 import { pricingConfig, formatNZD } from "@/lib/pricing/config";
+import { schoolBandSummaries } from "@/lib/pricing/school-bands";
 
 export const metadata: Metadata = buildMetadata({
   title: "IP Paging, PA & Intercom System Costs NZ",
@@ -22,6 +23,7 @@ const FACTORS = [
 
 export default function PricingPage() {
   const examples = presetSummaries();
+  const schoolBands = schoolBandSummaries();
 
   return (
     <div>
@@ -64,6 +66,32 @@ export default function PricingPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+
+      <section className="sc-container max-w-4xl py-14">
+        <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">Indicative school PA and paging costs</h2>
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--sc-slate)]">
+          For school planning, it is often more useful to think in broad site sizes. These ranges combine different room counts, cabling scenarios and feature levels so a school can understand the likely order of magnitude before a site-specific design is prepared.
+        </p>
+        <div className="mt-6 grid gap-5">
+          {schoolBands.map((band) => (
+            <div key={band.id} className="sc-card p-6">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <h3 className="text-lg font-semibold text-[var(--sc-blue-900)]">{band.title}</h3>
+                  <p className="mt-1 max-w-2xl text-sm text-[var(--sc-slate)]">{band.description}</p>
+                </div>
+                <p className="text-lg font-bold text-[var(--sc-teal-strong)]">{band.displayRange}</p>
+              </div>
+              <p className="mt-3 text-xs leading-relaxed text-[var(--sc-slate)]">Typical scope may include {band.typicalFeatures.join(", ")}.</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-5 flex flex-wrap gap-3">
+          <Link href="/schools" className="sc-btn-secondary">School systems guide</Link>
+          <Link href="/pricing-tool" className="sc-btn-primary">Price your own site</Link>
         </div>
       </section>
 

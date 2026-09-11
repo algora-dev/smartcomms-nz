@@ -23,6 +23,11 @@ export const metadata: Metadata = {
 
 const INTENT_CARDS = [
   {
+    href: "/schools",
+    title: "Plan a school communications system",
+    desc: "School-specific guidance covering paging, bells, emergency communication, intercom, indicative costs and funding.",
+  },
+  {
     href: "/systems/traditional-vs-ip",
     title: "Replace an old PA system",
     desc: "Understand what can potentially be reused, what usually changes and which architecture suits the site.",
@@ -119,6 +124,22 @@ export default function HomePage() {
             </div>
           </Reveal>
         </div>
+      </section>
+
+      <section className="sc-container py-16">
+        <Reveal>
+          <div className="rounded-2xl border border-[var(--sc-border)] bg-white p-7 sm:p-9">
+            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">For New Zealand schools</p>
+            <h2 className="mt-2 text-3xl font-bold tracking-tight text-[var(--sc-blue-900)]">Cost, system design and funding in one place</h2>
+            <p className="mt-3 max-w-3xl text-lg text-[var(--sc-slate)]">
+              The school guide brings together the questions schools usually research separately: what a modern paging and bell system can do, what a small, medium or large project may cost, and whether fixed communications work has a potential 5YA pathway.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Link href="/schools" className="sc-btn-primary">Explore school systems</Link>
+              <Link href="/pricing" className="sc-btn-secondary">See indicative school costs</Link>
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       <section className="sc-container py-16">

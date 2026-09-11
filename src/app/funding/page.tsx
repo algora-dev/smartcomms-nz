@@ -14,7 +14,7 @@ const reviewed = "11 September 2026";
 const faqs = [
   {
     q: "Can 5YA potentially fund a school PA, paging or bell system?",
-    a: "Potentially, yes. The strongest case is where the project is fixed ICT and communications infrastructure and creates, replaces or substantially upgrades a property asset. Approval still depends on the school's property plan, priorities, available 5YA allocation and the Ministry property process.",
+    a: "Potentially, yes. The strongest case is where the project is fixed ICT and communications infrastructure and creates, replaces or substantially upgrades a property asset. Approval still depends on the school&#39;s property plan, priorities, available 5YA allocation and the Ministry property process.",
   },
   {
     q: "Is 5YA a separate grant that the school applies for?",
@@ -142,7 +142,7 @@ export default function FundingPage() {
         </div>
 
         <div className="mt-8 rounded-xl border border-[var(--sc-border)] bg-white p-5 text-sm text-[var(--sc-slate)] not-prose">
-          SmartComms NZ is not a government agency. Funding information is general guidance based on publicly available Ministry information and should be confirmed against the school's actual property circumstances and current Ministry process.
+          SmartComms NZ is not a government agency. Funding information is general guidance based on publicly available Ministry information and should be confirmed against the school&#39;s actual property circumstances and current Ministry process.
         </div>
       </article>
 

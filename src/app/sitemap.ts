@@ -5,6 +5,7 @@ const UPDATED = "2026-09-11";
 
 export const routes: { path: string; priority: number; updated?: string }[] = [
   { path: "/", priority: 1 },
+  { path: "/schools", priority: 0.98 },
   { path: "/systems", priority: 0.9 },
   { path: "/systems/traditional-vs-ip", priority: 0.8 },
   { path: "/guides", priority: 0.8 },

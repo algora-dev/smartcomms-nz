@@ -11,6 +11,11 @@ export const metadata: Metadata = buildMetadata({
 
 const GUIDES = [
   {
+    title: "School PA, Paging, Bell & Intercom Systems",
+    desc: "A single guide to school communication features, indicative costs, upgrade decisions and potential 5YA funding.",
+    href: "/schools",
+  },
+  {
     title: "Traditional, IP and Hybrid Paging Systems",
     desc: "Understand the three common architectures and where each approach makes sense.",
     href: "/systems",

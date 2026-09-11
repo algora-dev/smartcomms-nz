@@ -12,6 +12,7 @@ export function SiteFooter() {
         <div>
           <p className="font-semibold text-[var(--sc-blue-900)]">Explore</p>
           <ul className="mt-2 space-y-1 text-[var(--sc-slate)]">
+            <li><Link href="/schools">School communications</Link></li>
             <li><Link href="/systems">System types</Link></li>
             <li><Link href="/pricing">NZ pricing guide</Link></li>
             <li><Link href="/pricing-tool">Ballpark cost calculator</Link></li>

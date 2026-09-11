@@ -126,15 +126,17 @@ export function PricingTool() {
 
   // deep-linkable state in URL
   useEffect(() => {
-    setHydrated(true);
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("cfg")) {
-      try {
-        const parsed = JSON.parse(decodeURIComponent(params.get("cfg")!));
-        if (parsed && parsed.areas && parsed.tier) setState({ ...defaultState(), ...parsed });
-        if (parsed?.tier) setStep(3);
-      } catch { /* ignore bad params */ }
-    }
+    queueMicrotask(() => {
+      setHydrated(true);
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("cfg")) {
+        try {
+          const parsed = JSON.parse(decodeURIComponent(params.get("cfg")!));
+          if (parsed && parsed.areas && parsed.tier) setState({ ...defaultState(), ...parsed });
+          if (parsed?.tier) setStep(3);
+        } catch { /* ignore bad params */ }
+      }
+    });
   }, []);
 
   useEffect(() => {
@@ -154,12 +156,6 @@ export function PricingTool() {
   const totalAreas =
     state.areas.standardIndoor + state.areas.largeIndoor + state.areas.outdoor +
     state.areas.largeOutdoor + state.areas.entry;
-
-  const stepHeadings = [
-    { n: 1, title: "What best describes the site?" },
-    { n: 2, title: "Roughly how many areas need coverage?" },
-    { n: 3, title: "How capable do you want the system to be?" },
-  ];
 
   const showSticky = step >= 1 && step <= 2 && totalAreas > 0;
 

@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     const key = process.env.RESEND_API_KEY;
     if (!key) {
       return NextResponse.json(
-      { error: "The enquiry service is temporarily unavailable. Please try again shortly or use our contact form." },
+        { error: "The enquiry service is temporarily unavailable. Please try again shortly or use our contact form." },
         { status: 503 },
       );
     }

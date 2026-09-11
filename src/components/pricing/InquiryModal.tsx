@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
-export type InquiryMode = "quote" | "assessment";
+export type InquiryMode = "quote" | "assessment" | "message";
 
 export function InquiryModal({
   open,
@@ -25,8 +25,10 @@ export function InquiryModal({
 
   useEffect(() => {
     if (open) {
-      setDone(false);
-      setError(null);
+      queueMicrotask(() => {
+        setDone(false);
+        setError(null);
+      });
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -68,11 +70,13 @@ export function InquiryModal({
     }
   }
 
-  const title = mode === "quote" ? "Get an accurate quote" : "Book a site assessment";
+  const title = mode === "quote" ? "Get an accurate quote" : mode === "assessment" ? "Book a site assessment" : "Send us a message";
   const blurb =
     mode === "quote"
       ? "Send us your details and one of our trusted installation partners can review the site and provide a proper project quote."
-      : "A short site review usually narrows the estimate considerably. Send us your details and we will be in touch to arrange a visit.";
+      : mode === "assessment"
+        ? "A short site review usually narrows the estimate considerably. Send us your details and we will be in touch to arrange a visit."
+        : "Questions, corrections, or a proposed system you would like us to look at. We read everything.";
 
   return (
     <div
@@ -189,7 +193,7 @@ export function InquiryModal({
                 disabled={sending}
                 className="w-full rounded-full bg-[var(--sc-teal-strong)] px-6 py-3 text-sm font-semibold text-white hover:bg-[var(--sc-teal-strong-hover)] hover:shadow-lg transition-all cursor-pointer disabled:opacity-50"
               >
-                {sending ? "Sending…" : mode === "quote" ? "Send enquiry" : "Request site assessment"}
+                {sending ? "Sending…" : mode === "quote" || mode === "message" ? "Send enquiry" : "Request site assessment"}
               </button>
               <p className="text-center text-xs leading-relaxed text-[var(--sc-slate)]">
                 We use your details to respond to this enquiry. If you request installation or a formal quote, relevant project details may be shared with a trusted installation partner. <Link href="/privacy" className="underline">Privacy</Link>.
