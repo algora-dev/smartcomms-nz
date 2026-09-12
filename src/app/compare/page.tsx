@@ -241,39 +241,70 @@ const platforms = [
 const publicPriceExamples = [
   {
     platform: "SPON",
-    example: "Local partner pricing used by the SmartComms NZ estimator",
-    amount: "No universal public MSRP",
-    meaning: "Our low-mid to mid position is informed by trusted partner pricing and project assumptions rather than a public global list price.",
+    core: "No consistent public NZ/global MSRP used",
+    audio: "No normalized public speaker price used",
+    intercom: "No normalized public intercom price used",
+    note: "SPON's relative cost band is informed by trusted NZ partner/project pricing used in the SmartComms estimator. We avoid presenting isolated overseas listings as though they were representative NZ channel pricing.",
+    sources: [
+      { label: "SPON product range", href: "https://sponcomm.com/" },
+      { label: "SPON XC-9000 software", href: "https://sponcomm.com/products/audio-management-software" },
+    ],
   },
   {
     platform: "Algo",
-    example: "8188 SIP ceiling speaker",
-    amount: "US$535 MSRP",
-    meaning: "A useful public benchmark for a full SIP/PoE classroom-style endpoint with talkback and multicast.",
+    core: "8301 paging adapter / scheduler: US$415 MSRP",
+    audio: "8188 SIP ceiling speaker: US$535 MSRP",
+    intercom: "1202 call button: US$260 add-on",
+    note: "A useful benchmark for SIP-native systems. Smaller Algo deployments may not need a dedicated central controller in the same way as an enterprise PA platform.",
+    sources: [
+      { label: "Algo 8301 public price", href: "https://www.voipsupply.com/algo-8301" },
+      { label: "Algo 8188 public price", href: "https://www.voipsupply.com/algo-8188-sip-ceiling-speaker" },
+    ],
   },
   {
     platform: "Axis",
-    example: "C1610-VE network sound projector",
-    amount: "about US$919 street",
-    meaning: "Shows the premium attached to Axis all-in-one network audio, DSP, health monitoring and security integration.",
+    core: "Audio Manager Edge: included in compatible network speakers for smaller systems",
+    audio: "C1410 Mk II indoor speaker: about £330 ex VAT; C1310-E Mk II horn: about £518 ex VAT",
+    intercom: "Two-way audio is built into selected speakers; no separate intercom station used in this benchmark",
+    note: "Axis can avoid a separate controller on smaller deployments because management software runs on the devices. Larger systems may use additional management components.",
+    sources: [
+      { label: "Axis C1410 Mk II public price", href: "https://www.use-ip.co.uk/axis-c1410-mk-ii.html" },
+      { label: "Axis C1310-E Mk II public price", href: "https://store.xma.co.uk/product?pid=02813-001" },
+    ],
   },
   {
     platform: "TOA",
-    example: "IP-A1SC15 network horn",
-    amount: "about £407 ex VAT public retail",
-    meaning: "A public benchmark for a rugged SIP/multicast IP horn rather than a complete TOA system.",
+    core: "N-8000EX IP intercom exchange: about £4,075 ex VAT",
+    audio: "IP-A1SC15 IP horn: about £420 ex VAT",
+    intercom: "N-8000MS master station: about £535 ex VAT",
+    note: "TOA spans several product families, so a real school design may use a different combination of IP paging, intercom and voice-alarm products.",
+    sources: [
+      { label: "TOA N-8000 public pricing", href: "https://blaydoncomms.co.uk/product-category/intercom-systems/" },
+      { label: "TOA IP-A1SC15 public price", href: "https://blaydoncomms.co.uk/product/loudspeakers/horn-speakers/toa-ip-a1sc615-horn-speakers/" },
+    ],
   },
   {
     platform: "AtlasIED",
-    example: "IP-SM talkback IP speaker",
-    amount: "US$1,298.99 official",
-    meaning: "Premium IPX endpoints include advanced talkback/notification features; visual-display models are higher again.",
+    core: "IP116-D GLOBALCOM controller: US$16,143 official",
+    audio: "IP-SM talkback IP speaker: US$1,298.99 official",
+    intercom: "IPCSD1 digital microphone station: US$2,351 official",
+    note: "AtlasIED publishes unusually transparent US pricing. GLOBALCOM deployments may also require endpoint licences and additional platform hardware depending on scale.",
+    sources: [
+      { label: "AtlasIED IP116-D controller", href: "https://www.atlasied.com/ip116-d" },
+      { label: "AtlasIED IP-SM speaker", href: "https://www.atlasied.com/ip-sm" },
+      { label: "AtlasIED IPCSD1 station", href: "https://www.atlasied.com/ipcsd1" },
+    ],
   },
   {
     platform: "Bosch PRAESENSA",
-    example: "Controller + amplifier architecture",
-    amount: "Premium enterprise pricing",
-    meaning: "Public MSRP schedules show controller, amplifier and power-supply costs in the thousands of US dollars before loudspeakers and installation.",
+    core: "PRA-SCS controller: US$2,700 MSRP; PRA-SCL: US$7,100 MSRP",
+    audio: "PRA-AD604 4-channel 600 W amplifier: US$5,679 MSRP",
+    intercom: "PRA-CSLD call station: US$1,499 MSRP",
+    note: "PRAESENSA is amplifier-and-passive-loudspeaker architecture rather than one powered IP speaker per room. These figures come from a public 2024 MSRP schedule and are evidence of relative architecture/cost, not current NZ pricing.",
+    sources: [
+      { label: "Bosch public MSRP schedule", href: "https://www.myvendorlink.com/external/vfile?d=vrf&ft=o&i=48&s=161269&sv=0&v=77290" },
+      { label: "Bosch PRAESENSA system datasheet", href: "https://licensing.boschsecurity.com/publicaddress/praesensa/datasheets/PRAESENSA_Public_Address_and_Voice_Alarm_System.pdf" },
+    ],
   },
 ];
 
@@ -421,38 +452,20 @@ export default function ComparePage() {
         </div>
       </section>
 
-      <section className="sc-container max-w-5xl py-14">
-        <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">What does “easy to use” actually mean?</h2>
-        <p className="mt-3 max-w-4xl leading-relaxed text-[var(--sc-slate)]">
-          Ease of use is easy to misrepresent in enterprise AV. We split it into two questions: <strong>how easy is the system for a receptionist, administrator or facilities user to operate every day?</strong> and <strong>how much specialist knowledge is required to design, configure and maintain it?</strong> Axis scores extremely well for everyday administration because Audio Manager Edge uses browser-based drag-and-drop management and is built into the speakers. Algo also scores well, especially for teams already comfortable with SIP. SPON&apos;s centralized management, scheduling and role-based controls are straightforward after commissioning, but there is less independent public review data. AtlasIED and Bosch can offer polished operator interfaces while still requiring substantially more specialist design work behind the scenes.
-        </p>
-        <p className="mt-4 max-w-4xl text-sm leading-relaxed text-[var(--sc-slate)]">
-          Independent review coverage is uneven because these are predominantly integrator-sold commercial systems rather than consumer products. Where public installer feedback exists, we use it as supporting evidence only. For example, commercial VoIP users have described Algo units as easy to set up with strong features for the price. We do not turn isolated comments into a numerical “review score”.
-        </p>
-      </section>
-
-      <section className="border-y border-[var(--sc-border)] bg-white py-14">
-        <div className="sc-container max-w-5xl">
-          <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">Public pricing examples behind the cost gauge</h2>
-          <p className="mt-3 max-w-4xl leading-relaxed text-[var(--sc-slate)]">
-            Exact system totals are difficult to compare fairly because one manufacturer may use one powered IP speaker per room while another uses network amplifiers feeding passive speaker lines, and some platforms include visual displays, talkback or certified life-safety features that others do not. The examples below are therefore evidence for the <em>relative</em> cost position, not an apples-to-apples school bill of materials.
-          </p>
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            {publicPriceExamples.map((item) => (
-              <div key={item.platform} className="sc-card p-5">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <h3 className="font-semibold text-[var(--sc-blue-900)]">{item.platform}</h3>
-                  <Badge tone="slate">{item.amount}</Badge>
-                </div>
-                <p className="mt-2 text-sm font-medium text-[var(--sc-blue-900)]">{item.example}</p>
-                <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">{item.meaning}</p>
-              </div>
-            ))}
+      <section className="sc-container max-w-5xl py-8">
+        <details className="rounded-xl border border-[var(--sc-border)] bg-white p-5 md:p-6">
+          <summary className="cursor-pointer text-xl font-bold text-[var(--sc-blue-900)]">
+            What does “easy to use” actually mean?
+          </summary>
+          <div className="pt-4">
+            <p className="max-w-4xl leading-relaxed text-[var(--sc-slate)]">
+              Ease of use is easy to misrepresent in enterprise AV. We split it into two questions: <strong>how easy is the system for a receptionist, administrator or facilities user to operate every day?</strong> and <strong>how much specialist knowledge is required to design, configure and maintain it?</strong> Axis scores extremely well for everyday administration because Audio Manager Edge uses browser-based drag-and-drop management and is built into the speakers. Algo also scores well, especially for teams already comfortable with SIP. SPON&apos;s centralized management, scheduling and role-based controls are straightforward after commissioning, but there is less independent public review data. AtlasIED and Bosch can offer polished operator interfaces while still requiring substantially more specialist design work behind the scenes.
+            </p>
+            <p className="mt-4 max-w-4xl text-sm leading-relaxed text-[var(--sc-slate)]">
+              Independent review coverage is uneven because these are predominantly integrator-sold commercial systems rather than consumer products. Where public installer feedback exists, we use it as supporting evidence only. We do not turn isolated comments into a numerical “review score”.
+            </p>
           </div>
-          <p className="mt-5 text-xs leading-relaxed text-[var(--sc-slate)]">
-            Public prices are international examples and may exclude tax, freight, software, accessories and installation. New Zealand channel pricing can differ materially. SPON&apos;s position also incorporates trusted local partner pricing used by the SmartComms NZ indicative estimator. All comparisons should be validated against a real project specification before procurement.
-          </p>
-        </div>
+        </details>
       </section>
 
       <section className="border-b border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-14">
@@ -506,18 +519,24 @@ export default function ComparePage() {
         </div>
       </section>
 
-      <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-14">
+      <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-8">
         <div className="sc-container max-w-5xl">
-          <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">How we compare value for money</h2>
-          <p className="mt-3 max-w-4xl leading-relaxed text-[var(--sc-slate)]">
-            We do not define value as “cheapest”. A low-cost platform with poor zoning, no useful scheduling and no practical emergency workflow can be worse value than a slightly more expensive system that replaces several separate products. Equally, a technically superior mission-critical platform can be poor value if the buyer never needs its redundancy, certification or enterprise controls.
-          </p>
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <div className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">1. Useful feature coverage</h3><p className="mt-2 text-sm text-[var(--sc-slate)]">How many of the buyer&apos;s actual paging, bell, emergency, intercom and integration requirements can the platform meet without bolt-ons?</p></div>
-            <div className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">2. Hardware and software cost</h3><p className="mt-2 text-sm text-[var(--sc-slate)]">What is the relative cost of endpoints, central hardware, software and required licences before installation?</p></div>
-            <div className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">3. Operational simplicity</h3><p className="mt-2 text-sm text-[var(--sc-slate)]">Can normal staff run schedules, pages and everyday functions without calling an integrator?</p></div>
-            <div className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">4. Design and lifecycle complexity</h3><p className="mt-2 text-sm text-[var(--sc-slate)]">How much specialist commissioning, training, licensing, maintenance and future integration does the system need?</p></div>
-          </div>
+          <details className="rounded-xl border border-[var(--sc-border)] bg-white p-5 md:p-6">
+            <summary className="cursor-pointer text-xl font-bold text-[var(--sc-blue-900)]">
+              How we compare value for money
+            </summary>
+            <div className="pt-4">
+              <p className="max-w-4xl leading-relaxed text-[var(--sc-slate)]">
+                We do not define value as “cheapest”. A low-cost platform with poor zoning, no useful scheduling and no practical emergency workflow can be worse value than a slightly more expensive system that replaces several separate products. Equally, a technically superior mission-critical platform can be poor value if the buyer never needs its redundancy, certification or enterprise controls.
+              </p>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                <div className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">1. Useful feature coverage</h3><p className="mt-2 text-sm text-[var(--sc-slate)]">How many of the buyer&apos;s actual paging, bell, emergency, intercom and integration requirements can the platform meet without bolt-ons?</p></div>
+                <div className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">2. Hardware and software cost</h3><p className="mt-2 text-sm text-[var(--sc-slate)]">What is the relative cost of endpoints, central hardware, software and required licences before installation?</p></div>
+                <div className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">3. Operational simplicity</h3><p className="mt-2 text-sm text-[var(--sc-slate)]">Can normal staff run schedules, pages and everyday functions without calling an integrator?</p></div>
+                <div className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">4. Design and lifecycle complexity</h3><p className="mt-2 text-sm text-[var(--sc-slate)]">How much specialist commissioning, training, licensing, maintenance and future integration does the system need?</p></div>
+              </div>
+            </div>
+          </details>
         </div>
       </section>
 
@@ -556,29 +575,76 @@ export default function ComparePage() {
         </div>
       </section>
 
-      <section className="sc-container max-w-5xl py-14">
-        <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">Sources and evidence used in this comparison</h2>
-        <p className="mt-3 max-w-4xl text-sm leading-relaxed text-[var(--sc-slate)]">
-          We prioritise first-party manufacturer documentation for features and system architecture, then use public distributor/reseller pricing as a reality check on relative product cost. Public installer commentary is used only as supporting evidence for usability because review volume is inconsistent across commercial AV brands.
-        </p>
-        <div className="mt-6 grid gap-3 text-sm md:grid-cols-2">
-          <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://sponcomm.com/u_file/2407/file/01/SPON-IP%20PA%20SYSTEM_NetLink%20series.pdf" target="_blank" rel="noopener noreferrer">SPON NetLink IP PA documentation ↗</a>
-          <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://sponcomm.com/products/audio-management-software" target="_blank" rel="noopener noreferrer">SPON XC-9000 Audio Management Software ↗</a>
-          <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.algosolutions.com/product/8301-ip-paging-adapter-scheduler/" target="_blank" rel="noopener noreferrer">Algo 8301 Paging Adapter & Scheduler ↗</a>
-          <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.algosolutions.com/articles/voice-paging-education/" target="_blank" rel="noopener noreferrer">Algo education paging guide ↗</a>
-          <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.axis.com/products/axis-audio-manager-edge" target="_blank" rel="noopener noreferrer">AXIS Audio Manager Edge ↗</a>
-          <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.axis.com/solutions/education/network-audio-solutions-for-education" target="_blank" rel="noopener noreferrer">Axis network audio for education ↗</a>
-          <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.toa.eu/solutions/solution-by-industry/educational-institutions" target="_blank" rel="noopener noreferrer">TOA educational systems ↗</a>
-          <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.toa.eu/products/voice-alarm-systems/vx-3000-series" target="_blank" rel="noopener noreferrer">TOA VX-3000 voice alarm ↗</a>
-          <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.atlasied.com/ip108-sp" target="_blank" rel="noopener noreferrer">AtlasIED GLOBALCOM.EDU ↗</a>
-          <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.atlasied.com/ip-enabled-speakers" target="_blank" rel="noopener noreferrer">AtlasIED IPX speaker pricing/features ↗</a>
-          <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://licensing.boschsecurity.com/publicaddress/praesensa/datasheets/PRAESENSA_Public_Address_and_Voice_Alarm_System.pdf" target="_blank" rel="noopener noreferrer">Bosch PRAESENSA system datasheet ↗</a>
-          <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://cdn.commerce.boschsecurity.com/public/documents/PRAESENSA_2.30_Configuration_Manual_enUS_100857072779.pdf" target="_blank" rel="noopener noreferrer">Bosch PRAESENSA configuration manual ↗</a>
-          <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.voipsupply.com/algo-8188-sip-ceiling-speaker" target="_blank" rel="noopener noreferrer">Public Algo 8188 MSRP example ↗</a>
-          <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.bhphotovideo.com/c/product/1760612-REG/axis_communications_02380_001_c1610_ve_network_sound_projector.html/overview" target="_blank" rel="noopener noreferrer">Public Axis C1610-VE price example ↗</a>
-          <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.misco.co.uk/product/Multimedia-Audio/Speakers/TOA/TOA-IP-A1SC15---IP-speaker---for-PA-system---15-Wa?prodid=9310776" target="_blank" rel="noopener noreferrer">Public TOA IP-A1SC15 price example ↗</a>
-          <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.atlasied.com/ip-sm" target="_blank" rel="noopener noreferrer">Official AtlasIED IP-SM price example ↗</a>
-        </div>
+      <section className="sc-container max-w-6xl py-10">
+        <details className="rounded-xl border border-[var(--sc-border)] bg-white p-5 md:p-6">
+          <summary className="cursor-pointer text-xl font-bold text-[var(--sc-blue-900)]">
+            Public pricing evidence behind the cost gauge
+          </summary>
+          <div className="pt-4">
+            <p className="max-w-4xl text-sm leading-relaxed text-[var(--sc-slate)]">
+              This evidence is intentionally kept separate from the main buyer guidance. Exact system totals are difficult to compare fairly because some platforms use powered IP speakers, others use centralized amplifiers and passive loudspeakers, and some include talkback, visual notification or life-safety supervision at the endpoint. The examples below use the most comparable public control, audio and intercom/call-station prices we could find. They support the <em>relative</em> cost gauge; they are not an apples-to-apples bill of materials or an installed NZ quote.
+            </p>
+            <div className="mt-6 overflow-x-auto rounded-xl border border-[var(--sc-border)]">
+              <table className="min-w-[1120px] w-full text-left text-sm">
+                <thead className="bg-[var(--sc-blue-900)] text-white">
+                  <tr>
+                    <th className="px-4 py-3">Platform</th>
+                    <th className="px-4 py-3">Core / control example</th>
+                    <th className="px-4 py-3">Representative audio hardware</th>
+                    <th className="px-4 py-3">Intercom / call example</th>
+                    <th className="px-4 py-3">Context</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {publicPriceExamples.map((item, index) => (
+                    <tr key={item.platform} className={`border-b border-[var(--sc-border)] last:border-0 ${index % 2 ? "bg-slate-50" : "bg-white"}`}>
+                      <td className="px-4 py-4 align-top font-semibold text-[var(--sc-blue-900)]">{item.platform}</td>
+                      <td className="px-4 py-4 align-top text-[var(--sc-slate)]">{item.core}</td>
+                      <td className="px-4 py-4 align-top text-[var(--sc-slate)]">{item.audio}</td>
+                      <td className="px-4 py-4 align-top text-[var(--sc-slate)]">{item.intercom}</td>
+                      <td className="px-4 py-4 align-top text-[var(--sc-slate)]">
+                        <p>{item.note}</p>
+                        <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs">
+                          {item.sources.map((source) => (
+                            <a key={source.href} className="font-semibold text-[var(--sc-blue-700)] hover:underline" href={source.href} target="_blank" rel="noopener noreferrer">{source.label} ↗</a>
+                          ))}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-5 text-xs leading-relaxed text-[var(--sc-slate)]">
+              Public prices are international examples and may exclude tax, freight, software, licences, accessories and installation. New Zealand channel pricing can differ materially. SPON&apos;s relative position uses trusted NZ partner/project pricing because we did not find a sufficiently consistent public NZ/global MSRP set to present as equivalent product pricing. Bosch figures shown are from a public 2024 MSRP schedule and should not be treated as current 2026 quotes.
+            </p>
+          </div>
+        </details>
+
+        <details className="mt-4 rounded-xl border border-[var(--sc-border)] bg-white p-5 md:p-6">
+          <summary className="cursor-pointer text-xl font-bold text-[var(--sc-blue-900)]">
+            Sources and evidence used in this comparison
+          </summary>
+          <div className="pt-4">
+            <p className="max-w-4xl text-sm leading-relaxed text-[var(--sc-slate)]">
+              We prioritise first-party manufacturer documentation for features and system architecture, then use public distributor/reseller pricing as a reality check on relative product cost. Public installer commentary is used only as supporting evidence for usability because review volume is inconsistent across commercial AV brands.
+            </p>
+            <div className="mt-6 grid gap-3 text-sm md:grid-cols-2">
+              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://sponcomm.com/u_file/2407/file/01/SPON-IP%20PA%20SYSTEM_NetLink%20series.pdf" target="_blank" rel="noopener noreferrer">SPON NetLink IP PA documentation ↗</a>
+              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://sponcomm.com/products/audio-management-software" target="_blank" rel="noopener noreferrer">SPON XC-9000 Audio Management Software ↗</a>
+              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.algosolutions.com/product/8301-ip-paging-adapter-scheduler/" target="_blank" rel="noopener noreferrer">Algo 8301 Paging Adapter & Scheduler ↗</a>
+              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.algosolutions.com/articles/voice-paging-education/" target="_blank" rel="noopener noreferrer">Algo education paging guide ↗</a>
+              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.axis.com/products/axis-audio-manager-edge" target="_blank" rel="noopener noreferrer">AXIS Audio Manager Edge ↗</a>
+              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.axis.com/solutions/education/network-audio-solutions-for-education" target="_blank" rel="noopener noreferrer">Axis network audio for education ↗</a>
+              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.toa.eu/solutions/solution-by-industry/educational-institutions" target="_blank" rel="noopener noreferrer">TOA educational systems ↗</a>
+              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.toa.eu/products/voice-alarm-systems/vx-3000-series" target="_blank" rel="noopener noreferrer">TOA VX-3000 voice alarm ↗</a>
+              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.atlasied.com/ip108-sp" target="_blank" rel="noopener noreferrer">AtlasIED GLOBALCOM.EDU ↗</a>
+              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.atlasied.com/ip-enabled-speakers" target="_blank" rel="noopener noreferrer">AtlasIED IPX speaker pricing/features ↗</a>
+              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://licensing.boschsecurity.com/publicaddress/praesensa/datasheets/PRAESENSA_Public_Address_and_Voice_Alarm_System.pdf" target="_blank" rel="noopener noreferrer">Bosch PRAESENSA system datasheet ↗</a>
+              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://cdn.commerce.boschsecurity.com/public/documents/PRAESENSA_2.30_Configuration_Manual_enUS_100857072779.pdf" target="_blank" rel="noopener noreferrer">Bosch PRAESENSA configuration manual ↗</a>
+            </div>
+          </div>
+        </details>
       </section>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema({
