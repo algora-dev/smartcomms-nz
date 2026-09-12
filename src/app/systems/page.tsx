@@ -69,7 +69,7 @@ export default function SystemsPage() {
         ))}
       </div>
       <div className="mt-10">
-        <Link href="/pricing-tool" className="sc-btn-primary">Estimate your system</Link>
+        <div className="flex flex-wrap gap-3"><Link href="/pricing-tool" className="sc-btn-primary">Estimate your system</Link><Link href="/compare" className="sc-btn-secondary">Compare leading platforms</Link></div>
       </div>
     </div>
   );

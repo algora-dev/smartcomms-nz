@@ -11,6 +11,11 @@ export const metadata: Metadata = buildMetadata({
 
 const GUIDES = [
   {
+    title: "Best IP Paging & PA Systems: 2026 Buyer’s Guide",
+    desc: "Compare SPON, Algo, Axis, TOA, AtlasIED, Bosch and traditional 100V PA by cost, features, ease of use and value.",
+    href: "/compare",
+  },
+  {
     title: "School PA, Paging, Bell & Intercom Systems",
     desc: "A single guide to school communication features, indicative costs, upgrade decisions and potential 5YA funding.",
     href: "/schools",

@@ -26,6 +26,13 @@ export default function MethodologyPage() {
       <p>
         The current ballpark calculator uses a central pricing configuration with disclosed installation assumptions. Indicative pricing for each feature and product is gathered from two to three independent sources and is not based on any single provider, which is why outputs are indicative ranges rather than exact prices. Those outputs are not represented as market averages. Where we later publish benchmarks based on completed projects, we will state the sample, period and limitations separately.
       </p>
+      <h2>Comparison methodology</h2>
+      <p>
+        Brand and platform comparisons prioritise first-party manufacturer documentation for capabilities, architecture, limits and supported integrations. Relative price positioning uses public product pricing where comparable examples are available, together with trusted-partner project pricing where public list prices are not published. We separate day-to-day operator ease from technical commissioning complexity, because an enterprise system can be easy for staff to use after it has been professionally configured.
+      </p>
+      <p>
+        Value-for-money ratings are use-case specific rather than absolute. A premium voice-alarm platform may be excellent value where certification and redundancy are required but poor value for a straightforward school bell and paging project. We do not treat isolated online reviews as representative market evidence; public installer feedback is used only as supporting context.
+      </p>
       <h2>Funding methodology</h2>
       <p>
         The funding checker identifies whether the nature of a proposed communications project appears consistent with publicly available Ministry guidance. It does not determine eligibility or approval. Final funding decisions remain with the school and the relevant property/funding process.

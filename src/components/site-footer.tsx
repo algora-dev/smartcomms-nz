@@ -14,6 +14,7 @@ export function SiteFooter() {
           <ul className="mt-2 space-y-1 text-[var(--sc-slate)]">
             <li><Link href="/schools">School communications</Link></li>
             <li><Link href="/systems">System types</Link></li>
+            <li><Link href="/compare">Compare systems</Link></li>
             <li><Link href="/pricing">NZ pricing guide</Link></li>
             <li><Link href="/pricing-tool">Ballpark cost calculator</Link></li>
             <li><Link href="/funding">School funding guide</Link></li>
