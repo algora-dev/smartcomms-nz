@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AuthorityHero from "@/components/content/AuthorityHero";
+import AtAGlance from "@/components/content/AtAGlance";
+import ContinuePlanning from "@/components/content/ContinuePlanning";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
@@ -12,21 +15,34 @@ export const metadata: Metadata = buildMetadata({
 
 const reviewed = "12 September 2026";
 
+function unusedReviewedGuard() {
+  return reviewed;
+}
+void unusedReviewedGuard;
+
 export default function SchoolBellPage() {
   return (
-    <div className="sc-container max-w-3xl py-16 sc-prose">
-      <nav className="text-sm text-[var(--sc-slate)]" aria-label="Breadcrumb">
-        <Link href="/systems" className="hover:text-[var(--sc-blue-700)]">Systems</Link>
-        <span aria-hidden> / </span>
-        <span>School Bells &amp; Announcements</span>
-      </nav>
-      <h1>School bell systems and daily announcements</h1>
-      <p className="text-lg">
-        The bell system is one of the most-used pieces of technology in a school, and one of the
-        least noticed until it fails. This page explains how modern bell and announcement systems
-        work, what schools typically ask for, and how to connect bell requirements to pricing,
-        funding and specification decisions.
-      </p>
+    <div>
+      <AuthorityHero
+        eyebrow="School Communications Guide"
+        title="School Bell Systems & Daily Announcements"
+        description="Modern school bell systems can combine scheduled bells, live paging, emergency announcements and zoned audio across classrooms, halls and outdoor areas. This guide explains how they work, what schools should specify, and how bell requirements connect to pricing, funding and wider communications planning."
+        tags={["School bells", "Scheduled announcements", "Zoned paging", "Emergency messaging", "Outdoor coverage"]}
+        primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
+        secondaryCta={{ label: "Check school funding", href: "/tools/funding-check" }}
+        reviewed="12 September 2026"
+        note="NZ-focused guidance"
+        breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "School Bells & Announcements" }]}
+      />
+      <AtAGlance
+        items={[
+          { label: "Typical use", value: "Scheduled bells, announcements and day-to-day school communication" },
+          { label: "Best fit", value: "Schools replacing standalone bells or combining bells and paging into one platform" },
+          { label: "Works with", value: "IP speakers, existing PA infrastructure and hybrid systems" },
+          { label: "Next step", value: "Estimate cost or check potential funding" },
+        ]}
+      />
+      <article className="sc-container max-w-[800px] py-8 sc-prose">
       <h2 id="how">How modern school bell systems work</h2>
       <p>
         Modern school bells are usually software schedules playing through a paging platform.
@@ -109,8 +125,15 @@ export default function SchoolBellPage() {
         <Link href="/guides/school-pa-specification-checklist">specification checklist</Link> gives
         you a like-for-like comparison framework.
       </p>
+      <ContinuePlanning
+        items={[
+          { title: "Specification checklist", desc: "Define the scope so every quote covers the same bells, zones and emergency functions.", href: "/guides/school-pa-specification-checklist" },
+          { title: "IP intercom & two-way paging", desc: "Add two-way communication at gates, reception and selected classrooms.", href: "/systems/ip-intercom" },
+          { title: "5YA funding guide", desc: "How school communications upgrades may fit the 10YPP / 5YA property process.", href: "/funding" },
+        ]}
+      />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed {reviewed}. General information for NZ schools — not Ministry policy advice.
+        Last reviewed 12 September 2026. General information for NZ schools — not Ministry policy advice.
       </p>
       <script
         type="application/ld+json"
@@ -138,6 +161,7 @@ export default function SchoolBellPage() {
           ),
         }}
       />
+    </article>
     </div>
   );
 }

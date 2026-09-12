@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AuthorityHero from "@/components/content/AuthorityHero";
+import AtAGlance from "@/components/content/AtAGlance";
+import ContinuePlanning from "@/components/content/ContinuePlanning";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
@@ -10,23 +13,29 @@ export const metadata: Metadata = buildMetadata({
   path: "/systems/ip-intercom",
 });
 
-const reviewed = "12 September 2026";
-
 export default function IpIntercomPage() {
   return (
-    <div className="sc-container max-w-3xl py-16 sc-prose">
-      <nav className="text-sm text-[var(--sc-slate)]" aria-label="Breadcrumb">
-        <Link href="/systems" className="hover:text-[var(--sc-blue-700)]">Systems</Link>
-        <span aria-hidden> / </span>
-        <span>IP Intercom &amp; Two-Way Paging</span>
-      </nav>
-      <h1>IP intercom and two-way paging</h1>
-      <p className="text-lg">
-        One-way paging tells a room something. An intercom lets the room talk back. On IP platforms,
-        two-way audio is a capability of the same infrastructure as your speakers and bells, which
-        is why intercom is increasingly specified alongside school and site paging upgrades in New
-        Zealand.
-      </p>
+    <div>
+      <AuthorityHero
+        eyebrow="Two-Way Communication Guide"
+        title="IP Intercom & Two-Way Paging Systems"
+        description="IP intercom systems add two-way communication to a wider paging network, allowing reception, classrooms, gates, offices and other locations to call or speak back. This guide explains fixed call points, SIP intercoms, classroom call buttons, video entry and how intercom functions can share the same infrastructure as paging and announcements."
+        tags={["IP intercom", "Two-way paging", "SIP intercom", "Call points", "Video entry"]}
+        primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
+        secondaryCta={{ label: "Compare system platforms", href: "/compare" }}
+        reviewed="12 September 2026"
+        note="NZ-focused guidance"
+        breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "IP Intercom & Two-Way Paging" }]}
+      />
+      <AtAGlance
+        items={[
+          { label: "Typical use", value: "Reception, classroom, gate and staff two-way communication" },
+          { label: "Best fit", value: "Sites wanting paging and intercom functions within one wider communications platform" },
+          { label: "Works with", value: "SIP, IP speakers, call buttons, paging consoles and video entry stations" },
+          { label: "Next step", value: "Define the required call points and estimate the project" },
+        ]}
+      />
+      <article className="sc-container max-w-[800px] py-8 sc-prose">
       <h2 id="how">How IP intercom works</h2>
       <p>
         An IP intercom endpoint is a network device with a speaker, a microphone and a call button
@@ -96,8 +105,15 @@ export default function IpIntercomPage() {
         <li><Link href="/systems/emergency-lockdown">Emergency and lockdown communication</Link></li>
         <li><Link href="/compare">IP paging platform comparison</Link></li>
       </ul>
+      <ContinuePlanning
+        items={[
+          { title: "Compare system platforms", desc: "Which IP paging and intercom platforms fit NZ sites and budgets.", href: "/compare" },
+          { title: "Emergency & lockdown communication", desc: "How intercom call points support school emergency planning.", href: "/systems/emergency-lockdown" },
+          { title: "Pricing guide", desc: "Indicative NZ installed ranges and the main cost drivers.", href: "/pricing" },
+        ]}
+      />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed {reviewed}. General information only — integration feasibility always depends
+        Last reviewed 12 September 2026. General information only — integration feasibility always depends
         on your specific phone system and network.
       </p>
       <script
@@ -126,6 +142,7 @@ export default function IpIntercomPage() {
           ),
         }}
       />
+    </article>
     </div>
   );
 }

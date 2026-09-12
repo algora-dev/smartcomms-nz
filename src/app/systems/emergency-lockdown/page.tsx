@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AuthorityHero from "@/components/content/AuthorityHero";
+import AtAGlance from "@/components/content/AtAGlance";
+import ContinuePlanning from "@/components/content/ContinuePlanning";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
@@ -10,24 +13,35 @@ export const metadata: Metadata = buildMetadata({
   path: "/systems/emergency-lockdown",
 });
 
-const reviewed = "12 September 2026";
-
 export default function EmergencyLockdownPage() {
   return (
-    <div className="sc-container max-w-3xl py-16 sc-prose">
-      <nav className="text-sm text-[var(--sc-slate)]" aria-label="Breadcrumb">
-        <Link href="/systems" className="hover:text-[var(--sc-blue-700)]">Systems</Link>
-        <span aria-hidden> / </span>
-        <span>Emergency &amp; Lockdown Communication</span>
-      </nav>
-      <h1>Emergency and lockdown communication systems</h1>
-      <p className="text-lg">
-        Modern paging platforms are increasingly asked to do more than bells and announcements: they
-        are part of a school&apos;s emergency response. This page is system-planning guidance — what
-        capabilities exist, how they are activated, and what to specify. It is not emergency
-        procedure advice; always follow your school&apos;s emergency management plan and Ministry
-        guidance for procedures themselves.
-      </p>
+    <div>
+      <AuthorityHero
+        eyebrow="School Safety Communication Guide"
+        title="Emergency, Lockdown & Safety Announcement Systems"
+        description="A school emergency communication system needs to deliver clear, fast and intelligible messages to the right areas during lockdowns, evacuations and other incidents. This guide explains the role of paging, zoning, prerecorded messages, live announcements, outdoor coverage and system resilience."
+        tags={["Lockdown announcements", "Emergency paging", "Evacuation messages", "Safety warnings", "Site-wide coverage"]}
+        primaryCta={{ label: "Review your system requirements", href: "/contact" }}
+        secondaryCta={{ label: "Check school funding", href: "/tools/funding-check" }}
+        reviewed="12 September 2026"
+        note="Planning guidance, not procedure advice"
+        breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "Emergency & Lockdown Communication" }]}
+      />
+      <AtAGlance
+        items={[
+          { label: "Typical use", value: "Lockdown, evacuation and urgent safety communication" },
+          { label: "Best fit", value: "Schools needing reliable site-wide emergency messaging alongside normal paging" },
+          { label: "Works with", value: "Paging platforms, bells, fixed speakers, outdoor horns and approved safety procedures" },
+          { label: "Next step", value: "Review coverage gaps or investigate funding" },
+        ]}
+      />
+      <div className="sc-container max-w-[1150px] pt-6">
+        <p className="rounded-xl border border-[var(--sc-teal)] bg-[var(--sc-blue-50)] px-5 py-4 text-sm font-medium text-[var(--sc-slate)]">
+          Paging and PA systems support emergency communication but do not replace required fire
+          alarm systems, emergency procedures or specialist life-safety systems.
+        </p>
+      </div>
+      <article className="sc-container max-w-[800px] py-8 sc-prose">
       <h2 id="why-paging">Why the paging system is central to school emergencies</h2>
       <p>
         In a lockdown or evacuation, the fastest way to reach every classroom, outdoor area and
@@ -110,8 +124,15 @@ export default function EmergencyLockdownPage() {
         <li><Link href="/systems/ip-intercom">IP intercom and two-way paging</Link></li>
         <li><Link href="/guides/nz-school-pa-paging-requirements">NZ school PA and paging requirements</Link></li>
       </ul>
+      <ContinuePlanning
+        items={[
+          { title: "NZ school PA requirements", desc: "Ministry design, cabling, funding and procurement context for school communications.", href: "/guides/nz-school-pa-paging-requirements" },
+          { title: "School systems overview", desc: "Features, indicative costs and upgrade decisions for school communications.", href: "/schools" },
+          { title: "5YA funding guide", desc: "How safety-motivated communications upgrades may fit the property funding process.", href: "/funding" },
+        ]}
+      />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed {reviewed}. System-planning information only — not emergency procedure advice.
+        Last reviewed 12 September 2026. System-planning information only — not emergency procedure advice.
         Follow your school&apos;s emergency management plan and official Ministry/NZ Police guidance.
       </p>
       <script
@@ -140,6 +161,7 @@ export default function EmergencyLockdownPage() {
           ),
         }}
       />
+    </article>
     </div>
   );
 }

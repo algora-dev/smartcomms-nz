@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
+import AuthorityHero from "@/components/content/AuthorityHero";
+import AtAGlance from "@/components/content/AtAGlance";
+import ContinuePlanning from "@/components/content/ContinuePlanning";
 
 export const metadata: Metadata = buildMetadata({
   title: "IP Paging & Network PA Systems: How They Work",
@@ -10,23 +13,29 @@ export const metadata: Metadata = buildMetadata({
   path: "/systems/ip-paging-pa",
 });
 
-const reviewed = "12 September 2026";
-
 export default function IpPagingPaPage() {
   return (
-    <div className="sc-container max-w-3xl py-16 sc-prose">
-      <nav className="text-sm text-[var(--sc-slate)]" aria-label="Breadcrumb">
-        <Link href="/systems" className="hover:text-[var(--sc-blue-700)]">Systems</Link>
-        <span aria-hidden> / </span>
-        <span>IP Paging &amp; Network PA</span>
-      </nav>
-      <h1>IP paging and network PA systems</h1>
-      <p className="text-lg">
-        IP paging is the modern replacement for the traditional central-amplifier PA system. Instead
-        of running speaker wires back to one rack, every speaker, intercom and call point becomes a
-        device on your computer network. This page explains the architecture in plain language, what
-        it needs to work well, and where it fits against traditional and hybrid designs.
-      </p>
+    <div>
+      <AuthorityHero
+        eyebrow="IP Paging & PA System Guide"
+        title="IP Paging & Network PA Systems"
+        description="Modern IP paging systems use the data network to deliver live announcements, scheduled messages, emergency audio and zoned communication across classrooms, offices, warehouses and multi-building sites. This guide explains how the architecture works, when full-IP or hybrid systems make sense, and what to consider before specifying one."
+        tags={["IP paging", "Network PA", "PoE speakers", "Zoned announcements", "Hybrid systems"]}
+        primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
+        secondaryCta={{ label: "Compare paging platforms", href: "/compare" }}
+        reviewed="12 September 2026"
+        note="NZ-focused guidance"
+        breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "IP Paging & Network PA" }]}
+      />
+      <AtAGlance
+        items={[
+          { label: "Typical use", value: "Site-wide paging, scheduled announcements and emergency communication" },
+          { label: "Best fit", value: "Schools, commercial sites and distributed facilities using modern network infrastructure" },
+          { label: "Works with", value: "IP speakers, SIP devices, existing 100V systems and hybrid architectures" },
+          { label: "Next step", value: "Estimate a system or compare platform options" },
+        ]}
+      />
+      <article className="sc-container max-w-[800px] py-8 sc-prose">
       <h2 id="what-is">What &quot;Audio over IP&quot; actually means</h2>
       <p>
         In a traditional PA system, audio travels as an analogue signal from a microphone or source
@@ -129,8 +138,15 @@ export default function IpPagingPaPage() {
           <Link href="/tools/funding-check">check potential school funding</Link>
         </li>
       </ul>
+      <ContinuePlanning
+        items={[
+          { title: "Compare paging platforms", desc: "SPON, Algo, Axis, TOA, AtlasIED, Bosch and traditional 100V compared for NZ buyers.", href: "/compare" },
+          { title: "Network readiness checklist", desc: "Check cabling, PoE and switch capacity before requesting IP paging quotes.", href: "/guides/ip-paging-network-readiness" },
+          { title: "Replacing an old PA system", desc: "What can be kept, what usually changes and how to plan the replacement.", href: "/systems/traditional-vs-ip" },
+        ]}
+      />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed {reviewed}. General information only — not design or compliance advice for any
+        Last reviewed 12 September 2026. General information only — not design or compliance advice for any
         specific site.
       </p>
       <script
@@ -138,7 +154,7 @@ export default function IpPagingPaPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             articleSchema({
-              headline: "IP Paging & Network PA Systems: How They Work",
+              headline: "IP Paging & Network PA Systems",
               description:
                 "A plain-language explanation of IP paging and network PA systems for NZ sites: Audio over IP, PoE endpoints, zoning, scheduling and architecture trade-offs.",
               url: `${site.url}/systems/ip-paging-pa`,
@@ -159,6 +175,7 @@ export default function IpPagingPaPage() {
           ),
         }}
       />
+    </article>
     </div>
   );
 }

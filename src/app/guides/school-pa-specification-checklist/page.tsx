@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AuthorityHero from "@/components/content/AuthorityHero";
+import AtAGlance from "@/components/content/AtAGlance";
+import ContinuePlanning from "@/components/content/ContinuePlanning";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
@@ -11,6 +14,7 @@ export const metadata: Metadata = buildMetadata({
 });
 
 const reviewed = "12 September 2026";
+void reviewed;
 
 const SECTIONS = [
   {
@@ -97,25 +101,27 @@ const SECTIONS = [
 
 export default function SpecificationChecklistPage() {
   return (
-    <div className="sc-container max-w-3xl py-16 sc-prose">
-      <nav className="text-sm text-[var(--sc-slate)]" aria-label="Breadcrumb">
-        <Link href="/guides" className="hover:text-[var(--sc-blue-700)]">Guides</Link>
-        <span aria-hidden> / </span>
-        <span>School PA Specification Checklist</span>
-      </nav>
-      <h1>School PA specification checklist</h1>
-      <p className="text-lg">
-        The most common reason school paging quotes are impossible to compare is that each bidder
-        answered a different question. This checklist defines the question. Work through it before
-        requesting quotes, attach it to your tender documents, and require every bidder to respond
-        section by section.
-      </p>
-      <p>
-        Context first if you need it: what the Ministry frameworks expect is covered in the{" "}
-        <Link href="/guides/nz-school-pa-paging-requirements">NZ school PA requirements guide</Link>,
-        and the system concepts are in the{" "}
-        <Link href="/systems/ip-paging-pa">IP paging architecture guide</Link>.
-      </p>
+    <div>
+      <AuthorityHero
+        eyebrow="Project Planning Checklist"
+        title="School PA, Paging & Bell Specification Checklist"
+        description="A good specification makes competing quotes easier to compare and reduces the risk of missing important coverage, emergency, network or operational requirements. Use this checklist to define what a school actually needs before requesting a formal system design or supplier quote."
+        tags={["PA specification", "Paging checklist", "School bells", "Emergency coverage", "Quote comparison"]}
+        primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
+        secondaryCta={{ label: "Check school funding", href: "/tools/funding-check" }}
+        reviewed="12 September 2026"
+        note="Attach to tender documents"
+        breadcrumb={[{ name: "Guides", href: "/guides" }, { name: "School PA Specification Checklist" }]}
+      />
+      <AtAGlance
+        items={[
+          { label: "Typical use", value: "Preparing a consistent brief before requesting system quotes" },
+          { label: "Best fit", value: "Schools, consultants, IT partners and property teams" },
+          { label: "Covers", value: "Coverage, zoning, bells, emergency functions, intercom, network infrastructure and support" },
+          { label: "Next step", value: "Use the checklist, then compare pricing and funding options" },
+        ]}
+      />
+      <article className="sc-container max-w-[800px] py-8 sc-prose">
       {SECTIONS.map((section) => (
         <section key={section.title} className="sc-card p-6 not-prose">
           <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">{section.title}</h2>
@@ -142,8 +148,15 @@ export default function SpecificationChecklistPage() {
         <Link href="/funding">funding guide</Link> and run the{" "}
         <Link href="/tools/funding-check">funding checker</Link> for an indicative read.
       </p>
+      <ContinuePlanning
+        items={[
+          { title: "Pricing guide", desc: "Indicative NZ installed ranges so you can sanity-check every quote.", href: "/pricing" },
+          { title: "5YA funding guide", desc: "How a clearly specified project fits the property funding process.", href: "/funding" },
+          { title: "Compare paging platforms", desc: "Which platforms and ecosystems suit which specifications.", href: "/compare" },
+        ]}
+      />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed {reviewed}. Procurement-support guidance only — follow your school&apos;s and
+        Last reviewed 12 September 2026. Procurement-support guidance only — follow your school&apos;s and
         the Ministry&apos;s procurement rules for any formal tender.
       </p>
       <script
@@ -172,6 +185,7 @@ export default function SpecificationChecklistPage() {
           ),
         }}
       />
+    </article>
     </div>
   );
 }

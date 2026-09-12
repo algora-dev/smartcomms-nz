@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AuthorityHero from "@/components/content/AuthorityHero";
+import AtAGlance from "@/components/content/AtAGlance";
+import ContinuePlanning from "@/components/content/ContinuePlanning";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
@@ -9,8 +12,6 @@ export const metadata: Metadata = buildMetadata({
     "What to check before specifying an IP paging system: PoE budget, VLANs, QoS, switch capacity, cabling state and Wi-Fi independence — a practical checklist for NZ schools and IT partners.",
   path: "/guides/ip-paging-network-readiness",
 });
-
-const reviewed = "12 September 2026";
 
 const CHECKS = [
   {
@@ -79,24 +80,27 @@ const CHECKS = [
 
 export default function NetworkReadinessPage() {
   return (
-    <div className="sc-container max-w-3xl py-16 sc-prose">
-      <nav className="text-sm text-[var(--sc-slate)]" aria-label="Breadcrumb">
-        <Link href="/guides" className="hover:text-[var(--sc-blue-700)]">Guides</Link>
-        <span aria-hidden> / </span>
-        <span>IP Paging Network Readiness</span>
-      </nav>
-      <h1>IP paging network readiness checklist</h1>
-      <p className="text-lg">
-        The single biggest factor in whether an IP paging project is straightforward or painful is
-        the state of the network it lands on. This checklist is written for NZ school property and
-        IT teams — and for the IT partners who support them — to work through <em>before</em> asking
-        for quotes. It bridges the AV world and the school network world, which is exactly where
-        most surprises live.
-      </p>
-      <p>
-        New to the architecture itself? Start with the{" "}
-        <Link href="/systems/ip-paging-pa">IP paging and network PA guide</Link> first.
-      </p>
+    <div>
+      <AuthorityHero
+        eyebrow="IT & Network Planning Guide"
+        title="Is Your Network Ready for IP Paging?"
+        description="IP paging systems rely on the site's data network, but most projects do not need a complete network rebuild. This guide helps schools and IT teams assess cabling, PoE capacity, switch ports, fibre links, multicast, SIP, VLANs, time synchronisation, resilience and remote management before the paging design is finalised."
+        tags={["Cat6 cabling", "PoE", "Network switches", "SIP", "Multicast", "VLANs"]}
+        primaryCta={{ label: "Estimate an IP paging system", href: "/pricing-tool" }}
+        secondaryCta={{ label: "Read the IP paging guide", href: "/systems/ip-paging-pa" }}
+        reviewed="12 September 2026"
+        note="For school IT teams and MSPs"
+        breadcrumb={[{ name: "Guides", href: "/guides" }, { name: "IP Paging Network Readiness" }]}
+      />
+      <AtAGlance
+        items={[
+          { label: "Typical use", value: "Checking whether existing network infrastructure can support an IP paging rollout" },
+          { label: "Best fit", value: "School IT teams, MSPs, network providers and project consultants" },
+          { label: "Check first", value: "Cabling, PoE, switch capacity, inter-building links and network design" },
+          { label: "Next step", value: "Identify gaps before requesting a final system quote" },
+        ]}
+      />
+      <article className="sc-container max-w-[800px] py-8 sc-prose">
       {CHECKS.map((section) => (
         <section key={section.title} className="sc-card p-6 not-prose">
           <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">{section.title}</h2>
@@ -128,8 +132,15 @@ export default function NetworkReadinessPage() {
         every quote you receive covers the same work. The Ministry-side context is in the{" "}
         <Link href="/guides/nz-school-pa-paging-requirements">requirements guide</Link>.
       </p>
+      <ContinuePlanning
+        items={[
+          { title: "IP paging architecture guide", desc: "How Audio over IP, PoE endpoints and zoning actually work.", href: "/systems/ip-paging-pa" },
+          { title: "Compare paging platforms", desc: "Which platforms fit which networks, budgets and support models.", href: "/compare" },
+          { title: "School systems overview", desc: "Features, indicative costs and upgrade decisions for schools.", href: "/schools" },
+        ]}
+      />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed {reviewed}. General guidance — always confirm specifics with your network
+        Last reviewed 12 September 2026. General guidance — always confirm specifics with your network
         administrator and installer.
       </p>
       <script
@@ -158,6 +169,7 @@ export default function NetworkReadinessPage() {
           ),
         }}
       />
+    </article>
     </div>
   );
 }

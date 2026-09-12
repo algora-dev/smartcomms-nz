@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AuthorityHero from "@/components/content/AuthorityHero";
+import AtAGlance from "@/components/content/AtAGlance";
+import ContinuePlanning from "@/components/content/ContinuePlanning";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
@@ -10,24 +13,29 @@ export const metadata: Metadata = buildMetadata({
   path: "/guides/nz-school-pa-paging-requirements",
 });
 
-const reviewed = "12 September 2026";
-
 export default function NzSchoolPaRequirementsPage() {
   return (
-    <div className="sc-container max-w-3xl py-16 sc-prose">
-      <nav className="text-sm text-[var(--sc-slate)]" aria-label="Breadcrumb">
-        <Link href="/guides" className="hover:text-[var(--sc-blue-700)]">Guides</Link>
-        <span aria-hidden> / </span>
-        <span>NZ School PA &amp; Paging Requirements</span>
-      </nav>
-      <h1>NZ school PA and paging requirements</h1>
-      <p className="text-lg">
-        Unlike some markets, New Zealand does not publish a single standalone &quot;school PA
-        standard&quot;. Instead, requirements are spread across Ministry of Education property
-        design guidance, ICT/network standards, health and safety frameworks, and the 10YPP / 5YA
-        property funding process. This guide brings those threads together so boards, principals and
-        property managers can see the whole picture in one place.
-      </p>
+    <div>
+      <AuthorityHero
+        eyebrow="New Zealand School Requirements Guide"
+        title="NZ School PA, Paging & Bell System Requirements"
+        description="New Zealand Ministry guidance recognises public-address and safety-warning systems as part of modern school infrastructure. This guide brings together the key requirements around paging, bells, safety announcements, speech intelligibility, visual alerts, ICT cabling, property planning and procurement."
+        tags={["Ministry guidance", "School PA requirements", "5YA", "10YPP", "Safety communication"]}
+        primaryCta={{ label: "Check potential funding", href: "/tools/funding-check" }}
+        secondaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
+        reviewed="12 September 2026"
+        note="Independent synthesis, not Ministry advice"
+        breadcrumb={[{ name: "Guides", href: "/guides" }, { name: "NZ School PA & Paging Requirements" }]}
+      />
+      <AtAGlance
+        items={[
+          { label: "Typical use", value: "Planning or reviewing a school-wide PA, paging or bell project" },
+          { label: "Best fit", value: "NZ state schools, IT partners, property teams and consultants" },
+          { label: "Covers", value: "Ministry design guidance, ICT infrastructure, 5YA/10YPP and procurement considerations" },
+          { label: "Next step", value: "Check funding potential or build an indicative budget" },
+        ]}
+      />
+      <article className="sc-container max-w-[800px] py-8 sc-prose">
       <p className="text-sm border-l-4 border-[var(--sc-teal)] pl-4">
         <strong>Note:</strong> this is our synthesis of publicly available Ministry material. It is
         not Ministry policy advice. Always confirm current requirements on{" "}
@@ -139,8 +147,15 @@ export default function NzSchoolPaRequirementsPage() {
           </a>
         </li>
       </ul>
+      <ContinuePlanning
+        items={[
+          { title: "5YA funding guide", desc: "How fixed communications may fit the 5YA / 10YPP property process, with real published examples.", href: "/funding" },
+          { title: "Specification checklist", desc: "Turn these requirements into a scope suppliers must quote against.", href: "/guides/school-pa-specification-checklist" },
+          { title: "Pricing guide", desc: "Indicative NZ installed ranges and what drives them.", href: "/pricing" },
+        ]}
+      />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed {reviewed}. Independent synthesis of public sources; not Ministry of Education
+        Last reviewed 12 September 2026. Independent synthesis of public sources; not Ministry of Education
         advice.
       </p>
       <script
@@ -169,6 +184,7 @@ export default function NzSchoolPaRequirementsPage() {
           ),
         }}
       />
+    </article>
     </div>
   );
 }
