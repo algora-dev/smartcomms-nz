@@ -23,14 +23,14 @@ export function SiteHeader() {
       <div className="sc-container flex h-20 items-center justify-between gap-6">
         <Link href="/" className="flex shrink-0 items-center gap-3" aria-label="SmartComms NZ home">
           <Image
-            src="/brand/scnz-logo-colour.png"
+            src="/brand/scnz-logo-colour-trans.png"
             alt="SmartComms New Zealand"
-            width={180}
-            height={44}
+            width={43}
+            height={60}
             className="h-[3.75rem] w-auto cursor-pointer transition-all duration-200 ease-out hover:scale-[1.05] hover:drop-shadow-[0_6px_22px_rgba(44,177,165,0.55)]"
             priority
           />
-          <span className="hidden cursor-pointer text-xl font-bold tracking-tight text-[var(--sc-blue-900)] transition-all duration-200 ease-out hover:scale-[1.08] hover:drop-shadow-[0_6px_22px_rgba(44,177,165,0.55)] xl:inline-block">SCNZ</span>
+          <span className="hidden cursor-pointer text-xl font-bold tracking-tight text-[var(--sc-blue-900)] transition-all duration-200 ease-out hover:scale-[1.08] hover:drop-shadow-[0_8px_30px_rgba(44,177,165,0.95)] xl:inline-block">SCNZ</span>
         </Link>
 
         <nav aria-label="Main navigation" className="hidden items-center gap-5 lg:flex">
@@ -38,7 +38,7 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-[var(--sc-slate)] transition-colors hover:text-[var(--sc-blue-900)]"
+              className="inline-block origin-left text-sm font-medium text-[var(--sc-slate)] transition-all duration-200 ease-out hover:scale-[1.06] hover:text-[var(--sc-blue-900)] hover:drop-shadow-[0_4px_14px_rgba(44,177,165,0.5)]"
             >
               {item.label}
             </Link>
