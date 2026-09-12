@@ -71,6 +71,25 @@ export default function SystemsPage() {
       <div className="mt-10">
         <div className="flex flex-wrap gap-3"><Link href="/pricing-tool" className="sc-btn-primary">Estimate your system</Link><Link href="/compare" className="sc-btn-secondary">Compare leading platforms</Link></div>
       </div>
+      <h2 className="mt-14 text-2xl font-semibold text-[var(--sc-blue-900)]">Deep dives by system type</h2>
+      <div className="mt-6 grid gap-6 sm:grid-cols-2">
+        <Link href="/systems/ip-paging-pa" className="sc-card group p-6">
+          <h3 className="font-semibold text-[var(--sc-blue-900)] group-hover:text-[var(--sc-blue-700)]">IP Paging &amp; Network PA Systems <span aria-hidden>→</span></h3>
+          <p className="mt-2 text-sm text-[var(--sc-slate)]">How Audio over IP, PoE endpoints, zoning and scheduling actually work — the architecture behind modern paging.</p>
+        </Link>
+        <Link href="/systems/school-bell-announcements" className="sc-card group p-6">
+          <h3 className="font-semibold text-[var(--sc-blue-900)] group-hover:text-[var(--sc-blue-700)]">School Bells &amp; Announcements <span aria-hidden>→</span></h3>
+          <p className="mt-2 text-sm text-[var(--sc-slate)]">Automated bell schedules, zone control, live paging and what to consider when replacing an aging school bell system.</p>
+        </Link>
+        <Link href="/systems/emergency-lockdown" className="sc-card group p-6">
+          <h3 className="font-semibold text-[var(--sc-blue-900)] group-hover:text-[var(--sc-blue-700)]">Emergency &amp; Lockdown Communication <span aria-hidden>→</span></h3>
+          <p className="mt-2 text-sm text-[var(--sc-slate)]">Planning guidance for emergency paging, lockdown and evacuation messaging, redundancy and activation points.</p>
+        </Link>
+        <Link href="/systems/ip-intercom" className="sc-card group p-6">
+          <h3 className="font-semibold text-[var(--sc-blue-900)] group-hover:text-[var(--sc-blue-700)]">IP Intercom &amp; Two-Way Paging <span aria-hidden>→</span></h3>
+          <p className="mt-2 text-sm text-[var(--sc-slate)]">Two-way audio, SIP/VoIP integration, classroom call points and gate entry — what intercom adds and where it fits.</p>
+        </Link>
+      </div>
     </div>
   );
 }

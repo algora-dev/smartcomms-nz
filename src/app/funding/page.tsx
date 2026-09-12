@@ -131,7 +131,7 @@ export default function FundingPage() {
           <p className="text-sm font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">What this means for your school</p>
           <h3 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">There is documented precedent for funding PA and bell infrastructure.</h3>
           <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">
-            Your own project still needs to fit your property plan, available allocation and Ministry process. The useful next step is to identify the fixed-infrastructure components and build a clear project case.
+            Your own project still needs to fit your property plan, available allocation and Ministry process. The useful next step is to identify the fixed-infrastructure components and build a clear project case. Our <Link href="/guides/nz-school-pa-paging-requirements">NZ school PA and paging requirements guide</Link> covers the Ministry context, and the <Link href="/guides/school-pa-specification-checklist">specification checklist</Link> helps you prepare evidence and scope that can be compared like-for-like.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             <Link href="/tools/funding-check" className="sc-btn-primary">Check your project</Link>
@@ -162,7 +162,7 @@ export default function FundingPage() {
           <li>Some classrooms, buildings, halls or outdoor areas cannot receive clear announcements.</li>
           <li>Emergency or lockdown communication cannot reliably reach the whole site.</li>
           <li>The school has expanded and the existing infrastructure no longer covers the campus properly.</li>
-          <li>Network, cabling, refurbishment or other property work is already planned, making coordination sensible.</li>
+          <li>Network, cabling, refurbishment or other property work is already planned, making coordination sensible. If cabling is part of your project, our <Link href="/guides/ip-paging-network-readiness">network readiness checklist</Link> helps scope that work.</li>
         </ul>
         <p>
           A project that is mainly routine maintenance or a discretionary technology refresh usually has a weaker 5YA argument than a genuine replacement or substantial fixed-infrastructure upgrade.

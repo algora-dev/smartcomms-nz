@@ -97,6 +97,9 @@ export default function PricingPage() {
 
       <section className="sc-container max-w-4xl py-14">
         <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">What changes the price?</h2>
+        <p className="mt-3 max-w-3xl text-[var(--sc-slate)]">
+          Network readiness is one of the main cost drivers: a site with suitable cabling and switch capacity installs for far less than one needing new infrastructure. See the <Link href="/guides/ip-paging-network-readiness">network readiness checklist</Link> to see where your site sits.
+        </p>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {FACTORS.map((factor) => (
             <div key={factor.title} className="sc-card p-5">

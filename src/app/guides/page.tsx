@@ -11,6 +11,21 @@ export const metadata: Metadata = buildMetadata({
 
 const GUIDES = [
   {
+    title: "NZ School PA & Paging Requirements",
+    desc: "What Ministry design, cabling, funding and procurement guidance means for school PA, bells, intercom and emergency communications.",
+    href: "/guides/nz-school-pa-paging-requirements",
+  },
+  {
+    title: "IP Paging Network Readiness Checklist",
+    desc: "PoE budget, VLANs, QoS, cabling state and support responsibility — check these before asking for IP paging quotes.",
+    href: "/guides/ip-paging-network-readiness",
+  },
+  {
+    title: "School PA Specification Checklist",
+    desc: "A pre-procurement checklist so every PA, bell or intercom quote you receive covers the same scope and compares fairly.",
+    href: "/guides/school-pa-specification-checklist",
+  },
+  {
     title: "Best IP Paging & PA Systems: 2026 Buyer’s Guide",
     desc: "Compare SPON, Algo, Axis, TOA, AtlasIED, Bosch and traditional 100V PA by cost, features, ease of use and value.",
     href: "/compare",

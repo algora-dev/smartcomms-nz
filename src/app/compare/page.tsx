@@ -328,6 +328,9 @@ export default function ComparePage() {
         <p className="mt-5 max-w-4xl text-lg leading-relaxed text-[var(--sc-slate)]">
           Comparing paging systems by brand alone is not very useful. A school, hospital, warehouse or commercial campus normally cares about four things: does the system have the right features, is it easy to run, will it scale, and does the extra capability justify the price? This guide compares SPON, Algo, Axis, TOA, AtlasIED, Bosch PRAESENSA and traditional 100V PA on exactly those questions.
         </p>
+        <p className="mt-4 max-w-4xl text-[var(--sc-slate)]">
+          New to the underlying technology? The <Link href="/systems/ip-paging-pa">IP paging architecture guide</Link> explains how these platforms work, the <Link href="/guides/ip-paging-network-readiness">network readiness checklist</Link> covers the PoE/network side, and schools specifying a system can use our <Link href="/guides/school-pa-specification-checklist">specification checklist</Link> to compare quotes like-for-like.
+        </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link href="/pricing-tool" className="sc-btn-primary">Estimate project cost</Link>
           <Link href="/tools/funding-check" className="sc-btn-secondary">Check NZ school funding</Link>
