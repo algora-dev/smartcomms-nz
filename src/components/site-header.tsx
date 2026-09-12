@@ -27,10 +27,10 @@ export function SiteHeader() {
             alt="SmartComms New Zealand"
             width={180}
             height={44}
-            className="h-[3.75rem] w-auto"
+            className="h-[3.75rem] w-auto cursor-pointer transition-all duration-200 ease-out hover:scale-[1.05] hover:drop-shadow-[0_6px_22px_rgba(44,177,165,0.55)]"
             priority
           />
-          <span className="hidden text-xl font-bold tracking-tight text-[var(--sc-blue-900)] xl:inline">SCNZ</span>
+          <span className="hidden cursor-pointer text-xl font-bold tracking-tight text-[var(--sc-blue-900)] transition-all duration-200 ease-out hover:scale-[1.08] hover:drop-shadow-[0_6px_22px_rgba(44,177,165,0.55)] xl:inline-block">SCNZ</span>
         </Link>
 
         <nav aria-label="Main navigation" className="hidden items-center gap-5 lg:flex">
