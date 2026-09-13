@@ -7,9 +7,9 @@ import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "IP Paging Network Readiness Checklist (NZ Schools & Sites)",
+  title: "IP Paging Network Readiness Guide",
   description:
-    "What to check before specifying an IP paging system: PoE budget, VLANs, QoS, switch capacity, cabling state and Wi-Fi independence — a practical checklist for NZ schools and IT partners.",
+    "Check cabling, PoE, switching, fibre, multicast, SIP and resilience before deploying an IP paging system.",
   path: "/guides/ip-paging-network-readiness",
 });
 

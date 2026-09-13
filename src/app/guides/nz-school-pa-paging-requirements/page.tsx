@@ -7,9 +7,9 @@ import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "NZ School PA & Paging Requirements: Ministry Standards Explained",
+  title: "NZ School PA & Paging Requirements",
   description:
-    "A synthesis of NZ Ministry of Education design, cabling, funding and procurement guidance relevant to school PA, paging, bell and intercom systems — in one place.",
+    "New Zealand Ministry guidance on school PA, paging, bell and intercom systems: design, cabling, funding and procurement explained in one place.",
   path: "/guides/nz-school-pa-paging-requirements",
 });
 

@@ -3,6 +3,10 @@ import Link from "next/link";
 import { buildMetadata, articleSchema, breadcrumbSchema } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { schoolBandSummaries } from "@/lib/pricing/school-bands";
+import AuthorityHero from "@/components/content/AuthorityHero";
+import AtAGlance from "@/components/content/AtAGlance";
+import ContinuePlanning from "@/components/content/ContinuePlanning";
+import { reviewedLabel } from "@/lib/content-meta";
 
 export const metadata: Metadata = buildMetadata({
   title: "School PA, Paging, Bell & Intercom Systems NZ",
@@ -10,7 +14,6 @@ export const metadata: Metadata = buildMetadata({
   path: "/schools",
 });
 
-const reviewed = "11 September 2026";
 const bands = schoolBandSummaries();
 
 const capabilities = [
@@ -25,18 +28,26 @@ const capabilities = [
 export default function SchoolsPage() {
   return (
     <div>
-      <div className="sc-container max-w-4xl py-16">
-        <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">New Zealand schools</p>
-        <h1 className="mt-2 text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">School PA, paging, bell and intercom systems</h1>
-        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[var(--sc-slate)]">
-          A modern school communications system can combine daily bells, live announcements, emergency messaging, indoor and outdoor coverage and two-way intercom into one coordinated platform. This guide explains the main options, likely cost ranges and the funding questions NZ state schools should investigate.
-        </p>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Link href="/pricing-tool" className="sc-btn-primary">Estimate your school cost</Link>
-          <Link href="/tools/funding-check" className="sc-btn-secondary">Check potential 5YA funding</Link>
-        </div>
-        <p className="mt-4 text-xs text-[var(--sc-slate)]">Last reviewed {reviewed}. Pricing is indicative only and funding is never guaranteed.</p>
-      </div>
+      <AuthorityHero
+        eyebrow="New Zealand school communications"
+        title="School Paging, PA, Bell & Intercom Systems"
+        description="Plan a modern school communication system for bells, live announcements, emergency messages, indoor and outdoor coverage, and optional two-way intercom. Compare systems, estimate cost and check potential Ministry funding."
+        tags={["School paging", "Bell systems", "Emergency announcements", "Intercom", "5YA funding"]}
+        primaryCta={{ label: "Get a ballpark price", href: "/pricing-tool" }}
+        secondaryCta={{ label: "Check school funding", href: "/tools/funding-check" }}
+        reviewed={reviewedLabel("/schools")}
+        note="Indicative pricing and funding guidance"
+        breadcrumb={[{ name: "Schools", href: "/schools" }]}
+      />
+      <AtAGlance
+        items={[
+          { label: "Typical use", value: "Bells, announcements, emergency messages and site-wide communication" },
+          { label: "Best fit", value: "Primary, intermediate and secondary schools upgrading or replacing legacy PA and bell systems" },
+          { label: "Planning options", value: "Full IP, traditional PA or hybrid upgrades" },
+          { label: "Next step", value: "Estimate project cost or check funding potential" },
+        ]}
+      />
+      <div className="h-8" />
 
       <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-14">
         <div className="sc-container max-w-4xl">
@@ -98,6 +109,17 @@ export default function SchoolsPage() {
         </div>
       </section>
 
+      <ContinuePlanning
+        items={[
+          { title: "NZ school requirements", desc: "Ministry design, cabling and procurement guidance for school PA and paging.", href: "/guides/nz-school-pa-paging-requirements" },
+          { title: "Specification checklist", desc: "Define scope so every quote covers the same things and compares fairly.", href: "/guides/school-pa-specification-checklist" },
+          { title: "Network readiness", desc: "Check cabling, PoE and switching before an IP paging project.", href: "/guides/ip-paging-network-readiness" },
+          { title: "Compare platforms", desc: "Side-by-side comparison of paging and PA platforms available in NZ.", href: "/compare" },
+          { title: "Pricing", desc: "Indicative installed cost ranges and how they are built up.", href: "/pricing" },
+          { title: "School funding", desc: "Whether fixed communications work may fit a 5YA / 10YPP pathway.", href: "/funding" },
+        ]}
+      />
+
       <article className="sc-container max-w-3xl py-14 sc-prose">
         <h2>When should a school consider replacing its current system?</h2>
         <p>Common triggers include unreliable bells or paging, unsupported equipment, classrooms or outdoor areas that cannot hear announcements, poor speech intelligibility, expansion into new blocks, and emergency messages that do not reliably reach the entire site. If bells are the main concern, see our <Link href="/systems/school-bell-announcements">school bell system guide</Link>; for safety messaging, see <Link href="/systems/emergency-lockdown">emergency and lockdown communication</Link>.</p>
@@ -109,7 +131,7 @@ export default function SchoolsPage() {
         <p>Start with a ballpark budget and, for a state school, check whether the fixed infrastructure has a potential 5YA pathway. A site assessment can then confirm what is reusable, where coverage is needed and what should appear in a formal quote or property-funding discussion. The Ministry-side context is covered in our <Link href="/guides/nz-school-pa-paging-requirements">NZ school PA and paging requirements guide</Link>, and the <Link href="/guides/school-pa-specification-checklist">specification checklist</Link> helps you get comparable quotes.</p>
       </article>
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema({ headline: "School PA, Paging, Bell & Intercom Systems NZ", description: "NZ guide to school paging, bells, PA, emergency communication, intercom, pricing and funding.", url: `${site.url}/schools`, datePublished: "2026-09-11", dateModified: "2026-09-11" })) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema({ headline: "School PA, Paging, Bell & Intercom Systems NZ", description: "NZ guide to school paging, bells, PA, emergency communication, intercom, pricing and funding.", url: `${site.url}/schools`, datePublished: "2026-09-11", dateModified: "2026-09-13" })) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([{ name: "SmartComms NZ", url: site.url }, { name: "Schools", url: `${site.url}/schools` }])) }} />
     </div>
   );

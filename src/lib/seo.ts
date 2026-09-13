@@ -30,8 +30,20 @@ export function organizationSchema() {
     "@type": "Organization",
     name: site.name,
     url: site.url,
+    logo: `${site.url}/brand/scnz-logo-colour.png`,
     description: site.description,
     areaServed: { "@type": "Country", name: "New Zealand" },
+    // sameAs is intentionally omitted: no genuine SmartComms social profiles
+    // exist yet. Only add sameAs entries for profiles that actually exist.
+  };
+}
+
+export function websiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: site.name,
+    url: site.url,
   };
 }
 
@@ -41,6 +53,12 @@ export function articleSchema(opts: {
   url: string;
   datePublished: string;
   dateModified?: string;
+  /** Only supply when a named reviewer has visibly reviewed the page. */
+  reviewedBy?: {
+    name: string;
+    role: string;
+    organisation: string;
+  };
 }) {
   return {
     "@context": "https://schema.org",
@@ -52,6 +70,9 @@ export function articleSchema(opts: {
     dateModified: opts.dateModified ?? opts.datePublished,
     author: { "@type": "Organization", name: "SmartComms NZ Editorial Team" },
     publisher: { "@type": "Organization", name: site.name },
+    ...(opts.reviewedBy
+      ? { reviewedBy: { "@type": "Person", name: opts.reviewedBy.name } }
+      : {}),
   };
 }
 

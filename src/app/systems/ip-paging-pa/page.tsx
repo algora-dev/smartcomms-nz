@@ -7,9 +7,9 @@ import AtAGlance from "@/components/content/AtAGlance";
 import ContinuePlanning from "@/components/content/ContinuePlanning";
 
 export const metadata: Metadata = buildMetadata({
-  title: "IP Paging & Network PA Systems: How They Work",
+  title: "IP Paging & Network PA Systems",
   description:
-    "A plain-language explanation of IP paging and network PA systems for NZ sites: Audio over IP, PoE endpoints, zoning, scheduling and how they compare with traditional 100V PA.",
+    "Learn how IP paging and network PA systems work, what infrastructure they need, and when full-IP or hybrid designs make sense.",
   path: "/systems/ip-paging-pa",
 });
 

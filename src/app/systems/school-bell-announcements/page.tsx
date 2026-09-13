@@ -7,9 +7,9 @@ import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "School Bell Systems & Daily Announcements (NZ)",
+  title: "School Bell & Announcement Systems",
   description:
-    "How modern school bell and announcement systems work in New Zealand: automated bell schedules, zone control, live paging and what to consider when replacing an old system.",
+    "Plan school bells, scheduled announcements and zoned paging across classrooms, halls and outdoor areas.",
   path: "/systems/school-bell-announcements",
 });
 

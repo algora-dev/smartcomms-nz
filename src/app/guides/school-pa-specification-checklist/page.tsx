@@ -7,9 +7,9 @@ import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "School PA Specification Checklist: Compare Quotes Like-for-Like",
+  title: "School PA Specification Checklist",
   description:
-    "A practical pre-procurement checklist for NZ schools specifying a PA, paging, bell or intercom system — so every quote you receive covers the same scope and can be compared fairly.",
+    "Use this NZ school PA and paging checklist to define coverage, bells, emergency features, intercom, networking and support before quoting.",
   path: "/guides/school-pa-specification-checklist",
 });
 

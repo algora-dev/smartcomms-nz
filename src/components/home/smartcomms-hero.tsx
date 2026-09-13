@@ -21,7 +21,6 @@ const SCENES = [
     long: false,
   },
 ];
-
 const SYSTEMS = ["Paging & PA", "Bells", "Intercom", "Emergency alerts", "Access"];
 const PLACES = ["Schools", "Hospitals", "Aged care facilities", "Corrections", "Campuses & large facilities"];
 const FLOW_LINES = [
@@ -221,7 +220,7 @@ export function SmartcommsHero() {
           <p className="sc-eyebrow">IP PAGING · SCHOOL BELLS · PA · INTERCOM · NEW ZEALAND</p>
           <div className="sc-headline-space">
             <h1 id="sc-heading" className="sc-stable-heading">
-              Understand.<br />Plan. Price the<br /><span>right system.</span>
+              Plan the right IP paging, PA, bell or intercom <span>system.</span>
             </h1>
             <div className="sc-animated-headings" aria-hidden="true">
               {SCENES.map((s, i) => (

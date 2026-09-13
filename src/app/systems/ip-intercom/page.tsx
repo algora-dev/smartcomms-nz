@@ -7,7 +7,7 @@ import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "IP Intercom & Two-Way Paging Systems (NZ)",
+  title: "IP Intercom & Two-Way Paging",
   description:
     "What IP intercoms add to a paging system: two-way audio, SIP integration, classroom call points, gate entry and what to consider when specifying intercom for NZ sites.",
   path: "/systems/ip-intercom",

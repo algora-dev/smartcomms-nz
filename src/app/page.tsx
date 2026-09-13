@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SmartcommsHero } from "@/components/home/smartcomms-hero";
 import { SystemVideo } from "@/components/home/system-video";
 import { Reveal } from "@/components/home/reveal";
+import { TrackedLink } from "@/components/tracked-link";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -59,11 +60,60 @@ const INTENT_CARDS = [
   },
 ];
 
+const UTILITY_LINKS = [
+  {
+    href: "/pricing",
+    label: "Indicative NZ pricing ranges",
+    event: "pricing_guide_cta_clicked",
+  },
+  {
+    href: "/funding",
+    label: "Documented school funding examples",
+    event: "funding_guide_cta_clicked",
+  },
+  {
+    href: "/compare",
+    label: "Buyer comparison guide",
+    event: "compare_cta_clicked",
+  },
+  {
+    href: "/pricing-tool",
+    label: "Pricing calculator",
+    event: "homepage_pricing_tool_clicked",
+  },
+  {
+    href: "/tools/funding-check",
+    label: "Funding checker",
+    event: "homepage_funding_tool_clicked",
+  },
+];
+
 export default function HomePage() {
   return (
     <>
       <SmartcommsHero />
       <SystemVideo />
+
+      <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)]" aria-label="Popular planning resources">
+        <div className="sc-container py-6">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">
+              Popular planning resources
+            </p>
+            {UTILITY_LINKS.map((link) => (
+              <TrackedLink
+                key={link.href}
+                href={link.href}
+                event={link.event}
+                payload={{ source: "homepage_strip" }}
+                className="text-sm font-medium text-[var(--sc-blue-700)] underline decoration-[var(--sc-teal)] decoration-2 underline-offset-4 hover:text-[var(--sc-navy)]"
+              >
+                {link.label}
+              </TrackedLink>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="sc-container py-16">
         <Reveal>
@@ -135,8 +185,8 @@ export default function HomePage() {
               The school guide brings together the questions schools usually research separately: what a modern paging and bell system can do, what a small, medium or large project may cost, and whether fixed communications work has a potential 5YA pathway.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <Link href="/schools" className="sc-btn-primary">Explore school systems</Link>
-              <Link href="/pricing" className="sc-btn-secondary">See indicative school costs</Link>
+              <TrackedLink href="/schools" event="school_guide_cta_clicked" payload={{ source: "homepage_school_band" }} className="sc-btn-primary">Explore school systems</TrackedLink>
+              <TrackedLink href="/pricing" event="pricing_guide_cta_clicked" payload={{ source: "homepage_school_band" }} className="sc-btn-secondary">See indicative school costs</TrackedLink>
             </div>
           </div>
         </Reveal>

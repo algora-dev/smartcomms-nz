@@ -7,9 +7,9 @@ import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Emergency & Lockdown Communication Systems for NZ Schools",
+  title: "School Emergency & Lockdown Systems",
   description:
-    "Planning guidance for school emergency paging, lockdown and evacuation communication in New Zealand: capabilities, activation methods, redundancy and specification considerations.",
+    "Learn how school paging supports lockdown, evacuation and emergency messages, including coverage, zoning and intelligibility.",
   path: "/systems/emergency-lockdown",
 });
 
