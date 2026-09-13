@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { track } from "@/lib/analytics";
 
 type Variant = "pricing-to-funding" | "funding-to-pricing";
 
@@ -16,10 +19,18 @@ export function ToolCrossSell({ variant }: { variant: Variant }) {
           Fixed paging, bell, emergency communication, intercom and communications infrastructure may have a potential Ministry 5YA / 10YPP funding pathway. A quick check can show which parts of your proposed project are worth investigating.
         </p>
         <div className="mt-4 flex flex-wrap gap-3">
-          <Link href="/tools/funding-check" className="sc-btn-primary">
+          <Link
+            href="/tools/funding-check"
+            className="sc-btn-primary"
+            onClick={() => track("pricing_to_funding_clicked")}
+          >
             Check potential funding
           </Link>
-          <Link href="/funding" className="sc-btn-secondary">
+          <Link
+            href="/funding"
+            className="sc-btn-secondary"
+            onClick={() => track("funding_guide_cta_clicked", { source: "pricing_tool" })}
+          >
             How school funding works
           </Link>
         </div>
@@ -39,10 +50,18 @@ export function ToolCrossSell({ variant }: { variant: Variant }) {
         Funding potential is only one part of the decision. Use the ballpark calculator to get an indicative installed price range for the system you are considering.
       </p>
       <div className="mt-4 flex flex-wrap gap-3">
-        <Link href="/pricing-tool" className="sc-btn-primary">
+        <Link
+          href="/pricing-tool"
+          className="sc-btn-primary"
+          onClick={() => track("funding_to_pricing_clicked")}
+        >
           Estimate project cost
         </Link>
-        <Link href="/pricing" className="sc-btn-secondary">
+        <Link
+          href="/pricing"
+          className="sc-btn-secondary"
+          onClick={() => track("pricing_guide_cta_clicked", { source: "funding_tool" })}
+        >
           Read the NZ pricing guide
         </Link>
       </div>

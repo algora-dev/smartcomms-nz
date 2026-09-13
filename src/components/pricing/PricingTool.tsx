@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { AreaKey, CalculatorState, FeaturePackage, InstallationType } from "@/lib/pricing/types";
 import { calculateEstimate } from "@/lib/pricing/calculate";
+import { track } from "@/lib/analytics";
 import { formatK, formatNZD, pricingConfig } from "@/lib/pricing/config";
 import { defaultState } from "@/lib/pricing/presets";
 import { ResultView } from "./ResultView";
@@ -124,6 +125,10 @@ export function PricingTool() {
   const [fineTuneOpen, setFineTuneOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
 
+  useEffect(() => {
+    track("pricing_tool_started");
+  }, []);
+
   // deep-linkable state in URL
   useEffect(() => {
     queueMicrotask(() => {
@@ -190,7 +195,11 @@ export function PricingTool() {
               <button
                 key={t.value}
                 type="button"
-                onClick={() => { patch({ tier: t.value }); setStep(1); }}
+                onClick={() => {
+                  patch({ tier: t.value });
+                  track("pricing_installation_selected", { installation_tier: t.value });
+                  setStep(1);
+                }}
                 className="rounded-xl border-2 border-[var(--sc-border)] bg-white p-5 text-left hover:border-[var(--sc-teal)] hover:bg-[var(--sc-blue-50)] hover:shadow-md transition-all cursor-pointer"
               >
                 <div className="font-semibold text-[var(--sc-navy)]">{t.title}</div>
@@ -240,7 +249,13 @@ export function PricingTool() {
             <button
               type="button"
               disabled={totalAreas === 0}
-              onClick={() => setStep(2)}
+              onClick={() => {
+                track("pricing_areas_completed", {
+                  total_areas: totalAreas,
+                  endpoint_count: estimate.endpoints,
+                });
+                setStep(2);
+              }}
               className="rounded-full bg-[var(--sc-navy)] px-6 py-3 text-sm font-semibold text-white hover:bg-[var(--sc-blue-700)] hover:shadow-lg transition-all cursor-pointer disabled:opacity-40"
             >
               Next step →
@@ -258,7 +273,10 @@ export function PricingTool() {
               <button
                 key={p.value}
                 type="button"
-                onClick={() => patch({ featurePackage: p.value })}
+                onClick={() => {
+                  patch({ featurePackage: p.value });
+                  track("pricing_package_selected", { package: p.value });
+                }}
                 className={`rounded-xl border-2 p-5 text-left transition-all cursor-pointer ${
                   state.featurePackage === p.value
                     ? "border-[var(--sc-teal)] bg-[var(--sc-blue-50)] shadow-md"
@@ -285,7 +303,10 @@ export function PricingTool() {
           <div className="mt-6 rounded-xl border border-[var(--sc-border)] bg-white">
             <button
               type="button"
-              onClick={() => setFineTuneOpen((o) => !o)}
+              onClick={() => {
+                if (!fineTuneOpen) track("pricing_customisation_opened");
+                setFineTuneOpen((o) => !o);
+              }}
               className="flex w-full items-center justify-between p-4 text-left font-medium text-[var(--sc-navy)] hover:bg-[var(--sc-blue-50)] rounded-xl transition-colors cursor-pointer"
             >
               Fine-tune this estimate (optional)
@@ -371,7 +392,17 @@ export function PricingTool() {
             <button type="button" onClick={() => setStep(1)} className="text-sm font-medium text-[var(--sc-slate)] hover:text-[var(--sc-navy)] cursor-pointer">← Back</button>
             <button
               type="button"
-              onClick={() => setStep(3)}
+              onClick={() => {
+                track("pricing_completed", {
+                  installation_tier: state.tier,
+                  total_areas: totalAreas,
+                  package: state.featurePackage,
+                  estimate_low: estimate.low,
+                  estimate_high: estimate.high,
+                  over_30_endpoints: estimate.overThreshold,
+                });
+                setStep(3);
+              }}
               className="rounded-full bg-[var(--sc-teal-strong)] px-8 py-3 text-sm font-semibold text-white hover:bg-[var(--sc-teal-strong-hover)] hover:shadow-lg transition-all cursor-pointer"
             >
               See my estimate

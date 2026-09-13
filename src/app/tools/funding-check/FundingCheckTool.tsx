@@ -7,8 +7,10 @@
  * follow-up project review.
  */
 
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
+import { track } from "@/lib/analytics";
+import { attributionForSubmission } from "@/lib/attribution";
 import { ToolCrossSell } from "@/components/tool-cross-sell";
 import {
   CABLING_STATUS,
@@ -121,6 +123,10 @@ export function FundingCheckTool() {
   const [sent, setSent] = useState(false);
   const [sendError, setSendError] = useState<string | null>(null);
 
+  useEffect(() => {
+    track("funding_tool_started");
+  }, []);
+
   function toggle(list: string[], id: string): string[] {
     return list.includes(id) ? list.filter((item) => item !== id) : [...list, id];
   }
@@ -136,7 +142,15 @@ export function FundingCheckTool() {
   }
 
   function finish() {
-    setResult(runAssessment(answers));
+    const assessment = runAssessment(answers);
+    setResult(assessment);
+    track("funding_completed", {
+      school_type: answers.schoolType,
+      project_type: answers.projectStatus,
+      strong_component_count: assessment.components.strong.length,
+      case_category: assessment.caseTier,
+      pathway: assessment.pathway,
+    });
     if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -148,13 +162,29 @@ export function FundingCheckTool() {
       const response = await fetch("/api/funding-check/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ answers, lead, source: { url: window.location.href, referrer: document.referrer } }),
+        body: JSON.stringify({
+          answers,
+          lead,
+          source: { url: window.location.href, referrer: document.referrer },
+          attribution: attributionForSubmission(),
+        }),
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok || !data.ok) throw new Error(data.error || "Submission failed");
       setSent(true);
+      track("enquiry_submitted", {
+        enquiry_type: "funding_check",
+        cta: lead.cta,
+        pathway: result.pathway,
+        case_category: result.caseTier,
+      });
     } catch (error) {
-      setSendError(error instanceof Error ? error.message : "Something went wrong - please try again.");
+      track("enquiry_failed", { enquiry_type: "funding_check", cta: lead.cta });
+      setSendError(
+        error instanceof Error && error.message && !error.message.toLowerCase().includes("failed")
+          ? error.message
+          : "We couldn't submit your request. Please try the form again in a few minutes.",
+      );
     } finally {
       setSending(false);
     }
@@ -203,6 +233,12 @@ export function FundingCheckTool() {
           <p className="mt-2 text-lg font-semibold text-[var(--sc-blue-900)]">{pathwayHeading}</p>
           <p className="mt-2 max-w-2xl text-[var(--sc-slate)]">{pathwayBody}</p>
         </div>
+
+        {result.maintenanceNote && (
+          <div className="mt-4 rounded-lg border border-[#c9a227]/40 bg-[#fdf8ec] p-4 leading-relaxed text-[var(--sc-charcoal)]">
+            {result.maintenanceNote}
+          </div>
+        )}
 
         {result.positiveOverrideMessage && (
           <div className="mt-4 rounded-lg border border-[var(--sc-teal-accent)] bg-[#eefaf8] p-4 text-[var(--sc-charcoal)]">
@@ -269,6 +305,8 @@ export function FundingCheckTool() {
                 onClick={() => {
                   setLead((current) => ({ ...current, cta: "review" }));
                   setShowLead(true);
+                  track("funding_review_opened", { cta: "review", pathway: result.pathway });
+                  track("enquiry_opened", { enquiry_type: "funding_check", cta: "review" });
                 }}
               >
                 {result.pathway === "state_integrated"
@@ -287,6 +325,8 @@ export function FundingCheckTool() {
                 onClick={() => {
                   setLead((current) => ({ ...current, cta: "quote" }));
                   setShowLead(true);
+                  track("funding_review_opened", { cta: "quote", pathway: result.pathway });
+                  track("enquiry_opened", { enquiry_type: "funding_check", cta: "quote" });
                 }}
               >
                 {RESULT_COPY.ctaSecondary}
@@ -416,7 +456,10 @@ export function FundingCheckTool() {
                   label={option.label}
                   tooltip={option.tooltip}
                   selected={answers.schoolType === option.id}
-                  onClick={() => setAnswers({ ...answers, schoolType: option.id })}
+                  onClick={() => {
+                    setAnswers({ ...answers, schoolType: option.id });
+                    track("funding_school_type_selected", { school_type: option.id });
+                  }}
                 />
               ))}
             </div>
@@ -428,7 +471,10 @@ export function FundingCheckTool() {
                   key={option.id}
                   label={option.label}
                   selected={answers.projectStatus === option.id}
-                  onClick={() => setAnswers({ ...answers, projectStatus: option.id, ...(option.id === "new_build" ? { currentSystem: undefined, cablingStatus: undefined } : {}) })}
+                  onClick={() => {
+                    setAnswers({ ...answers, projectStatus: option.id, ...(option.id === "new_build" ? { currentSystem: undefined, cablingStatus: undefined } : {}) });
+                    track("funding_project_type_selected", { project_type: option.id });
+                  }}
                 />
               ))}
             </div>
@@ -465,7 +511,10 @@ export function FundingCheckTool() {
                   key={feature.id}
                   type="button"
                   aria-pressed={selected}
-                  onClick={() => setAnswers({ ...answers, features: toggle(answers.features, feature.id) })}
+                  onClick={() => {
+                    setAnswers({ ...answers, features: toggle(answers.features, feature.id) });
+                    track("funding_features_selected", { feature: feature.id });
+                  }}
                   className={`sc-card p-4 text-left ${selected ? "border-[var(--sc-blue-600)] bg-[var(--sc-blue-50)]" : ""}`}
                 >
                   <span className="flex items-start justify-between gap-3">

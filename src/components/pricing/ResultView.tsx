@@ -6,6 +6,7 @@ import { formatNZD, pricingConfig } from "@/lib/pricing/config";
 import { packageLabel } from "@/lib/pricing/calculate";
 import { InquiryModal, type InquiryMode } from "./InquiryModal";
 import { ToolCrossSell } from "@/components/tool-cross-sell";
+import { track } from "@/lib/analytics";
 
 const pdfLabel = "SmartComms NZ ballpark system estimate";
 
@@ -57,6 +58,11 @@ export function ResultView({
   if (a.entry > 0) included.push(`${a.entry} × ${state.fineTune.entryIntercom} entry intercom${a.entry > 1 ? "s" : ""}`);
 
   async function downloadPdf() {
+    track("pricing_pdf_downloaded", {
+      installation_tier: state.tier,
+      total_areas: state.areas.standardIndoor + state.areas.largeIndoor + state.areas.outdoor + state.areas.largeOutdoor + state.areas.entry,
+      package: state.featurePackage,
+    });
     const { jsPDF } = await import("jspdf");
     const doc = new jsPDF({ unit: "pt", format: "a4" });
     const W = doc.internal.pageSize.getWidth();
@@ -248,14 +254,20 @@ export function ResultView({
         <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <button
             type="button"
-            onClick={() => setInquiry("quote")}
+            onClick={() => {
+              track("pricing_quote_opened");
+              setInquiry("quote");
+            }}
             className="w-full rounded-full bg-[var(--sc-teal-strong)] px-6 py-3 text-center text-sm font-semibold text-white hover:bg-[var(--sc-teal-strong-hover)] hover:shadow-lg transition-all sm:w-auto cursor-pointer"
           >
             Get an accurate quote
           </button>
           <button
             type="button"
-            onClick={() => setInquiry("assessment")}
+            onClick={() => {
+              track("pricing_site_assessment_opened");
+              setInquiry("assessment");
+            }}
             className="w-full rounded-full border border-white/40 px-6 py-3 text-center text-sm font-semibold text-white hover:bg-white/10 transition-all sm:w-auto cursor-pointer"
           >
             Book a site assessment

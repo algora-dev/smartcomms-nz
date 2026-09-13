@@ -4,7 +4,9 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { site } from "@/lib/site";
-import { organizationSchema } from "@/lib/seo";
+import { organizationSchema, websiteSchema } from "@/lib/seo";
+import { GA4_MEASUREMENT_ID } from "@/lib/analytics";
+import { AttributionBoot } from "@/components/attribution-boot";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
@@ -26,6 +28,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
+        />
+        {GA4_MEASUREMENT_ID ? (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`} />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA4_MEASUREMENT_ID}',{anonymize_ip:true});`,
+              }}
+            />
+          </>
+        ) : null}
+        <AttributionBoot />
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
