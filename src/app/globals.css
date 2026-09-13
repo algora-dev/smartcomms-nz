@@ -130,7 +130,7 @@ a:hover {
 }
 
 .sc-btn-primary:hover {
-  background: #4a7fb5;
+  background: var(--sc-accent-hover); /* #2a5286: white text passes WCAG AA on hover */
   color: #fff;
   box-shadow: 0 0 0 1px rgba(44, 177, 165, 0.45), 0 6px 22px rgba(44, 177, 165, 0.5);
 }

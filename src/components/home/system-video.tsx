@@ -21,13 +21,18 @@ export function SystemVideo() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          // Lazy-load the source only when the video approaches the viewport.
+          if (!video.src) {
+            video.src = "/videos/scnz-system-overview.mp4";
+            video.load();
+          }
           video.play().then(() => setPlaying(true)).catch(() => {});
         } else {
           video.pause();
           setPlaying(false);
         }
       },
-      { threshold: 0.35 }
+      { rootMargin: "200px", threshold: 0.35 }
     );
     observer.observe(video);
     return () => observer.disconnect();
@@ -60,11 +65,10 @@ export function SystemVideo() {
       >
         <video
           ref={videoRef}
-          className="block w-full h-auto"
-          src="/videos/scnz-system-overview.mp4"
+          className="block w-full h-auto bg-[#0b2d5b]"
           muted
           playsInline
-          preload="metadata"
+          preload="none"
           aria-label="SmartComms system overview video"
           onClick={togglePlay}
         />

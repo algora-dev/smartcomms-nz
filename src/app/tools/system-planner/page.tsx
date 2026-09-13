@@ -1,5 +1,6 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
 export default function SystemPlannerPage() {
-  redirect("/pricing-tool");
+  // Retired tool route: permanently redirect to the pricing calculator.
+  permanentRedirect("/pricing-tool");
 }

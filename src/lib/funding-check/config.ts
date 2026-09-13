@@ -195,6 +195,8 @@ export const RESULT_COPY = {
   },
   positiveOverride:
     "We found fixed communications elements with a strong potential funding fit. The overall case may simply need better supporting evidence before it is put forward.",
+  maintenanceNote:
+    "Routine maintenance is a weaker 5YA basis. Some of the fixed communications components you selected may still have a strong capital-infrastructure fit, but ordinary maintenance alone is generally not the strongest 5YA case. A project review can help determine whether the work is better described as replacement, renewal or substantial upgrade.",
   ctaPrimary: "Get a Funding-Ready Project Review",
   ctaPrimaryBody:
     "We can review the existing system, confirm the likely scope, identify the strongest funding components and prepare an indicative budget and technical summary for discussion with the school's Property Advisor / 10YPP consultant.",

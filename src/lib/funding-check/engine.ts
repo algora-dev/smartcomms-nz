@@ -40,6 +40,8 @@ export interface AssessmentResult {
   pathwayLabel: string | null;
   positiveOverride: boolean;
   positiveOverrideMessage: string | null;
+  /** Set when the project is described as maintenance only, explaining the weaker basis. */
+  maintenanceNote: string | null;
   components: ComponentBreakdown;
   hasStrongComponents: boolean;
   caseTier: CaseTier;
@@ -117,6 +119,21 @@ export function caseTierFor(score: number): CaseTier {
   return "weak";
 }
 
+/**
+ * Maintenance-only projects must never be presented as an unqualified strong
+ * 5YA project case. Strong fixed-component classifications are kept, but the
+ * overall case is capped at Moderate (when answers suggest the work may in
+ * fact be replacement/substantial upgrade) or Weak otherwise.
+ */
+function maintenanceCap(answers: AssessmentAnswers, tier: CaseTier): CaseTier {
+  if (answers.projectStatus !== "maintenance_only") return tier;
+  const upgradeEvidence =
+    answers.currentSystem === "full_replacement" ||
+    answers.reasons.includes("old_or_failing") ||
+    answers.reasons.includes("emergency_gap");
+  return upgradeEvidence ? "moderate" : "weak";
+}
+
 function infrastructureSummary(answers: AssessmentAnswers): AssessmentResult["infrastructureSummary"] {
   let reusable: AssessmentResult["infrastructureSummary"]["reusable"] = "unknown";
   let heading = "Existing infrastructure: To be confirmed";
@@ -177,9 +194,10 @@ export function runAssessment(answers: AssessmentAnswers): AssessmentResult {
   const components = componentBreakdown(answers.features);
   const hasStrong = components.strong.length > 0;
   const { score, factors } = scoreProjectCase(answers);
-  const caseTier = caseTierFor(score);
+  const isMaintenanceOnly = answers.projectStatus === "maintenance_only";
+  const caseTier = maintenanceCap(answers, caseTierFor(score));
 
-  const positiveOverride = hasStrong && caseTier === "weak" && pathway === "five_ya";
+  const positiveOverride = hasStrong && caseTier === "weak" && pathway === "five_ya" && !isMaintenanceOnly;
   let headline: string;
   if (pathway === "state_integrated") headline = RESULT_COPY.stateIntegrated.headline;
   else if (pathway === "private") headline = RESULT_COPY.private.headline;
@@ -195,6 +213,7 @@ export function runAssessment(answers: AssessmentAnswers): AssessmentResult {
     pathwayLabel: pathway === "five_ya" ? RESULT_COPY.pathway5ya : null,
     positiveOverride,
     positiveOverrideMessage: positiveOverride ? RESULT_COPY.positiveOverride : null,
+    maintenanceNote: isMaintenanceOnly ? RESULT_COPY.maintenanceNote : null,
     components,
     hasStrongComponents: hasStrong,
     caseTier,

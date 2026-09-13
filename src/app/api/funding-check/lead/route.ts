@@ -24,6 +24,7 @@ function buildEmailHtml(
   summary: Record<string, string>,
   result: AssessmentResult,
   source?: { url?: string; referrer?: string },
+  attribution?: Record<string, string>,
 ): string {
   const rows = Object.entries(summary)
     .map(([k, v]) => `<tr><td style="padding:6px 12px;border:1px solid #e5e7eb;font-weight:600;vertical-align:top;white-space:nowrap;">${escapeHtml(k)}</td><td style="padding:6px 12px;border:1px solid #e5e7eb;">${escapeHtml(v)}</td></tr>`)
@@ -55,6 +56,7 @@ function buildEmailHtml(
   <table style="border-collapse:collapse;font-size:0.925rem;">${rows}</table>
   ${source?.url ? `<p><strong>Page:</strong> ${escapeHtml(source.url)}</p>` : ""}
   ${source?.referrer ? `<p><strong>Referrer:</strong> ${escapeHtml(source.referrer)}</p>` : ""}
+  ${attribution && Object.keys(attribution).length ? `<h3 style="color:#0b2d5b;">Attribution (internal only)</h3><table style="border-collapse:collapse;font-size:0.925rem;">${Object.entries(attribution).map(([k, v]) => `<tr><td style="padding:6px 12px;border:1px solid #e5e7eb;font-weight:600;white-space:nowrap;">${escapeHtml(k)}</td><td style="padding:6px 12px;border:1px solid #e5e7eb;">${escapeHtml(v)}</td></tr>`).join("")}</table>` : ""}
   <p style="margin-top:16px;font-size:0.75rem;color:#6b7280;">Sent ${new Date().toISOString()} from the SmartComms NZ funding check.</p>
 </div>`;
 }
@@ -64,6 +66,7 @@ export async function POST(req: Request) {
     answers?: AssessmentAnswers;
     lead?: LeadPayload;
     source?: { url?: string; referrer?: string };
+    attribution?: Record<string, string>;
   };
 
   try {
@@ -72,7 +75,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Invalid request." }, { status: 400 });
   }
 
-  const { answers, lead, source } = body;
+  const { answers, lead, source, attribution } = body;
   if (!lead || !lead.name || !lead.school || !lead.email || !answers) {
     return NextResponse.json({ ok: false, error: "Missing required fields." }, { status: 400 });
   }
@@ -105,18 +108,18 @@ export async function POST(req: Request) {
         to: [to],
         reply_to: lead.email,
         subject,
-        html: buildEmailHtml(lead, summary, result, source),
+        html: buildEmailHtml(lead, summary, result, source, attribution),
       }),
     });
 
     if (!res.ok) {
       const text = await res.text().catch(() => "");
       console.error(`[funding-check/lead] Resend error ${res.status}: ${text}`);
-      return NextResponse.json({ ok: false, error: "Could not send request. Please try again or email us directly." }, { status: 502 });
+      return NextResponse.json({ ok: false, error: "We couldn't submit your request. Please try the form again in a few minutes." }, { status: 502 });
     }
   } catch (error) {
     console.error("[funding-check/lead] send failed", error);
-    return NextResponse.json({ ok: false, error: "Could not send request. Please try again or email us directly." }, { status: 502 });
+    return NextResponse.json({ ok: false, error: "We couldn't submit your request. Please try the form again in a few minutes." }, { status: 502 });
   }
 
   return NextResponse.json({ ok: true });
