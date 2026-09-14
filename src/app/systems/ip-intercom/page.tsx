@@ -4,6 +4,7 @@ import AuthorityHero from "@/components/content/AuthorityHero";
 import AtAGlance from "@/components/content/AtAGlance";
 import ContinuePlanning from "@/components/content/ContinuePlanning";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
+import { reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
@@ -23,7 +24,7 @@ export default function IpIntercomPage() {
         tags={["IP intercom", "Two-way paging", "SIP intercom", "Call points", "Video entry"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
         secondaryCta={{ label: "Compare system platforms", href: "/compare" }}
-        reviewed="12 September 2026"
+        reviewed={reviewedLabel("/systems/ip-intercom")}
         note="NZ-focused guidance"
         breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "IP Intercom & Two-Way Paging" }]}
       />
@@ -113,7 +114,7 @@ export default function IpIntercomPage() {
         ]}
       />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed 12 September 2026. General information only — integration feasibility always depends
+        Last reviewed {reviewedLabel("/systems/ip-intercom")}. General information only - integration feasibility always depends
         on your specific phone system and network.
       </p>
       <script
@@ -125,7 +126,7 @@ export default function IpIntercomPage() {
               description:
                 "What IP intercoms add to a paging system: two-way audio, SIP integration, classroom call points, gate entry and specification considerations.",
               url: `${site.url}/systems/ip-intercom`,
-              datePublished: "2026-09-12",
+              datePublished: reviewedDate("/systems/ip-intercom"),
             })
           ),
         }}

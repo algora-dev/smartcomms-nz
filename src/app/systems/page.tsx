@@ -6,7 +6,7 @@ import { reviewedLabel } from "@/lib/content-meta";
 export const metadata: Metadata = buildMetadata({
   title: "Paging, PA, Bell & Intercom System Types",
   description:
-    "Compare traditional 100V PA, full IP/PoE and hybrid paging architectures, then explore school bells, emergency lockdown and intercom systems for New Zealand sites.",
+    "Compare traditional 100V, full-IP and hybrid paging systems, then explore bells, emergency messaging, intercom and network planning.",
   path: "/systems",
 });
 

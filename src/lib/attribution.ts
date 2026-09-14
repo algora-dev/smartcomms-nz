@@ -71,6 +71,28 @@ export function captureAttribution(): void {
 }
 
 /**
+ * Refresh last-touch only (client-side navigation). First touch is never
+ * overwritten. New tagged sources (UTM/partner) intentionally update the
+ * last-touch record; a new landing page is not recorded, because the
+ * visitor already arrived earlier in the session.
+ */
+export function refreshLastTouch(): void {
+  if (typeof window === "undefined") return;
+  const params = new URLSearchParams(window.location.search);
+  const last = {
+    landingPage: window.location.pathname + window.location.search,
+    referrer: document.referrer,
+    utmSource: params.get("utm_source") ?? "",
+    utmMedium: params.get("utm_medium") ?? "",
+    utmCampaign: params.get("utm_campaign") ?? "",
+    utmContent: params.get("utm_content") ?? "",
+    partner: params.get("partner") ?? "",
+    firstVisitAt: undefined,
+  };
+  writeJson(LAST_TOUCH_KEY, last);
+}
+
+/**
  * Flattened attribution for form submission. Merges first-touch values with
  * the current page and URL parameters so both journeys reach the enquiry.
  */
@@ -99,4 +121,26 @@ export function attributionForSubmission(): Record<string, string> {
     if (!out[key]) delete out[key];
   }
   return out;
+}
+
+/**
+ * Structured first/last-touch block for project leads (Phase 3.3).
+ * Flat keys are also kept for backwards compatibility with the email body.
+ */
+export function attributionBlocks(): {
+  firstTouch: Record<string, string>;
+  lastTouch: Record<string, string>;
+} {
+  if (typeof window === "undefined") return { firstTouch: {}, lastTouch: {} };
+  const first = readJson(FIRST_TOUCH_KEY) ?? {};
+  const last = readJson(LAST_TOUCH_KEY) ?? {};
+  const clean = (source: Record<string, unknown>) => {
+    const out: Record<string, string> = {};
+    for (const key of ["landingPage", "referrer", "utmSource", "utmMedium", "utmCampaign", "utmContent", "partner", "firstVisitAt"]) {
+      const v = typeof source[key] === "string" ? (source[key] as string) : "";
+      if (v) out[key] = v;
+    }
+    return out;
+  };
+  return { firstTouch: clean(first), lastTouch: clean(last) };
 }

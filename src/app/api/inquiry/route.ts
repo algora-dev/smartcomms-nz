@@ -3,7 +3,9 @@ import { NextResponse } from "next/server";
 export const runtime = "nodejs";
 export const maxDuration = 30;
 
-const TO_EMAIL = process.env.INQUIRY_EMAIL_TO ?? "insights@t3labs.co.uk";
+// Destination inbox is configured exclusively via environment variables.
+// No hardcoded fallback: a missing variable must fail safely (503) rather
+// than expose or rely on a private address in a public repository.
 const MAX_ATTACHMENT_BYTES = 8 * 1024 * 1024; // per file
 const MAX_TOTAL_ATTACHMENT_BYTES = 20 * 1024 * 1024;
 const MAX_FILES = 5;
@@ -50,9 +52,14 @@ export async function POST(req: Request) {
   try {
     const { Resend } = await import("resend");
     const key = process.env.RESEND_API_KEY;
-    if (!key) {
+    const toEmail = process.env.INQUIRY_EMAIL_TO;
+    const fromEmail = process.env.INQUIRY_EMAIL_FROM;
+    if (!key || !toEmail || !fromEmail) {
+      if (!key) console.error("[inquiry] RESEND_API_KEY is not configured.");
+      if (!toEmail) console.error("[inquiry] INQUIRY_EMAIL_TO is not configured.");
+      if (!fromEmail) console.error("[inquiry] INQUIRY_EMAIL_FROM is not configured.");
       return NextResponse.json(
-        { error: "The enquiry service is temporarily unavailable. Please try the form again in a few minutes." },
+        { error: "Something went wrong. Please try again shortly." },
         { status: 503 },
       );
     }
@@ -123,7 +130,12 @@ export async function POST(req: Request) {
       if (sniffed === null) {
         return NextResponse.json({ error: `${f.name} does not appear to be a valid ${ext.toUpperCase()} file.` }, { status: 400 });
       }
-      // "unknown" is accepted only for formats we cannot sniff (dwg, heic).
+      // "unknown" bytes are accepted ONLY for formats we cannot sniff
+      // (dwg, heic). Any other allowed extension with unrecognised bytes
+      // is rejected: never trust the filename extension alone.
+      if (sniffed === "unknown" && ext !== "dwg" && ext !== "heic") {
+        return NextResponse.json({ error: `${f.name} does not appear to be a valid ${ext.toUpperCase()} file.` }, { status: 400 });
+      }
       attachments.push({ filename: f.name, content: Buffer.from(bytes) });
     }
 
@@ -159,8 +171,8 @@ export async function POST(req: Request) {
     ].filter((line) => line !== null).join("\n");
 
     const sendResult = await resend.emails.send({
-      from: process.env.INQUIRY_EMAIL_FROM ?? "SmartComms NZ <insights@t3labs.co.uk>",
-      to: [TO_EMAIL],
+      from: fromEmail,
+      to: [toEmail],
       replyTo: email,
       subject: `SmartComms enquiry: ${modeLabel} - ${name}`,
       text: body,

@@ -8,7 +8,7 @@ import { formatNZD, pricingConfig } from "@/lib/pricing/config";
 export const metadata: Metadata = buildMetadata({
   title: "PA & Intercom System Cost Calculator NZ",
   description:
-    "Get a ballpark installed price for an IP paging, PA, bell or intercom system in New Zealand in under a minute. Indicative cost ranges for schools, offices and multi-zone sites.",
+    "Get an indicative installed price for an IP paging, PA, bell or intercom system in NZ in under a minute. No technical knowledge required.",
   path: "/pricing-tool",
 });
 

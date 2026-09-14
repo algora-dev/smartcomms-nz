@@ -17,7 +17,16 @@ export const metadata: Metadata = {
     template: "%s | SmartComms NZ",
   },
   description: site.description,
-  openGraph: { siteName: site.name, locale: site.locale, type: "website" },
+  openGraph: {
+    siteName: site.name,
+    locale: site.locale,
+    type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "SmartComms NZ - IP paging, PA, bell and intercom planning for New Zealand" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

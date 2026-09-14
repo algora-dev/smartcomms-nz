@@ -12,6 +12,7 @@ interface LeadPayload {
   email: string;
   phone: string;
   contactMethod: string;
+  townRegion: string;
   cta: string;
 }
 
@@ -49,6 +50,7 @@ function buildEmailHtml(
     <li><strong>Email:</strong> ${escapeHtml(lead.email)}</li>
     <li><strong>Phone:</strong> ${escapeHtml(lead.phone || "(not provided)")}</li>
     <li><strong>Preferred contact:</strong> ${escapeHtml(lead.contactMethod)}</li>
+    <li><strong>Town / region:</strong> ${escapeHtml(lead.townRegion || "(not provided)")}</li>
   </ul>
   <h3 style="color:#0b2d5b;">Assessment result</h3>
   <table style="border-collapse:collapse;font-size:0.925rem;">${resultRows}</table>
@@ -81,13 +83,17 @@ export async function POST(req: Request) {
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.FUNDING_LEAD_EMAIL_TO ?? "insights@t3labs.co.uk";
-  const from = process.env.FUNDING_LEAD_EMAIL_FROM ?? "SmartComms NZ <insights@t3labs.co.uk>";
+  // Destination inbox is configured exclusively via environment variables.
+  // No hardcoded fallback: a missing variable must fail safely (503).
+  const to = process.env.FUNDING_LEAD_EMAIL_TO ?? process.env.INQUIRY_EMAIL_TO;
+  const from = process.env.FUNDING_LEAD_EMAIL_FROM ?? process.env.INQUIRY_EMAIL_FROM;
 
-  if (!apiKey) {
-    console.error("[funding-check/lead] RESEND_API_KEY is not configured.");
+  if (!apiKey || !to || !from) {
+    if (!apiKey) console.error("[funding-check/lead] RESEND_API_KEY is not configured.");
+    if (!to) console.error("[funding-check/lead] FUNDING_LEAD_EMAIL_TO / INQUIRY_EMAIL_TO is not configured.");
+    if (!from) console.error("[funding-check/lead] FUNDING_LEAD_EMAIL_FROM / INQUIRY_EMAIL_FROM is not configured.");
     return NextResponse.json(
-      { ok: false, error: "The enquiry service is temporarily unavailable. Please try again shortly or use our contact form." },
+      { ok: false, error: "Something went wrong. Please try again shortly." },
       { status: 503 },
     );
   }

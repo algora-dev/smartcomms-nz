@@ -69,7 +69,15 @@ export function articleSchema(opts: {
     datePublished: opts.datePublished,
     dateModified: opts.dateModified ?? opts.datePublished,
     author: { "@type": "Organization", name: "SmartComms NZ Editorial Team" },
-    publisher: { "@type": "Organization", name: site.name },
+    publisher: {
+      "@type": "Organization",
+      name: site.name,
+      url: site.url,
+      logo: {
+        "@type": "ImageObject",
+        url: `${site.url}/brand/scnz-logo-colour.png`,
+      },
+    },
     ...(opts.reviewedBy
       ? { reviewedBy: { "@type": "Person", name: opts.reviewedBy.name } }
       : {}),

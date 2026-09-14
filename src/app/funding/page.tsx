@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { buildMetadata } from "@/lib/seo";
+import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
+import { reviewedDate, reviewedLabel } from "@/lib/content-meta";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
   title: "5YA Funding for School PA, Paging & Bell Systems NZ",
@@ -9,7 +11,7 @@ export const metadata: Metadata = buildMetadata({
   path: "/funding",
 });
 
-const reviewed = "11 September 2026";
+const reviewed = reviewedLabel("/funding");
 
 const faqs = [
   {
@@ -37,6 +39,16 @@ const faqs = [
 export default function FundingPage() {
   return (
     <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema({
+        headline: "5YA Funding for School PA, Paging & Bell Systems NZ",
+        description: "How NZ state schools can investigate 5YA / 10YPP funding for paging, PA and bell systems, with published examples of Ministry-funded school projects.",
+        url: `${site.url}/funding`,
+        datePublished: reviewedDate("/funding"),
+      })) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([
+        { name: "SmartComms NZ", url: site.url },
+        { name: "Funding", url: `${site.url}/funding` },
+      ])) }} />
       <div className="sc-container max-w-4xl py-16">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">New Zealand state schools</p>

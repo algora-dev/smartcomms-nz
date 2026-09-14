@@ -36,6 +36,7 @@ interface LeadForm {
   school: string;
   email: string;
   phone: string;
+  townRegion: string;
   contactMethod: "email" | "phone";
   cta: "review" | "quote";
 }
@@ -116,6 +117,7 @@ export function FundingCheckTool() {
     school: "",
     email: "",
     phone: "",
+    townRegion: "",
     contactMethod: "email",
     cta: "review",
   });
@@ -371,13 +373,28 @@ export function FundingCheckTool() {
                 />
               </label>
               <label className="text-sm font-medium text-[var(--sc-slate)]">
-                Phone (optional)
+                Town / region
+                <input
+                  required
+                  value={lead.townRegion}
+                  onChange={(event) => setLead({ ...lead, townRegion: event.target.value })}
+                  className="mt-1 w-full rounded-lg border border-[var(--sc-grey)] px-3 py-2 text-[var(--sc-charcoal)] focus:border-[var(--sc-accent)] focus:outline-none"
+                />
+              </label>
+              <label className="text-sm font-medium text-[var(--sc-slate)]">
+                Phone {lead.contactMethod === "phone" ? "" : "(optional)"}
                 <input
                   type="tel"
+                  required={lead.contactMethod === "phone"}
                   value={lead.phone}
                   onChange={(event) => setLead({ ...lead, phone: event.target.value })}
                   className="mt-1 w-full rounded-lg border border-[var(--sc-grey)] px-3 py-2 text-[var(--sc-charcoal)] focus:border-[var(--sc-accent)] focus:outline-none"
                 />
+                {lead.contactMethod === "phone" && !lead.phone.trim() && (
+                  <span className="mt-1 block text-xs text-red-600">
+                    Please add a phone number so we can call you back.
+                  </span>
+                )}
               </label>
               <label className="text-sm font-medium text-[var(--sc-slate)]">
                 Preferred contact method
@@ -391,6 +408,14 @@ export function FundingCheckTool() {
                 </select>
               </label>
               <div className="sm:col-span-2">
+                {lead.cta === "review" && (
+                  <p className="mb-3 text-xs leading-relaxed text-[var(--sc-slate)]">
+                    Send us your result and we can connect you with a trusted New Zealand technology or
+                    installation partner who can review the existing system, confirm scope, prepare an
+                    indicative project budget and help assemble the technical information needed for your
+                    property discussion.
+                  </p>
+                )}
                 <p className="text-xs text-[var(--sc-slate)]">Your funding-check answers are attached automatically. If you request a quote or project review, relevant details may be shared with a trusted installation partner. <Link href="/privacy" className="underline">Privacy</Link>.</p>
                 <button type="submit" disabled={sending} className="sc-btn-primary mt-3 disabled:opacity-50">
                   {sending ? "Sending..." : "Send my request"}
@@ -419,7 +444,7 @@ export function FundingCheckTool() {
             setSent(false);
             setShowLead(false);
             setAnswers({ reasons: [], features: [] });
-            setLead({ name: "", school: "", email: "", phone: "", contactMethod: "email", cta: "review" });
+            setLead({ name: "", school: "", email: "", phone: "", townRegion: "", contactMethod: "email", cta: "review" });
             setScreen(0);
           }}
         >

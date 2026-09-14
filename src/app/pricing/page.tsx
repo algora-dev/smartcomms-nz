@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { buildMetadata } from "@/lib/seo";
+import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
+import { reviewedDate } from "@/lib/content-meta";
+import { site } from "@/lib/site";
 import { presetSummaries } from "@/lib/pricing/presets";
 import { pricingConfig, formatNZD } from "@/lib/pricing/config";
 import { schoolBandSummaries } from "@/lib/pricing/school-bands";
@@ -27,6 +29,16 @@ export default function PricingPage() {
 
   return (
     <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema({
+        headline: "IP Paging, PA & Intercom System Costs NZ",
+        description: "Indicative installed price ranges for IP paging, PA, bell and intercom systems in New Zealand, plus the main factors that affect project cost.",
+        url: `${site.url}/pricing`,
+        datePublished: reviewedDate("/pricing"),
+      })) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([
+        { name: "SmartComms NZ", url: site.url },
+        { name: "Pricing", url: `${site.url}/pricing` },
+      ])) }} />
       <div className="sc-container max-w-4xl py-16">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">New Zealand pricing guide</p>
