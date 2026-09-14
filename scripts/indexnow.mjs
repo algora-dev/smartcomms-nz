@@ -3,7 +3,7 @@
  * Usage: npm run indexnow -- /schools /pricing /funding
  * Requires the existing public IndexNow key file to remain deployed.
  */
-const site = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.smartcomms.co.nz").replace(/\/$/, "");
+const site = (process.env.NEXT_PUBLIC_SITE_URL || "https://smartcomms.co.nz").replace(/\/$/, "");
 const key = "e5f35406b43b495b4dacb3ea8957792b";
 const paths = process.argv.slice(2);
 if (!paths.length) {
