@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { site } from "@/lib/site";
 import { organizationSchema, websiteSchema } from "@/lib/seo";
 import { GA4_MEASUREMENT_ID } from "@/lib/analytics";
+import { Suspense } from "react";
 import { AttributionBoot } from "@/components/attribution-boot";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -51,7 +52,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             />
           </>
         ) : null}
-        <AttributionBoot />
+        <Suspense>
+          <AttributionBoot />
+        </Suspense>
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />

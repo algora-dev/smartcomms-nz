@@ -81,24 +81,20 @@ Required to make enquiry forms actually send:
 RESEND_API_KEY=
 ```
 
-Recommended verified sender addresses:
+Required (no hardcoded fallbacks — missing values fail safely with a generic error):
 
 ```text
-INQUIRY_EMAIL_FROM="SmartComms NZ <enquiries@YOUR-VERIFIED-DOMAIN>"
-FUNDING_LEAD_EMAIL_FROM="SmartComms NZ <enquiries@YOUR-VERIFIED-DOMAIN>"
+RESEND_API_KEY=
+INQUIRY_EMAIL_TO=YOUR-INQUIRY-INBOX
+INQUIRY_EMAIL_FROM=SmartComms NZ <enquiries@YOUR-VERIFIED-DOMAIN>
+FUNDING_LEAD_EMAIL_TO=YOUR-FUNDING-INBOX
+FUNDING_LEAD_EMAIL_FROM=SmartComms NZ <enquiries@YOUR-VERIFIED-DOMAIN>
 ```
 
-Optional recipient overrides (otherwise both default to insights@t3labs.co.uk):
+Production canonical URL (non-www):
 
 ```text
-INQUIRY_EMAIL_TO=
-FUNDING_LEAD_EMAIL_TO=
-```
-
-Production canonical URL:
-
-```text
-NEXT_PUBLIC_SITE_URL=https://YOUR-PRODUCTION-DOMAIN
+NEXT_PUBLIC_SITE_URL=https://smartcomms.co.nz
 ```
 
 ## Checks completed in this package

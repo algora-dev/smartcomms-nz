@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
+import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
@@ -11,7 +12,7 @@ export const metadata: Metadata = buildMetadata({
   path: "/compare",
 });
 
-const reviewed = "12 September 2026";
+const reviewed = reviewedLabel("/compare");
 
 const quickValue = [
   {
@@ -654,8 +655,8 @@ export default function ComparePage() {
         headline: "Best IP Paging, PA, Bell & Intercom Systems: 2026 Buyer’s Guide",
         description: "Comparison of SPON, Algo, Axis, TOA, AtlasIED, Bosch PRAESENSA and traditional 100V PA by cost, features, ease of use and value.",
         url: `${site.url}/compare`,
-        datePublished: "2026-09-12",
-        dateModified: "2026-09-12",
+        datePublished: publishedDate("/compare"),
+        dateModified: reviewedDate("/compare"),
       })) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([
         { name: "SmartComms NZ", url: site.url },

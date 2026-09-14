@@ -81,6 +81,14 @@ export async function POST(req: Request) {
   if (!lead || !lead.name || !lead.school || !lead.email || !answers) {
     return NextResponse.json({ ok: false, error: "Missing required fields." }, { status: 400 });
   }
+  // Server-side enforcement of the funding lead requirements (frontend
+  // validation must never be the only gate).
+  if (!lead.townRegion || !lead.townRegion.trim()) {
+    return NextResponse.json({ ok: false, error: "Please add your town or region so we can route your enquiry." }, { status: 400 });
+  }
+  if (lead.contactMethod === "phone" && (!lead.phone || !lead.phone.trim())) {
+    return NextResponse.json({ ok: false, error: "Please add a phone number so we can call you back." }, { status: 400 });
+  }
 
   const apiKey = process.env.RESEND_API_KEY;
   // Destination inbox is configured exclusively via environment variables.

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { captureAttribution, refreshLastTouch } from "@/lib/attribution";
 
 /**
@@ -10,18 +10,19 @@ import { captureAttribution, refreshLastTouch } from "@/lib/attribution";
  */
 export function AttributionBoot() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     captureAttribution();
   }, []);
 
   // The root layout persists across client-side navigation, so the initial
-  // mount alone never updates last touch. Refresh on route change (query
-  // params are read directly from window.location inside refreshLastTouch);
-  // first touch is preserved.
+  // mount alone never updates last touch. Refresh on route AND query change
+  // (same-route tagged navigation updates last touch); first touch is
+  // preserved by refreshLastTouch().
   useEffect(() => {
     refreshLastTouch();
-  }, [pathname]);
+  }, [pathname, searchParams]);
 
   return null;
 }

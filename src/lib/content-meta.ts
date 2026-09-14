@@ -61,3 +61,8 @@ export function reviewedLabel(path: string): string {
 export function reviewedDate(path: string): string {
   return CONTENT_META[path]?.reviewed ?? "2026-09-11";
 }
+
+/** ISO published date for Article datePublished (NOT the reviewed date). */
+export function publishedDate(path: string): string {
+  return CONTENT_META[path]?.published ?? "2026-09-11";
+}

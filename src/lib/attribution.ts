@@ -93,32 +93,19 @@ export function refreshLastTouch(): void {
 }
 
 /**
- * Flattened attribution for form submission. Merges first-touch values with
- * the current page and URL parameters so both journeys reach the enquiry.
+ * Flattened attribution for form submission. Built from the structured
+ * first/last-touch records so both journeys reach the enquiry with the
+ * complete field set: landing page, referrer, UTMs, partner and timestamp.
  */
 export function attributionForSubmission(): Record<string, string> {
   if (typeof window === "undefined") return {};
-  const first = readJson(FIRST_TOUCH_KEY) ?? {};
-  const last = readJson(LAST_TOUCH_KEY) ?? {};
-  const currentParams = new URLSearchParams(window.location.search);
-  const val = (source: Record<string, unknown>, key: string) =>
-    typeof source[key] === "string" ? (source[key] as string) : "";
-  const pick = (key: string, fallbackParam: string) =>
-    val(first, key) || currentParams.get(fallbackParam) || "";
-  const out: Record<string, string> = {
-    landingPage: val(first, "landingPage") || window.location.pathname,
-    firstReferrer: val(first, "referrer"),
-    utmSource: pick("utmSource", "utm_source"),
-    utmMedium: pick("utmMedium", "utm_medium"),
-    utmCampaign: pick("utmCampaign", "utm_campaign"),
-    utmContent: pick("utmContent", "utm_content"),
-    partner: pick("partner", "partner") || currentParams.get("partner") || "",
-    firstVisitAt: val(first, "firstVisitAt"),
-    lastLandingPage: val(last, "landingPage"),
-    currentPage: window.location.href,
-  };
-  for (const key of Object.keys(out)) {
-    if (!out[key]) delete out[key];
+  const { firstTouch, lastTouch } = attributionBlocks();
+  const out: Record<string, string> = { currentPage: window.location.href };
+  for (const [key, value] of Object.entries(firstTouch)) {
+    if (value) out[`first_${key}`] = value;
+  }
+  for (const [key, value] of Object.entries(lastTouch)) {
+    if (value) out[`last_${key}`] = value;
   }
   return out;
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
-import { reviewedDate } from "@/lib/content-meta";
+import { publishedDate, reviewedDate } from "@/lib/content-meta";
 import { site } from "@/lib/site";
 import { presetSummaries } from "@/lib/pricing/presets";
 import { pricingConfig, formatNZD } from "@/lib/pricing/config";
@@ -33,7 +33,8 @@ export default function PricingPage() {
         headline: "IP Paging, PA & Intercom System Costs NZ",
         description: "Indicative installed price ranges for IP paging, PA, bell and intercom systems in New Zealand, plus the main factors that affect project cost.",
         url: `${site.url}/pricing`,
-        datePublished: reviewedDate("/pricing"),
+        datePublished: publishedDate("/pricing"),
+        dateModified: reviewedDate("/pricing"),
       })) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([
         { name: "SmartComms NZ", url: site.url },

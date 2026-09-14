@@ -7,6 +7,7 @@ import AuthorityHero from "@/components/content/AuthorityHero";
 import AtAGlance from "@/components/content/AtAGlance";
 import ContinuePlanning from "@/components/content/ContinuePlanning";
 import { reviewedLabel } from "@/lib/content-meta";
+import { publishedDate, reviewedDate } from "@/lib/content-meta";
 
 export const metadata: Metadata = buildMetadata({
   title: "School PA, Paging, Bell & Intercom Systems NZ",
@@ -131,7 +132,7 @@ export default function SchoolsPage() {
         <p>Start with a ballpark budget and, for a state school, check whether the fixed infrastructure has a potential 5YA pathway. A site assessment can then confirm what is reusable, where coverage is needed and what should appear in a formal quote or property-funding discussion. The Ministry-side context is covered in our <Link href="/guides/nz-school-pa-paging-requirements">NZ school PA and paging requirements guide</Link>, and the <Link href="/guides/school-pa-specification-checklist">specification checklist</Link> helps you get comparable quotes.</p>
       </article>
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema({ headline: "School PA, Paging, Bell & Intercom Systems NZ", description: "NZ guide to school paging, bells, PA, emergency communication, intercom, pricing and funding.", url: `${site.url}/schools`, datePublished: "2026-09-11", dateModified: "2026-09-13" })) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema({ headline: "School PA, Paging, Bell & Intercom Systems NZ", description: "NZ guide to school paging, bells, PA, emergency communication, intercom, pricing and funding.", url: `${site.url}/schools`, datePublished: publishedDate("/schools"), dateModified: reviewedDate("/schools") })) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([{ name: "SmartComms NZ", url: site.url }, { name: "Schools", url: `${site.url}/schools` }])) }} />
     </div>
   );

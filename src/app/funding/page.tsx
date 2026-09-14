@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
-import { reviewedDate, reviewedLabel } from "@/lib/content-meta";
+import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
@@ -43,7 +43,8 @@ export default function FundingPage() {
         headline: "5YA Funding for School PA, Paging & Bell Systems NZ",
         description: "How NZ state schools can investigate 5YA / 10YPP funding for paging, PA and bell systems, with published examples of Ministry-funded school projects.",
         url: `${site.url}/funding`,
-        datePublished: reviewedDate("/funding"),
+        datePublished: publishedDate("/funding"),
+        dateModified: reviewedDate("/funding"),
       })) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([
         { name: "SmartComms NZ", url: site.url },
