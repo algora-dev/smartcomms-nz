@@ -4,6 +4,7 @@ import AuthorityHero from "@/components/content/AuthorityHero";
 import AtAGlance from "@/components/content/AtAGlance";
 import ContinuePlanning from "@/components/content/ContinuePlanning";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
+import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
@@ -23,7 +24,7 @@ export default function NzSchoolPaRequirementsPage() {
         tags={["Ministry guidance", "School PA requirements", "5YA", "10YPP", "Safety communication"]}
         primaryCta={{ label: "Check potential funding", href: "/tools/funding-check" }}
         secondaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
-        reviewed="12 September 2026"
+        reviewed={reviewedLabel("/guides/nz-school-pa-paging-requirements")}
         note="Independent synthesis, not Ministry advice"
         breadcrumb={[{ name: "Guides", href: "/guides" }, { name: "NZ School PA & Paging Requirements" }]}
       />
@@ -155,7 +156,7 @@ export default function NzSchoolPaRequirementsPage() {
         ]}
       />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed 12 September 2026. Independent synthesis of public sources; not Ministry of Education
+        Last reviewed {reviewedLabel("/guides/nz-school-pa-paging-requirements")}. Independent synthesis of public sources; not Ministry of Education
         advice.
       </p>
       <script
@@ -167,7 +168,8 @@ export default function NzSchoolPaRequirementsPage() {
               description:
                 "A synthesis of NZ Ministry of Education design, cabling, funding and procurement guidance relevant to school PA, paging, bell and intercom systems.",
               url: `${site.url}/guides/nz-school-pa-paging-requirements`,
-              datePublished: "2026-09-12",
+              datePublished: publishedDate("/guides/nz-school-pa-paging-requirements"),
+              dateModified: reviewedDate("/guides/nz-school-pa-paging-requirements"),
             })
           ),
         }}

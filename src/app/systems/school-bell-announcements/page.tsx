@@ -4,6 +4,7 @@ import AuthorityHero from "@/components/content/AuthorityHero";
 import AtAGlance from "@/components/content/AtAGlance";
 import ContinuePlanning from "@/components/content/ContinuePlanning";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
+import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
@@ -30,7 +31,7 @@ export default function SchoolBellPage() {
         tags={["School bells", "Scheduled announcements", "Zoned paging", "Emergency messaging", "Outdoor coverage"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
         secondaryCta={{ label: "Check school funding", href: "/tools/funding-check" }}
-        reviewed="12 September 2026"
+        reviewed={reviewedLabel("/systems/school-bell-announcements")}
         note="NZ-focused guidance"
         breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "School Bells & Announcements" }]}
       />
@@ -133,7 +134,7 @@ export default function SchoolBellPage() {
         ]}
       />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed 12 September 2026. General information for NZ schools — not Ministry policy advice.
+        Last reviewed {reviewedLabel("/systems/school-bell-announcements")}. General information for NZ schools — not Ministry policy advice.
       </p>
       <script
         type="application/ld+json"
@@ -144,7 +145,8 @@ export default function SchoolBellPage() {
               description:
                 "How modern school bell and announcement systems work in New Zealand: automated schedules, zone control, live paging and replacement planning.",
               url: `${site.url}/systems/school-bell-announcements`,
-              datePublished: "2026-09-12",
+              datePublished: publishedDate("/systems/school-bell-announcements"),
+              dateModified: reviewedDate("/systems/school-bell-announcements"),
             })
           ),
         }}

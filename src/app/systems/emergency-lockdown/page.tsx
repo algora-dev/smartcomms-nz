@@ -4,6 +4,7 @@ import AuthorityHero from "@/components/content/AuthorityHero";
 import AtAGlance from "@/components/content/AtAGlance";
 import ContinuePlanning from "@/components/content/ContinuePlanning";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
+import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
@@ -23,7 +24,7 @@ export default function EmergencyLockdownPage() {
         tags={["Lockdown announcements", "Emergency paging", "Evacuation messages", "Safety warnings", "Site-wide coverage"]}
         primaryCta={{ label: "Review your system requirements", href: "/contact" }}
         secondaryCta={{ label: "Check school funding", href: "/tools/funding-check" }}
-        reviewed="12 September 2026"
+        reviewed={reviewedLabel("/systems/emergency-lockdown")}
         note="Planning guidance, not procedure advice"
         breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "Emergency & Lockdown Communication" }]}
       />
@@ -132,7 +133,7 @@ export default function EmergencyLockdownPage() {
         ]}
       />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed 12 September 2026. System-planning information only — not emergency procedure advice.
+        Last reviewed {reviewedLabel("/systems/emergency-lockdown")}. System-planning information only — not emergency procedure advice.
         Follow your school&apos;s emergency management plan and official Ministry/NZ Police guidance.
       </p>
       <script
@@ -144,7 +145,8 @@ export default function EmergencyLockdownPage() {
               description:
                 "Planning guidance for school emergency paging, lockdown and evacuation communication in New Zealand: capabilities, activation methods, redundancy and specification.",
               url: `${site.url}/systems/emergency-lockdown`,
-              datePublished: "2026-09-12",
+              datePublished: publishedDate("/systems/emergency-lockdown"),
+              dateModified: reviewedDate("/systems/emergency-lockdown"),
             })
           ),
         }}

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
-import { reviewedLabel } from "@/lib/content-meta";
+import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import AuthorityHero from "@/components/content/AuthorityHero";
 
 export const metadata: Metadata = buildMetadata({
@@ -167,8 +167,8 @@ export default function TraditionalVsIpPage() {
               headline: "Traditional PA vs IP Paging: Which Should You Use?",
               description: "Compare traditional 100V PA, full IP and hybrid paging systems for NZ sites.",
               url: `${site.url}/systems/traditional-vs-ip`,
-              datePublished: "2026-09-11",
-              dateModified: "2026-09-13",
+              datePublished: publishedDate("/systems/traditional-vs-ip"),
+              dateModified: reviewedDate("/systems/traditional-vs-ip"),
             }),
           ),
         }}

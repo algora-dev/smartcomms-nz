@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
+import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
 import AuthorityHero from "@/components/content/AuthorityHero";
 import AtAGlance from "@/components/content/AtAGlance";
@@ -23,7 +24,7 @@ export default function IpPagingPaPage() {
         tags={["IP paging", "Network PA", "PoE speakers", "Zoned announcements", "Hybrid systems"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
         secondaryCta={{ label: "Compare paging platforms", href: "/compare" }}
-        reviewed="12 September 2026"
+        reviewed={reviewedLabel("/systems/ip-paging-pa")}
         note="NZ-focused guidance"
         breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "IP Paging & Network PA" }]}
       />
@@ -146,7 +147,7 @@ export default function IpPagingPaPage() {
         ]}
       />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed 12 September 2026. General information only — not design or compliance advice for any
+        Last reviewed {reviewedLabel("/systems/ip-paging-pa")}. General information only — not design or compliance advice for any
         specific site.
       </p>
       <script
@@ -158,7 +159,8 @@ export default function IpPagingPaPage() {
               description:
                 "A plain-language explanation of IP paging and network PA systems for NZ sites: Audio over IP, PoE endpoints, zoning, scheduling and architecture trade-offs.",
               url: `${site.url}/systems/ip-paging-pa`,
-              datePublished: "2026-09-12",
+              datePublished: publishedDate("/systems/ip-paging-pa"),
+              dateModified: reviewedDate("/systems/ip-paging-pa"),
             })
           ),
         }}

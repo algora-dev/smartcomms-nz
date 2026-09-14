@@ -4,6 +4,7 @@ import AuthorityHero from "@/components/content/AuthorityHero";
 import AtAGlance from "@/components/content/AtAGlance";
 import ContinuePlanning from "@/components/content/ContinuePlanning";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
+import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
@@ -88,7 +89,7 @@ export default function NetworkReadinessPage() {
         tags={["Cat6 cabling", "PoE", "Network switches", "SIP", "Multicast", "VLANs"]}
         primaryCta={{ label: "Estimate an IP paging system", href: "/pricing-tool" }}
         secondaryCta={{ label: "Read the IP paging guide", href: "/systems/ip-paging-pa" }}
-        reviewed="12 September 2026"
+        reviewed={reviewedLabel("/guides/ip-paging-network-readiness")}
         note="For school IT teams and MSPs"
         breadcrumb={[{ name: "Guides", href: "/guides" }, { name: "IP Paging Network Readiness" }]}
       />
@@ -140,7 +141,7 @@ export default function NetworkReadinessPage() {
         ]}
       />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed 12 September 2026. General guidance — always confirm specifics with your network
+        Last reviewed {reviewedLabel("/guides/ip-paging-network-readiness")}. General guidance — always confirm specifics with your network
         administrator and installer.
       </p>
       <script
@@ -152,7 +153,8 @@ export default function NetworkReadinessPage() {
               description:
                 "What to check before specifying an IP paging system: PoE budget, VLANs, QoS, switch capacity, cabling state and support responsibility.",
               url: `${site.url}/guides/ip-paging-network-readiness`,
-              datePublished: "2026-09-12",
+              datePublished: publishedDate("/guides/ip-paging-network-readiness"),
+              dateModified: reviewedDate("/guides/ip-paging-network-readiness"),
             })
           ),
         }}

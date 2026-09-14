@@ -4,6 +4,7 @@ import AuthorityHero from "@/components/content/AuthorityHero";
 import AtAGlance from "@/components/content/AtAGlance";
 import ContinuePlanning from "@/components/content/ContinuePlanning";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
+import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
@@ -109,7 +110,7 @@ export default function SpecificationChecklistPage() {
         tags={["PA specification", "Paging checklist", "School bells", "Emergency coverage", "Quote comparison"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
         secondaryCta={{ label: "Check school funding", href: "/tools/funding-check" }}
-        reviewed="12 September 2026"
+        reviewed={reviewedLabel("/guides/school-pa-specification-checklist")}
         note="Attach to tender documents"
         breadcrumb={[{ name: "Guides", href: "/guides" }, { name: "School PA Specification Checklist" }]}
       />
@@ -156,7 +157,7 @@ export default function SpecificationChecklistPage() {
         ]}
       />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed 12 September 2026. Procurement-support guidance only — follow your school&apos;s and
+        Last reviewed {reviewedLabel("/guides/school-pa-specification-checklist")}. Procurement-support guidance only — follow your school&apos;s and
         the Ministry&apos;s procurement rules for any formal tender.
       </p>
       <script
@@ -168,7 +169,8 @@ export default function SpecificationChecklistPage() {
               description:
                 "A practical pre-procurement checklist for NZ schools specifying a PA, paging, bell or intercom system, so quotes can be compared fairly.",
               url: `${site.url}/guides/school-pa-specification-checklist`,
-              datePublished: "2026-09-12",
+              datePublished: publishedDate("/guides/school-pa-specification-checklist"),
+              dateModified: reviewedDate("/guides/school-pa-specification-checklist"),
             })
           ),
         }}
