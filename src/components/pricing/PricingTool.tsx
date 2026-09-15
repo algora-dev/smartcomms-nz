@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { AreaKey, CalculatorState, FeaturePackage, InstallationType } from "@/lib/pricing/types";
 import { calculateEstimate } from "@/lib/pricing/calculate";
 import { track } from "@/lib/analytics";
@@ -153,6 +153,39 @@ export function PricingTool() {
   }, [state, hydrated]);
 
   const estimate = useMemo(() => calculateEstimate(state), [state]);
+
+  // Server-side output logging (proof of use). Fire-and-forget, once per
+  // unique result: fires when the results view renders (incl. deep-linked
+  // cfg loads) and again if the user edits and returns to a new result.
+  const loggedSig = useRef<string | null>(null);
+  useEffect(() => {
+    if (step !== 3) return;
+    const sig = JSON.stringify([state, estimate.low, estimate.high]);
+    if (loggedSig.current === sig) return;
+    loggedSig.current = sig;
+    fetch("/api/pricing-tool/output-log", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        tier: state.tier,
+        featurePackage: state.featurePackage,
+        areas: state.areas,
+        speakers: state.speakers,
+        fineTune: state.fineTune,
+        breakdown: estimate.breakdown,
+        low: estimate.low,
+        high: estimate.high,
+        basis: estimate.basis,
+        endpoints: estimate.endpoints,
+        overThreshold: estimate.overThreshold,
+        monitoringAnnual: estimate.monitoringAnnual,
+        monitoringIncludedMonths: estimate.monitoringIncludedMonths,
+        twoWayRooms: estimate.twoWayRooms,
+        fireInterface: estimate.fireInterface,
+      }),
+      keepalive: true,
+    }).catch(() => { /* silent: never surface to the user */ });
+  }, [step, state, estimate]);
 
   const patch = (p: Partial<CalculatorState>) => setState((s) => ({ ...s, ...p }));
   const patchArea = (key: AreaKey, n: number) =>
