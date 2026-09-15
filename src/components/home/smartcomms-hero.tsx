@@ -30,12 +30,6 @@ const FLOW_LINES = [
   "M0 50 H20 C50 50 50 70 80 70 H100",
   "M0 50 H20 C50 50 50 90 80 90 H100",
 ];
-const CHAPTERS = [
-  { jump: 0, num: "01", label: "The systems" },
-  { jump: 2400, num: "02", label: "The places" },
-  { jump: 5600, num: "03", label: "Your next step" },
-];
-
 /**
  * SmartComms animated hero — audience-flow version (handoff 2026-09-06).
  * 20s loop: one audience at a time on the left, all five systems on the right,
@@ -56,7 +50,6 @@ export function SmartcommsHero() {
     const places = [...hero.querySelectorAll<HTMLElement>('[data-sc-terms="places"] > span')];
     const flowLines = [...hero.querySelectorAll<SVGPathElement>("[data-sc-flow-line]")];
     const flowSvg = hero.querySelector<SVGSVGElement>(".sc-flow-lines");
-    const chapterBtns = [...hero.querySelectorAll<HTMLButtonElement>("[data-sc-jump]")];
     const pauseBtn = hero.querySelector<HTMLButtonElement>("[data-sc-pause]");
     const replayBtn = hero.querySelector<HTMLButtonElement>("[data-sc-replay]");
     const progress = hero.querySelector<HTMLElement>(".sc-progress > div");
@@ -125,10 +118,6 @@ export function SmartcommsHero() {
         scene.style.opacity = String(reduced.matches ? Number(i === phase) : enter * leave);
         scene.style.transform = reduced.matches ? "none" : `translateY(${(1 - enter) * 8}px)`;
       });
-      chapterBtns.forEach((button, i) => {
-        if (i === phase) button.setAttribute("aria-current", "step");
-        else button.removeAttribute("aria-current");
-      });
       paintFlow();
       progressEl.style.transform = `scaleX(${time / duration})`;
       hero.dataset.scPulse = String(
@@ -168,11 +157,6 @@ export function SmartcommsHero() {
       seek(0);
       setPlaying(true);
     };
-    const onChapter = (e: Event) => {
-      const btn = e.currentTarget as HTMLButtonElement;
-      seek(Number(btn.dataset.scJump));
-      setPlaying(true);
-    };
     const onReducedChange = () => {
       if (reduced.matches) {
         seek(7800);
@@ -183,7 +167,6 @@ export function SmartcommsHero() {
 
     pause.addEventListener("click", onPause);
     replay.addEventListener("click", onReplay);
-    chapterBtns.forEach((b) => b.addEventListener("click", onChapter));
     reduced.addEventListener("change", onReducedChange);
     document.addEventListener("visibilitychange", onVisibility);
 
@@ -207,7 +190,6 @@ export function SmartcommsHero() {
       observer.disconnect();
       pause.removeEventListener("click", onPause);
       replay.removeEventListener("click", onReplay);
-      chapterBtns.forEach((b) => b.removeEventListener("click", onChapter));
       reduced.removeEventListener("change", onReducedChange);
       document.removeEventListener("visibilitychange", onVisibility);
     };
@@ -337,13 +319,6 @@ export function SmartcommsHero() {
         </div>
       </div>
       <div className="sc-playback">
-        <div className="sc-chapters" aria-label="Animation chapters">
-          {CHAPTERS.map((c) => (
-            <button type="button" data-sc-jump={c.jump} key={c.jump}>
-              <span>{c.num}</span> {c.label}
-            </button>
-          ))}
-        </div>
         <div className="sc-transport">
           <button type="button" data-sc-pause aria-label="Pause animation">
             Pause
@@ -351,7 +326,6 @@ export function SmartcommsHero() {
           <button type="button" data-sc-replay>
             Replay <span aria-hidden="true">↻</span>
           </button>
-          <span className="sc-time-label">20 SEC</span>
         </div>
       </div>
       <div className="sc-progress" aria-hidden="true">
