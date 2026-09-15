@@ -14,10 +14,10 @@ import { site } from "@/lib/site";
  */
 const REVIEW_DATE = "2026-09-15";
 const REVIEW_LABEL = "15 September 2026";
-const PAGE_TITLE = "Best IP Paging & PA Systems NZ 2026: Buyer’s Guide";
-const ARTICLE_HEADLINE = "Best IP paging, PA, bell and intercom systems in NZ";
+const PAGE_TITLE = "Best School PA & IP Paging Systems NZ (2026 Guide)";
+const ARTICLE_HEADLINE = "Best school PA, IP paging, bell & intercom systems in NZ (2026)";
 const PAGE_DESCRIPTION =
-  "Compare SPON, FrontRow, Algo, ITC, Axis, TOA and 2N for NZ school paging, PA, bells and intercom: capabilities, costs, local support and trade-offs.";
+  "Compare SPON, FrontRow, Algo, Bosch PROSPERO, ITC, Axis and TOA for NZ school PA, paging, bells and intercom: features, support and trade-offs.";
 const pageUrl = `${site.url.replace(/\/$/, "")}/compare`;
 
 export const metadata: Metadata = buildMetadata({
@@ -147,6 +147,16 @@ const evidence = {
     "href": "https://www.jdsecurity.co.nz/axis/axis-ip-audio/axis-audio-manager-edge/",
     "kind": "NZ integrator evidence"
   },
+  "bosch-prospero": {
+    "label": "Bosch PROSPERO configuration manual",
+    "href": "https://cdn.commerce.boschsecurity.com/public/documents/PROSPERO_CM_Configuration_Manual_all_126077875339.pdf",
+    "kind": "Manufacturer documentation"
+  },
+  "bosch-prospero-nz": {
+    "label": "Pacific AV NZ — Bosch PROSPERO school paging and bells",
+    "href": "https://www.pacificav.co.nz/product/bosch-prospero-ip-based-paging-and-bell-system/",
+    "kind": "NZ integrator / product evidence"
+  },
   "toa-ip": {
     "label": "TOA IP-A1 speakers, interfaces and intercom options",
     "href": "https://toamys.com.my/products/network-pa/IP-A1-Series",
@@ -202,10 +212,10 @@ const evidence = {
     "href": "https://nz.nas.solutions/atlas-ied-now-distributed-by-nas",
     "kind": "NZ distribution evidence"
   },
-  "bosch": {
-    "label": "PRAESENSA — supervised speaker-line retrofit",
-    "href": "https://www.keenfinity-group.com/xc/en/news/product-news/pra-eob-end-of-branch-device/",
-    "kind": "Manufacturer"
+  "bosch-praesensa": {
+    "label": "Bosch PRAESENSA public address and voice alarm system",
+    "href": "https://licensing.boschsecurity.com/publicaddress/praesensa/datasheets/PRAESENSA_Public_Address_and_Voice_Alarm_System.pdf",
+    "kind": "Manufacturer documentation"
   },
   "algo-price-core": {
     "label": "VoIP Supply — 8301 displayed US selling price",
@@ -378,6 +388,42 @@ const platforms: readonly Platform[] = [
     ]
   },
   {
+    "id": "bosch-prospero",
+    "name": "Bosch PROSPERO",
+    "family": "PROSPERO IP public address system",
+    "category": "School-focused network paging and bells",
+    "fit": "A direct school-specific alternative worth quoting",
+    "verdict": "A credible NZ school shortlist option for scheduled bells, live zoned paging and mixed IP / amplifier-fed coverage.",
+    "summary": "Bosch PROSPERO belongs in the main school comparison rather than being represented only by PRAESENSA. Bosch documentation describes PROSPERO as a TCP/IP public-address system optimized for education, with scheduled broadcasts, live paging, emergency tasks, call stations, IP classroom speakers and interface modules for amplifiers. Pacific AV lists it in New Zealand specifically as an IP paging and bells system for schools. That makes it a much closer comparison to SPON, FrontRow and Algo than the life-safety-oriented PRAESENSA platform.",
+    "bells": "Web-managed scheduled broadcasts plus live and pre-recorded zoned paging from the PROSPERO call station.",
+    "talkback": "The reviewed package supports zone monitoring and bidirectional audio at interface-module level, but a classroom intercom / call-back workflow is not established by the core school package; specify it separately if required.",
+    "integration": "Standard TCP/IP networking, PoE on call stations / interface modules and control I/O. Do not assume SIP or third-party API support unless the proposed version documents it.",
+    "coverage": "IP classroom speaker endpoints plus IP audio interfaces feeding suitable amplifiers and passive speaker zones.",
+    "visual": "No school-wide visual-alert endpoint is established in the reviewed PROSPERO package; specify a separate documented integration if required.",
+    "operations": "Web configuration plus a touchscreen call station for live, recorded and emergency broadcasts; scheduling is built into the system workflow.",
+    "setup": "Requires PROSPERO software, a suitable Windows host / server, network design, call stations and the required speaker or interface modules.",
+    "value": "A school-specific Bosch architecture can avoid paying for the specialist redundancy and certification features of PRAESENSA when those are not part of the brief.",
+    "costWatch": "Price the software licence, host, call stations and one endpoint / interface per required zone; do not use PRAESENSA pricing as a PROSPERO proxy.",
+    "strengths": [
+      "The manufacturer explicitly optimizes the platform for education, including IP classroom speakers, scheduling, paging and emergency tasks.",
+      "A current NZ-facing Pacific AV listing gives the platform a concrete local route for school enquiries and system design."
+    ],
+    "tradeoffs": [
+      "PROSPERO is not the same engineering proposition as PRAESENSA; do not transfer PRAESENSA certification, redundancy or supervision claims to it.",
+      "If room-to-office intercom, SIP telephony or visual notification is required, make those functions explicit in the proposal and verify the exact supported workflow."
+    ],
+    "core": "PROSPERO system software licence on the required Windows host, with PRP-CST call station(s).",
+    "audio": "PRP-UC15L-IP classroom speaker and/or PRP-IM1A / PRP-IM2C1A interfaces feeding suitable amplifiers and passive speakers.",
+    "call": "PRP-CST provides operator paging and zone monitoring. Quote a separate documented room-calling / intercom solution if classroom call-back is required.",
+    "nz": "Pacific AV NZ lists Bosch PROSPERO as a school-focused IP paging and bells system and links the current system documentation. This establishes a local enquiry route; it does not establish NZ market share or stock levels.",
+    "sources": [
+      "bosch-prospero"
+    ],
+    "nzSources": [
+      "bosch-prospero-nz"
+    ]
+  },
+  {
     "id": "itc",
     "name": "ITC",
     "family": "NZ-listed 78-series / Luna IP PA and intercom",
@@ -497,11 +543,13 @@ const faqs: readonly Question[] = [
   {
     "id": "best-school-system",
     "question": "Which IP paging system is best for a New Zealand school?",
-    "answer": "For a typical brief covering bells, zoned announcements, indoor/outdoor coverage and optional room calling, SPON is our all-round starting point. FrontRow Conductor is a particularly important comparison when classroom audio is part of the project, and Algo when SIP or existing PA reuse is central. ITC, Axis and TOA remain worthwhile alternatives according to the supplied architecture and support. This is a fit-based shortlist, not a market-share ranking.",
+    "answer": "For a typical brief covering bells, zoned announcements, indoor/outdoor coverage and optional room calling, SPON is our all-round starting point. FrontRow Conductor is a particularly important comparison when classroom audio is part of the project, and Algo when SIP or existing PA reuse is central. Bosch PROSPERO is also a direct school-specific network-paging option with a NZ-facing supply route. ITC, Axis and TOA remain worthwhile alternatives according to the supplied architecture and support. This is a fit-based shortlist, not a market-share ranking.",
     "sources": [
       "spon-school",
       "frontrow",
-      "algo-scheduler"
+      "algo-scheduler",
+      "bosch-prospero",
+      "bosch-prospero-nz"
     ]
   },
   {
@@ -511,6 +559,16 @@ const faqs: readonly Question[] = [
     "sources": [
       "frontrow-classroom",
       "spon-control"
+    ]
+  },
+  {
+    "id": "bosch-prospero-vs-praesensa",
+    "question": "What is the difference between Bosch PROSPERO and Bosch PRAESENSA for a school?",
+    "answer": "PROSPERO is the closer comparison for an everyday school paging-and-bells brief: Bosch documentation describes a TCP/IP PA system optimized for education, with scheduling, live paging, call stations, classroom IP speakers and amplifier interfaces. PRAESENSA is a separate public-address and voice-alarm architecture built around supervised, certified and highly resilient operation. A normal school project should not be pushed into PRAESENSA simply because both products carry the Bosch name, and PRAESENSA capabilities must not be attributed to PROSPERO.",
+    "sources": [
+      "bosch-prospero",
+      "bosch-prospero-nz",
+      "bosch-praesensa"
     ]
   },
   {
@@ -667,7 +725,7 @@ export default function ComparePage() {
           {ARTICLE_HEADLINE}
         </h1>
         <p className="mt-5 max-w-4xl text-lg leading-relaxed text-[var(--sc-slate)]">
-          A school needs more than a speaker brand. It needs bells that follow the timetable, clear announcements in the right places, reliable emergency controls and a system staff can actually use. This 2026 guide compares <strong>SPON, FrontRow, Algo, ITC, Axis and TOA</strong> for that job, with <strong>2N</strong> considered separately for current intercom needs and existing paging installations.
+          A school needs more than a speaker brand. It needs bells that follow the timetable, clear announcements in the right places, reliable emergency controls and a system staff can actually use. This 2026 guide compares <strong>SPON, FrontRow, Algo, Bosch PROSPERO, ITC, Axis and TOA</strong> for that job, with <strong>2N</strong> considered separately for current intercom needs and existing paging installations.
         </p>
         <p className="mt-4 max-w-4xl leading-relaxed text-[var(--sc-slate)]">
           Compare the complete design: software, indoor and outdoor coverage, room calling, network requirements, installation and NZ support. Not every platform delivers these in the same way—and not every school needs every feature.
@@ -701,7 +759,7 @@ export default function ComparePage() {
             Which system belongs on your shortlist?
           </SectionHeading>
           <p className="mt-4 max-w-4xl leading-relaxed text-[var(--sc-slate)]">
-            <strong>SPON is our all-round starting point for a typical school wanting integrated bells, paging and intercom.</strong> FrontRow Conductor deserves a direct comparison where classroom audio matters; Algo is particularly compelling for SIP and staged upgrades. ITC, Axis and TOA add credible alternatives for different site requirements. This is an editorial fit judgement—not proof of a universal winner on price or performance.
+            <strong>SPON is our all-round starting point for a typical school wanting integrated bells, paging and intercom.</strong> FrontRow Conductor deserves a direct comparison where classroom audio matters; Algo is particularly compelling for SIP and staged upgrades. Bosch PROSPERO is a school-specific network-paging alternative with a NZ-facing channel, while ITC, Axis and TOA add credible options for different site requirements. This is an editorial fit judgement—not proof of a universal winner on price or performance.
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {platforms.slice(0, 3).map((platform, index) => (
@@ -715,7 +773,7 @@ export default function ComparePage() {
           </div>
           <TableRegion label="System shortlist. Scroll horizontally on smaller screens.">
             <table className="w-full min-w-[720px] text-left text-sm leading-relaxed">
-              <caption className="border-b border-[var(--sc-border)] px-4 py-3 text-left text-xs text-[var(--sc-slate)]">Six main comparison options. The order is not a measured ranking. Select a name for its evidence and trade-offs.</caption>
+              <caption className="border-b border-[var(--sc-border)] px-4 py-3 text-left text-xs text-[var(--sc-slate)]">Seven main comparison options. The order is not a measured ranking. Select a name for its evidence and trade-offs.</caption>
               <thead className="bg-[var(--sc-blue-900)] text-white"><tr>
                 <th scope="col" className="w-1/5 px-4 py-3">System / family</th>
                 <th scope="col" className="px-4 py-3">When it makes sense</th>
@@ -860,8 +918,8 @@ export default function ComparePage() {
             </div>
             <div>
               <h3 className="font-semibold text-[var(--sc-blue-900)]">Bosch PRAESENSA</h3>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Investigate separately when a supervised public-address / voice-alarm design is required. The manufacturer documents supervised loudspeaker-line options, including retrofits. This is a different engineering brief from comparing everyday bells and room calling.</p>
-              <Sources ids={["bosch"]} />
+              <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Investigate separately when a supervised public-address / voice-alarm design is required. <strong>PRAESENSA is not the Bosch system used in the main school shortlist above:</strong> PROSPERO is the closer everyday bells-and-paging comparison. PRAESENSA belongs here when certification, supervision, redundancy and life-safety engineering change the brief.</p>
+              <Sources ids={["bosch-praesensa"]} />
             </div>
           </div>
           <p className="mt-5 text-xs leading-relaxed text-[var(--sc-slate)]">This is a focused selection guide, not an exhaustive list of every brand sold in New Zealand. Specialist projects may require a broader shortlist.</p>
@@ -872,7 +930,7 @@ export default function ComparePage() {
         <SectionHeading id="costs-title" eyebrow="Price, ease and value" description="There is no verified, like-for-like public NZ price set covering all these systems. A numerical league table would suggest a level of certainty the evidence does not support.">
           Compare complete project cost—not isolated speakers
         </SectionHeading>
-        <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">SPON’s integrated feature coverage makes it a strong value candidate. FrontRow may offer better value when its classroom functions are needed; Algo or another hybrid design may win by retaining good existing equipment. The deciding evidence is an itemised quote against the same operational brief—not a brand-wide “cheap” or “premium” label.</p>
+        <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">SPON’s integrated feature coverage makes it a strong value candidate. FrontRow may offer better value when its classroom functions are needed; Algo or another hybrid design may win by retaining good existing equipment; Bosch PROSPERO should be priced as its own school-focused architecture rather than through PRAESENSA component costs. The deciding evidence is an itemised quote against the same operational brief—not a brand-wide “cheap” or “premium” label.</p>
         <div className="mt-5 grid gap-4 md:grid-cols-3">
           {[
             ["Equipment and software", "Include controllers, licences, indoor/outdoor audio, intercom microphones or buttons, consoles, mounts and visual endpoints."],
@@ -915,7 +973,7 @@ export default function ComparePage() {
           <div className="mt-5 grid gap-4 md:grid-cols-2">
             <div className="sc-card bg-white p-5">
               <h3 className="font-semibold text-[var(--sc-blue-900)]">Quote A: network endpoints where needed</h3>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Price the required room control, talkback and outdoor coverage. Include power, data cabling and software. SPON and FrontRow provide useful integrated-system comparisons; Algo, Axis, TOA and a supported ITC package should be scoped against the same requirements.</p>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Price the required room control, talkback and outdoor coverage. Include power, data cabling and software. SPON and FrontRow provide useful integrated-system comparisons; Algo, Bosch PROSPERO, Axis, TOA and a supported ITC package should be scoped against the same requirements.</p>
             </div>
             <div className="sc-card bg-white p-5">
               <h3 className="font-semibold text-[var(--sc-blue-900)]">Quote B: retain suitable existing speaker lines</h3>
@@ -972,7 +1030,7 @@ export default function ComparePage() {
         <h2 id="methodology-title" className="text-xl font-bold text-[var(--sc-blue-900)]">How this comparison was prepared</h2>
         <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">We prioritise manufacturer documentation for capability and lifecycle, then NZ distributors and integrators for the products and projects they publish. Local catalogue and case-study statements are attributed, not treated as independently measured market share. Unverified features are labelled for confirmation rather than marked absent.</p>
         <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">The recommendations are editorial judgements for a typical school brief. This is not a hands-on group test, a review-score aggregate or a complete-system pricing study. SmartComms NZ is a T3 Labs research and enquiry site that can introduce projects to installation / technology partners; inclusion is not a manufacturer endorsement.</p>
-        <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">The main shortlist is deliberately compact. FrontRow and ITC receive full comparisons; 2N’s lifecycle distinction is explicit; AtlasIED and Bosch remain specialist considerations. Stock, warranties, software terms and exact product compatibility must be confirmed in a current written proposal.</p>
+        <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">The main shortlist is deliberately compact. FrontRow, ITC and Bosch PROSPERO receive full comparisons; 2N’s lifecycle distinction is explicit; AtlasIED and Bosch PRAESENSA remain specialist considerations. Stock, warranties, software terms and exact product compatibility must be confirmed in a current written proposal.</p>
         <details id="sources" className="mt-6 scroll-mt-24 rounded-xl border border-[var(--sc-border)] bg-white p-5 md:p-6">
           <summary className="cursor-pointer rounded text-lg font-bold text-[var(--sc-blue-900)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">Sources and evidence register ({sourceEntries.length})</summary>
           <p className="mt-4 text-xs leading-relaxed text-[var(--sc-slate)]">Reviewed {REVIEW_LABEL}. Numbered references throughout the guide open the original source. Manufacturer specifications establish capability; local listings establish a route for enquiry; historical installations do not establish current product availability.</p>
