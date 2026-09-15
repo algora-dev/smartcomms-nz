@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SmartcommsHero } from "@/components/home/smartcomms-hero";
-import { SystemVideo } from "@/components/home/system-video";
 import { Reveal } from "@/components/home/reveal";
 import { TrackedLink } from "@/components/tracked-link";
 import { site } from "@/lib/site";
@@ -92,7 +91,6 @@ export default function HomePage() {
   return (
     <>
       <SmartcommsHero />
-      <SystemVideo />
 
       <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)]" aria-label="Popular planning resources">
         <div className="sc-container py-6">
