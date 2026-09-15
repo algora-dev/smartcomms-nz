@@ -2,666 +2,996 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
-import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
+import { publishedDate } from "@/lib/content-meta";
 import { site } from "@/lib/site";
 
+/**
+ * SmartComms NZ /compare — source review: 15 September 2026.
+ * Server component: all comparisons, details and source links render in HTML.
+ * No package, layout, CSS or client-state dependency has been added.
+ * Keep this review date aligned with /compare in lib/content-meta when deploying.
+ * Editorial fit is not a lab rating or a verified complete-system price ranking.
+ */
+const REVIEW_DATE = "2026-09-15";
+const REVIEW_LABEL = "15 September 2026";
+const PAGE_TITLE = "Best IP Paging & PA Systems NZ 2026: Buyer’s Guide";
+const ARTICLE_HEADLINE = "Best IP paging, PA, bell and intercom systems in NZ";
+const PAGE_DESCRIPTION =
+  "Compare SPON, FrontRow, Algo, ITC, Axis, TOA and 2N for NZ school paging, PA, bells and intercom: capabilities, costs, local support and trade-offs.";
+const pageUrl = `${site.url.replace(/\/$/, "")}/compare`;
+
 export const metadata: Metadata = buildMetadata({
-  title: "Best IP Paging & PA Systems NZ 2026: Buyer’s Guide",
-  description:
-    "Compare SPON, Algo, Axis, TOA, AtlasIED, Bosch PRAESENSA and traditional 100V PA by price, features, ease of use, school fit and value for money.",
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
   path: "/compare",
 });
 
-const reviewed = reviewedLabel("/compare");
+const evidence = {
+  "spon-school": {
+    "label": "SPON school PA solution",
+    "href": "https://sponcomm.com/solution-detail/smart-pa-solution-for-schools",
+    "kind": "Manufacturer"
+  },
+  "spon-control": {
+    "label": "SPON XC-9000 management software",
+    "href": "https://sponcomm.com/products/audio-management-software",
+    "kind": "Manufacturer"
+  },
+  "spon-nz": {
+    "label": "Sound Choice Pro Audio NZ — SPON range",
+    "href": "https://www.scpaudio.co.nz/brand/spon/",
+    "kind": "NZ supply evidence"
+  },
+  "spon-intercom": {
+    "label": "NZ-listed NAS-8523CV intercom",
+    "href": "https://www.scpaudio.co.nz/shop/ip-paging/intercoms/nas-8523cv/",
+    "kind": "NZ product listing"
+  },
+  "frontrow": {
+    "label": "FrontRow Conductor",
+    "href": "https://www.gofrontrow.com/products/conductor/",
+    "kind": "Manufacturer"
+  },
+  "frontrow-classroom": {
+    "label": "FrontRow ezRoom classroom system",
+    "href": "https://www.gofrontrow.co.uk/products/ezroom/",
+    "kind": "Manufacturer"
+  },
+  "frontrow-nz": {
+    "label": "Pacific AV — FrontRow and named NZ schools",
+    "href": "https://www.pacificav.co.nz/brands/frontrow/",
+    "kind": "NZ integrator evidence"
+  },
+  "frontrow-devices": {
+    "label": "Pacific AV — CM900 and CM800 interfaces",
+    "href": "https://www.pacificav.co.nz/product/frontrow-networked-audio-devices/",
+    "kind": "NZ product / integration evidence"
+  },
+  "frontrow-server": {
+    "label": "Pacific AV — Conductor administrative station",
+    "href": "https://www.pacificav.co.nz/product/conductor-administrative-station/",
+    "kind": "NZ product listing"
+  },
+  "frontrow-visual": {
+    "label": "FrontRow Conductor display integration",
+    "href": "https://www.gofrontrow.com.au/news/frontrow-conductor-integrates-with-boxlight-mimio-and-clevertouch-interactive-panels-for-audio-and-video-school-wide-communication/",
+    "kind": "Manufacturer"
+  },
+  "algo-scheduler": {
+    "label": "Algo 8301 user guide",
+    "href": "https://docs.algosolutions.com/docs/8301-user-guide",
+    "kind": "Manufacturer documentation"
+  },
+  "algo-speaker": {
+    "label": "Algo 8188 ceiling speaker",
+    "href": "https://www.algosolutions.com/product/8188-ip-ceiling-speaker/",
+    "kind": "Manufacturer"
+  },
+  "algo-display": {
+    "label": "Algo 8410 / 8420 display speaker guide",
+    "href": "https://docs.algosolutions.com/docs/8410-8420-user-guide",
+    "kind": "Manufacturer documentation"
+  },
+  "algo-management": {
+    "label": "Algo Device Management Platform guide",
+    "href": "https://docs.algosolutions.com/docs/admp-guide",
+    "kind": "Manufacturer documentation"
+  },
+  "algo-nz": {
+    "label": "Everlea NZ — Algo paging and scheduling",
+    "href": "https://www.everlea.co.nz/ip-paging-solutions/voip-paging/algo-8301-paging-adapter-and-scheduler/",
+    "kind": "NZ supply evidence"
+  },
+  "algo-training": {
+    "label": "Everlea — Algo configuration training",
+    "href": "https://www.everlea.co.nz/everlea-training/",
+    "kind": "NZ support / training evidence"
+  },
+  "itc-system": {
+    "label": "itc manufacturer — 78-series system architecture",
+    "href": "https://www.itctech.com.cn/case/index/art/1914.html",
+    "kind": "Manufacturer; overseas installation"
+  },
+  "itc-nz": {
+    "label": "Sound Choice Pro Audio NZ — ITC range",
+    "href": "https://www.scpaudio.co.nz/brand/itc/",
+    "kind": "NZ product listings"
+  },
+  "itc-server": {
+    "label": "NZ-listed ITC T-7800A / Luna server",
+    "href": "https://www.scpaudio.co.nz/shop/commercial/t-7800a-ip-intercom-pa-system-server/",
+    "kind": "NZ product / integration evidence"
+  },
+  "itc-edwards": {
+    "label": "Edwards NZ — ITC PA systems",
+    "href": "https://www.edwardsnz.co.nz/itc",
+    "kind": "NZ supply evidence"
+  },
+  "axis-edge": {
+    "label": "AXIS Audio Manager Edge",
+    "href": "https://www.axis.com/products/axis-audio-manager-edge",
+    "kind": "Manufacturer"
+  },
+  "axis-console": {
+    "label": "AXIS C6110 paging console and two-way audio",
+    "href": "https://www.axis.com/products/axis-c6110",
+    "kind": "Manufacturer"
+  },
+  "axis-bridge": {
+    "label": "AXIS C8110 audio bridge",
+    "href": "https://www.axis.com/products/axis-c8110",
+    "kind": "Manufacturer"
+  },
+  "axis-nz": {
+    "label": "JD Security NZ — Axis audio management",
+    "href": "https://www.jdsecurity.co.nz/axis/axis-ip-audio/axis-audio-manager-edge/",
+    "kind": "NZ integrator evidence"
+  },
+  "toa-ip": {
+    "label": "TOA IP-A1 speakers, interfaces and intercom options",
+    "href": "https://toamys.com.my/products/network-pa/IP-A1-Series",
+    "kind": "Manufacturer"
+  },
+  "toa-scheduler": {
+    "label": "TOA IP-A1PG scheduling gateway",
+    "href": "https://www.toa.co.uk/products/ip-a1pg/",
+    "kind": "Manufacturer"
+  },
+  "toa-intercom": {
+    "label": "TOA N-8000 dedicated intercom family",
+    "href": "https://www.toa.co.uk/products/intercom-systems/n-8000-series/",
+    "kind": "Manufacturer"
+  },
+  "toa-nz": {
+    "label": "Australis Music NZ — TOA",
+    "href": "https://www.australismusic.co.nz/brands/toa",
+    "kind": "NZ brand / channel evidence"
+  },
+  "2n-current": {
+    "label": "2N IP Verso 2.0 product support",
+    "href": "https://www.2n.com/en-GB/support/intercoms/2n-ip-verso-2/",
+    "kind": "Manufacturer documentation"
+  },
+  "2n-nz": {
+    "label": "Sektor NZ — IP Verso 2.0 listing",
+    "href": "https://www.sektor.co.nz/Product/SEAX02907001",
+    "kind": "NZ product listing"
+  },
+  "2n-legacy": {
+    "label": "2N — discontinued Net Audio Systems",
+    "href": "https://www.2n.com/en-GB/products/discontinued/2n-net-audio-systems/",
+    "kind": "Manufacturer lifecycle notice"
+  },
+  "2n-mic": {
+    "label": "2N SIP Mic — APAC discontinuation notice",
+    "href": "https://www.2n.com/en-AU/newsroom/2n-sip-mic-discontinuation-notice-new-chapter-begins/",
+    "kind": "Manufacturer lifecycle notice"
+  },
+  "2n-school": {
+    "label": "Edwards — Three Kings Primary project, March 2024",
+    "href": "https://www.edwardsnz.co.nz/school-uses-paging-system-for-tighter-lockdown-procedures",
+    "kind": "Historical NZ school installation"
+  },
+  "atlas": {
+    "label": "AtlasIED GLOBALCOM announcement platform",
+    "href": "https://www.atlasied.com/ip108-sp",
+    "kind": "Manufacturer"
+  },
+  "atlas-nz": {
+    "label": "NAS — AtlasIED distribution in Australia and NZ",
+    "href": "https://nz.nas.solutions/atlas-ied-now-distributed-by-nas",
+    "kind": "NZ distribution evidence"
+  },
+  "bosch": {
+    "label": "PRAESENSA — supervised speaker-line retrofit",
+    "href": "https://www.keenfinity-group.com/xc/en/news/product-news/pra-eob-end-of-branch-device/",
+    "kind": "Manufacturer"
+  },
+  "algo-price-core": {
+    "label": "VoIP Supply — 8301 displayed US selling price",
+    "href": "https://www.voipsupply.com/algo-8301",
+    "kind": "International price example"
+  },
+  "algo-price-speaker": {
+    "label": "VoIP Supply — 8188 displayed US selling price",
+    "href": "https://www.voipsupply.com/algo-8188-sip-ceiling-speaker",
+    "kind": "International price example"
+  },
+  "toa-price": {
+    "label": "Northamber — IP-A1PG displayed UK price",
+    "href": "https://www.northamber.com/audio-visual/professional-audio/audio-over-ip/ip-paging-gateway-25-w",
+    "kind": "International price example"
+  }
+} as const;
 
-const quickValue = [
+type EvidenceId = keyof typeof evidence;
+type Platform = {
+  id: string;
+  name: string;
+  family: string;
+  category: string;
+  fit: string;
+  verdict: string;
+  summary: string;
+  bells: string;
+  talkback: string;
+  integration: string;
+  coverage: string;
+  visual: string;
+  operations: string;
+  setup: string;
+  value: string;
+  costWatch: string;
+  strengths: readonly string[];
+  tradeoffs: readonly string[];
+  core: string;
+  audio: string;
+  call: string;
+  nz: string;
+  sources: readonly EvidenceId[];
+  nzSources: readonly EvidenceId[];
+};
+type Question = {
+  id: string;
+  question: string;
+  answer: string;
+  sources: readonly EvidenceId[];
+};
+
+const platforms: readonly Platform[] = [
   {
-    platform: "SPON",
-    cost: "Low-mid to mid",
-    features: "Excellent",
-    ease: "Easy to moderate",
-    complexity: "Moderate",
-    value: "Excellent",
-    note: "Strong price-to-feature balance when one platform needs to cover bells, paging, emergency messages, zoning, intercom and indoor/outdoor endpoints.",
+    "id": "spon",
+    "name": "SPON",
+    "family": "IP PA / intercom with XC-9000 management",
+    "category": "Integrated school platform",
+    "fit": "Our all-round starting point",
+    "verdict": "A strong first quote for bells, zoned paging and optional room calling in one managed system.",
+    "summary": "SPON is a strong all-round school shortlist when the aim is one managed environment for daily announcements, schedules and two-way communication. Its school solution documents zoned announcements, automated bells and priority messages; XC-9000 adds central device management, intercom and integration controls. That breadth is the reason to consider it—not an unverified claim that it is always cheapest.",
+    "bells": "Central scheduling and zoned paging in the specified management package.",
+    "talkback": "Supported intercom / microphone-equipped endpoints; not every speaker is two-way.",
+    "integration": "XC-9000 documents SIP trunking and HTTP APIs. Confirm endpoint and software compatibility.",
+    "coverage": "IP indoor/outdoor endpoints; suitable interfaces and amplifiers for retained analogue zones.",
+    "visual": "Specify the visual endpoint or external alert integration; do not infer it from an audio-only quote.",
+    "operations": "Central schedules, zones and user controls. Ask staff to test the actual operator interface.",
+    "setup": "Confirm software licensing, supported endpoint families, network design and recovery arrangements.",
+    "value": "Broad feature coverage can reduce the need for separate bell and intercom systems.",
+    "costWatch": "Obtain an itemised NZ quote; public evidence does not establish a complete-system price lead.",
+    "strengths": [
+      "Daily bells and priority announcements sit alongside centrally managed paging rather than a separate timer-only system.",
+      "Intercom and integration options make it worth quoting where the brief extends beyond one-way audio."
+    ],
+    "tradeoffs": [
+      "SPON has several endpoint families. A shared brand name is not proof that any model works with any server or firmware.",
+      "Demonstrate talkback, fault reporting and emergency overrides on the proposed configuration; verify support and software terms."
+    ],
+    "core": "XC-9000 management licence and the required host / controller for the quoted design.",
+    "audio": "Compatible indoor speaker, plus separately sized outdoor endpoints or amplifier-fed zones.",
+    "call": "A supported room intercom; NAS-8523CV is one NZ-listed example, subject to controller compatibility.",
+    "nz": "Sound Choice Pro Audio NZ lists SPON speakers, interfaces and intercoms. This demonstrates a local product channel, not nationwide stock or a measured market share.",
+    "sources": [
+      "spon-school",
+      "spon-control"
+    ],
+    "nzSources": [
+      "spon-nz",
+      "spon-intercom"
+    ]
   },
   {
-    platform: "Algo",
-    cost: "Mid",
-    features: "Very good",
-    ease: "Easy",
-    complexity: "Low to moderate",
-    value: "Very good",
-    note: "Particularly strong where SIP, multicast and an existing VoIP environment are already central to the design.",
+    "id": "frontrow",
+    "name": "FrontRow",
+    "family": "Conductor with compatible classroom audio / interfaces",
+    "category": "School and classroom integration",
+    "fit": "Strongest fit when classroom audio is part of the brief",
+    "verdict": "An important NZ school comparison when campus communication must work with classroom voice and AV systems.",
+    "summary": "FrontRow Conductor is a direct school-wide competitor, not just a classroom microphone product. It combines campus paging, bell schedules, intercom and alerts with compatible FrontRow classroom systems. The relevant comparison is a Conductor-based school package—not a standalone Juno or classroom amplifier priced against a whole-campus platform.",
+    "bells": "Conductor server and administrative controls provide school schedules, zones and alerts.",
+    "talkback": "Compatible classroom audio and intercom interfaces; specify the microphone / call control.",
+    "integration": "FrontRow campus/classroom ecosystem. Confirm any telephone gateway or SIP requirement explicitly.",
+    "coverage": "Classroom interfaces; CM800 can feed a suitable 100V amplifier for common/outdoor areas.",
+    "visual": "Supported display integration is available; include compatible panels, software and programming.",
+    "operations": "School-oriented administration and classroom controls; compare timetable changes and call handling in a demo.",
+    "setup": "Server, licences, room interfaces, local audio power and any classroom AV integration need a coordinated design.",
+    "value": "Particularly attractive when existing or new FrontRow classroom audio is useful to the project.",
+    "costWatch": "Separate classroom voice amplification / AV control from the essential campus PA price.",
+    "strengths": [
+      "A coherent education workflow joins room audio, bells, announcements and intercom.",
+      "Pacific AV publishes named NZ school installations, giving buyers a concrete local implementation trail."
+    ],
+    "tradeoffs": [
+      "A classroom audio package and a simple PoE paging speaker are different purchases; compare the same required functions.",
+      "Do not assume every room device is natively PoE or every display/phone system integrates without additional equipment."
+    ],
+    "core": "Conductor server, licences and administrative station; confirm the current supplied hardware.",
+    "audio": "CM900 / compatible classroom audio; CM800 plus suitable amplifier for 100V speaker zones.",
+    "call": "Compatible room microphone and call interface; quote teacher microphone functions separately where required.",
+    "nz": "Pacific AV lists FrontRow installations including Ormiston Junior High and Waterview Primary. Its device page identifies CM900 as the replacement for CM3000 and documents CM800 integration with standard 100V amplifiers.",
+    "sources": [
+      "frontrow",
+      "frontrow-classroom",
+      "frontrow-visual"
+    ],
+    "nzSources": [
+      "frontrow-nz",
+      "frontrow-devices",
+      "frontrow-server"
+    ]
   },
   {
-    platform: "Axis",
-    cost: "Mid-high",
-    features: "Very good",
-    ease: "Very easy",
-    complexity: "Low to moderate",
-    value: "Very good",
-    note: "Excellent operational simplicity and a strong fit where the site already uses Axis video, access-control or security infrastructure.",
+    "id": "algo",
+    "name": "Algo",
+    "family": "8301 scheduler + SIP speakers / interfaces",
+    "category": "SIP-first and hybrid migration",
+    "fit": "Strong starting point for VoIP and retained PA",
+    "verdict": "A particularly practical quote when the school already uses SIP phones or wants to retain working amplifiers.",
+    "summary": "Algo is a strong SIP-first choice, but a SIP phone system is not required just to run scheduled bells from an 8301. The adapter provides scheduling and a bridge to an existing amplifier, while selected IP speakers provide paging and talkback. Current Algo display speakers and management tools also make this a broader option than an audio-only endpoint comparison suggests.",
+    "bells": "8301 built-in scheduler; SIP / multicast paging. Scheduling does not require SIP registration.",
+    "talkback": "8188 has a microphone and talkback; a compatible call button is an accessory, not a complete intercom.",
+    "integration": "SIP and multicast. Optional management and notification integrations have separate requirements.",
+    "coverage": "Indoor speakers, outdoor horns and 8301 line-level output to a compatible existing amplifier.",
+    "visual": "8410 / 8420 display speakers and visual alerters; specify content and trigger configuration.",
+    "operations": "Browser scheduling and phone/console paging. Provide a simple staff workflow, not just administrator logins.",
+    "setup": "Provision SIP where used, multicast, priorities and endpoint management; cloud management is optional.",
+    "value": "Can retain existing PA infrastructure and avoid a large central server for basic scheduled paging.",
+    "costWatch": "Include call accessories, mounting, any console and optional management / integration licences.",
+    "strengths": [
+      "The 8301 is both a bell scheduler and a migration interface, so new IP areas and existing PA can be considered together.",
+      "Selected speakers provide talkback; display endpoints and ADMP management extend the same manufacturer’s range."
+    ],
+    "tradeoffs": [
+      "The complete staff workflow still needs designing across scheduler, telephony, buttons and any management tools.",
+      "A gateway cannot give individual-room control to speakers sharing one undivided analogue circuit."
+    ],
+    "core": "8301 scheduler / adapter; add console and management only where the brief requires them.",
+    "audio": "8188 indoor PoE speaker, appropriate outdoor horn and any amplifier interfaces.",
+    "call": "8188 talkback with a compatible 1202 / 1203 call accessory, or a dedicated intercom design.",
+    "nz": "Everlea NZ publishes Algo paging products and configuration training covering provisioning, SIP, multicast and scheduling. Obtain local support, lead-time and replacement terms with the quote.",
+    "sources": [
+      "algo-scheduler",
+      "algo-speaker",
+      "algo-display",
+      "algo-management"
+    ],
+    "nzSources": [
+      "algo-nz",
+      "algo-training"
+    ]
   },
   {
-    platform: "TOA",
-    cost: "Mid-high to high",
-    features: "Excellent",
-    ease: "Moderate",
-    complexity: "Moderate to high",
-    value: "Good to very good",
-    note: "Mature intercom, paging and voice-alarm choices, with particularly good value when TOA is already installed or certified voice alarm matters.",
+    "id": "itc",
+    "name": "ITC",
+    "family": "NZ-listed 78-series / Luna IP PA and intercom",
+    "category": "Server-managed IP / hybrid PA",
+    "fit": "A relevant integrated alternative to quote",
+    "verdict": "Worth a like-for-like proposal for centrally managed PA and intercom, with the exact local product revision confirmed.",
+    "summary": "The relevant ITC here is the itc audio manufacturer, not an unrelated IT company. NZ listings identify a T-7800A / Luna IP PA and intercom system, network speakers and amplifiers. The manufacturer also documents a 78-series architecture combining server control, paging microphones, IP speakers and amplifier-fed zones. This makes it a meaningful alternative, provided the supplied product family and support are confirmed.",
+    "bells": "T-7800A / Luna listing documents central management, scheduling and IP intercom.",
+    "talkback": "Specified 78-series intercom terminals; do not treat a paging-only speaker as a room intercom.",
+    "integration": "Confirm SIP, APIs, security and firmware for the actual model; IP alone proves none of these.",
+    "coverage": "T-7807-type IP speakers and network amplifiers feeding suitable passive indoor/outdoor speakers.",
+    "visual": "Not established for the NZ-listed package reviewed; request a documented solution if required.",
+    "operations": "Server-based scheduling and paging controls; request a demo of the locally supplied software.",
+    "setup": "Check model generation, endpoint power, licences, network requirements and ongoing software support.",
+    "value": "An IP / amplifier hybrid may suit a mixed site without requiring a powered network speaker everywhere.",
+    "costWatch": "Do not assume a low system price from overseas component listings; quote the local supported package.",
+    "strengths": [
+      "The documented 78-series approach accommodates both network endpoints and amplifier-fed passive speaker areas.",
+      "NZ ITC listings make this a more relevant local enquiry than an unfamiliar overseas-only product family."
+    ],
+    "tradeoffs": [
+      "Published local listings are not a lifecycle guarantee. Confirm which 78-series / Luna models and software are supplied now.",
+      "Do not transfer SIP, PoE or display claims from another ITC series to this package without model-specific documentation."
+    ],
+    "core": "T-7800A / Luna or its supplier-confirmed current replacement, with software and paging station.",
+    "audio": "T-7807-type indoor endpoint; a network amplifier such as T-78120 with suitable passive speakers where appropriate.",
+    "call": "A compatible T-7803-series terminal or current equivalent, explicitly included and demonstrated.",
+    "nz": "Sound Choice Pro Audio NZ lists the ITC range and T-7800A server; Edwards also presents ITC PA systems. These are local supply signals, not evidence of current stock or the number of school installations.",
+    "sources": [
+      "itc-system"
+    ],
+    "nzSources": [
+      "itc-nz",
+      "itc-server",
+      "itc-edwards"
+    ]
   },
   {
-    platform: "AtlasIED",
-    cost: "High",
-    features: "Excellent",
-    ease: "Moderate",
-    complexity: "High",
-    value: "Project-dependent",
-    note: "Premium value where visual notification, enterprise integrations and sophisticated mass communication justify the higher endpoint and platform cost.",
+    "id": "axis",
+    "name": "Axis",
+    "family": "Audio Manager Edge + network audio",
+    "category": "Browser management and security integration",
+    "fit": "Strong for administration and security convergence",
+    "verdict": "Retain on the shortlist where browser-based operation and existing Axis security systems matter.",
+    "summary": "Axis remains relevant to a NZ school comparison. Audio Manager Edge is built into compatible audio devices and provides browser-based zones, scheduling and health monitoring without a separate management server for that tier. The C6110 console also supports two-way communication with compatible devices; it should not be reduced to a one-way security speaker system.",
+    "bells": "Edge provides schedules and paging management; plan around its 200-speaker / 20-zone limit.",
+    "talkback": "C6110 with compatible microphone-equipped speakers or intercoms; configure the receiving device.",
+    "integration": "SIP and Axis integration tools; validate the chosen camera, access-control and audio workflow.",
+    "coverage": "Indoor/outdoor network speakers; C8110 audio bridge connects retained analogue audio equipment.",
+    "visual": "Specify compatible visual devices / integrations; an audio-only speaker is not a text display.",
+    "operations": "Browser-based zoning, schedules, user roles and health checks are well documented.",
+    "setup": "Edge limits, network design and integration still need engineering; larger designs may need another management tier.",
+    "value": "Included Edge management and reuse of an existing Axis environment may reduce additional system components.",
+    "costWatch": "Price the actual speaker mix, C6110, bridges and any larger-site management—not just an entry speaker.",
+    "strengths": [
+      "A well-documented browser workflow and built-in management make it a useful usability benchmark.",
+      "C8110 bridging and C6110 calling allow more than a simple set of standalone network speakers."
+    ],
+    "tradeoffs": [
+      "Twenty management zones are not the same as twenty speakers. Check the required grouping before choosing Edge.",
+      "Day-to-day simplicity is not a substitute for testing term-calendar changes, calling and outage behaviour."
+    ],
+    "core": "Included Audio Manager Edge on compatible devices; assess other management tiers only when required.",
+    "audio": "Selected indoor and outdoor Axis speakers; C8110 bridge and existing amplifier for retained 100V lines.",
+    "call": "C6110 console plus compatible two-way speaker / intercom, with the microphone and calling path configured.",
+    "nz": "JD Security’s NZ site documents Axis Audio Manager Edge and network-audio integration. Local relevance is sufficient to retain Axis; this is not a claim that it is the most widely installed school platform.",
+    "sources": [
+      "axis-edge",
+      "axis-console",
+      "axis-bridge"
+    ],
+    "nzSources": [
+      "axis-nz"
+    ]
   },
   {
-    platform: "Bosch PRAESENSA",
-    cost: "High to very high",
-    features: "Exceptional for life safety",
-    ease: "Moderate day to day",
-    complexity: "Specialist",
-    value: "Project-dependent",
-    note: "Outstanding value when supervised voice alarm, redundancy and mission-critical availability are required. Often more system than a normal school needs.",
-  },
-  {
-    platform: "Traditional 100V PA",
-    cost: "Low for basic systems",
-    features: "Basic to good",
-    ease: "Very easy",
-    complexity: "Low",
-    value: "Excellent for simple needs",
-    note: "Still hard to beat for basic one-way paging on a tight budget, but feature growth and granular zoning can quickly make IP or hybrid designs more attractive.",
-  },
+    "id": "toa",
+    "name": "TOA",
+    "family": "IP-A1 network PA; N-8000 for dedicated intercom",
+    "category": "Network PA and established intercom families",
+    "fit": "Strong for a tailored PA / intercom design",
+    "verdict": "A useful comparison where network audio, existing PA equipment or dedicated intercom drive the design.",
+    "summary": "TOA should not be compared only as a high-end voice-alarm system. IP-A1 includes SIP speakers, gateways and interfaces, with scheduled broadcasting through the IP-A1PG. IP-A1 also has specific two-way options. N-8000 is a separate dedicated intercom family; combining families is a design decision, not a feature automatically included with every TOA speaker.",
+    "bells": "IP-A1PG gateway supplies browser scheduling and SIP-to-multicast paging.",
+    "talkback": "IP-A1AF with IP-A1MP microphone panel, or a dedicated N-8000 intercom design.",
+    "integration": "IP-A1 documents SIP, multicast, ONVIF and APIs. N-8000 is a distinct architecture.",
+    "coverage": "IP-A1 ceiling speakers / outdoor horns; interfaces and suitable amplifiers for passive speakers.",
+    "visual": "External or separately specified notification design; no blanket display claim for IP-A1.",
+    "operations": "IP-A1PG browser schedules and defined paging controls; N-8000 has a different station-based workflow.",
+    "setup": "Select the family first, then confirm interfaces, zone limits, firmware and regional model availability.",
+    "value": "Can be a targeted network-PA or intercom purchase rather than a full voice-alarm project.",
+    "costWatch": "Avoid pricing an N-8000 exchange or voice-alarm rack as mandatory for a simpler IP-A1 design.",
+    "strengths": [
+      "IP-A1PG adds a documented scheduler, and the family includes both direct IP speakers and analogue interfaces.",
+      "Dedicated intercom requirements can be assessed against N-8000 rather than assumed from one-way PA."
+    ],
+    "tradeoffs": [
+      "Interoperability and software limits need checking for the specific combination of families and endpoints.",
+      "Certified voice-alarm products are a separate specification; their certification does not apply to all TOA PA equipment."
+    ],
+    "core": "IP-A1PG for the illustrated IP-A1 scheduling design; a separate N-8000 design only when needed.",
+    "audio": "IP-A1PC238 indoor speaker and IP-A1SC15 outdoor horn, subject to NZ supply confirmation.",
+    "call": "IP-A1AF + IP-A1MP and a suitable speaker/calling station, or specified N-8000 stations.",
+    "nz": "Australis Music’s NZ site lists TOA. That establishes a NZ-facing channel; ask the integrator to confirm supply and support for the exact IP-A1 or N-8000 parts, not just the brand.",
+    "sources": [
+      "toa-ip",
+      "toa-scheduler",
+      "toa-intercom"
+    ],
+    "nzSources": [
+      "toa-nz"
+    ]
+  }
 ];
 
-const capabilityRows = [
-  ["Live zoned paging", "Excellent", "Excellent", "Excellent", "Excellent", "Excellent", "Excellent", "Good"],
-  ["Scheduled bells / messages", "Excellent", "Excellent", "Excellent", "Excellent", "Excellent", "Very good", "Basic to good"],
-  ["Emergency / lockdown messaging", "Excellent", "Very good", "Excellent", "Excellent", "Excellent", "Exceptional", "Good"],
-  ["Two-way intercom / talkback", "Excellent", "Excellent", "Very good", "Excellent", "Excellent", "Project-dependent", "Limited"],
-  ["Visual alerts / display messaging", "Very good", "Good", "Excellent", "Project-dependent", "Excellent", "Project-dependent", "Limited"],
-  ["SIP / VoIP integration", "Very good", "Excellent", "Excellent", "Very good", "Excellent", "Project-dependent", "Requires gateway"],
-  ["Existing analogue reuse", "Very good", "Excellent", "Very good", "Excellent", "Excellent", "Excellent", "Native"],
-  ["School-focused daily operation", "Excellent", "Very good", "Very good", "Very good", "Excellent", "Very good", "Good"],
-  ["Enterprise / multi-site depth", "Very good", "Very good", "Excellent", "Excellent", "Exceptional", "Exceptional", "Limited"],
-  ["Certified / supervised voice alarm", "Project-dependent", "Limited", "Integration-dependent", "Excellent", "Very good", "Exceptional", "System-dependent"],
+const faqs: readonly Question[] = [
+  {
+    "id": "best-school-system",
+    "question": "Which IP paging system is best for a New Zealand school?",
+    "answer": "For a typical brief covering bells, zoned announcements, indoor/outdoor coverage and optional room calling, SPON is our all-round starting point. FrontRow Conductor is a particularly important comparison when classroom audio is part of the project, and Algo when SIP or existing PA reuse is central. ITC, Axis and TOA remain worthwhile alternatives according to the supplied architecture and support. This is a fit-based shortlist, not a market-share ranking.",
+    "sources": [
+      "spon-school",
+      "frontrow",
+      "algo-scheduler"
+    ]
+  },
+  {
+    "id": "frontrow-vs-spon",
+    "question": "How does FrontRow compare with SPON?",
+    "answer": "Both deserve consideration for school-wide bells, paging and intercom. FrontRow Conductor is especially relevant when communications should join up with compatible classroom audio and controls. SPON is a strong comparison when the brief centres on a managed IP PA and intercom platform. Compare the same room functions: a teacher microphone and classroom AV package should not be priced against a bare paging speaker.",
+    "sources": [
+      "frontrow-classroom",
+      "spon-control"
+    ]
+  },
+  {
+    "id": "itc-for-schools",
+    "question": "Is ITC a relevant school PA option in New Zealand?",
+    "answer": "Yes. NZ suppliers publish ITC PA products, including a T-7800A / Luna IP PA and intercom system. It belongs in a local comparison, but the installer should identify the currently supplied generation, supported software, endpoint power and telephone integration. The absence of a verified feature in this guide means “check the exact package”, not “the manufacturer cannot do it”.",
+    "sources": [
+      "itc-server",
+      "itc-edwards"
+    ]
+  },
+  {
+    "id": "2n-for-schools",
+    "question": "Should 2N still be considered for a school paging project?",
+    "answer": "Yes for relevant intercom requirements and existing installations, but distinguish current products from legacy Net Audio equipment. Edwards documents a 2N school project at Three Kings Primary. Separately, 2N marks its Net Audio family discontinued, and its APAC SIP Mic notice closed orders on 31 January 2025. A current IP Verso 2.0 intercom is not by itself a school-wide bell scheduler.",
+    "sources": [
+      "2n-school",
+      "2n-legacy",
+      "2n-mic",
+      "2n-current"
+    ]
+  },
+  {
+    "id": "cheapest-system",
+    "question": "Which school PA system is cheapest?",
+    "answer": "There is no verified like-for-like NZ price winner in the public evidence reviewed here. Retaining a suitable existing 100V speaker network may save more than changing brands. Compare a new IP design and a hybrid reuse design against the same coverage, talkback, software, installation and support requirements. Overseas component prices are not installed NZ system prices.",
+    "sources": []
+  },
+  {
+    "id": "easiest-system",
+    "question": "Which system is easiest for school staff to use?",
+    "answer": "Axis provides a well-documented browser interface; FrontRow is designed around school and classroom operation. Algo provides browser scheduling, while SPON and the NZ-listed ITC system offer central controls. None has been given a hands-on usability score here. Ask an administrator—not just the installer—to change a timetable, make a zoned page and manage a room call before accepting the system.",
+    "sources": [
+      "axis-edge",
+      "frontrow",
+      "algo-scheduler",
+      "spon-control",
+      "itc-server"
+    ]
+  },
+  {
+    "id": "without-internet",
+    "question": "Can scheduled bells work without an internet connection?",
+    "answer": "Local scheduling is possible: the Algo 8301, for example, does not require a cloud scheduler or SIP registration for scheduled bells. However, internet loss, loss of a local server, a failed network switch and a power cut are different failures. Test the proposed system’s behaviour in each case, including emergency controls and the backup-power design.",
+    "sources": [
+      "algo-scheduler"
+    ]
+  }
 ];
 
-const platforms = [
-  {
-    name: "SPON",
-    label: "Best all-round value for feature-rich school and standard multi-zone projects",
-    summary:
-      "SPON is strongest when the buyer wants one integrated IP communications platform rather than a collection of separate endpoint products. Its NetLink school material covers flexible zoning, school bells, SIP, fire-alarm integration and third-party APIs, while the broader platform adds intercom, emergency broadcasting, scheduled playback, role-based permissions and central device management.",
-    strengths: [
-      "Very broad school feature set in one ecosystem: bells, live paging, scheduled audio, emergency messages, zoning and intercom.",
-      "IP and PoE endpoints across classrooms, halls, outdoor areas and call/intercom locations.",
-      "Can reuse suitable existing network infrastructure and can bridge to analogue equipment where required.",
-      "Central software exposes terminal status, volume, tasks, media and zone control through a web interface.",
-      "Particularly attractive where the goal is maximum useful functionality without moving into enterprise voice-alarm pricing.",
-    ],
-    tradeoffs: [
-      "Public retail pricing is less transparent than Algo, Axis or AtlasIED, so local partner pricing matters more when validating value.",
-      "Independent installer/user review volume is thinner than for some long-established Western brands, so we rate ease of use mainly from documented workflows and partner experience rather than a large public review base.",
-      "For projects requiring formally certified voice-alarm architecture, extensive fail-safe redundancy or highly specialised transport/airport functionality, Bosch, TOA or AtlasIED may be a better starting point.",
-    ],
-    bestFor: "NZ schools, aged-care sites, warehouses, commercial campuses and other distributed facilities that want a broad feature set at a practical overall system cost.",
-    source: "https://sponcomm.com/u_file/2407/file/01/SPON-IP%20PA%20SYSTEM_NetLink%20series.pdf",
-    sourceLabel: "SPON NetLink IP PA system documentation",
-  },
-  {
-    name: "Algo",
-    label: "Best for SIP-first paging, VoIP integration and staged migration",
-    summary:
-      "Algo is one of the clearest choices when a site already thinks in SIP, multicast and VoIP. Its 8301 paging adapter and scheduler can bridge existing analogue PA into an IP environment, while speakers such as the 8188 act as SIP endpoints with multicast, talkback and auto-provisioning.",
-    strengths: [
-      "Excellent SIP and multicast support with broad compatibility across VoIP environments.",
-      "Very useful migration path for sites that want to keep existing amplifiers or analogue speaker infrastructure.",
-      "Dedicated school-bell scheduling and direct room endpoint options.",
-      "Public pricing is relatively transparent and individual endpoint costs are easy to benchmark.",
-      "Independent AV/VoIP community feedback is generally positive around straightforward setup and feature value, although this is anecdotal rather than a formal review dataset.",
-    ],
-    tradeoffs: [
-      "The architecture can be more endpoint-centric than platform-centric, so advanced visual notification, mass communication or policy workflows may rely on additional software or third-party platforms.",
-      "A school wanting a highly integrated bells + paging + intercom + emergency platform may need more design decisions than with a more unified suite.",
-    ],
-    bestFor: "Schools, offices and commercial sites with an existing SIP/VoIP environment, especially where legacy paging needs to be retained or upgraded in stages.",
-    source: "https://www.algosolutions.com/product/8301-ip-paging-adapter-scheduler/",
-    sourceLabel: "Algo 8301 Paging Adapter & Scheduler",
-  },
-  {
-    name: "Axis",
-    label: "Best for ease of use and security-system convergence",
-    summary:
-      "Axis deserves a place in this comparison because its network-audio platform is unusually easy to operate. Audio Manager Edge is built into Axis audio devices, supports up to 200 speakers and 20 zones, offers drag-and-drop zoning, browser management, schedules and health monitoring, and integrates naturally with Axis video and security products.",
-    strengths: [
-      "Probably the strongest ease-of-use story in this group for small and mid-sized IP audio systems.",
-      "Built-in Audio Manager Edge software means no separate management server is required for straightforward deployments.",
-      "Open standards, SIP support and close integration with cameras, analytics, access control and security workflows.",
-      "Health monitoring and remote management are strong for sites with limited on-site technical support.",
-      "Audio Manager Pro extends the architecture to much larger systems when Edge is not enough.",
-    ],
-    tradeoffs: [
-      "Public endpoint pricing is generally above basic SPON/Algo-style school endpoint pricing.",
-      "Its strongest differentiation is security convergence and operational simplicity rather than dedicated school intercom depth.",
-      "Advanced large-site management may introduce licensed software and a different architecture from smaller Edge-managed sites.",
-    ],
-    bestFor: "Schools and commercial sites that value simple administration, remote health monitoring and tight integration with an existing Axis security ecosystem.",
-    source: "https://www.axis.com/products/axis-audio-manager-edge",
-    sourceLabel: "AXIS Audio Manager Edge",
-  },
-  {
-    name: "TOA",
-    label: "Best for mature PA/intercom ecosystems and certified voice-alarm options",
-    summary:
-      "TOA spans more than one architecture. The N-8000 family is a dedicated IP intercom/paging platform, IP-A1 devices provide SIP/open-protocol network endpoints, and VX-3000 provides scalable EN 54-16 certified public-address and voice-alarm capability. That breadth is valuable, but it can also make product selection more specialised.",
-    strengths: [
-      "Long-established intercom and PA product families with strong school, healthcare, industrial and public-building use cases.",
-      "N-8000 supports conversation, paging, BGM, emergency paging and security functions over IP.",
-      "VX-3000 adds certified voice-alarm capability and scales to very large systems.",
-      "Version 5 VX-3000 software introduces simple mode and tiered user access, improving day-to-day management.",
-      "IP-A1 network endpoints provide SIP, multicast and API-based integration without requiring the full voice-alarm platform.",
-    ],
-    tradeoffs: [
-      "Achieving the broadest mix of intercom, school paging and certified voice alarm can involve multiple TOA product families rather than one simple platform.",
-      "Full VX-3000 configuration is more specialist than a mainstream school-only IP paging system.",
-    ],
-    bestFor: "Sites that already use TOA, projects needing mature intercom capability, and facilities where certified voice alarm or large-scale PA is part of the requirement.",
-    source: "https://www.toa.eu/solutions/solution-by-industry/educational-institutions",
-    sourceLabel: "TOA education solutions",
-  },
-  {
-    name: "AtlasIED",
-    label: "Best for premium mass communication, visual notification and enterprise integration",
-    summary:
-      "AtlasIED GLOBALCOM and IPX are designed around advanced facility-wide communication. The platform combines paging, visual messaging, scheduled school bells, intercom, SIP/VoIP integration and enterprise notification workflows. It is powerful, but the public cost of IPX endpoints puts it firmly into the premium end of this comparison.",
-    strengths: [
-      "Excellent audio plus visual-notification endpoint range, including displays, flashers, talkback and outdoor horns.",
-      "GLOBALCOM.EDU is specifically positioned for education and integrates VoIP, analogue audio and network endpoints.",
-      "Strong InformaCast and enterprise emergency-notification integration.",
-      "Browser-based management is designed to simplify day-to-day operation once the system has been commissioned.",
-      "Strong fit for campuses that want audio, text and broader mass-notification channels to work together.",
-    ],
-    tradeoffs: [
-      "Premium endpoint pricing can make a straightforward audio-only school project expensive compared with simpler platforms.",
-      "The enterprise feature set and certification/training ecosystem imply higher design and commissioning complexity than a basic school paging deployment.",
-    ],
-    bestFor: "Large schools, universities, campuses, transport and enterprise environments where premium endpoints, visual alerts and sophisticated mass notification justify the investment.",
-    source: "https://www.atlasied.com/ip108-sp",
-    sourceLabel: "AtlasIED GLOBALCOM.EDU",
-  },
-  {
-    name: "Bosch PRAESENSA",
-    label: "Best for mission-critical supervised public address and voice alarm",
-    summary:
-      "Bosch PRAESENSA is the most safety-focused architecture in this comparison. It is IP-networked, fully supervised and designed around redundancy, fault reporting, battery-backed power and certified public-address/voice-alarm requirements. Those capabilities are valuable, but they add cost and commissioning depth that many ordinary school projects do not need.",
-    strengths: [
-      "Exceptional system supervision, redundancy and fail-safe design for critical applications.",
-      "EN-certified public-address and voice-alarm architecture with line integrity supervision and redundant controller options.",
-      "Strong DSP, logging, fault reporting and third-party interface capability.",
-      "Can scale well beyond a normal school and suits hospitals, airports, transport, major public buildings and other critical estates.",
-      "Day-to-day control can still be made intuitive through call stations and wall controls after commissioning.",
-    ],
-    tradeoffs: [
-      "System-controller, amplifier, power-supply and call-station pricing places PRAESENSA at the high end before speakers and installation are considered.",
-      "Configuration is specialist work involving network, security, redundancy and voice-alarm considerations.",
-      "For a typical school that mainly needs bells, paging, lockdown messages and intercom, much of the premium may buy capability that is not actually required.",
-    ],
-    bestFor: "Mission-critical facilities and projects where certified voice alarm, redundancy, supervision and system availability are core requirements rather than optional extras.",
-    source: "https://licensing.boschsecurity.com/publicaddress/praesensa/datasheets/PRAESENSA_Public_Address_and_Voice_Alarm_System.pdf",
-    sourceLabel: "Bosch PRAESENSA system datasheet",
-  },
-  {
-    name: "Traditional 100V PA",
-    label: "Best for very simple one-way paging at minimum hardware cost",
-    summary:
-      "A traditional 100V amplifier-and-speaker system remains perfectly valid when the brief is simple: one-way announcements, a few zones and little need for software, intercom or per-endpoint control. The hardware can be inexpensive and familiar, but complex zoning, scheduling, monitoring and future expansion usually require extra control equipment.",
-    strengths: [
-      "Low equipment cost for basic one-way paging and background music.",
-      "Simple day-to-day operation and a huge ecosystem of amplifiers and passive speakers.",
-      "Existing speaker lines may be reusable in a hybrid upgrade.",
-      "Does not require a PoE network port at every speaker.",
-    ],
-    tradeoffs: [
-      "Limited per-room control, endpoint monitoring and software-defined zoning compared with full IP.",
-      "Two-way communication and visual messaging require additional systems.",
-      "Large new cable runs and future re-zoning can erode the initial hardware-cost advantage.",
-    ],
-    bestFor: "Small sites with straightforward one-way paging needs, or hybrid projects where good existing 100V infrastructure can be retained.",
-    source: "/systems/traditional-vs-ip",
-    sourceLabel: "SmartComms architecture guide",
-  },
-];
+const sourceEntries = Object.entries(evidence) as [EvidenceId, (typeof evidence)[EvidenceId]][];
+const sourceNumbers = Object.fromEntries(sourceEntries.map(([id], index) => [id, index + 1])) as Record<EvidenceId, number>;
 
-const publicPriceExamples = [
-  {
-    platform: "SPON",
-    core: "No consistent public NZ/global MSRP used",
-    audio: "No normalized public speaker price used",
-    intercom: "No normalized public intercom price used",
-    note: "SPON's relative cost band is informed by trusted NZ partner/project pricing used in the SmartComms estimator. We avoid presenting isolated overseas listings as though they were representative NZ channel pricing.",
-    sources: [
-      { label: "SPON product range", href: "https://sponcomm.com/" },
-      { label: "SPON XC-9000 software", href: "https://sponcomm.com/products/audio-management-software" },
-    ],
-  },
-  {
-    platform: "Algo",
-    core: "8301 paging adapter / scheduler: US$415 MSRP",
-    audio: "8188 SIP ceiling speaker: US$535 MSRP",
-    intercom: "1202 call button: US$260 add-on",
-    note: "A useful benchmark for SIP-native systems. Smaller Algo deployments may not need a dedicated central controller in the same way as an enterprise PA platform.",
-    sources: [
-      { label: "Algo 8301 public price", href: "https://www.voipsupply.com/algo-8301" },
-      { label: "Algo 8188 public price", href: "https://www.voipsupply.com/algo-8188-sip-ceiling-speaker" },
-    ],
-  },
-  {
-    platform: "Axis",
-    core: "Audio Manager Edge: included in compatible network speakers for smaller systems",
-    audio: "C1410 Mk II indoor speaker: about £330 ex VAT; C1310-E Mk II horn: about £518 ex VAT",
-    intercom: "Two-way audio is built into selected speakers; no separate intercom station used in this benchmark",
-    note: "Axis can avoid a separate controller on smaller deployments because management software runs on the devices. Larger systems may use additional management components.",
-    sources: [
-      { label: "Axis C1410 Mk II public price", href: "https://www.use-ip.co.uk/axis-c1410-mk-ii.html" },
-      { label: "Axis C1310-E Mk II public price", href: "https://store.xma.co.uk/product?pid=02813-001" },
-    ],
-  },
-  {
-    platform: "TOA",
-    core: "N-8000EX IP intercom exchange: about £4,075 ex VAT",
-    audio: "IP-A1SC15 IP horn: about £420 ex VAT",
-    intercom: "N-8000MS master station: about £535 ex VAT",
-    note: "TOA spans several product families, so a real school design may use a different combination of IP paging, intercom and voice-alarm products.",
-    sources: [
-      { label: "TOA N-8000 public pricing", href: "https://blaydoncomms.co.uk/product-category/intercom-systems/" },
-      { label: "TOA IP-A1SC15 public price", href: "https://blaydoncomms.co.uk/product/loudspeakers/horn-speakers/toa-ip-a1sc615-horn-speakers/" },
-    ],
-  },
-  {
-    platform: "AtlasIED",
-    core: "IP116-D GLOBALCOM controller: US$16,143 official",
-    audio: "IP-SM talkback IP speaker: US$1,298.99 official",
-    intercom: "IPCSD1 digital microphone station: US$2,351 official",
-    note: "AtlasIED publishes unusually transparent US pricing. GLOBALCOM deployments may also require endpoint licences and additional platform hardware depending on scale.",
-    sources: [
-      { label: "AtlasIED IP116-D controller", href: "https://www.atlasied.com/ip116-d" },
-      { label: "AtlasIED IP-SM speaker", href: "https://www.atlasied.com/ip-sm" },
-      { label: "AtlasIED IPCSD1 station", href: "https://www.atlasied.com/ipcsd1" },
-    ],
-  },
-  {
-    platform: "Bosch PRAESENSA",
-    core: "PRA-SCS controller: US$2,700 MSRP; PRA-SCL: US$7,100 MSRP",
-    audio: "PRA-AD604 4-channel 600 W amplifier: US$5,679 MSRP",
-    intercom: "PRA-CSLD call station: US$1,499 MSRP",
-    note: "PRAESENSA is amplifier-and-passive-loudspeaker architecture rather than one powered IP speaker per room. These figures come from a public 2024 MSRP schedule and are evidence of relative architecture/cost, not current NZ pricing.",
-    sources: [
-      { label: "Bosch public MSRP schedule", href: "https://www.myvendorlink.com/external/vfile?d=vrf&ft=o&i=48&s=161269&sv=0&v=77290" },
-      { label: "Bosch PRAESENSA system datasheet", href: "https://licensing.boschsecurity.com/publicaddress/praesensa/datasheets/PRAESENSA_Public_Address_and_Voice_Alarm_System.pdf" },
-    ],
-  },
-];
+function Sources({ ids, label = "Evidence" }: { ids: readonly EvidenceId[]; label?: string }) {
+  if (ids.length === 0) return null;
+  return (
+    <span className="mt-2 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-xs leading-relaxed text-[var(--sc-slate)]">
+      <span>{label}:</span>
+      {ids.map((id) => (
+        <a
+          key={id}
+          href={evidence[id].href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${evidence[id].label} (source ${sourceNumbers[id]}, opens in a new tab)`}
+          title={`${evidence[id].kind}: ${evidence[id].label}`}
+          className="rounded font-semibold text-[var(--sc-blue-700)] underline decoration-slate-300 underline-offset-2 hover:decoration-current focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
+        >
+          [{sourceNumbers[id]}]
+        </a>
+      ))}
+    </span>
+  );
+}
 
 function Badge({ children, tone = "blue" }: { children: ReactNode; tone?: "blue" | "teal" | "slate" }) {
-  const cls = tone === "teal"
+  const colours = tone === "teal"
     ? "bg-[var(--sc-teal-50)] text-[var(--sc-teal-strong)]"
     : tone === "slate"
       ? "bg-slate-100 text-slate-700"
       : "bg-[var(--sc-blue-50)] text-[var(--sc-blue-900)]";
-  return <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${cls}`}>{children}</span>;
+  return <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold leading-relaxed ${colours}`}>{children}</span>;
+}
+
+function SectionHeading({ id, eyebrow, children, description }: { id: string; eyebrow: string; children: ReactNode; description?: string }) {
+  return (
+    <div className="max-w-4xl">
+      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">{eyebrow}</p>
+      <h2 id={id} className="mt-2 text-2xl font-bold tracking-tight text-[var(--sc-blue-900)] md:text-3xl">{children}</h2>
+      {description && <p className="mt-3 leading-relaxed text-[var(--sc-slate)]">{description}</p>}
+    </div>
+  );
+}
+
+function TableRegion({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="mt-6">
+      <p className="mb-2 text-xs text-[var(--sc-slate)] lg:hidden">Scroll across the table to compare all columns.</p>
+      <div
+        role="region"
+        aria-label={label}
+        tabIndex={0}
+        className="overflow-x-auto rounded-xl border border-[var(--sc-border)] bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--sc-blue-700)]"
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function JsonLd({ data }: { data: unknown }) {
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\u003c") }} />;
 }
 
 export default function ComparePage() {
+  const article = {
+    ...articleSchema({
+      headline: ARTICLE_HEADLINE,
+      description: PAGE_DESCRIPTION,
+      url: pageUrl,
+      datePublished: publishedDate("/compare"),
+      dateModified: REVIEW_DATE,
+    }),
+    "@id": `${pageUrl}#article`,
+    inLanguage: "en-NZ",
+    citation: sourceEntries.map(([, source]) => source.href),
+    about: [
+      { "@type": "Thing", name: "School public address and IP paging systems" },
+      { "@type": "Thing", name: "School bell scheduling and intercom" },
+    ],
+  };
+  // Unordered editorial shortlist: positions identify visible entries, not ratings.
+  const shortlistSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${pageUrl}#shortlist`,
+    name: "NZ school paging and PA comparison shortlist",
+    itemListOrder: "https://schema.org/ItemListUnordered",
+    numberOfItems: platforms.length,
+    itemListElement: platforms.map((platform, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: `${pageUrl}#${platform.id}`,
+      name: `${platform.name}: ${platform.family}`,
+      description: platform.verdict,
+    })),
+  };
+
   return (
-    <div>
-      <header className="sc-container max-w-5xl py-16">
-        <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">Capability-led buyer&apos;s guide</p>
-        <h1 className="mt-2 max-w-4xl text-4xl font-bold tracking-tight text-[var(--sc-blue-900)] md:text-5xl">
-          Best IP paging, PA, bell and intercom systems: 2026 buyer&apos;s guide
+    <article aria-labelledby="compare-title">
+      <header className="sc-container max-w-5xl py-12 md:py-16">
+        <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">New Zealand · School and multi-zone communications</p>
+        <h1 id="compare-title" className="mt-3 max-w-4xl text-4xl font-bold tracking-tight text-[var(--sc-blue-900)] md:text-5xl">
+          {ARTICLE_HEADLINE}
         </h1>
         <p className="mt-5 max-w-4xl text-lg leading-relaxed text-[var(--sc-slate)]">
-          Comparing paging systems by brand alone is not very useful. A school, hospital, warehouse or commercial campus normally cares about four things: does the system have the right features, is it easy to run, will it scale, and does the extra capability justify the price? This guide compares SPON, Algo, Axis, TOA, AtlasIED, Bosch PRAESENSA and traditional 100V PA on exactly those questions.
+          A school needs more than a speaker brand. It needs bells that follow the timetable, clear announcements in the right places, reliable emergency controls and a system staff can actually use. This 2026 guide compares <strong>SPON, FrontRow, Algo, ITC, Axis and TOA</strong> for that job, with <strong>2N</strong> considered separately for current intercom needs and existing paging installations.
         </p>
-        <p className="mt-4 max-w-4xl text-[var(--sc-slate)]">
-          New to the underlying technology? The <Link href="/systems/ip-paging-pa">IP paging architecture guide</Link> explains how these platforms work, the <Link href="/guides/ip-paging-network-readiness">network readiness checklist</Link> covers the PoE/network side, and schools specifying a system can use our <Link href="/guides/school-pa-specification-checklist">specification checklist</Link> to compare quotes like-for-like.
+        <p className="mt-4 max-w-4xl leading-relaxed text-[var(--sc-slate)]">
+          Compare the complete design: software, indoor and outdoor coverage, room calling, network requirements, installation and NZ support. Not every platform delivers these in the same way—and not every school needs every feature.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <Link href="/pricing-tool" className="sc-btn-primary">Estimate project cost</Link>
-          <Link href="/tools/funding-check" className="sc-btn-secondary">Check NZ school funding</Link>
+          <Link href="/pricing-tool" className="sc-btn-primary">Estimate NZ project cost</Link>
+          <a href="#shortlist" className="sc-btn-secondary">Compare the shortlist</a>
         </div>
-        <p className="mt-4 text-xs text-[var(--sc-slate)]">Last reviewed {reviewed}. Prices and ratings are planning guidance, not supplier quotes or manufacturer endorsements.</p>
+        <p className="mt-5 text-xs leading-relaxed text-[var(--sc-slate)]">
+          SmartComms NZ editorial guide · Reviewed <time dateTime={REVIEW_DATE}>{REVIEW_LABEL}</time>. Evidence-led recommendations, not hands-on test scores or supplier quotes. <a href="#methodology" className="font-semibold underline underline-offset-2">How we compare</a>
+        </p>
+        <nav aria-label="On this comparison page" className="mt-7 border-t border-[var(--sc-border)] pt-5">
+          <ul className="flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold text-[var(--sc-blue-700)]">
+            {[
+              ["#shortlist", "Which system fits?"],
+              ["#capabilities", "Feature comparison"],
+              ["#platforms", "Platform profiles"],
+              ["#2n", "2N and legacy systems"],
+              ["#costs", "Cost and value"],
+              ["#school-scenario", "30-area school"],
+              ["#questions", "Buyer questions"],
+              ["#sources", "Sources"],
+            ].map(([href, text]) => <li key={href}><a href={href} className="rounded hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">{text}</a></li>)}
+          </ul>
+        </nav>
       </header>
 
-      <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-14">
-        <div className="sc-container max-w-5xl">
-          <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">The short answer: which platform offers the best value?</h2>
-          <p className="mt-3 max-w-4xl leading-relaxed text-[var(--sc-slate)]">
-            For a typical school or standard multi-zone commercial site, <strong>SPON sits in the strongest price-to-feature position</strong> in this comparison: the product cost is usually below the premium enterprise platforms, while the school-relevant feature set is unusually broad. Algo is also very strong value where SIP/VoIP is the priority, and Axis is compelling when ease of use and security integration matter most. Bosch, AtlasIED and parts of the TOA range can offer deeper enterprise or life-safety capability, but their extra cost is easiest to justify when the project genuinely needs those features.
+      <section id="shortlist" aria-labelledby="shortlist-title" className="scroll-mt-24 border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-12">
+        <div className="sc-container max-w-6xl">
+          <SectionHeading id="shortlist-title" eyebrow="Start with the job, not the logo">
+            Which system belongs on your shortlist?
+          </SectionHeading>
+          <p className="mt-4 max-w-4xl leading-relaxed text-[var(--sc-slate)]">
+            <strong>SPON is our all-round starting point for a typical school wanting integrated bells, paging and intercom.</strong> FrontRow Conductor deserves a direct comparison where classroom audio matters; Algo is particularly compelling for SIP and staged upgrades. ITC, Axis and TOA add credible alternatives for different site requirements. This is an editorial fit judgement—not proof of a universal winner on price or performance.
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
-            <div className="sc-card bg-white p-5">
-              <Badge tone="teal">Best all-round value</Badge>
-              <h3 className="mt-3 text-lg font-semibold text-[var(--sc-blue-900)]">SPON</h3>
-              <p className="mt-2 text-sm text-[var(--sc-slate)]">Broad bells, paging, emergency, intercom and integration features without enterprise voice-alarm pricing.</p>
-            </div>
-            <div className="sc-card bg-white p-5">
-              <Badge>Best SIP-first value</Badge>
-              <h3 className="mt-3 text-lg font-semibold text-[var(--sc-blue-900)]">Algo</h3>
-              <p className="mt-2 text-sm text-[var(--sc-slate)]">Easy SIP/multicast deployment and a strong migration path when VoIP is already central to the site.</p>
-            </div>
-            <div className="sc-card bg-white p-5">
-              <Badge tone="slate">Best premium / critical</Badge>
-              <h3 className="mt-3 text-lg font-semibold text-[var(--sc-blue-900)]">Bosch / AtlasIED / TOA</h3>
-              <p className="mt-2 text-sm text-[var(--sc-slate)]">The right direction when certification, supervision, visual notification or advanced enterprise integration matters more than lowest project cost.</p>
-            </div>
+            {platforms.slice(0, 3).map((platform, index) => (
+              <div key={platform.id} className="sc-card flex flex-col bg-white p-5 md:p-6">
+                <div><Badge tone={index === 0 ? "teal" : "blue"}>{["Integrated school brief", "School + classroom audio", "SIP + existing PA"][index]}</Badge></div>
+                <h3 className="mt-3 text-xl font-semibold text-[var(--sc-blue-900)]"><a href={`#${platform.id}`} className="hover:underline">{platform.name}</a></h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--sc-slate)]">{platform.verdict}</p>
+                <div className="mt-3"><Sources ids={platform.sources.slice(0, 2)} /></div>
+              </div>
+            ))}
           </div>
-          <div className="mt-8 overflow-x-auto rounded-xl border border-[var(--sc-border)] bg-white">
-            <table className="min-w-[760px] w-full text-left text-sm">
-              <thead className="bg-white text-[var(--sc-blue-900)]">
-                <tr className="border-b border-[var(--sc-border)]">
-                  <th className="px-4 py-3">Buyer priority</th>
-                  <th className="px-4 py-3">Strongest starting point</th>
-                  <th className="px-4 py-3">Why</th>
+          <TableRegion label="System shortlist. Scroll horizontally on smaller screens.">
+            <table className="w-full min-w-[720px] text-left text-sm leading-relaxed">
+              <caption className="border-b border-[var(--sc-border)] px-4 py-3 text-left text-xs text-[var(--sc-slate)]">Six main comparison options. The order is not a measured ranking. Select a name for its evidence and trade-offs.</caption>
+              <thead className="bg-[var(--sc-blue-900)] text-white"><tr>
+                <th scope="col" className="w-1/5 px-4 py-3">System / family</th>
+                <th scope="col" className="px-4 py-3">When it makes sense</th>
+                <th scope="col" className="px-4 py-3">Where value comes from</th>
+                <th scope="col" className="px-4 py-3">What can change the cost</th>
+              </tr></thead>
+              <tbody>{platforms.map((platform, index) => (
+                <tr key={platform.id} className={`border-t border-[var(--sc-border)] align-top ${index % 2 ? "bg-slate-50" : "bg-white"}`}>
+                  <th scope="row" className="px-4 py-4 font-normal"><a href={`#${platform.id}`} className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">{platform.name}</a><span className="mt-1 block text-xs text-[var(--sc-slate)]">{platform.category}</span></th>
+                  <td className="px-4 py-4 text-[var(--sc-slate)]">{platform.verdict}</td>
+                  <td className="px-4 py-4 text-[var(--sc-slate)]">{platform.value}</td>
+                  <td className="px-4 py-4 text-[var(--sc-slate)]">{platform.costWatch}</td>
                 </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-[var(--sc-border)]"><td className="px-4 py-3 font-medium">Best all-round school value</td><td className="px-4 py-3 font-semibold text-[var(--sc-blue-900)]">SPON</td><td className="px-4 py-3 text-[var(--sc-slate)]">Broad school feature coverage without moving into premium enterprise pricing.</td></tr>
-                <tr className="border-b border-[var(--sc-border)] bg-slate-50"><td className="px-4 py-3 font-medium">Best SIP / VoIP-first option</td><td className="px-4 py-3 font-semibold text-[var(--sc-blue-900)]">Algo</td><td className="px-4 py-3 text-[var(--sc-slate)]">Excellent SIP, multicast and legacy-PA migration options.</td></tr>
-                <tr className="border-b border-[var(--sc-border)]"><td className="px-4 py-3 font-medium">Easiest small/mid-site administration</td><td className="px-4 py-3 font-semibold text-[var(--sc-blue-900)]">Axis</td><td className="px-4 py-3 text-[var(--sc-slate)]">Built-in browser management, drag-and-drop zones and strong remote health monitoring.</td></tr>
-                <tr className="border-b border-[var(--sc-border)] bg-slate-50"><td className="px-4 py-3 font-medium">Best premium visual / mass notification</td><td className="px-4 py-3 font-semibold text-[var(--sc-blue-900)]">AtlasIED</td><td className="px-4 py-3 text-[var(--sc-slate)]">Strong audio + display endpoints and enterprise notification integrations.</td></tr>
-                <tr className="border-b border-[var(--sc-border)]"><td className="px-4 py-3 font-medium">Best certified / mission-critical voice alarm</td><td className="px-4 py-3 font-semibold text-[var(--sc-blue-900)]">Bosch PRAESENSA</td><td className="px-4 py-3 text-[var(--sc-slate)]">Supervision, redundancy and life-safety architecture are the core design priorities.</td></tr>
-                <tr><td className="px-4 py-3 font-medium">Lowest-cost simple one-way PA</td><td className="px-4 py-3 font-semibold text-[var(--sc-blue-900)]">Traditional 100V</td><td className="px-4 py-3 text-[var(--sc-slate)]">Still excellent value where advanced zoning, intercom and software control are unnecessary.</td></tr>
-              </tbody>
+              ))}</tbody>
             </table>
-          </div>
+          </TableRegion>
+          <p className="mt-4 text-sm leading-relaxed text-[var(--sc-slate)]">
+            <a href="#2n" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">2N has a different role</a>: current IP intercom plus a legacy school-paging history. <a href="#other-architectures" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">Traditional 100V, AtlasIED and Bosch PRAESENSA</a> are covered below where simpler PA or specialist requirements change the brief.
+          </p>
         </div>
       </section>
 
-      <section className="sc-container max-w-6xl py-14">
-        <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">Price, features, ease of use and value for money</h2>
-        <p className="mt-3 max-w-4xl leading-relaxed text-[var(--sc-slate)]">
-          This is the quickest way to read the market. <strong>Product-cost position</strong> compares typical hardware/platform pricing, not installed project totals. <strong>School feature fit</strong> focuses on the functions buyers most often ask for: bells, live and zoned paging, emergency messages, indoor/outdoor coverage and optional intercom. <strong>Ease</strong> means day-to-day use after commissioning. We score technical setup separately because an easy operator interface can still sit on top of a complex system.
-        </p>
-        <div className="mt-6 overflow-x-auto rounded-xl border border-[var(--sc-border)] bg-white">
-          <table className="min-w-[1100px] w-full text-left text-sm">
-            <thead className="bg-[var(--sc-blue-900)] text-white">
-              <tr>
-                <th className="px-4 py-3">Platform</th>
-                <th className="px-4 py-3">Relative product cost</th>
-                <th className="px-4 py-3">School feature fit</th>
-                <th className="px-4 py-3">Day-to-day ease</th>
-                <th className="px-4 py-3">Technical setup</th>
-                <th className="px-4 py-3">Value for a typical school</th>
-                <th className="px-4 py-3">Why</th>
+      <section id="capabilities" aria-labelledby="capabilities-title" className="sc-container max-w-6xl scroll-mt-24 py-12">
+        <SectionHeading id="capabilities-title" eyebrow="Apples to apples" description="These entries identify how the function is delivered, not a score for the whole brand. Accessories, software and integrations must be included in the proposed system.">
+          Bells, paging, intercom and integration compared
+        </SectionHeading>
+        <TableRegion label="School communications capability comparison. Scroll horizontally on smaller screens.">
+          <table className="w-full min-w-[760px] text-left text-sm leading-relaxed">
+            <caption className="border-b border-[var(--sc-border)] px-4 py-3 text-left text-xs text-[var(--sc-slate)]">Model-aware feature comparison. “Confirm” means the reviewed evidence does not establish the feature for that particular package.</caption>
+            <thead className="bg-[var(--sc-blue-900)] text-white"><tr>
+              <th scope="col" className="px-4 py-3">Platform</th>
+              <th scope="col" className="px-4 py-3">Bells / live zoned paging</th>
+              <th scope="col" className="px-4 py-3">Room calling / talkback</th>
+              <th scope="col" className="px-4 py-3">SIP and integration</th>
+            </tr></thead>
+            <tbody>{platforms.map((platform, index) => (
+              <tr key={platform.id} className={`border-t border-[var(--sc-border)] align-top ${index % 2 ? "bg-slate-50" : "bg-white"}`}>
+                <th scope="row" className="px-4 py-4"><a href={`#${platform.id}`} className="text-[var(--sc-blue-700)] underline underline-offset-2">{platform.name}</a></th>
+                <td className="px-4 py-4 text-[var(--sc-slate)]">{platform.bells}</td>
+                <td className="px-4 py-4 text-[var(--sc-slate)]">{platform.talkback}</td>
+                <td className="px-4 py-4 text-[var(--sc-slate)]">{platform.integration}<Sources ids={platform.id === "itc" ? ["itc-server", "itc-system"] : platform.sources.slice(0, 3)} /></td>
               </tr>
-            </thead>
-            <tbody>
-              {quickValue.map((row, index) => (
-                <tr key={row.platform} className={index % 2 ? "bg-slate-50" : "bg-white"}>
-                  <td className="px-4 py-4 font-semibold text-[var(--sc-blue-900)]">{row.platform}</td>
-                  <td className="px-4 py-4">{row.cost}</td>
-                  <td className="px-4 py-4">{row.features}</td>
-                  <td className="px-4 py-4">{row.ease}</td>
-                  <td className="px-4 py-4">{row.complexity}</td>
-                  <td className="px-4 py-4 font-semibold">{row.value}</td>
-                  <td className="max-w-sm px-4 py-4 text-[var(--sc-slate)]">{row.note}</td>
-                </tr>
-              ))}
-            </tbody>
+            ))}</tbody>
           </table>
-        </div>
+        </TableRegion>
         <div className="mt-5 rounded-xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-5 text-sm leading-relaxed text-[var(--sc-slate)]">
-          <strong className="text-[var(--sc-blue-900)]">Important:</strong> value changes with the brief. Bosch can be outstanding value for a hospital or transport site that genuinely needs certified voice alarm and redundancy. Traditional 100V can be outstanding value for a tiny site that only needs one-way announcements. The “typical school” column assumes a buyer wants modern bells, zoned paging, emergency messaging, indoor/outdoor coverage and straightforward administration without paying for enterprise features it may never use.
+          <strong className="text-[var(--sc-blue-900)]">A lockdown message is not a certification.</strong> Specify message priority, activation, cancellation, fault reporting and backup power for every design. A normal IP paging system must not be assumed to satisfy a required fire / evacuation voice-alarm specification. Have the project’s designer establish the applicable requirements and verify the complete system.
         </div>
+        <p className="mt-4 text-sm leading-relaxed text-[var(--sc-slate)]">New to the architecture? Read the <Link href="/systems/ip-paging-pa" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">IP paging guide</Link> and <Link href="/guides/ip-paging-network-readiness" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">network readiness checklist</Link>.</p>
       </section>
 
-      <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-14">
-        <div className="sc-container max-w-6xl">
-          <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">Feature comparison at a glance</h2>
-          <p className="mt-3 max-w-4xl text-[var(--sc-slate)]">
-            Ratings describe the platform family as a practical buying option, not every individual product. Some capabilities require a specific module, software tier or companion product.
-          </p>
-          <div className="mt-6 overflow-x-auto rounded-xl border border-[var(--sc-border)] bg-white">
-            <table className="min-w-[1180px] w-full text-left text-sm">
-              <thead className="bg-white text-[var(--sc-blue-900)]">
-                <tr className="border-b border-[var(--sc-border)]">
-                  <th className="px-4 py-3">Capability</th>
-                  <th className="px-4 py-3">SPON</th>
-                  <th className="px-4 py-3">Algo</th>
-                  <th className="px-4 py-3">Axis</th>
-                  <th className="px-4 py-3">TOA</th>
-                  <th className="px-4 py-3">AtlasIED</th>
-                  <th className="px-4 py-3">Bosch</th>
-                  <th className="px-4 py-3">100V PA</th>
-                </tr>
-              </thead>
-              <tbody>
-                {capabilityRows.map((row, index) => (
-                  <tr key={row[0]} className={`border-b border-[var(--sc-border)] last:border-0 ${index % 2 ? "bg-slate-50" : "bg-white"}`}>
-                    {row.map((cell, cellIndex) => (
-                      <td key={`${row[0]}-${cellIndex}`} className={`px-4 py-3 ${cellIndex === 0 ? "font-semibold text-[var(--sc-blue-900)]" : "text-[var(--sc-slate)]"}`}>{cell}</td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <section className="sc-container max-w-5xl py-8">
-        <details className="rounded-xl border border-[var(--sc-border)] bg-white p-5 md:p-6">
-          <summary className="cursor-pointer text-xl font-bold text-[var(--sc-blue-900)]">
-            What does “easy to use” actually mean?
-          </summary>
-          <div className="pt-4">
-            <p className="max-w-4xl leading-relaxed text-[var(--sc-slate)]">
-              Ease of use is easy to misrepresent in enterprise AV. We split it into two questions: <strong>how easy is the system for a receptionist, administrator or facilities user to operate every day?</strong> and <strong>how much specialist knowledge is required to design, configure and maintain it?</strong> Axis scores extremely well for everyday administration because Audio Manager Edge uses browser-based drag-and-drop management and is built into the speakers. Algo also scores well, especially for teams already comfortable with SIP. SPON&apos;s centralized management, scheduling and role-based controls are straightforward after commissioning, but there is less independent public review data. AtlasIED and Bosch can offer polished operator interfaces while still requiring substantially more specialist design work behind the scenes.
-            </p>
-            <p className="mt-4 max-w-4xl text-sm leading-relaxed text-[var(--sc-slate)]">
-              Independent review coverage is uneven because these are predominantly integrator-sold commercial systems rather than consumer products. Where public installer feedback exists, we use it as supporting evidence only. We do not turn isolated comments into a numerical “review score”.
-            </p>
-          </div>
-        </details>
-      </section>
-
-      <section className="border-b border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-14">
+      <section id="platforms" aria-labelledby="platforms-title" className="scroll-mt-24 border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-12">
         <div className="sc-container max-w-5xl">
-          <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">A realistic school scenario: where the differences show up</h2>
-          <p className="mt-3 max-w-4xl leading-relaxed text-[var(--sc-slate)]">
-            Consider a 30-area school with roughly 24 classrooms, administration, a hall, outdoor coverage, scheduled bells, live zoned announcements, emergency/lockdown messages and optional two-way room calling. For this type of site, the buyer usually wants the most useful features for the least complexity and capital cost.
-          </p>
-          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <div className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">SPON</h3><p className="mt-2 text-sm text-[var(--sc-slate)]">Likely one of the strongest fits because the school-specific functions sit inside the same platform and the cost position remains below the premium enterprise tier.</p></div>
-            <div className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">Algo</h3><p className="mt-2 text-sm text-[var(--sc-slate)]">Very attractive if the school already has a capable SIP/VoIP environment or wants to migrate room-by-room while retaining legacy infrastructure.</p></div>
-            <div className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">Axis</h3><p className="mt-2 text-sm text-[var(--sc-slate)]">Strong where simple administration and integration with cameras/security matter, though endpoint pricing can move above the lower-cost IP options.</p></div>
-            <div className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">TOA</h3><p className="mt-2 text-sm text-[var(--sc-slate)]">A credible mature choice, particularly if intercom or voice alarm is important, but the best design may span more than one TOA family.</p></div>
-            <div className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">AtlasIED</h3><p className="mt-2 text-sm text-[var(--sc-slate)]">Feature-rich and highly capable, but premium endpoints and enterprise tooling are easiest to justify when visual notification or advanced mass communication is a real requirement.</p></div>
-            <div className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">Bosch PRAESENSA</h3><p className="mt-2 text-sm text-[var(--sc-slate)]">Technically excellent, but most compelling when certified voice alarm, redundancy and fault supervision are requirements rather than optional upgrades.</p></div>
+          <SectionHeading id="platforms-title" eyebrow="The system behind the brand" description="The profiles pair documented capability with local evidence. A NZ listing shows an available route for enquiry; it does not prove stock, school-market share or guaranteed support.">
+            Detailed platform comparison and NZ market fit
+          </SectionHeading>
+          <div className="mt-7 space-y-5">
+            {platforms.map((platform) => (
+              <article id={platform.id} key={platform.id} aria-labelledby={`${platform.id}-title`} className="sc-card scroll-mt-24 bg-white p-5 md:p-7">
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <h3 id={`${platform.id}-title`} className="text-2xl font-bold text-[var(--sc-blue-900)]">{platform.name}</h3>
+                    <p className="mt-1 text-sm font-medium text-[var(--sc-blue-700)]">{platform.family}</p>
+                  </div>
+                  <Badge tone={platform.id === "spon" ? "teal" : "slate"}>{platform.category}</Badge>
+                </div>
+                <p className="mt-4 font-semibold text-[var(--sc-blue-900)]">{platform.fit}</p>
+                <p className="mt-2 leading-relaxed text-[var(--sc-slate)]">{platform.summary}</p>
+                <Sources ids={platform.sources} label="Technical evidence" />
+                <div className="mt-5 grid gap-5 md:grid-cols-2">
+                  <div><h4 className="font-semibold text-[var(--sc-blue-900)]">Where it earns its place</h4><ul className="mt-2 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[var(--sc-slate)]">{platform.strengths.map((text) => <li key={text}>{text}</li>)}</ul></div>
+                  <div><h4 className="font-semibold text-[var(--sc-blue-900)]">Trade-offs to check</h4><ul className="mt-2 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[var(--sc-slate)]">{platform.tradeoffs.map((text) => <li key={text}>{text}</li>)}</ul></div>
+                </div>
+                <div className="mt-5 rounded-lg border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-4">
+                  <h4 className="text-sm font-semibold text-[var(--sc-blue-900)]">NZ market fit / local ecosystem</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">{platform.nz}</p>
+                  <Sources ids={platform.nzSources} label="Local evidence" />
+                </div>
+                <details className="mt-5 border-t border-[var(--sc-border)] pt-4">
+                  <summary className="cursor-pointer rounded font-semibold text-[var(--sc-blue-700)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">Design detail: endpoints, controls and quote scope</summary>
+                  <dl className="mt-4 grid gap-x-6 gap-y-4 text-sm leading-relaxed md:grid-cols-2">
+                    {[
+                      ["Core / control", platform.core],
+                      ["Representative audio", platform.audio],
+                      ["Room-call provision", platform.call],
+                      ["Indoor, outdoor and legacy coverage", platform.coverage],
+                      ["Visual notification", platform.visual],
+                      ["Day-to-day operation", platform.operations],
+                      ["Technical setup", platform.setup],
+                      ["Cost validation", platform.costWatch],
+                    ].map(([title, text]) => <div key={title}><dt className="font-semibold text-[var(--sc-blue-900)]">{title}</dt><dd className="mt-1 text-[var(--sc-slate)]">{text}</dd></div>)}
+                  </dl>
+                  <p className="mt-4 text-xs leading-relaxed text-[var(--sc-slate)]">These are a quoting framework and component examples, not a complete bill of materials or an assurance of cross-family compatibility.</p>
+                  <Sources ids={[...platform.sources, ...platform.nzSources]} />
+                </details>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="sc-container max-w-5xl py-14">
-        <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">Detailed platform comparison</h2>
-        <div className="mt-8 space-y-8">
-          {platforms.map((platform) => (
-            <article key={platform.name} className="sc-card p-6 md:p-8">
-              <div className="flex flex-wrap items-start justify-between gap-3">
-                <div>
-                  <h3 className="text-2xl font-semibold text-[var(--sc-blue-900)]">{platform.name}</h3>
-                  <p className="mt-1 font-medium text-[var(--sc-blue-700)]">{platform.label}</p>
-                </div>
-                <a href={platform.source} target={platform.source.startsWith("http") ? "_blank" : undefined} rel={platform.source.startsWith("http") ? "noopener noreferrer" : undefined} className="text-sm font-semibold text-[var(--sc-blue-700)] hover:underline">Source ↗</a>
-              </div>
-              <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">{platform.summary}</p>
-              <div className="mt-6 grid gap-6 md:grid-cols-2">
-                <div>
-                  <h4 className="font-semibold text-[var(--sc-blue-900)]">Where it is strongest</h4>
-                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[var(--sc-slate)]">
-                    {platform.strengths.map((item) => <li key={item}>{item}</li>)}
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-[var(--sc-blue-900)]">Trade-offs to consider</h4>
-                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[var(--sc-slate)]">
-                    {platform.tradeoffs.map((item) => <li key={item}>{item}</li>)}
-                  </ul>
-                </div>
-              </div>
-              <p className="mt-6 rounded-lg bg-[var(--sc-blue-50)] p-4 text-sm leading-relaxed text-[var(--sc-slate)]"><strong className="text-[var(--sc-blue-900)]">Best fit:</strong> {platform.bestFor}</p>
-              <p className="mt-3 text-xs text-[var(--sc-slate)]">Primary source: {platform.sourceLabel}</p>
-            </article>
-          ))}
+      <section id="2n" aria-labelledby="2n-title" className="sc-container max-w-5xl scroll-mt-24 py-12">
+        <SectionHeading id="2n-title" eyebrow="A specialist role, not an irrelevant brand">
+          2N: current IP intercom and legacy school paging
+        </SectionHeading>
+        <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">
+          <strong>2N has genuine NZ school-paging history.</strong> Edwards describes a Three Kings Primary installation using 2N network speakers, outdoor zones, paging microphones, scheduled bells and lockdown messages in a project article dated 1 March 2024. That is useful local evidence—but it does not establish that the same equipment remains a current new-build platform.
+        </p>
+        <Sources ids={["2n-school"]} label="Historical NZ project" />
+        <div className="mt-5 grid gap-5 md:grid-cols-2">
+          <div className="sc-card p-5">
+            <Badge>Current intercom shortlist</Badge>
+            <h3 className="mt-3 text-lg font-semibold text-[var(--sc-blue-900)]">IP Verso 2.0 and the specified calling system</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">2N maintains IP Verso 2.0 documentation, and Sektor NZ lists the product. It is relevant to SIP-based entrance communication and access workflows. Quote the intercom, modules, receiving station / calling service and any required licences. A door intercom alone does not provide a campus bell schedule.</p>
+            <Sources ids={["2n-current", "2n-nz"]} />
+          </div>
+          <div className="sc-card p-5">
+            <Badge tone="slate">Lifecycle check required</Badge>
+            <h3 className="mt-3 text-lg font-semibold text-[var(--sc-blue-900)]">Net Audio and SIP Mic are not a current-system assumption</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">2N’s discontinued Net Audio page includes IP Audio Manager and Net Audio decoders. Its APAC / AMER SIP Mic notice set final orders at <strong>31 January 2025</strong> and identifies AXIS C6110 as the successor. That does not mean all 2N products are discontinued or that an existing installation must be removed.</p>
+            <Sources ids={["2n-legacy", "2n-mic"]} />
+          </div>
         </div>
+        <p className="mt-5 text-sm leading-relaxed text-[var(--sc-slate)]"><strong className="text-[var(--sc-blue-900)]">Buying decision:</strong> keep 2N on the intercom shortlist or review the lifecycle of an installed system. For a new whole-school design, require a current supported scheduler, paging architecture and endpoint list rather than specifying “2N audio” generically.</p>
       </section>
 
-      <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-8">
+      <section id="other-architectures" aria-labelledby="alternatives-title" className="scroll-mt-24 border-y border-[var(--sc-border)] bg-slate-50 py-10">
         <div className="sc-container max-w-5xl">
-          <details className="rounded-xl border border-[var(--sc-border)] bg-white p-5 md:p-6">
-            <summary className="cursor-pointer text-xl font-bold text-[var(--sc-blue-900)]">
-              How we compare value for money
-            </summary>
-            <div className="pt-4">
-              <p className="max-w-4xl leading-relaxed text-[var(--sc-slate)]">
-                We do not define value as “cheapest”. A low-cost platform with poor zoning, no useful scheduling and no practical emergency workflow can be worse value than a slightly more expensive system that replaces several separate products. Equally, a technically superior mission-critical platform can be poor value if the buyer never needs its redundancy, certification or enterprise controls.
-              </p>
-              <div className="mt-6 grid gap-4 md:grid-cols-2">
-                <div className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">1. Useful feature coverage</h3><p className="mt-2 text-sm text-[var(--sc-slate)]">How many of the buyer&apos;s actual paging, bell, emergency, intercom and integration requirements can the platform meet without bolt-ons?</p></div>
-                <div className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">2. Hardware and software cost</h3><p className="mt-2 text-sm text-[var(--sc-slate)]">What is the relative cost of endpoints, central hardware, software and required licences before installation?</p></div>
-                <div className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">3. Operational simplicity</h3><p className="mt-2 text-sm text-[var(--sc-slate)]">Can normal staff run schedules, pages and everyday functions without calling an integrator?</p></div>
-                <div className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">4. Design and lifecycle complexity</h3><p className="mt-2 text-sm text-[var(--sc-slate)]">How much specialist commissioning, training, licensing, maintenance and future integration does the system need?</p></div>
-              </div>
+          <SectionHeading id="alternatives-title" eyebrow="When the brief changes">
+            Traditional 100V, AtlasIED and Bosch PRAESENSA
+          </SectionHeading>
+          <div className="mt-5 grid gap-5 md:grid-cols-3">
+            <div>
+              <h3 className="font-semibold text-[var(--sc-blue-900)]">Traditional 100V / hybrid</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Keep a simple amplifier-and-speaker design in the comparison when the job is basic one-way PA. Reuse may be attractive, but shared speaker circuits limit individual-room control. Intercom and visual alerts need additional provision.</p>
+              <Link href="/systems/traditional-vs-ip" className="mt-3 inline-block text-sm font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">Compare analogue, IP and hybrid</Link>
             </div>
-          </details>
-        </div>
-      </section>
-
-      <section className="sc-container max-w-4xl py-14 sc-prose">
-        <h2>Which IP paging system offers the best value for a school?</h2>
-        <p>For a typical feature-rich school project, SPON currently sits in the strongest all-round value position in this guide because it combines bells, live and scheduled paging, emergency messaging, zoning, intercom and integration at a lower relative product-cost tier than the premium enterprise systems. Algo can be equally compelling where SIP/VoIP integration is the main requirement, while Axis can justify a higher endpoint price through particularly simple administration and strong security-system integration.</p>
-        <h2>Which school PA system is easiest to use?</h2>
-        <p>For small and mid-sized IP audio deployments, Axis has the clearest documented ease-of-use advantage: Audio Manager Edge is built into the devices, uses a standard browser, supports drag-and-drop zones and provides an intuitive dashboard. Algo is also straightforward in SIP environments. SPON is designed around centralized management, schedules and role-based permissions and should be easy for staff after commissioning, but independent public usability reviews are less numerous.</p>
-        <h2>Which system has the most features?</h2>
-        <p>There is no single winner because the feature sets solve different problems. Bosch PRAESENSA has the deepest mission-critical voice-alarm, supervision and redundancy capability. AtlasIED is particularly strong in enterprise mass notification and visual messaging. SPON has one of the broadest combinations of features that are directly useful to a normal school. TOA spans mature intercom, IP paging and certified voice alarm across several product families.</p>
-        <h2>Which system is cheapest?</h2>
-        <p>For a basic one-way PA, traditional 100V hardware is usually the lowest-cost starting point. Among modern IP options, SPON and Algo generally occupy the lower-to-middle part of the cost spectrum in this comparison. Axis and TOA typically move higher depending on endpoint and platform choice, while AtlasIED and Bosch sit at the premium end. A site-specific design can reverse that order if one platform reuses substantially more existing infrastructure than another.</p>
-        <h2>Which system should a New Zealand school choose?</h2>
-        <p>If the brief is a conventional modern school system with scheduled bells, live paging, lockdown/emergency announcements, classroom and outdoor coverage, zoning and optional intercom, SPON, Algo and Axis are the most obvious price-conscious IP shortlists. SPON has the broadest integrated school feature proposition of those three, Algo is particularly strong for SIP-first environments, and Axis is especially attractive where operational simplicity and security integration matter.</p>
-        <p>TOA, AtlasIED and Bosch move up the shortlist as the project becomes more specialised. Certified voice alarm, visual alerting, very large estates, advanced redundancy, mission-critical operation or existing enterprise-standard platforms can justify their additional cost and complexity.</p>
-        <h2>Is a more expensive PA system automatically better?</h2>
-        <p>No. More expensive systems often buy deeper redundancy, higher-end endpoint hardware, visual notification, certification or enterprise management. Those are valuable only if the project needs them. The best system is the least complicated platform that reliably meets the real operational and safety requirements with enough headroom for future growth.</p>
-        <h2>Are IP paging systems always better than traditional 100V PA?</h2>
-        <p>No. A basic 100V system can still be the lowest-cost answer for straightforward one-way paging. Full IP becomes increasingly attractive when the site wants flexible zones, per-endpoint control, scheduling, intercom, monitoring, remote administration or staged future expansion. Hybrid systems can combine both approaches.</p>
-        <h2>What about installation cost?</h2>
-        <p>Installation can change the ranking. A lower-cost IP speaker may still require new structured cabling and PoE switching, while a higher-cost gateway may allow an existing 100V speaker network to stay in service. That is why this page separates product-cost position from installed project pricing. Use the <Link href="/pricing-tool">SmartComms ballpark calculator</Link> for an indicative installed NZ project range.</p>
-        <h2>Can a school get funding for an IP paging or bell upgrade?</h2>
-        <p>Potentially. For New Zealand state schools, fixed communications infrastructure may have a pathway through 5YA capital funding within the 10YPP process depending on the property, project reason, available allocation and Ministry process. See the <Link href="/funding">school communications funding guide</Link> or use the <Link href="/tools/funding-check">funding checker</Link>.</p>
-      </section>
-
-      <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-900)] py-14 text-white">
-        <div className="sc-container max-w-4xl text-center">
-          <h2 className="text-3xl font-bold">Do not choose the brand first. Define the requirement first.</h2>
-          <p className="mx-auto mt-4 max-w-3xl leading-relaxed text-blue-100">
-            Tell us roughly how many areas you have, what you need the system to do and what infrastructure already exists. The next step should be a platform recommendation based on the site, not a pre-selected brand.
-          </p>
-          <div className="mt-7 flex flex-wrap justify-center gap-3">
-            <Link href="/pricing-tool" className="inline-flex items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[var(--sc-blue-900)]">Estimate project cost</Link>
-            <Link href="/contact" className="inline-flex items-center justify-center rounded-lg border border-white/40 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10">Discuss system requirements</Link>
+            <div>
+              <h3 className="font-semibold text-[var(--sc-blue-900)]">AtlasIED</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Consider a specified GLOBALCOM / IP endpoint solution for a wider campus-notification brief. AtlasIED has an ANZ distribution route through NAS; its shorter treatment here reflects scope, not an absence from NZ or a finding of inferior school suitability.</p>
+              <Sources ids={["atlas", "atlas-nz"]} />
+            </div>
+            <div>
+              <h3 className="font-semibold text-[var(--sc-blue-900)]">Bosch PRAESENSA</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Investigate separately when a supervised public-address / voice-alarm design is required. The manufacturer documents supervised loudspeaker-line options, including retrofits. This is a different engineering brief from comparing everyday bells and room calling.</p>
+              <Sources ids={["bosch"]} />
+            </div>
           </div>
+          <p className="mt-5 text-xs leading-relaxed text-[var(--sc-slate)]">This is a focused selection guide, not an exhaustive list of every brand sold in New Zealand. Specialist projects may require a broader shortlist.</p>
         </div>
       </section>
 
-      <section className="sc-container max-w-6xl py-10">
-        <details className="rounded-xl border border-[var(--sc-border)] bg-white p-5 md:p-6">
-          <summary className="cursor-pointer text-xl font-bold text-[var(--sc-blue-900)]">
-            Public pricing evidence behind the cost gauge
-          </summary>
-          <div className="pt-4">
-            <p className="max-w-4xl text-sm leading-relaxed text-[var(--sc-slate)]">
-              This evidence is intentionally kept separate from the main buyer guidance. Exact system totals are difficult to compare fairly because some platforms use powered IP speakers, others use centralized amplifiers and passive loudspeakers, and some include talkback, visual notification or life-safety supervision at the endpoint. The examples below use the most comparable public control, audio and intercom/call-station prices we could find. They support the <em>relative</em> cost gauge; they are not an apples-to-apples bill of materials or an installed NZ quote.
-            </p>
-            <div className="mt-6 overflow-x-auto rounded-xl border border-[var(--sc-border)]">
-              <table className="min-w-[1120px] w-full text-left text-sm">
-                <thead className="bg-[var(--sc-blue-900)] text-white">
-                  <tr>
-                    <th className="px-4 py-3">Platform</th>
-                    <th className="px-4 py-3">Core / control example</th>
-                    <th className="px-4 py-3">Representative audio hardware</th>
-                    <th className="px-4 py-3">Intercom / call example</th>
-                    <th className="px-4 py-3">Context</th>
-                  </tr>
-                </thead>
+      <section id="costs" aria-labelledby="costs-title" className="sc-container max-w-5xl scroll-mt-24 py-12">
+        <SectionHeading id="costs-title" eyebrow="Price, ease and value" description="There is no verified, like-for-like public NZ price set covering all these systems. A numerical league table would suggest a level of certainty the evidence does not support.">
+          Compare complete project cost—not isolated speakers
+        </SectionHeading>
+        <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">SPON’s integrated feature coverage makes it a strong value candidate. FrontRow may offer better value when its classroom functions are needed; Algo or another hybrid design may win by retaining good existing equipment. The deciding evidence is an itemised quote against the same operational brief—not a brand-wide “cheap” or “premium” label.</p>
+        <div className="mt-5 grid gap-4 md:grid-cols-3">
+          {[
+            ["Equipment and software", "Include controllers, licences, indoor/outdoor audio, intercom microphones or buttons, consoles, mounts and visual endpoints."],
+            ["Installation and readiness", "Include cabling, PoE switch capacity, backup power, amplifier interfaces, network configuration and coverage testing."],
+            ["Operation and lifecycle", "Include staff training, support, subscriptions, replacement availability, configuration backups and ownership of administrative access."],
+          ].map(([title, text]) => <div key={title} className="sc-card p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">{title}</h3><p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">{text}</p></div>)}
+        </div>
+        <p className="mt-4 text-sm leading-relaxed text-[var(--sc-slate)]"><strong>Operator ease and commissioning complexity are different.</strong> A receptionist may use one simple page button while an integrator manages servers, SIP, multicast and permissions behind it. Compare staff tasks in a demonstration; this guide does not convert manufacturer screenshots into tested usability scores.</p>
+        <details className="mt-6 rounded-xl border border-[var(--sc-border)] bg-white p-5">
+          <summary className="cursor-pointer rounded font-semibold text-[var(--sc-blue-900)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">Public component-price evidence and its limits</summary>
+          <div className="pt-4 text-sm leading-relaxed text-[var(--sc-slate)]">
+            <p>The following displayed prices were reviewed on {REVIEW_LABEL}. They are <strong>international component examples, not NZ quotes, a complete system or a basis for ranking every platform</strong>. Currency, tax treatment, options, freight and installation differ. Recheck the supplier page before relying on a figure.</p>
+            <TableRegion label="International component-price examples. Scroll horizontally on smaller screens.">
+              <table className="w-full min-w-[580px] text-left text-sm">
+                <caption className="sr-only">Isolated international seller prices, checked 15 September 2026</caption>
+                <thead className="bg-slate-100 text-[var(--sc-blue-900)]"><tr><th scope="col" className="px-4 py-3">Item / role</th><th scope="col" className="px-4 py-3">Displayed price</th><th scope="col" className="px-4 py-3">Important boundary</th></tr></thead>
                 <tbody>
-                  {publicPriceExamples.map((item, index) => (
-                    <tr key={item.platform} className={`border-b border-[var(--sc-border)] last:border-0 ${index % 2 ? "bg-slate-50" : "bg-white"}`}>
-                      <td className="px-4 py-4 align-top font-semibold text-[var(--sc-blue-900)]">{item.platform}</td>
-                      <td className="px-4 py-4 align-top text-[var(--sc-slate)]">{item.core}</td>
-                      <td className="px-4 py-4 align-top text-[var(--sc-slate)]">{item.audio}</td>
-                      <td className="px-4 py-4 align-top text-[var(--sc-slate)]">{item.intercom}</td>
-                      <td className="px-4 py-4 align-top text-[var(--sc-slate)]">
-                        <p>{item.note}</p>
-                        <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs">
-                          {item.sources.map((source) => (
-                            <a key={source.href} className="font-semibold text-[var(--sc-blue-700)] hover:underline" href={source.href} target="_blank" rel="noopener noreferrer">{source.label} ↗</a>
-                          ))}
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
+                  <tr className="border-t border-[var(--sc-border)] align-top"><th scope="row" className="px-4 py-3 font-medium">Algo 8301 scheduler / adapter</th><td className="px-4 py-3">US$485</td><td className="px-4 py-3">VoIP Supply selling price, not its separate MSRP field. Speakers and amplification are not included.<Sources ids={["algo-price-core"]} /></td></tr>
+                  <tr className="border-t border-[var(--sc-border)] align-top"><th scope="row" className="px-4 py-3 font-medium">Algo 8188 indoor speaker</th><td className="px-4 py-3">US$485</td><td className="px-4 py-3">Standard speaker listing; call accessories, mounting options and notification licences can add cost.<Sources ids={["algo-price-speaker"]} /></td></tr>
+                  <tr className="border-t border-[var(--sc-border)] align-top"><th scope="row" className="px-4 py-3 font-medium">TOA IP-A1PG scheduling gateway</th><td className="px-4 py-3">£523.82 ex VAT</td><td className="px-4 py-3">Northamber UK listing for a gateway, not an intercom exchange or installed school package.<Sources ids={["toa-price"]} /></td></tr>
                 </tbody>
               </table>
-            </div>
-            <p className="mt-5 text-xs leading-relaxed text-[var(--sc-slate)]">
-              Public prices are international examples and may exclude tax, freight, software, licences, accessories and installation. New Zealand channel pricing can differ materially. SPON&apos;s relative position uses trusted NZ partner/project pricing because we did not find a sufficiently consistent public NZ/global MSRP set to present as equivalent product pricing. Bosch figures shown are from a public 2024 MSRP schedule and should not be treated as current 2026 quotes.
-            </p>
+            </TableRegion>
+            <p className="mt-4">For <strong>SPON, FrontRow and ITC</strong>, obtain the local core/control, representative audio and room-call prices outlined in each profile. For <strong>Axis</strong>, included Edge management does not make speakers, bridges or a console free. For <strong>2N</strong>, quote the entrance/calling function separately rather than inventing an equivalent bell-system controller.</p>
+            <p className="mt-3">No intercom price is shown unless the required audio and calling hardware are clear: a call button alone is not a complete two-way endpoint. Overseas prices have not been converted to NZD or multiplied into hypothetical school totals.</p>
           </div>
         </details>
-
-        <details className="mt-4 rounded-xl border border-[var(--sc-border)] bg-white p-5 md:p-6">
-          <summary className="cursor-pointer text-xl font-bold text-[var(--sc-blue-900)]">
-            Sources and evidence used in this comparison
-          </summary>
-          <div className="pt-4">
-            <p className="max-w-4xl text-sm leading-relaxed text-[var(--sc-slate)]">
-              We prioritise first-party manufacturer documentation for features and system architecture, then use public distributor/reseller pricing as a reality check on relative product cost. Public installer commentary is used only as supporting evidence for usability because review volume is inconsistent across commercial AV brands.
-            </p>
-            <div className="mt-6 grid gap-3 text-sm md:grid-cols-2">
-              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://sponcomm.com/u_file/2407/file/01/SPON-IP%20PA%20SYSTEM_NetLink%20series.pdf" target="_blank" rel="noopener noreferrer">SPON NetLink IP PA documentation ↗</a>
-              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://sponcomm.com/products/audio-management-software" target="_blank" rel="noopener noreferrer">SPON XC-9000 Audio Management Software ↗</a>
-              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.algosolutions.com/product/8301-ip-paging-adapter-scheduler/" target="_blank" rel="noopener noreferrer">Algo 8301 Paging Adapter & Scheduler ↗</a>
-              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.algosolutions.com/articles/voice-paging-education/" target="_blank" rel="noopener noreferrer">Algo education paging guide ↗</a>
-              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.axis.com/products/axis-audio-manager-edge" target="_blank" rel="noopener noreferrer">AXIS Audio Manager Edge ↗</a>
-              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.axis.com/solutions/education/network-audio-solutions-for-education" target="_blank" rel="noopener noreferrer">Axis network audio for education ↗</a>
-              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.toa.eu/solutions/solution-by-industry/educational-institutions" target="_blank" rel="noopener noreferrer">TOA educational systems ↗</a>
-              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.toa.eu/products/voice-alarm-systems/vx-3000-series" target="_blank" rel="noopener noreferrer">TOA VX-3000 voice alarm ↗</a>
-              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.atlasied.com/ip108-sp" target="_blank" rel="noopener noreferrer">AtlasIED GLOBALCOM.EDU ↗</a>
-              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://www.atlasied.com/ip-enabled-speakers" target="_blank" rel="noopener noreferrer">AtlasIED IPX speaker pricing/features ↗</a>
-              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://licensing.boschsecurity.com/publicaddress/praesensa/datasheets/PRAESENSA_Public_Address_and_Voice_Alarm_System.pdf" target="_blank" rel="noopener noreferrer">Bosch PRAESENSA system datasheet ↗</a>
-              <a className="sc-card p-4 font-medium text-[var(--sc-blue-700)] hover:underline" href="https://cdn.commerce.boschsecurity.com/public/documents/PRAESENSA_2.30_Configuration_Manual_enUS_100857072779.pdf" target="_blank" rel="noopener noreferrer">Bosch PRAESENSA configuration manual ↗</a>
-            </div>
-          </div>
-        </details>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link href="/pricing-tool" className="sc-btn-primary">Get an indicative NZ installed range</Link>
+          <Link href="/guides/school-pa-specification-checklist" className="sc-btn-secondary">Compare quotes like for like</Link>
+        </div>
       </section>
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema({
-        headline: "Best IP Paging, PA, Bell & Intercom Systems: 2026 Buyer’s Guide",
-        description: "Comparison of SPON, Algo, Axis, TOA, AtlasIED, Bosch PRAESENSA and traditional 100V PA by cost, features, ease of use and value.",
-        url: `${site.url}/compare`,
-        datePublished: publishedDate("/compare"),
-        dateModified: reviewedDate("/compare"),
-      })) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([
+      <section id="school-scenario" aria-labelledby="scenario-title" className="scroll-mt-24 border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-12">
+        <div className="sc-container max-w-5xl">
+          <SectionHeading id="scenario-title" eyebrow="Make the comparison practical">
+            A 30-area school: one brief, comparable proposals
+          </SectionHeading>
+          <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">Consider an illustrative school with <strong>24 classrooms, two administration areas, a hall and three outdoor coverage areas</strong>. It needs timetable bells, live zoned paging, priority messages and optional classroom calls. These are 30 coverage areas—not necessarily 30 speakers, 30 cable circuits or 30 software zones. Speaker quantities and placement require a coverage design.</p>
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            <div className="sc-card bg-white p-5">
+              <h3 className="font-semibold text-[var(--sc-blue-900)]">Quote A: network endpoints where needed</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Price the required room control, talkback and outdoor coverage. Include power, data cabling and software. SPON and FrontRow provide useful integrated-system comparisons; Algo, Axis, TOA and a supported ITC package should be scoped against the same requirements.</p>
+            </div>
+            <div className="sc-card bg-white p-5">
+              <h3 className="font-semibold text-[var(--sc-blue-900)]">Quote B: retain suitable existing speaker lines</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Ask what can be kept in the hall and outdoor areas while improving classroom control. An audio interface normally feeds an amplifier; it does not directly drive an existing 100V line. Reuse is worthwhile only if coverage, condition and the required zones remain suitable.</p>
+            </div>
+          </div>
+          <p className="mt-4 text-sm leading-relaxed text-[var(--sc-slate)]"><strong>Axis example:</strong> a 30-area site is not automatically too large for Edge’s 20-zone limit. Several areas may share one zone. If the brief needs more than 20 independently configured management zones, assess the appropriate management tier before quoting.<Sources ids={["axis-edge"]} /></p>
+          <details className="mt-5 rounded-xl border border-[var(--sc-border)] bg-white p-5">
+            <summary className="cursor-pointer rounded font-semibold text-[var(--sc-blue-900)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">The acceptance demonstration every proposal should pass</summary>
+            <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm leading-relaxed text-[var(--sc-slate)]">
+              <li>Have a school administrator change a normal-day timetable, add an exception and disable holiday bells without altering other schedules.</li>
+              <li>Page one room, a teaching block and the whole site; check speech clarity in the hall and outdoor areas with realistic background noise.</li>
+              <li>Make a classroom call, handle two simultaneous requests and show how priority messages override normal audio and are cancelled.</li>
+              <li>Test internet loss, local server loss, switch loss and power loss separately. Record what still works, what fails and how staff are alerted.</li>
+              <li>Restore a configuration backup and replace an endpoint. Confirm administrative access, update responsibility, spare-part lead times and support arrangements.</li>
+            </ol>
+          </details>
+          <p className="mt-5 text-sm leading-relaxed text-[var(--sc-slate)]">Use the <Link href="/guides/ip-paging-network-readiness" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">network readiness checklist</Link> alongside this brief. A PoE label, SIP logo or “emergency” button alone does not verify the complete design.</p>
+        </div>
+      </section>
+
+      <section id="questions" aria-labelledby="questions-title" className="sc-container max-w-4xl scroll-mt-24 py-12">
+        <SectionHeading id="questions-title" eyebrow="Buyer questions">
+          Choosing a school paging, bell or intercom system
+        </SectionHeading>
+        <div className="mt-6 divide-y divide-[var(--sc-border)]">
+          {faqs.map((faq) => (
+            <section id={faq.id} key={faq.id} aria-labelledby={`${faq.id}-heading`} className="scroll-mt-24 py-5">
+              <h3 id={`${faq.id}-heading`} className="text-lg font-semibold text-[var(--sc-blue-900)]">{faq.question}</h3>
+              <p className="mt-2 leading-relaxed text-[var(--sc-slate)]">{faq.answer}</p>
+              <Sources ids={faq.sources} />
+            </section>
+          ))}
+          <section className="py-5" aria-labelledby="funding-question">
+            <h3 id="funding-question" className="text-lg font-semibold text-[var(--sc-blue-900)]">Where should a NZ school check funding options?</h3>
+            <p className="mt-2 leading-relaxed text-[var(--sc-slate)]">Use the <Link href="/funding" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">school communications funding guide</Link> or the <Link href="/tools/funding-check" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">funding checker</Link> alongside a defined project scope. A recommendation in this comparison is not an eligibility decision, funding approval or promise that an entire project will be covered.</p>
+          </section>
+        </div>
+      </section>
+
+      <section aria-labelledby="next-step-title" className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-900)] py-12 text-white">
+        <div className="sc-container max-w-4xl text-center">
+          <h2 id="next-step-title" className="text-3xl font-bold">Define the requirement. Then choose the platform.</h2>
+          <p className="mx-auto mt-4 max-w-3xl leading-relaxed text-blue-100">Start with the areas to cover, the equipment worth retaining and what staff need to do every day. Use the same brief for each proposal so a lower price does not hide missing coverage, intercom, licences or support.</p>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <Link href="/pricing-tool" className="inline-flex items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[var(--sc-blue-900)]">Estimate project cost</Link>
+            <Link href="/contact" className="inline-flex items-center justify-center rounded-lg border border-white/40 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10">Discuss your system requirements</Link>
+            <Link href="/tools/funding-check" className="inline-flex items-center justify-center rounded-lg border border-white/40 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10">Check funding pathways</Link>
+          </div>
+        </div>
+      </section>
+
+      <section id="methodology" aria-labelledby="methodology-title" className="sc-container max-w-5xl scroll-mt-24 py-10">
+        <h2 id="methodology-title" className="text-xl font-bold text-[var(--sc-blue-900)]">How this comparison was prepared</h2>
+        <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">We prioritise manufacturer documentation for capability and lifecycle, then NZ distributors and integrators for the products and projects they publish. Local catalogue and case-study statements are attributed, not treated as independently measured market share. Unverified features are labelled for confirmation rather than marked absent.</p>
+        <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">The recommendations are editorial judgements for a typical school brief. This is not a hands-on group test, a review-score aggregate or a complete-system pricing study. SmartComms NZ is a T3 Labs research and enquiry site that can introduce projects to installation / technology partners; inclusion is not a manufacturer endorsement.</p>
+        <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">The main shortlist is deliberately compact. FrontRow and ITC receive full comparisons; 2N’s lifecycle distinction is explicit; AtlasIED and Bosch remain specialist considerations. Stock, warranties, software terms and exact product compatibility must be confirmed in a current written proposal.</p>
+        <details id="sources" className="mt-6 scroll-mt-24 rounded-xl border border-[var(--sc-border)] bg-white p-5 md:p-6">
+          <summary className="cursor-pointer rounded text-lg font-bold text-[var(--sc-blue-900)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">Sources and evidence register ({sourceEntries.length})</summary>
+          <p className="mt-4 text-xs leading-relaxed text-[var(--sc-slate)]">Reviewed {REVIEW_LABEL}. Numbered references throughout the guide open the original source. Manufacturer specifications establish capability; local listings establish a route for enquiry; historical installations do not establish current product availability.</p>
+          <ol className="mt-5 grid gap-3 md:grid-cols-2">
+            {sourceEntries.map(([id, source]) => (
+              <li key={id} className="rounded-lg border border-[var(--sc-border)] p-3">
+                <a href={source.href} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">[{sourceNumbers[id]}] {source.label}<span className="sr-only"> (opens in a new tab)</span></a>
+                <span className="mt-1 block text-xs text-[var(--sc-slate)]">{source.kind}</span>
+              </li>
+            ))}
+          </ol>
+        </details>
+      </section>
+      <JsonLd data={article} />
+      <JsonLd data={breadcrumbSchema([
         { name: "SmartComms NZ", url: site.url },
-        { name: "Compare systems", url: `${site.url}/compare` },
-      ])) }} />
-    </div>
+        { name: "Compare systems", url: pageUrl },
+      ])} />
+      <JsonLd data={shortlistSchema} />
+    </article>
   );
 }

@@ -30,7 +30,7 @@ export const CONTENT_META: Record<string, ContentMeta> = {
   "/funding": { published: "2026-09-11", reviewed: "2026-09-11" },
   "/tools": { published: "2026-09-11", reviewed: "2026-09-11" },
   "/tools/funding-check": { published: "2026-09-11", reviewed: "2026-09-13" },
-  "/compare": { published: "2026-09-12", reviewed: "2026-09-12" },
+  "/compare": { published: "2026-09-12", reviewed: "2026-09-15" },
   "/about": { published: "2026-09-05", reviewed: "2026-09-05" },
   "/about/methodology": { published: "2026-09-05", reviewed: "2026-09-05" },
   "/about/disclosure": { published: "2026-09-05", reviewed: "2026-09-05" },
