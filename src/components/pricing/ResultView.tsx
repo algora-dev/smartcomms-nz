@@ -14,10 +14,12 @@ export function ResultView({
   state,
   estimate,
   onEdit,
+  onRestart,
 }: {
   state: CalculatorState;
   estimate: EstimateResult;
   onEdit: () => void;
+  onRestart: () => void;
 }) {
   const [breakdownOpen, setBreakdownOpen] = useState(false);
   const [inquiry, setInquiry] = useState<InquiryMode | null>(null);
@@ -289,6 +291,13 @@ export function ResultView({
           className="text-sm font-medium text-[var(--sc-slate)] hover:text-[var(--sc-navy)] cursor-pointer"
         >
           ← Change my answers
+        </button>
+        <button
+          type="button"
+          onClick={onRestart}
+          className="text-sm font-medium text-[var(--sc-slate)] hover:text-[var(--sc-navy)] cursor-pointer"
+        >
+          ↻ Start again
         </button>
       </div>
 

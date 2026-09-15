@@ -124,6 +124,8 @@ export function PricingTool() {
   const [step, setStep] = useState(0); // 0 installation, 1 areas, 2 features, 3 result
   const [fineTuneOpen, setFineTuneOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [confirmRestart, setConfirmRestart] = useState(false);
+  const skipPersist = useRef(false);
 
   useEffect(() => {
     track("pricing_tool_started");
@@ -146,11 +148,50 @@ export function PricingTool() {
 
   useEffect(() => {
     if (!hydrated) return;
+    if (skipPersist.current) {
+      skipPersist.current = false;
+      return;
+    }
     const params = new URLSearchParams(window.location.search);
     params.set("cfg", encodeURIComponent(JSON.stringify(state)));
     const url = `${window.location.pathname}?${params.toString()}`;
     window.history.replaceState(null, "", url);
   }, [state, hydrated]);
+
+  // Wipe the tool back to a fresh start (used by the restart confirmation).
+  const restartTool = () => {
+    skipPersist.current = true;
+    setState(defaultState());
+    setStep(0);
+    setFineTuneOpen(false);
+    setConfirmRestart(false);
+    window.history.replaceState(null, "", window.location.pathname);
+  };
+
+  // While a result exists: warn before refresh/leaving, and intercept any
+  // "Get a ballpark price" CTA on the page so it asks before wiping.
+  useEffect(() => {
+    if (step !== 3) return;
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    const onDocClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      const anchor = target?.closest?.('a[href*="/pricing-tool"]') as HTMLAnchorElement | null;
+      if (anchor) {
+        e.preventDefault();
+        e.stopPropagation();
+        setConfirmRestart(true);
+      }
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+    document.addEventListener("click", onDocClick, true);
+    return () => {
+      window.removeEventListener("beforeunload", onBeforeUnload);
+      document.removeEventListener("click", onDocClick, true);
+    };
+  }, [step]);
 
   const estimate = useMemo(() => calculateEstimate(state), [state]);
 
@@ -445,7 +486,58 @@ export function PricingTool() {
       )}
 
       {/* RESULT */}
-      {step === 3 && <ResultView state={state} estimate={estimate} onEdit={() => setStep(1)} />}
+      {step === 3 && (
+        <ResultView
+          state={state}
+          estimate={estimate}
+          onEdit={() => setStep(1)}
+          onRestart={() => setConfirmRestart(true)}
+        />
+      )}
+
+      {/* Restart confirmation */}
+      {confirmRestart && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="restart-modal-title"
+          onClick={() => setConfirmRestart(false)}
+        >
+          <div
+            className="w-full max-w-md rounded-2xl border border-[var(--sc-border)] bg-white p-7 shadow-[0_24px_64px_rgba(11,45,91,0.25)]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 id="restart-modal-title" className="text-lg font-semibold text-[var(--sc-navy)]">
+              Start a new estimate?
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-[var(--sc-slate)]">
+              This will clear your current ballpark price. If you want to keep it,
+              download the PDF estimate first — you will not be able to recover it after
+              starting again.
+            </p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-end">
+              <button
+                type="button"
+                onClick={() => setConfirmRestart(false)}
+                className="w-full rounded-full border border-[var(--sc-navy)]/30 px-6 py-3 text-sm font-semibold text-[var(--sc-navy)] transition-all hover:bg-[var(--sc-blue-50)] sm:w-auto cursor-pointer"
+              >
+                Keep my estimate
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  track("pricing_restart_confirmed");
+                  restartTool();
+                }}
+                className="w-full rounded-full bg-[var(--sc-teal-strong)] px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-[var(--sc-teal-strong-hover)] hover:shadow-lg sm:w-auto cursor-pointer"
+              >
+                Start new estimate
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* sticky running range */}
       {showSticky && (
