@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
+import { verifySessionToken } from "./login/route";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
@@ -39,9 +40,10 @@ export default async function PricingLogsPage({
   searchParams: Promise<{ e?: string }>;
 }) {
   const { e } = await searchParams;
-  const expected = process.env.PRICING_LOGS_KEY;
   const jar = await cookies();
-  const ok = Boolean(expected) && jar.get("pricing_logs_auth")?.value === expected;
+  // HMAC-signed expiring session token (see login/route.ts); the master key
+  // is never stored in the cookie.
+  const ok = verifySessionToken(jar.get("pricing_logs_session")?.value);
 
   if (!ok) {
     return (
@@ -96,7 +98,14 @@ export default async function PricingLogsPage({
 
   return (
     <main className="sc-container py-12 max-w-4xl">
-      <h1 className="text-2xl font-bold">Pricing tool output log ({list.length} latest)</h1>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-2xl font-bold">Pricing tool output log ({list.length} latest)</h1>
+        <form action="/insights/pricing-logs/logout" method="post">
+          <button type="submit" className="rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-100">
+            Sign out
+          </button>
+        </form>
+      </div>
       <div className="mt-6 space-y-3">
         {list.length === 0 && <p className="text-sm">No completed outputs logged yet.</p>}
         {list.map((r) => {

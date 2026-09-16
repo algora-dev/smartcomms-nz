@@ -192,6 +192,12 @@ export function ProjectEnquiryModal({
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    // Strategically important routing answer: partner-sent prospects must not
+    // be silently treated as new leads, so project enquiries require it.
+    if (isProject && !existingProvider) {
+      setError("Please tell us whether you are already working with an installer, IT provider or consultant (or choose Not sure).");
+      return;
+    }
     setSending(true);
     setError(null);
     try {
@@ -356,7 +362,7 @@ export function ProjectEnquiryModal({
 
                   <fieldset className="rounded-xl border border-[var(--sc-border)] p-3">
                     <legend className="px-1 text-sm font-medium text-[var(--sc-charcoal)]">
-                      Are you already working with an installer, IT provider or consultant?
+                      Are you already working with an installer, IT provider or consultant? *{existingProvider ? "" : " (required)"}
                     </legend>
                     <div className="mt-1 flex flex-wrap gap-3">
                       {EXISTING_PROVIDER_OPTIONS.map((o) => (

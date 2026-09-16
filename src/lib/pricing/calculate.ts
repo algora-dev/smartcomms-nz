@@ -29,11 +29,7 @@ function subtotalForTier(state: CalculatorState, tier: Tier) {
 
   // Headend / platform (flat across tiers). Model assumption: a combined
   // platform allowance - other architectures distribute these costs differently.
-  add(
-    "Central paging / control platform",
-    c.headendPrice,
-    "Paging station, server, software, remote programming and commissioning (combined platform allowance - model assumption)"
-  );
+    add("Central paging / control platform", c.headendPrice, "Combined platform allowance (model assumption) - paging station, server, software, remote programming and commissioning. Equivalent functionality may be centralised or distributed depending on the architecture.");
 
   // Areas
   const a = state.areas;
@@ -80,13 +76,13 @@ function subtotalForTier(state: CalculatorState, tier: Tier) {
     add(
       `Two-way room call buttons (${twoWayRooms})`,
       twoWayRooms * unitPrice(c.intercoms.twoWayButton.priceA, c.intercoms.twoWayButton.priceB, tier),
-      "Push-button calling using the speaker's built-in microphone (model assumption)"
+      "Room-call provision using a compatible call button and two-way audio endpoint/interface (model assumption)"
     );
   }
 
   // Fire interface (model assumption - a combined interface allowance)
   if (resolveFire(state)) {
-    add("Fire alarm / lockdown / EVAC interface", c.fireInterfacePrice, "Model assumption - combined interface allowance");
+    add("Fire alarm / lockdown / EVAC interface", c.fireInterfacePrice, "Emergency-system interface allowance (model assumption; implementation varies by platform)");
   }
 
   // Additional control stations
@@ -154,8 +150,7 @@ export function calculateEstimate(state: CalculatorState): EstimateResult {
 
   const endpoints = countEndpoints(state);
   const monitoringAnnual = state.fineTune.monitoring ? c.monitoringAnnualPrice : null;
-  const monitoringIncludedMonths =
-    state.tier === "A" ? c.monitoringFreeMonthsTierA : 0;
+  const monitoringIncludedMonths = 0;
 
   // Breakdown shown under the primary tier basis (B for unsure low-side)
   const { lines } = subtotalForTier(state, state.tier === "unsure" ? "B" : state.tier);

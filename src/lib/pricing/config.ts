@@ -12,8 +12,7 @@ export const pricingConfig = {
   headendPrice: 5995,
   estimateLowMultiplier,
   estimateHighMultiplier,
-  monitoringAnnualPrice: 650,
-  monitoringFreeMonthsTierA: 24,
+  monitoringAnnualPrice: 650, // optional service: indicative SmartComms model assumption, not a market-wide package
   fireInterfacePrice: 1895,
   endpointWarningThreshold: 30,
   /**

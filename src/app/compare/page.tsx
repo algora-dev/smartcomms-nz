@@ -7,10 +7,9 @@ import { site } from "@/lib/site";
 import { ProjectHelpLauncher } from "@/components/enquiry/ProjectHelpLauncher";
 
 /**
- * SmartComms NZ /compare — source review: 15 September 2026.
- * Server component: all comparisons, details and source links render in HTML.
- * No package, layout, CSS or client-state dependency has been added.
- * Review date lives in lib/content-meta (single source of truth).
+ * SmartComms NZ /compare — server component: all comparisons, details and
+ * source links render in HTML. Review date lives in lib/content-meta
+ * (single source of truth).
  * Editorial fit is not a lab rating or a verified complete-system price ranking.
  */
 const REVIEW_DATE = reviewedDate("/compare");

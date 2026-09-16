@@ -3,7 +3,7 @@ import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
 import { PricingTool } from "@/components/pricing/PricingTool";
 import { presetSummaries } from "@/lib/pricing/presets";
-import { formatNZD, pricingConfig } from "@/lib/pricing/config";
+import { pricingConfig } from "@/lib/pricing/config";
 
 export const metadata: Metadata = buildMetadata({
   title: "PA & Intercom System Cost Calculator NZ",
@@ -59,7 +59,7 @@ export default function PricingToolPage() {
         <div className="sc-container max-w-3xl">
           <h2 className="text-2xl font-bold text-[var(--sc-navy)]">Indicative installed system examples in New Zealand</h2>
           <p className="mt-3 text-sm text-[var(--sc-slate)]">
-            The main cost drivers are the number of areas to cover, speaker quantities, existing network cabling and the emergency/intercom functionality required. Every example includes the central platform allowance of {formatNZD(pricingConfig.headendPrice)} ex GST. These examples use the same pricing config as the calculator and are not presented as market averages.
+            The main cost drivers are the number of areas to cover, speaker quantities, existing network cabling and the emergency/intercom functionality required. Every example includes a central control/platform allowance for the modelled system (a SmartComms planning assumption; other architectures distribute these costs differently). These examples use the same pricing config as the calculator and are not presented as market averages.
           </p>
           <div className="mt-6 grid gap-4">
             {examples.map((e) => (

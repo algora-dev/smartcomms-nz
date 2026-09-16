@@ -17,10 +17,9 @@ export default function PrivacyPage() {
       </p>
       <h2>Information you may provide</h2>
       <p>
-        Enquiry forms may collect your name, organisation or school, email address, phone number, town/region, project
-        details, existing provider relationships, brand preferences and any plans, images or documents you choose to
-        attach. Name, organisation, email, town/region and (for general messages) your message are required so we can
-        respond; all other fields are optional.
+        For project enquiries, name, organisation, email and town/region are required. For a general message, name,
+        email and the message are required. Other fields — including phone, brand preference and attachments — are
+        optional unless the form specifically says otherwise.
       </p>
       <h2>How enquiries are handled</h2>
       <p>

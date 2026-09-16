@@ -19,7 +19,7 @@ const TIER_CARDS: { value: InstallationType; title: string; desc: string }[] = [
   {
     value: "A",
     title: "New build / major construction",
-    desc: "The system is being installed while the building is being constructed or substantially refurbished. Site-wide cabling is installed by a Ministry of Education approved ICT contractor and is excluded from your estimate.",
+    desc: "The system is being installed during construction or major refurbishment. Site-wide structured cabling is excluded from this communications estimate and should be included in the wider ICT/electrical project scope.",
   },
   {
     value: "B",
@@ -29,7 +29,7 @@ const TIER_CARDS: { value: InstallationType; title: string; desc: string }[] = [
   {
     value: "C",
     title: "Existing site, new cabling required",
-    desc: "Site-wide cabling is installed by a Ministry of Education approved ICT contractor and is excluded from your estimate.",
+    desc: "Suitable data cabling is not available at the required device locations. Site-wide structured cabling is excluded from this communications estimate and needs to be scoped separately by an appropriate ICT/cabling contractor.",
   },
   {
     value: "unsure",
@@ -454,8 +454,7 @@ export function PricingTool() {
                     className="h-4 w-4 accent-[var(--sc-teal)] cursor-pointer"
                   />
                   <span className="text-sm text-[var(--sc-charcoal)]">
-                    Add off-site monitoring ({formatNZD(pricingConfig.monitoringAnnualPrice)}/year)
-                    {state.tier === "A" && <span className="ml-1 font-medium text-[var(--sc-teal)]">first 24 months included</span>}
+                    Add off-site monitoring ({formatNZD(pricingConfig.monitoringAnnualPrice)}/year, indicative model assumption)
                   </span>
                 </label>
               </div>

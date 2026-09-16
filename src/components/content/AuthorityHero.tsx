@@ -8,6 +8,7 @@ export default function AuthorityHero({
   description,
   tags,
   primaryCta,
+  primaryCtaNode,
   secondaryCta,
   reviewed,
   note,
@@ -18,6 +19,8 @@ export default function AuthorityHero({
   description: string;
   tags: string[];
   primaryCta: { label: string; href: string };
+  /** Optional custom CTA node (e.g. a modal launcher) that overrides the plain Link. */
+  primaryCtaNode?: React.ReactNode;
   secondaryCta?: { label: string; href: string };
   reviewed: string;
   note?: string;
@@ -62,9 +65,11 @@ export default function AuthorityHero({
           ))}
         </div>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link href={primaryCta.href} className="sc-btn-primary">
-            {primaryCta.label}
-          </Link>
+          {primaryCtaNode ?? (
+            <Link href={primaryCta.href} className="sc-btn-primary">
+              {primaryCta.label}
+            </Link>
+          )}
           {secondaryCta ? (
             <Link href={secondaryCta.href} className="sc-btn-secondary">
               {secondaryCta.label}

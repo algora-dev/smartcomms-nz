@@ -125,12 +125,9 @@ export function ResultView({
 
     if (estimate.monitoringAnnual !== null) {
       doc.setFont("helvetica", "bold");
-      doc.text("Recurring: off-site monitoring", 55, y);
+      doc.text("Recurring: off-site monitoring (indicative model assumption)", 55, y);
       doc.setFont("helvetica", "normal");
-      const mon = estimate.monitoringIncludedMonths
-        ? `Included for the first ${estimate.monitoringIncludedMonths} months, then ${formatNZD(estimate.monitoringAnnual)}/year`
-        : `${formatNZD(estimate.monitoringAnnual)}/year`;
-      doc.text(mon, W - 55, y, { align: "right" });
+      doc.text(`${formatNZD(estimate.monitoringAnnual)}/year`, W - 55, y, { align: "right" });
       y += 22;
     }
 
@@ -161,7 +158,7 @@ export function ResultView({
     doc.setFont("helvetica", "normal");
     doc.setFontSize(9);
     doc.setTextColor(90);
-    const lines = doc.splitTextToSize(disclaimer + " This document is an indicative estimate only, not a formal quote. For an accurate quote, contact SmartComms NZ.", W - 100);
+    const lines = doc.splitTextToSize(disclaimer + " This document is an indicative estimate from a SmartComms planning model, not a formal quote. For a formal quote, SmartComms can review the project information and suggest an appropriate provider from its selected network.", W - 100);
     if (y + lines.length * 11 > 780) { doc.addPage(); y = 60; }
     doc.text(lines, 50, y);
 
@@ -177,7 +174,10 @@ export function ResultView({
           <span className="ml-2 align-middle text-sm font-normal text-[var(--sc-slate)]">ex GST</span>
         </div>
         <p className="mt-3 text-sm text-[var(--sc-slate)]">
-          This is a ballpark estimate based on standard installation assumptions. A site review can confirm the final equipment quantities, cabling requirements and installed price.
+          SmartComms uses a range-based planning model to give a realistic order-of-magnitude estimate for the
+          configuration you entered. Actual product, installation and site costs can sit above or below the range
+          depending on the platform, existing infrastructure, supplier and project conditions. A site review can
+          confirm the final equipment quantities, cabling requirements and installed price.
         </p>
         <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <button
@@ -244,9 +244,7 @@ export function ResultView({
         <div className="mt-6 rounded-xl border border-[var(--sc-teal)]/30 bg-[var(--sc-blue-50)] p-4">
           <div className="text-sm font-semibold text-[var(--sc-navy)]">Off-site monitoring</div>
           <div className="text-sm text-[var(--sc-slate)]">
-            {estimate.monitoringIncludedMonths
-              ? `Included for the first ${estimate.monitoringIncludedMonths} months, then ${formatNZD(estimate.monitoringAnnual)}/year`
-              : `${formatNZD(estimate.monitoringAnnual)}/year`}
+            {formatNZD(estimate.monitoringAnnual)}/year (indicative SmartComms model assumption, not a market-wide package)
             <span className="block text-xs">Recurring cost, separate from the installed estimate above.</span>
           </div>
         </div>
@@ -361,8 +359,21 @@ export function ResultView({
         open={inquiry !== null}
         mode={inquiry ?? "quote"}
         onClose={() => setInquiry(null)}
-        estimateSummary={`${formatNZD(estimate.low)} - ${formatNZD(estimate.high)}${rangeSuffix}`}
+        estimateSummary={`${formatNZD(estimate.low)} - ${formatNZD(estimate.high)}${rangeSuffix} ex GST`}
         estimateLink={typeof window !== "undefined" ? window.location.href : undefined}
+        context={{
+          "Site situation": tierText,
+          "Feature package": packageLabel[state.featurePackage],
+          "Standard indoor rooms": String(a.standardIndoor),
+          "Large indoor spaces": String(a.largeIndoor),
+          "Outdoor areas": String(a.outdoor),
+          "Large outdoor / sports areas": String(a.largeOutdoor),
+          "Entry intercoms": `${a.entry}${a.entry ? ` (${state.fineTune.entryIntercom})` : ""}`,
+          "Two-way call buttons": String(estimate.twoWayRooms),
+          "Off-site monitoring": state.fineTune.monitoring ? "Yes" : "No",
+          "Fire / EVAC interface": estimate.fireInterface ? "Yes" : "No",
+          "Modelled endpoints": String(estimate.endpoints),
+        }}
       />
     </div>
   );

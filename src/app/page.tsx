@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SmartcommsHero } from "@/components/home/smartcomms-hero";
 import { Reveal } from "@/components/home/reveal";
 import { TrackedLink } from "@/components/tracked-link";
+import { ProjectHelpLauncher } from "@/components/enquiry/ProjectHelpLauncher";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -199,7 +200,12 @@ export default function HomePage() {
           <div className="mt-8 flex flex-wrap gap-4">
             <Link href="/systems" className="sc-btn-secondary">Compare system architectures</Link>
             <Link href="/guides" className="sc-btn-secondary">Browse practical guides</Link>
-            <Link href="/contact" className="sc-btn-primary">Tell us about your project</Link>
+            <ProjectHelpLauncher
+              mode="project_help"
+              sourceTopic="homepage_bottom_cta"
+              buttonLabel="Tell us about your project"
+              className="sc-btn-primary"
+            />
           </div>
         </Reveal>
       </section>

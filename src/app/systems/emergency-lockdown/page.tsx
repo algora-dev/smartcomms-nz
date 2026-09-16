@@ -3,6 +3,7 @@ import Link from "next/link";
 import AuthorityHero from "@/components/content/AuthorityHero";
 import AtAGlance from "@/components/content/AtAGlance";
 import ContinuePlanning from "@/components/content/ContinuePlanning";
+import { ProjectHelpLauncher } from "@/components/enquiry/ProjectHelpLauncher";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
@@ -23,6 +24,14 @@ export default function EmergencyLockdownPage() {
         description="A school emergency communication system needs to deliver clear, fast and intelligible messages to the right areas during lockdowns, evacuations and other incidents. This guide explains the role of paging, zoning, prerecorded messages, live announcements, outdoor coverage and system resilience."
         tags={["Lockdown announcements", "Emergency paging", "Evacuation messages", "Safety warnings", "Site-wide coverage"]}
         primaryCta={{ label: "Discuss the technical scope", href: "/contact" }}
+        primaryCtaNode={
+          <ProjectHelpLauncher
+            mode="system_selection"
+            sourceTopic="emergency_lockdown"
+            buttonLabel="Discuss the technical scope"
+            className="sc-btn-primary"
+          />
+        }
         secondaryCta={{ label: "Check school funding", href: "/tools/funding-check" }}
         reviewed={reviewedLabel("/systems/emergency-lockdown")}
         note="Planning guidance, not procedure advice"

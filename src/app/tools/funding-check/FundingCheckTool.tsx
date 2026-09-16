@@ -10,9 +10,8 @@
 import { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
-import { attributionForSubmission } from "@/lib/attribution";
 import { ToolCrossSell } from "@/components/tool-cross-sell";
-import { InquiryModal } from "@/components/pricing/InquiryModal";
+import { ProjectEnquiryModal, type EnquiryMode } from "@/components/enquiry/ProjectEnquiryModal";
 import {
   CABLING_STATUS,
   CABLING_TOOLTIP,
@@ -27,21 +26,22 @@ import {
 } from "@/lib/funding-check/config";
 import {
   runAssessment,
+  answersToSummary,
   type AssessmentAnswers,
   type AssessmentResult,
+  type PathwayKind,
 } from "@/lib/funding-check/engine";
 
+/** Single source of truth for how a pathway is labelled everywhere it is serialised or displayed. */
+const PATHWAY_SUMMARY_LABEL: Record<PathwayKind, string> = {
+  five_ya: "5YA / 10YPP capital pathway",
+  maintenance_only: "Maintenance-only — not a current 5YA pathway",
+  state_integrated: "State-integrated property pathway",
+  private: "Private-school capital / other funding",
+  new_build: "New build / major capital project",
+  unknown: "School type unknown",
+};
 
-interface LeadForm {
-  name: string;
-  school: string;
-  email: string;
-  phone: string;
-  townRegion: string;
-  contactMethod: "email" | "phone";
-  cta: "review" | "quote";
-  companyWebsite?: string;
-}
 
 function InfoDot({ text }: { text: string }) {
   return (
@@ -106,6 +106,16 @@ function CheckLine({ children }: { children: ReactNode }) {
   );
 }
 
+function fundingContext(answers: AssessmentAnswers, result: AssessmentResult): Record<string, string> {
+  const summary = answersToSummary(answers);
+  return {
+    "Funding pathway": PATHWAY_SUMMARY_LABEL[result.pathway],
+    "Funding case": `${result.caseTier} (${result.caseScore} categories)`,
+    "Strong components": result.components.strong.join("; ") || "(none)",
+    ...Object.fromEntries(Object.entries(summary).map(([k, v]) => [k, v])),
+  };
+}
+
 export function FundingCheckTool() {
   const [screen, setScreen] = useState(0);
   const [answers, setAnswers] = useState<AssessmentAnswers>({
@@ -113,20 +123,7 @@ export function FundingCheckTool() {
     features: [],
   });
   const [result, setResult] = useState<AssessmentResult | null>(null);
-  const [connectOpen, setConnectOpen] = useState(false);
-  const [showLead, setShowLead] = useState(false);
-  const [lead, setLead] = useState<LeadForm>({
-    name: "",
-    school: "",
-    email: "",
-    phone: "",
-    townRegion: "",
-    contactMethod: "email",
-    cta: "review",
-  });
-  const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState(false);
-  const [sendError, setSendError] = useState<string | null>(null);
+  const [enquiry, setEnquiry] = useState<EnquiryMode | null>(null);
 
   useEffect(() => {
     track("funding_tool_started");
@@ -157,41 +154,6 @@ export function FundingCheckTool() {
       pathway: assessment.pathway,
     });
     if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  async function submitLead() {
-    if (!result) return;
-    setSending(true);
-    setSendError(null);
-    try {
-      const response = await fetch("/api/funding-check/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          answers,
-          lead,
-          source: { url: window.location.href, referrer: document.referrer },
-          attribution: attributionForSubmission(),
-        }),
-      });
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok || !data.ok) throw new Error(data.error || "Submission failed");
-      setSent(true);
-      track("funding_help_submitted", {
-        cta: lead.cta,
-        pathway: result.pathway,
-        case_category: result.caseTier,
-      });
-    } catch (error) {
-      track("project_help_failed", { enquiry_type: "funding_check", cta: lead.cta });
-      setSendError(
-        error instanceof Error && error.message && !error.message.toLowerCase().includes("failed")
-          ? error.message
-          : "We couldn't submit your request. Please try the form again in a few minutes.",
-      );
-    } finally {
-      setSending(false);
-    }
   }
 
   const isNewBuild = answers.projectStatus === "new_build";
@@ -235,13 +197,12 @@ export function FundingCheckTool() {
     return (
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-[var(--sc-blue-900)]">{result.headline}</h1>
-        <InquiryModal
-          open={connectOpen}
-          mode="connect"
-          onClose={() => setConnectOpen(false)}
-          summaryLabel="Your funding result"
-          estimateSummary={`Funding case: ${result.caseTier === "strong" ? "Strong" : result.caseTier === "moderate" ? "Potential" : "Needs supporting evidence"}; Pathway: ${result.pathway === "five_ya" ? "5-Year property plan" : result.pathway === "state_integrated" ? "State integrated" : result.pathway === "private" ? "Private" : result.pathway === "unknown" ? "School type unknown" : "New build"}`}
-          estimateLink={typeof window !== "undefined" ? window.location.href : undefined}
+        <ProjectEnquiryModal
+          open={enquiry !== null}
+          mode={enquiry ?? "funding_help"}
+          onClose={() => setEnquiry(null)}
+          sourceTopic="funding_check"
+          context={fundingContext(answers, result)}
         />
 
         <div className="sc-card mt-6 p-6">
@@ -315,24 +276,13 @@ export function FundingCheckTool() {
             The next review can also confirm {result.confirmationsNeeded.slice(0, 2).join(" and ").toLowerCase()}.
           </p>
 
-          {!showLead && !sent && (
+          {!enquiry && (
             <div className="mt-4 flex flex-wrap gap-4">
-              <button
-                type="button"
-                className="sc-btn-secondary"
-                onClick={() => {
-                  setConnectOpen(true);
-                  track("funding_connect_opened", { pathway: result.pathway });
-                }}
-              >
-                Want more information?
-              </button>
               <button
                 type="button"
                 className="sc-btn-primary"
                 onClick={() => {
-                  setLead((current) => ({ ...current, cta: "review" }));
-                  setShowLead(true);
+                  setEnquiry("funding_help");
                   track("funding_help_opened", { cta: "review", pathway: result.pathway });
                 }}
               >
@@ -352,8 +302,7 @@ export function FundingCheckTool() {
                 type="button"
                 className="sc-btn-secondary"
                 onClick={() => {
-                  setLead((current) => ({ ...current, cta: "quote" }));
-                  setShowLead(true);
+                  setEnquiry("quote_help");
                   track("funding_help_opened", { cta: "quote", pathway: result.pathway });
                 }}
               >
@@ -361,114 +310,7 @@ export function FundingCheckTool() {
               </button>
             </div>
           )}
-
-          {showLead && !sent && (
-            <form
-              className="mt-4 grid gap-4 sm:grid-cols-2"
-              onSubmit={(event) => {
-                event.preventDefault();
-                void submitLead();
-              }}
-            >
-              {/* Honeypot: real users never see this field. */}
-              <div className="hidden" aria-hidden="true">
-                <label>
-                  Website
-                  <input
-                    tabIndex={-1}
-                    autoComplete="off"
-                    value={lead.companyWebsite ?? ""}
-                    onChange={(event) => setLead({ ...lead, companyWebsite: event.target.value })}
-                  />
-                </label>
-              </div>
-              <label className="text-sm font-medium text-[var(--sc-slate)]">
-                Your name
-                <input
-                  required
-                  value={lead.name}
-                  onChange={(event) => setLead({ ...lead, name: event.target.value })}
-                  className="mt-1 w-full rounded-lg border border-[var(--sc-grey)] px-3 py-2 text-[var(--sc-charcoal)] focus:border-[var(--sc-accent)] focus:outline-none"
-                />
-              </label>
-              <label className="text-sm font-medium text-[var(--sc-slate)]">
-                School
-                <input
-                  required
-                  value={lead.school}
-                  onChange={(event) => setLead({ ...lead, school: event.target.value })}
-                  className="mt-1 w-full rounded-lg border border-[var(--sc-grey)] px-3 py-2 text-[var(--sc-charcoal)] focus:border-[var(--sc-accent)] focus:outline-none"
-                />
-              </label>
-              <label className="text-sm font-medium text-[var(--sc-slate)]">
-                Email
-                <input
-                  required
-                  type="email"
-                  value={lead.email}
-                  onChange={(event) => setLead({ ...lead, email: event.target.value })}
-                  className="mt-1 w-full rounded-lg border border-[var(--sc-grey)] px-3 py-2 text-[var(--sc-charcoal)] focus:border-[var(--sc-accent)] focus:outline-none"
-                />
-              </label>
-              <label className="text-sm font-medium text-[var(--sc-slate)]">
-                Town / region
-                <input
-                  required
-                  value={lead.townRegion}
-                  onChange={(event) => setLead({ ...lead, townRegion: event.target.value })}
-                  className="mt-1 w-full rounded-lg border border-[var(--sc-grey)] px-3 py-2 text-[var(--sc-charcoal)] focus:border-[var(--sc-accent)] focus:outline-none"
-                />
-              </label>
-              <label className="text-sm font-medium text-[var(--sc-slate)]">
-                Phone {lead.contactMethod === "phone" ? "" : "(optional)"}
-                <input
-                  type="tel"
-                  required={lead.contactMethod === "phone"}
-                  value={lead.phone}
-                  onChange={(event) => setLead({ ...lead, phone: event.target.value })}
-                  className="mt-1 w-full rounded-lg border border-[var(--sc-grey)] px-3 py-2 text-[var(--sc-charcoal)] focus:border-[var(--sc-accent)] focus:outline-none"
-                />
-                {lead.contactMethod === "phone" && !lead.phone.trim() && (
-                  <span className="mt-1 block text-xs text-red-600">
-                    Please add a phone number so we can call you back.
-                  </span>
-                )}
-              </label>
-              <label className="text-sm font-medium text-[var(--sc-slate)]">
-                Preferred contact method
-                <select
-                  value={lead.contactMethod}
-                  onChange={(event) => setLead({ ...lead, contactMethod: event.target.value as "email" | "phone" })}
-                  className="mt-1 w-full rounded-lg border border-[var(--sc-grey)] px-3 py-2 text-[var(--sc-charcoal)] focus:border-[var(--sc-accent)] focus:outline-none"
-                >
-                  <option value="email">Email</option>
-                  <option value="phone">Phone</option>
-                </select>
-              </label>
-              <div className="sm:col-span-2">
-                {lead.cta === "review" && (
-                  <p className="mb-3 text-xs leading-relaxed text-[var(--sc-slate)]">
-                    Send us your result and we can suggest an appropriate next step - or a suitable provider from our
-                    selected New Zealand partner network who can review the existing system, confirm scope and prepare
-                    an indicative project budget.
-                  </p>
-                )}
-                <p className="text-xs text-[var(--sc-slate)]">Your funding-check answers are attached automatically. Your enquiry goes to SmartComms / T3 Labs first; a provider receives your contact details only if you agree to a direct introduction. <Link href="/privacy" className="underline">Privacy</Link>.</p>
-                <button type="submit" disabled={sending} className="sc-btn-primary mt-3 disabled:opacity-50">
-                  {sending ? "Sending..." : "Send my request"}
-                </button>
-                {sendError && <p className="mt-2 text-sm text-red-600">{sendError}</p>}
-              </div>
-            </form>
-          )}
-
-          {sent && (
-            <p className="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-emerald-700">
-              Thanks - your request has been sent. We&apos;ll review the information you supplied and work out the most
-              useful next step. Where a specialist provider is appropriate, we can suggest someone from our selected
-              New Zealand partner network.
-            </p>
-          )}
+          <p className="mt-3 text-xs text-[var(--sc-slate)]">Your funding-check answers are attached automatically. Your enquiry goes to SmartComms / T3 Labs first; a provider receives your contact details only if you agree to a direct introduction. <Link href="/privacy" className="underline">Privacy</Link>.</p>
         </div>
 
         <p className="mt-6 rounded-lg border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-4 text-xs leading-relaxed text-[var(--sc-slate)]">
@@ -480,10 +322,8 @@ export function FundingCheckTool() {
           className="sc-btn-secondary mt-6"
           onClick={() => {
             setResult(null);
-            setSent(false);
-            setShowLead(false);
+            setEnquiry(null);
             setAnswers({ reasons: [], features: [] });
-            setLead({ name: "", school: "", email: "", phone: "", townRegion: "", contactMethod: "email", cta: "review" });
             setScreen(0);
           }}
         >

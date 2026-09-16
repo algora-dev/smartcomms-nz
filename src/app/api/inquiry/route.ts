@@ -10,6 +10,13 @@ const MAX_ATTACHMENT_BYTES = 8 * 1024 * 1024; // per file
 const MAX_TOTAL_ATTACHMENT_BYTES = 20 * 1024 * 1024;
 const MAX_FILES = 5;
 
+/**
+ * Abuse protection note: durable per-IP rate limiting for this route is a
+ * deployment-layer control (Vercel Firewall / WAF or an edge rate limiter),
+ * because in-memory limits do not survive across serverless instances.
+ * The honeypot + field validation below are the in-app baseline only.
+ */
+
 const ALLOWED_EXTENSIONS = new Set(["pdf", "png", "jpg", "jpeg", "webp", "dwg", "heic"]);
 
 const HELP_LABELS: Record<string, string> = {
@@ -223,8 +230,9 @@ export async function POST(req: Request) {
       attribution.length ? attribution.map(([k, v]) => `- ${k}: ${v}`).join("\n") : "(none captured)",
       "",
       "=== ROUTING STATUS ===",
-      "T3 review required — NOT automatically forwarded to any partner.",
-      "Provider contact details are shared with the customer only after they agree to a direct introduction.",
+      "T3 review required — not automatically forwarded.",
+      "You may recommend a provider and send the customer the provider's public contact details.",
+      "Do NOT share the customer's personal/contact/project information with any provider unless the customer agrees to a direct introduction.",
     ].filter((line) => line !== null).join("\n");
 
     const sendResult = await resend.emails.send({
