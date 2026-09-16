@@ -128,6 +128,7 @@ export function PricingTool() {
   const [confirmRestart, setConfirmRestart] = useState(false);
   const [industry, setIndustry] = useState<IndustryContext>();
   const skipPersist = useRef(false);
+  const userTouchedRef = useRef(false);
 
   useEffect(() => {
     track("pricing_tool_started");
@@ -155,6 +156,10 @@ export function PricingTool() {
       skipPersist.current = false;
       return;
     }
+    // Don't write cfg into the URL until the user has actually changed
+    // something: a default cfg blob on arrival gets picked up on refresh and
+    // re-opens the tool straight at the result screen mid-page.
+    if (!userTouchedRef.current) return;
     const params = new URLSearchParams(window.location.search);
     params.set("cfg", encodeURIComponent(JSON.stringify(state)));
     const url = `${window.location.pathname}?${params.toString()}`;
@@ -266,9 +271,14 @@ export function PricingTool() {
     }).catch(() => { /* silent: never surface to the user */ });
   }, [step, state, estimate]);
 
-  const patch = (p: Partial<CalculatorState>) => setState((s) => ({ ...s, ...p }));
-  const patchArea = (key: AreaKey, n: number) =>
+  const patch = (p: Partial<CalculatorState>) => {
+    userTouchedRef.current = true;
+    setState((s) => ({ ...s, ...p }));
+  };
+  const patchArea = (key: AreaKey, n: number) => {
+    userTouchedRef.current = true;
     setState((s) => ({ ...s, areas: { ...s.areas, [key]: n } }));
+  };
 
   const totalAreas =
     state.areas.standardIndoor + state.areas.largeIndoor + state.areas.outdoor +
