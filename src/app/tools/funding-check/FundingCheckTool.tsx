@@ -296,21 +296,8 @@ export function FundingCheckTool() {
           </div>
         )}
 
-        <ToolCrossSell
-          variant="funding-to-pricing"
-          estimateLow={hasCarriedEstimate ? carriedEstimateLow : undefined}
-          estimateHigh={hasCarriedEstimate ? carriedEstimateHigh : undefined}
-          fundingResult={`${result.pathway}:${result.caseTier}`}
-          financePrimary={
-            result.pathway === "maintenance_only" ||
-            result.pathway === "private" ||
-            result.pathway === "unknown" ||
-            result.caseTier === "weak"
-          }
-        />
-
         <div className="mt-8 sc-card p-6">
-          <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">{RESULT_COPY.ctaPrimary}</h2>
+          <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">Find out more about your project</h2>
           <p className="mt-2 text-[var(--sc-slate)]">{RESULT_COPY.ctaPrimaryBody}</p>
           <p className="mt-3 text-sm text-[var(--sc-slate)]">
             The next review can also confirm {result.confirmationsNeeded.slice(0, 2).join(" and ").toLowerCase()}.
@@ -327,20 +314,10 @@ export function FundingCheckTool() {
                 className="sc-btn-primary"
                 onClick={() => {
                   setEnquiry("funding_help");
-                  track("funding_help_opened", { cta: "review", pathway: result.pathway });
+                  track("funding_help_opened", { cta: "find_out_more", pathway: result.pathway });
                 }}
               >
-                {result.pathway === "state_integrated"
-                  ? RESULT_COPY.stateIntegrated.cta
-                  : result.pathway === "private"
-                    ? RESULT_COPY.private.cta
-                    : result.pathway === "new_build"
-                      ? RESULT_COPY.newBuild.cta
-                      : result.pathway === "unknown"
-                        ? RESULT_COPY.unknownSchool.cta
-                        : result.pathway === "maintenance_only"
-                          ? RESULT_COPY.maintenanceOnly.cta
-                          : RESULT_COPY.ctaPrimary}
+                Find out more
               </button>
               <button
                 type="button"
@@ -356,6 +333,19 @@ export function FundingCheckTool() {
           )}
           <p className="mt-3 text-xs text-[var(--sc-slate)]">Your funding-check answers are attached automatically so the SmartComms team can understand the context. Your enquiry stays with SmartComms; we do not send your details or funding-check answers to the providers we recommend. <Link href="/privacy" className="underline">Privacy</Link>.</p>
         </div>
+
+        <ToolCrossSell
+          variant="funding-to-pricing"
+          estimateLow={hasCarriedEstimate ? carriedEstimateLow : undefined}
+          estimateHigh={hasCarriedEstimate ? carriedEstimateHigh : undefined}
+          fundingResult={`${result.pathway}:${result.caseTier}`}
+          financePrimary={
+            result.pathway === "maintenance_only" ||
+            result.pathway === "private" ||
+            result.pathway === "unknown" ||
+            result.caseTier === "weak"
+          }
+        />
 
         <p className="mt-6 rounded-lg border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-4 text-xs leading-relaxed text-[var(--sc-slate)]">
           {DISCLAIMER}
