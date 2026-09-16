@@ -214,6 +214,14 @@ export default function FundingPage() {
           </div>
         </div>
 
+        <div className="mt-6 rounded-2xl border border-[var(--sc-border)] bg-white p-6 not-prose">
+          <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">What if the funding pathway does not cover the project?</h2>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">
+            Equipment finance or leasing is a separate commercial option and does not replace Ministry funding approval. It may still be worth exploring where a project cannot be paid entirely from available capital funding or the organisation wants to spread the cost.
+          </p>
+          <Link href="/financing" className="sc-btn-secondary mt-4 inline-flex">Explore finance / leasing</Link>
+        </div>
+
         <div className="mt-8 rounded-xl border border-[var(--sc-border)] bg-white p-5 text-sm text-[var(--sc-slate)] not-prose">
           SmartComms NZ is not a government agency. Funding information is general guidance based on publicly available Ministry information and should be confirmed against the school&#39;s actual property circumstances and current Ministry process.
         </div>

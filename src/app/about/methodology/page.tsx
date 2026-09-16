@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Research Methodology",
   description:
-    "How SmartComms NZ researches, verifies and labels technical, funding and indicative pricing information.",
+    "How SmartComms NZ researches, verifies and labels technical, funding, finance and indicative pricing information.",
   path: "/about/methodology",
 });
 
@@ -36,6 +36,10 @@ export default function MethodologyPage() {
       <h2>Funding methodology</h2>
       <p>
         The funding checker identifies whether the nature of a proposed communications project appears consistent with publicly available Ministry guidance. It does not determine eligibility or approval. Final funding decisions remain with the school and the relevant property/funding process.
+      </p>
+      <h2>Finance-check methodology</h2>
+      <p>
+        The finance checker is a conversation tool, not a credit or affordability assessment. It uses the organisation type, rough project value, stated payment range and possible upfront contribution to decide what kind of finance conversation may be useful. Every result can still lead to a specialist discussion. SmartComms does not provide finance, quote rates or decide whether an application will be approved.
       </p>
       <h2>Corrections</h2>
       <p>

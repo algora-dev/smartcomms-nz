@@ -295,7 +295,7 @@ export function ResultView({
         )}
       </div>
 
-      <ToolCrossSell variant="pricing-to-funding" />
+      <ToolCrossSell variant="pricing-to-funding" estimateLow={estimate.low} estimateHigh={estimate.high} />
 
       {/* Quote / assessment CTAs */}
       <div className="mt-8 rounded-2xl bg-[var(--sc-navy)] p-8 text-center">

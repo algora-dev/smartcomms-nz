@@ -14,10 +14,10 @@ export default function ToolsPage() {
     <div className="sc-container max-w-4xl py-16">
       <h1 className="text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">SmartComms tools</h1>
       <p className="mt-4 max-w-3xl text-lg text-[var(--sc-slate)]">
-        Two quick tools to answer the questions that most often stop a communications project early: what might it cost, and for NZ state schools, could parts of it potentially be funded?
+        Three quick tools for the questions that often stop a communications project early: what might it cost, is there a school funding pathway, and is finance or leasing worth exploring?
       </p>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
+      <div className="mt-10 grid gap-6 md:grid-cols-3">
         <div className="sc-card p-6">
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">30-60 seconds</p>
           <h2 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Ballpark Cost Calculator</h2>
@@ -35,12 +35,21 @@ export default function ToolsPage() {
           </p>
           <Link href="/tools/funding-check" className="sc-btn-primary mt-5">Check potential funding</Link>
         </div>
+
+        <div className="sc-card p-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">About a minute</p>
+          <h2 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Finance & Leasing Check</h2>
+          <p className="mt-2 text-[var(--sc-slate)]">
+            Tell us who the project is for, the rough value and what sort of regular payment feels manageable. Get a practical starting point without completing a finance application.
+          </p>
+          <Link href="/tools/finance-check" className="sc-btn-primary mt-5">Check finance options</Link>
+        </div>
       </div>
 
       <div className="mt-8 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6">
         <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">The tools work together</h2>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[var(--sc-slate)]">
-          A school can start by checking funding and then estimate the likely project cost, or start with a budget and discover that fixed communications work may have a funding pathway. Both tools are indicative and designed to make the next conversation with a provider, Property Advisor or project team easier.
+          Start wherever the project is clearest: estimate the likely cost, check a school funding pathway, or explore finance and leasing. The tools are indicative and designed to make the next conversation with the right specialist easier.
         </p>
       </div>
     </div>

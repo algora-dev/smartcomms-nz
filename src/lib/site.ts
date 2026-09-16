@@ -7,7 +7,7 @@ export const site = {
   currency: "NZD",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://smartcomms.co.nz",
   description:
-    "New Zealand information and planning resource for IP paging, PA, bell, intercom and integrated communication systems, including pricing and school funding tools.",
+    "New Zealand information and planning resource for IP paging, PA, bell, intercom and integrated communication systems, including pricing, school funding and finance/leasing tools.",
 } as const;
 
 export const locale = {

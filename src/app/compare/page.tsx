@@ -654,9 +654,9 @@ const USE_CASES: { id: string; whatMatters: string; startingPoints: string[]; wh
   },
   {
     id: "uc-browser-security",
-    whatMatters: "Browser administration / security-system convergence",
+    whatMatters: "Browser administration / open integration",
     startingPoints: ["axis", "algo", "toa"],
-    why: "Browser-based zone/schedule management and documented bridges to camera and access-control ecosystems.",
+    why: "Browser-based management, SIP/open integration and documented ways to connect network-audio functions with wider systems.",
   },
   {
     id: "uc-entrance-intercom",

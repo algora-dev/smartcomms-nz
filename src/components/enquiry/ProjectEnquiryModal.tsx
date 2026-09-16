@@ -16,6 +16,7 @@ export type EnquiryMode =
   | "project_help"
   | "quote_help"
   | "funding_help"
+  | "finance_help"
   | "site_assessment"
   | "cabling_help"
   | "system_selection"
@@ -27,6 +28,7 @@ const HELP_OPTIONS = [
   { value: "formal_quote", label: "Formal quote / installer" },
   { value: "site_assessment", label: "Site assessment" },
   { value: "funding_scope", label: "Funding / project-scope question" },
+  { value: "finance_options", label: "Finance / leasing question" },
   { value: "cabling_network", label: "Network / cabling question" },
   { value: "quote_review", label: "Existing design / quote review" },
   { value: "general_question", label: "General question" },
@@ -36,6 +38,7 @@ const DEFAULT_HELP: Record<EnquiryMode, string> = {
   project_help: "choosing_system",
   quote_help: "formal_quote",
   funding_help: "funding_scope",
+  finance_help: "finance_options",
   site_assessment: "site_assessment",
   cabling_help: "cabling_network",
   system_selection: "choosing_system",
@@ -70,6 +73,12 @@ const MODE_COPY: Record<EnquiryMode, { title: string; blurb: string; submit: str
     blurb:
       "A provider can help document the existing system, technical scope and indicative budget. The school, Property Advisor / 10YPP process and Ministry requirements determine the funding pathway and approval.",
     submit: "Send enquiry",
+  },
+  finance_help: {
+    title: "Discuss finance or leasing options",
+    blurb:
+      "Tell us a little about the project. We'll review the information and, where appropriate, suggest a finance specialist or next step from our selected New Zealand network.",
+    submit: "Send finance enquiry",
   },
   site_assessment: {
     title: "Ask about a site assessment",

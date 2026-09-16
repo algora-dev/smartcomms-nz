@@ -15,20 +15,20 @@ export default function AboutPage() {
     <div className="sc-container max-w-3xl py-16 sc-prose">
       <h1 className="text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">About SmartComms NZ</h1>
       <p className="mt-4 text-lg text-[var(--sc-slate)]">
-        SmartComms NZ is a New Zealand information and planning resource for paging, PA, bell, intercom and integrated communication systems. It is designed to make the early project decisions easier: what the system should do, what it may cost, what funding may exist and what to resolve before requesting a final quote.
+        SmartComms NZ is a New Zealand information and planning resource for paging, PA, bell, intercom and integrated communication systems. It is designed to make the early project decisions easier: what the system should do, what it may cost, what funding or finance options may be worth exploring and what to resolve before requesting a final quote.
       </p>
       <h2>What we do</h2>
       <ul>
         <li>Plain-language explanations of system architectures and features</li>
         <li>Indicative NZ pricing examples with disclosed assumptions</li>
-        <li>Interactive planning, pricing and school-funding tools</li>
+        <li>Interactive planning, pricing, school-funding and finance/leasing tools</li>
         <li>Guidance for reviewing a proposed system, upgrade or quote</li>
         <li>Introductions to trusted installation or technology partners when a user asks for project delivery</li>
       </ul>
       <h2>How SmartComms works</h2>
       <ol>
         <li><strong>Research the options.</strong> Use our guides, comparisons and planning tools to understand the system, features and architecture that may suit your site.</li>
-        <li><strong>Build a realistic project picture.</strong> Use our pricing and, where relevant, funding tools to understand likely scope, budget and questions that still need answering.</li>
+        <li><strong>Build a realistic project picture.</strong> Use our pricing and, where relevant, funding or finance tools to understand likely scope, budget and questions that still need answering.</li>
         <li><strong>Ask SmartComms for help.</strong> If you want to progress the project, send us enough information to understand what you need.</li>
         <li><strong>Get the right next step.</strong> T3 Labs reviews the enquiry. Where specialist help is appropriate, we can suggest a suitable provider from our selected New Zealand partner network.</li>
       </ol>

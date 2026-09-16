@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import { buildMetadata } from "@/lib/seo";
 import { FundingCheckTool } from "./FundingCheckTool";
 
@@ -23,7 +24,9 @@ export default function FundingCheckPage() {
           Indicative only. This tool does not approve funding. <Link href="/funding" className="underline">Read how the funding pathway works</Link>.
         </p>
       </div>
-      <FundingCheckTool />
+      <Suspense fallback={<div className="sc-card p-6 text-sm text-[var(--sc-slate)]">Loading funding checker…</div>}>
+        <FundingCheckTool />
+      </Suspense>
     </div>
   );
 }

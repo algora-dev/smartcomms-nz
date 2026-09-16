@@ -9,7 +9,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "IP Paging, PA, Bell & Intercom Systems NZ | SmartComms",
   description:
-    "Plan, price and understand IP paging, PA, bell, intercom and emergency communication systems in New Zealand. Free pricing and school funding tools.",
+    "Plan, price and understand IP paging, PA, bell, intercom and emergency communication systems in New Zealand. Free pricing, school funding and finance/leasing tools.",
   alternates: { canonical: site.url },
   openGraph: {
     title: "IP Paging, PA, Bell & Intercom Systems NZ | SmartComms",
@@ -49,6 +49,11 @@ const INTENT_CARDS = [
     desc: "NZ state schools can quickly see whether parts of a proposed project may have a 5YA / 10YPP pathway.",
   },
   {
+    href: "/tools/finance-check",
+    title: "Explore finance or leasing",
+    desc: "See whether spreading the project cost through equipment finance or leasing looks worth discussing.",
+  },
+  {
     href: "/funding",
     title: "Understand 5YA / 10YPP funding",
     desc: "See why fixed school communications infrastructure may fit and what the school needs to do next.",
@@ -86,6 +91,11 @@ const UTILITY_LINKS = [
     label: "Funding checker",
     event: "homepage_funding_tool_clicked",
   },
+  {
+    href: "/tools/finance-check",
+    label: "Finance checker",
+    event: "homepage_finance_tool_clicked",
+  },
 ];
 
 export default function HomePage() {
@@ -119,13 +129,13 @@ export default function HomePage() {
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">Free planning tools</p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-[var(--sc-blue-900)]">
-              Start with cost or funding
+              Start with cost, funding or finance
             </h2>
             <p className="mt-3 text-lg text-[var(--sc-slate)]">
               You do not need to know the products or technical design first. Use whichever question matters most right now, then move between the tools as the project becomes clearer.
             </p>
           </div>
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
             <div className="sc-card p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">30-60 seconds</p>
               <h3 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Ballpark Cost Calculator</h3>
@@ -146,6 +156,17 @@ export default function HomePage() {
               <div className="mt-5 flex flex-wrap gap-3">
                 <Link href="/tools/funding-check" className="sc-btn-primary">Check potential funding</Link>
                 <Link href="/funding" className="sc-btn-secondary">Read the funding guide</Link>
+              </div>
+            </div>
+            <div className="sc-card p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">Schools & organisations</p>
+              <h3 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Finance & Leasing Check</h3>
+              <p className="mt-2 text-[var(--sc-slate)]">
+                If paying the full project cost upfront is not ideal, see whether equipment finance or leasing is worth discussing.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <Link href="/tools/finance-check" className="sc-btn-primary">Check finance options</Link>
+                <Link href="/financing" className="sc-btn-secondary">How finance can work</Link>
               </div>
             </div>
           </div>

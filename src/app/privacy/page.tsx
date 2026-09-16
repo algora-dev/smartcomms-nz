@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "Privacy",
-  description: "How SmartComms NZ collects, uses and shares information submitted through project, pricing and funding enquiry forms.",
+  description: "How SmartComms NZ collects, uses and shares information submitted through project, pricing, funding and finance enquiry forms.",
   path: "/privacy",
 });
 
@@ -41,7 +41,7 @@ export default function PrivacyPage() {
           attaches it to enquiry emails so we know which page or tool an enquiry came from.
         </li>
         <li>
-          Pricing-tool outputs may be logged without personal information when configured, to improve the model.
+          Pricing-tool outputs may be logged without personal information when configured, to improve the model. Finance-check and funding-check answers may be attached to an enquiry when you choose to contact SmartComms, so T3 Labs can understand the context you supplied.
           No names, emails or free-text notes are sent to analytics.
         </li>
       </ul>

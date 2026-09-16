@@ -5,66 +5,116 @@ import { track } from "@/lib/analytics";
 
 type Variant = "pricing-to-funding" | "funding-to-pricing";
 
-export function ToolCrossSell({ variant }: { variant: Variant }) {
+function queryString(params: Record<string, string | number | undefined>): string {
+  const q = new URLSearchParams();
+  for (const [key, value] of Object.entries(params)) {
+    if (value !== undefined && value !== "") q.set(key, String(value));
+  }
+  const rendered = q.toString();
+  return rendered ? `?${rendered}` : "";
+}
+
+export function ToolCrossSell({
+  variant,
+  estimateLow,
+  estimateHigh,
+  fundingResult,
+  financePrimary = false,
+}: {
+  variant: Variant;
+  estimateLow?: number;
+  estimateHigh?: number;
+  fundingResult?: string;
+  financePrimary?: boolean;
+}) {
   if (variant === "pricing-to-funding") {
+    const fundingHref = `/tools/funding-check${queryString({
+      source: "pricing",
+      estimateLow: Math.round(estimateLow ?? 0) || undefined,
+      estimateHigh: Math.round(estimateHigh ?? 0) || undefined,
+    })}`;
+    const financeHref = `/tools/finance-check${queryString({
+      source: "pricing",
+      estimateLow: Math.round(estimateLow ?? 0) || undefined,
+      estimateHigh: Math.round(estimateHigh ?? 0) || undefined,
+    })}`;
+
     return (
       <section className="mt-8 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6 sm:p-7">
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">
-          New Zealand state schools
+          Payment & funding options
         </p>
         <h3 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">
-          Could part of this project be funded?
+          How might the project be paid for?
         </h3>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--sc-slate)]">
-          Fixed paging, bell, emergency communication, intercom and communications infrastructure may have a potential Ministry 5YA / 10YPP funding pathway. A quick check can show which parts of your proposed project are worth investigating.
+          If this is a New Zealand school project, a property/funding pathway may be worth checking. Schools and other organisations can also explore equipment finance or leasing if they want to spread the project cost.
         </p>
         <div className="mt-4 flex flex-wrap gap-3">
           <Link
-            href="/tools/funding-check"
+            href={fundingHref}
             className="sc-btn-primary"
             onClick={() => track("pricing_to_funding_clicked")}
           >
-            Check potential funding
+            Check school funding
           </Link>
           <Link
-            href="/funding"
+            href={financeHref}
             className="sc-btn-secondary"
-            onClick={() => track("funding_guide_cta_clicked", { source: "pricing_tool" })}
+            onClick={() => track("pricing_to_finance_clicked")}
           >
-            How school funding works
+            Explore finance / leasing
           </Link>
         </div>
+        <p className="mt-3 text-xs leading-relaxed text-[var(--sc-slate)]">
+          Your SmartComms estimate is carried into the next tool so you do not need to enter the project value again.
+        </p>
       </section>
     );
   }
 
+  const financeHref = `/tools/finance-check${queryString({
+    source: "funding",
+    fundingResult,
+    estimateLow: Math.round(estimateLow ?? 0) || undefined,
+    estimateHigh: Math.round(estimateHigh ?? 0) || undefined,
+  })}`;
+  const pricingHref = `/pricing-tool${queryString({ source: "funding" })}`;
+
   return (
     <section className="mt-8 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6 sm:p-7">
       <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">
-        Next step
+        Next options
       </p>
       <h3 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">
-        See what the project might cost
+        {financePrimary ? "Funding may not be the only route" : "Compare the next ways to progress"}
       </h3>
       <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--sc-slate)]">
-        Funding potential is only one part of the decision. Use the ballpark calculator to get an indicative installed price range for the system you are considering.
+        {financePrimary
+          ? "The pathway assessed may not be the strongest fit as entered. Equipment finance or leasing can still be worth discussing, and you can also estimate the project cost if it is not yet clear."
+          : "A funding pathway and commercial finance are different options. You can estimate the likely project cost or explore finance and leasing without changing this funding result."}
       </p>
       <div className="mt-4 flex flex-wrap gap-3">
         <Link
-          href="/pricing-tool"
-          className="sc-btn-primary"
+          href={financeHref}
+          className={financePrimary ? "sc-btn-primary" : "sc-btn-secondary"}
+          onClick={() => track("funding_to_finance_clicked", { funding_result: fundingResult ?? "unknown" })}
+        >
+          Explore finance / leasing
+        </Link>
+        <Link
+          href={pricingHref}
+          className={financePrimary ? "sc-btn-secondary" : "sc-btn-primary"}
           onClick={() => track("funding_to_pricing_clicked")}
         >
           Estimate project cost
         </Link>
-        <Link
-          href="/pricing"
-          className="sc-btn-secondary"
-          onClick={() => track("pricing_guide_cta_clicked", { source: "funding_tool" })}
-        >
-          Read the NZ pricing guide
-        </Link>
       </div>
+      {estimateLow && estimateHigh ? (
+        <p className="mt-3 text-xs leading-relaxed text-[var(--sc-slate)]">
+          The pricing estimate you brought into this funding check will also carry into the finance checker.
+        </p>
+      ) : null}
     </section>
   );
 }

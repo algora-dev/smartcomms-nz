@@ -1,0 +1,170 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
+import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
+import { site } from "@/lib/site";
+
+export const metadata: Metadata = buildMetadata({
+  title: "PA, Paging & Intercom Finance & Leasing NZ",
+  description:
+    "Explore equipment finance, leasing and lease-to-own options for NZ paging, PA, school bell, intercom and communications-system projects, then run a quick finance check.",
+  path: "/financing",
+});
+
+const faqs = [
+  {
+    q: "Can a paging, PA, bell or intercom system be financed in New Zealand?",
+    a: "Potentially. New Zealand commercial equipment-finance providers publicly finance technology, AV, security and other business equipment. Whether a particular communications project is accepted depends on the organisation, equipment, transaction and finance provider.",
+  },
+  {
+    q: "What finance structures may be available?",
+    a: "Depending on the provider and transaction, options can include commercial equipment loans, finance leases, business rentals and other equipment-finance structures. Some providers also use lease-to-own wording for arrangements where ownership transfers at the end of the agreed term.",
+  },
+  {
+    q: "Do I need a deposit?",
+    a: "Not always. Some New Zealand equipment-finance providers advertise structures that can finance up to 100% of an equipment invoice, subject to their normal assessment and approval criteria. Other transactions may benefit from or require an upfront contribution.",
+  },
+  {
+    q: "Can schools explore equipment finance or leasing?",
+    a: "Yes, some NZ equipment-finance providers specifically work with schools and education organisations. State and state-integrated schools can also have governance, accounting, borrowing or property requirements that need to be checked before entering an agreement.",
+  },
+  {
+    q: "What if I do not know the project price yet?",
+    a: "You can still use the finance checker with a rough site size, or use the SmartComms pricing calculator first and carry the indicative project range into the finance check.",
+  },
+  {
+    q: "Does the SmartComms finance checker approve finance?",
+    a: "No. SmartComms does not provide finance or make credit decisions. The checker only helps determine whether a specialist conversation looks useful and gives T3 Labs enough context to suggest an appropriate next step or provider from its selected network.",
+  },
+];
+
+export default function FinancingPage() {
+  const reviewed = reviewedLabel("/financing");
+  return (
+    <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema({
+        headline: "Finance and leasing options for paging, PA, bell and intercom systems in New Zealand",
+        description: "Equipment finance, leasing and lease-to-own options for NZ communications-system projects, plus a quick SmartComms finance check.",
+        url: `${site.url}/financing`,
+        datePublished: publishedDate("/financing"),
+        dateModified: reviewedDate("/financing"),
+      })) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([
+        { name: "SmartComms NZ", url: site.url },
+        { name: "Finance & leasing", url: `${site.url}/financing` },
+      ])) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.q,
+          acceptedAnswer: { "@type": "Answer", text: faq.a },
+        })),
+      }) }} />
+
+      <header className="sc-container max-w-4xl py-16">
+        <div className="max-w-3xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">New Zealand project payment options</p>
+          <h1 className="mt-2 text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">
+            Finance and leasing for paging, PA, bell and intercom systems
+          </h1>
+          <p className="mt-4 text-lg leading-relaxed text-[var(--sc-slate)]">
+            Paying the full project cost upfront is not the only possible route. Commercial equipment finance, leasing and lease-to-own-style structures may let an eligible organisation spread the cost of a communications-system project over regular payments.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link href="/tools/finance-check" className="sc-btn-primary">Check whether finance is worth exploring</Link>
+            <Link href="/pricing-tool" className="sc-btn-secondary">Estimate the project cost first</Link>
+          </div>
+          <p className="mt-4 text-xs leading-relaxed text-[var(--sc-slate)]">
+            Last reviewed {reviewed}. SmartComms does not provide finance, quote interest rates or make credit decisions. Actual options and approval are determined by the relevant finance provider.
+          </p>
+        </div>
+      </header>
+
+      <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-14">
+        <div className="sc-container max-w-4xl">
+          <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">The short version</h2>
+          <div className="mt-6 grid gap-5 md:grid-cols-3">
+            <div className="sc-card bg-white p-5">
+              <h3 className="font-semibold text-[var(--sc-blue-900)]">1. Work out the rough project value</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Use an existing supplier estimate or the SmartComms pricing calculator. A broad range is enough to start the conversation.</p>
+            </div>
+            <div className="sc-card bg-white p-5">
+              <h3 className="font-semibold text-[var(--sc-blue-900)]">2. Decide what feels manageable</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Think about the regular payment range the organisation could accommodate and whether any upfront contribution is available.</p>
+            </div>
+            <div className="sc-card bg-white p-5">
+              <h3 className="font-semibold text-[var(--sc-blue-900)]">3. Discuss the actual structure</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">A finance specialist can then explain which structures may be relevant and what information is needed for a real application.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <article className="sc-container max-w-3xl py-14 sc-prose">
+        <h2>What can equipment finance help with?</h2>
+        <p>
+          Commercial equipment finance is used to spread the cost of business and organisational assets over time. In New Zealand, finance providers publicly offer finance and leasing for technology, audio-visual equipment, security systems, medical equipment and other commercial assets. A paging or intercom project may include a mixture of hardware, software, installation and related work, so the exact financeable scope needs to be confirmed with the provider.
+        </p>
+
+        <h2>Finance lease, rental or equipment loan?</h2>
+        <p>
+          Different providers use different structures. Common NZ commercial-equipment options include finance leases, business rentals and commercial equipment loans. “Lease to own” is also used in the market for some finance-lease arrangements where ownership transfers at the end of the agreed term. The right structure depends on the organisation and transaction, so SmartComms does not attempt to choose the contract type inside the checker.
+        </p>
+
+        <h2>Who might explore finance?</h2>
+        <p>
+          Equipment-finance providers in New Zealand publicly work with businesses, schools and education organisations, healthcare providers, government and local-government organisations, charities and other commercial entities. Provider appetite and approval criteria differ, which is why the SmartComms tool focuses on whether there is a useful conversation to have rather than trying to approve or reject an application.
+        </p>
+
+        <h2>What if the project cannot be paid upfront?</h2>
+        <p>
+          That is one of the main reasons to investigate finance or leasing. An organisation may want to preserve cash, spread the project cost, stage an upgrade or compare finance against another capital pathway. A low upfront contribution does not automatically mean there is no option: some NZ providers advertise up to 100% equipment finance for qualifying transactions, while other providers or structures may require different terms.
+        </p>
+
+        <h2>Schools: funding and finance are different questions</h2>
+        <p>
+          New Zealand state schools may have property or capital-funding pathways for eligible projects, while finance or leasing is a separate commercial arrangement. School boards can also have specific governance, accounting and borrowing requirements. A school should therefore check the relevant Ministry/property position and the proposed finance structure rather than treating finance as a substitute for a funding approval.
+        </p>
+
+        <div className="not-prose mt-10 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6">
+          <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">Check in about a minute</h2>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">
+            Tell us who the project is for, roughly how much finance may be needed and what sort of regular payment feels manageable. The result is designed to show whether a specialist conversation looks useful — not to decide whether finance will be approved.
+          </p>
+          <Link href="/tools/finance-check" className="sc-btn-primary mt-4 inline-flex">Run the finance check</Link>
+        </div>
+
+        <h2>Sources and market context</h2>
+        <p>
+          The descriptions above are based on publicly available New Zealand equipment-finance information. They establish that these kinds of commercial structures exist; they do not mean SmartComms has a referral relationship with every provider referenced.
+        </p>
+        <ul>
+          <li><a href="https://www.eleasing.co.nz/customers/">eLeasing — NZ commercial equipment finance and leasing options</a></li>
+          <li><a href="https://www.westpac.co.nz/business/loans-and-finance/equipment-finance/">Westpac NZ — business equipment finance</a></li>
+          <li><a href="https://mtlfinance.co.nz/">MTL Finance — equipment leasing for NZ schools and businesses</a></li>
+          <li><a href="https://www.education.govt.nz/education-professionals/schools-year-0-13/funding-and-financials/day-day-financial-management">Ministry of Education — school financial management and borrowing guidance</a></li>
+        </ul>
+
+        <div className="not-prose mt-8 rounded-xl border border-[var(--sc-border)] bg-white p-5 text-sm leading-relaxed text-[var(--sc-slate)]">
+          SmartComms NZ is an information and planning resource operated by T3 Labs. It does not provide financial advice, finance products, credit assessment or approval. If you ask for practical help, T3 Labs can review the information supplied and suggest an appropriate next step or provider from its selected network.
+        </div>
+      </article>
+
+      <section className="border-t border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-14">
+        <div className="sc-container max-w-3xl">
+          <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">Finance & leasing FAQs</h2>
+          <div className="mt-6 space-y-4">
+            {faqs.map((faq) => (
+              <div key={faq.q} className="rounded-xl border border-[var(--sc-border)] bg-white p-5">
+                <h3 className="font-semibold text-[var(--sc-blue-900)]">{faq.q}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

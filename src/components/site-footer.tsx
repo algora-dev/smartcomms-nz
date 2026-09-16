@@ -19,6 +19,8 @@ export function SiteFooter() {
             <li><Link href="/pricing-tool">Ballpark cost calculator</Link></li>
             <li><Link href="/funding">School funding guide</Link></li>
             <li><Link href="/tools/funding-check">School funding check</Link></li>
+            <li><Link href="/financing">Finance & leasing guide</Link></li>
+            <li><Link href="/tools/finance-check">Finance & leasing check</Link></li>
             <li><Link href="/guides">Guides</Link></li>
           </ul>
         </div>
@@ -35,7 +37,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-[var(--sc-border)] py-4 text-center text-xs text-[var(--sc-slate)]">
-        © {new Date().getFullYear()} {site.name}. Operated by {site.operator}. Information is general in nature and indicative pricing or funding guidance should be confirmed for the specific project.
+        © {new Date().getFullYear()} {site.name}. Operated by {site.operator}. Information is general in nature. Indicative pricing, funding or finance guidance should be confirmed for the specific project.
       </div>
     </footer>
   );

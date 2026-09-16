@@ -52,6 +52,7 @@ export default function PricingPage() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link href="/pricing-tool" className="sc-btn-primary">Calculate your site</Link>
             <Link href="/tools/funding-check" className="sc-btn-secondary">Check school funding potential</Link>
+            <Link href="/financing" className="sc-btn-secondary">Explore finance / leasing</Link>
           </div>
           <p className="mt-4 text-xs text-[var(--sc-slate)]">Indicative only, ex GST. SmartComms pricing is a planning model informed by supplier pricing, product information and installation/project information available to us - it shows a realistic order of magnitude for the modelled scope, not a market average or a quote from every brand. Assumptions last reviewed {pricingConfig.reviewedAtLabel}. See <Link href="/about/methodology">how we get our pricing</Link>.</p>
         </div>
@@ -130,6 +131,18 @@ export default function PricingPage() {
           <div className="mt-4 flex flex-wrap gap-3">
             <Link href="/pricing-tool" className="sc-btn-primary">Get a ballpark price</Link>
             <Link href="/funding" className="sc-btn-secondary">School funding guide</Link>
+            <Link href="/financing" className="sc-btn-secondary">Finance & leasing guide</Link>
+          </div>
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-[var(--sc-border)] bg-white p-6">
+          <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">Once you know the likely cost</h2>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">
+            The next question is how the project will be paid for. NZ schools can investigate relevant funding pathways, while schools and other organisations may also want to explore equipment finance or leasing.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Link href="/tools/funding-check" className="sc-btn-secondary">Check school funding</Link>
+            <Link href="/tools/finance-check" className="sc-btn-primary">Check finance options</Link>
           </div>
         </div>
       </section>

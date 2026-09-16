@@ -9,6 +9,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { track } from "@/lib/analytics";
 import { ToolCrossSell } from "@/components/tool-cross-sell";
 import { ProjectEnquiryModal, type EnquiryMode } from "@/components/enquiry/ProjectEnquiryModal";
@@ -41,6 +42,13 @@ const PATHWAY_SUMMARY_LABEL: Record<PathwayKind, string> = {
   new_build: "New build / major capital project",
   unknown: "School type unknown",
 };
+
+function parseMoneyParam(value: string | null): number | undefined {
+  if (!value) return undefined;
+  const n = Number(value);
+  if (!Number.isFinite(n) || n <= 0 || n > 5_000_000) return undefined;
+  return Math.round(n);
+}
 
 
 function InfoDot({ text }: { text: string }) {
@@ -117,6 +125,14 @@ function fundingContext(answers: AssessmentAnswers, result: AssessmentResult): R
 }
 
 export function FundingCheckTool() {
+  const searchParams = useSearchParams();
+  const carriedEstimateLow = parseMoneyParam(searchParams.get("estimateLow"));
+  const carriedEstimateHigh = parseMoneyParam(searchParams.get("estimateHigh"));
+  const hasCarriedEstimate = Boolean(
+    carriedEstimateLow &&
+    carriedEstimateHigh &&
+    carriedEstimateHigh >= carriedEstimateLow,
+  );
   const [screen, setScreen] = useState(0);
   const [answers, setAnswers] = useState<AssessmentAnswers>({
     reasons: [],
@@ -267,7 +283,18 @@ export function FundingCheckTool() {
           </div>
         )}
 
-        <ToolCrossSell variant="funding-to-pricing" />
+        <ToolCrossSell
+          variant="funding-to-pricing"
+          estimateLow={hasCarriedEstimate ? carriedEstimateLow : undefined}
+          estimateHigh={hasCarriedEstimate ? carriedEstimateHigh : undefined}
+          fundingResult={`${result.pathway}:${result.caseTier}`}
+          financePrimary={
+            result.pathway === "maintenance_only" ||
+            result.pathway === "private" ||
+            result.pathway === "unknown" ||
+            result.caseTier === "weak"
+          }
+        />
 
         <div className="mt-8 sc-card p-6">
           <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">{RESULT_COPY.ctaPrimary}</h2>
