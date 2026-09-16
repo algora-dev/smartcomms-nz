@@ -141,6 +141,23 @@ export function FundingCheckTool() {
   const [result, setResult] = useState<AssessmentResult | null>(null);
   const [enquiry, setEnquiry] = useState<EnquiryMode | null>(null);
   const toolTopRef = useRef<HTMLDivElement>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
+
+  // Scroll AFTER the new screen has rendered. Inline scroll calls race React:
+  // the target ref may not exist yet, silently cancelling the scroll and
+  // leaving the user at the bottom of the previous screen.
+  const prevScrollKeyRef = useRef<string | null>(null);
+  useEffect(() => {
+    const key = result ? "result" : `step-${screen}`;
+    if (prevScrollKeyRef.current === key) return;
+    const first = prevScrollKeyRef.current === null;
+    prevScrollKeyRef.current = key;
+    if (first) return; // initial page load: keep natural position
+    requestAnimationFrame(() => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      (result ? resultRef.current : toolTopRef.current)?.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
+    });
+  }, [screen, result]);
 
   useEffect(() => {
     track("funding_tool_started");
@@ -152,12 +169,10 @@ export function FundingCheckTool() {
 
   function next() {
     setScreen((current) => Math.min(totalScreens - 1, current + 1));
-    if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function back() {
     setScreen((current) => Math.max(0, current - 1));
-    if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function finish() {
@@ -170,7 +185,6 @@ export function FundingCheckTool() {
       case_category: assessment.caseTier,
       pathway: assessment.pathway,
     });
-    if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   const isNewBuild = answers.projectStatus === "new_build";
@@ -212,7 +226,7 @@ export function FundingCheckTool() {
                 : RESULT_COPY.newBuild.body;
 
     return (
-      <div>
+      <div ref={resultRef} className="scroll-mt-6">
         <h1 className="text-3xl font-bold tracking-tight text-[var(--sc-blue-900)]">{result.headline}</h1>
         <ProjectEnquiryModal
           open={enquiry !== null}
@@ -353,10 +367,6 @@ export function FundingCheckTool() {
             setEnquiry(null);
             setAnswers({ reasons: [], features: [] });
             setScreen(0);
-            requestAnimationFrame(() => {
-              const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-              toolTopRef.current?.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
-            });
           }}
         >
           Start over

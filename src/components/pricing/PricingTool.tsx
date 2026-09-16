@@ -170,11 +170,20 @@ export function PricingTool() {
       ref.current?.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
     });
   }
-  /** Central navigation helper: set the visible screen and move the viewport to its top. */
+  /** Central navigation helper: the scroll itself happens in a post-render
+   *  effect on [step] — scrolling from inside the click handler races React
+   *  (the next screen's ref may not exist yet), which silently cancels it. */
   function goToStep(next: number) {
     setStep(next);
-    scrollToolTo(next === 3 ? resultRef : toolTopRef);
   }
+  const prevStepRef = useRef<number | null>(null);
+  useEffect(() => {
+    if (prevStepRef.current === step) return;
+    const first = prevStepRef.current === null;
+    prevStepRef.current = step;
+    if (first) return; // initial mount / deep-link hydration: don't hijack scroll
+    scrollToolTo(step === 3 ? resultRef : toolTopRef);
+  }, [step]);
 
   const restartTool = () => {
     skipPersist.current = true;
@@ -188,7 +197,6 @@ export function PricingTool() {
     if (industry) {
       window.history.replaceState(null, "", `?industry=${industry}`);
     }
-    scrollToolTo(toolTopRef);
   };
 
   const leaveIndustryScope = () => {

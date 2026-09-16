@@ -146,12 +146,10 @@ export function FinanceCheckTool() {
 
   function next() {
     setScreen((current) => Math.min(2, current + 1));
-    scrollToElement(toolTopRef.current);
   }
 
   function back() {
     setScreen((current) => Math.max(0, current - 1));
-    scrollToElement(toolTopRef.current);
   }
 
   function finish() {
@@ -166,7 +164,6 @@ export function FinanceCheckTool() {
       result_level: result.level,
       source: answers.source,
     });
-    scrollToElement(resultRef.current);
   }
 
   function restart() {
@@ -181,8 +178,14 @@ export function FinanceCheckTool() {
       carriedEstimateHigh: carriedHigh,
       projectValueBand: hasCarriedEstimate ? "smartcomms_estimate" : undefined,
     });
-    scrollToElement(toolTopRef.current);
   }
+
+  // Scroll AFTER the new screen has rendered. Scrolling from inside the
+  // click handler races React: the target element may not exist yet, which
+  // silently cancelled the scroll and left the user at the bottom.
+  useEffect(() => {
+    scrollToElement(resultReady ? resultRef.current : toolTopRef.current);
+  }, [resultReady, screen]);
 
   const canContinue =
     (screen === 0 && Boolean(answers.organisationType)) ||
