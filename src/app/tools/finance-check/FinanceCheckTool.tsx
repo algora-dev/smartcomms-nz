@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { track } from "@/lib/analytics";
@@ -102,6 +102,17 @@ export function FinanceCheckTool() {
   const [resultReady, setResultReady] = useState(false);
   const [enquiryOpen, setEnquiryOpen] = useState(false);
 
+  // Element-targeted scrolling: never rely on page-top because authority
+  // content can live above/below the tool.
+  const toolTopRef = useRef<HTMLDivElement>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
+  function scrollToElement(el: HTMLElement | null) {
+    requestAnimationFrame(() => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      el?.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
+    });
+  }
+
   useEffect(() => {
     track("finance_tool_started", { source: answers.source ?? "direct" });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -122,12 +133,12 @@ export function FinanceCheckTool() {
 
   function next() {
     setScreen((current) => Math.min(2, current + 1));
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollToElement(toolTopRef.current);
   }
 
   function back() {
     setScreen((current) => Math.max(0, current - 1));
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollToElement(toolTopRef.current);
   }
 
   function finish() {
@@ -142,7 +153,7 @@ export function FinanceCheckTool() {
       result_level: result.level,
       source: answers.source,
     });
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollToElement(resultRef.current);
   }
 
   function restart() {
@@ -156,7 +167,7 @@ export function FinanceCheckTool() {
       carriedEstimateHigh: carriedHigh,
       projectValueBand: hasCarriedEstimate ? "smartcomms_estimate" : undefined,
     });
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollToElement(toolTopRef.current);
   }
 
   const canContinue =
@@ -182,32 +193,62 @@ export function FinanceCheckTool() {
 
     const isStateSchool = answers.organisationType === "state_school" || answers.organisationType === "state_integrated_school";
 
+    const answerSummary: [string, string][] = [
+      ["Organisation", result.organisationLabel],
+      ["Project value", result.projectValueLabel],
+      ["Regular budget", `${labelFrom(answers.paymentFrequency === "weekly" ? WEEKLY_BUDGETS : MONTHLY_BUDGETS, answers.paymentBudget)} / ${answers.paymentFrequency}`],
+      ["Upfront contribution", labelFrom(UPFRONT_BANDS, answers.upfrontBand)],
+    ];
+
     return (
-      <div>
-        <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">{result.eyebrow}</p>
-        <h2 className="mt-2 text-3xl font-bold tracking-tight text-[var(--sc-blue-900)]">{result.headline}</h2>
-        <p className="mt-4 max-w-2xl leading-relaxed text-[var(--sc-slate)]">{result.body}</p>
+      <div ref={resultRef} className="scroll-mt-6">
+        {/* Result hero: the answer is the first thing on screen. */}
+        <section className="rounded-2xl border-2 border-[var(--sc-teal)] bg-[var(--sc-blue-50)] p-6 sm:p-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--sc-blue-700)]">Your finance-check result</p>
+          <div className="mt-3">
+            <span className="inline-flex rounded-full bg-[var(--sc-navy)] px-4 py-1.5 text-sm font-semibold text-white">{result.eyebrow}</span>
+          </div>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-[var(--sc-blue-900)] md:text-4xl">{result.headline}</h2>
+          <p className="mt-4 max-w-2xl leading-relaxed text-[var(--sc-slate)]">{result.body}</p>
+
+          <div className="mt-6">
+            <button
+              type="button"
+              onClick={() => {
+                setEnquiryOpen(true);
+                track("finance_help_opened", { result_level: result.level });
+              }}
+              className="sc-btn-primary cursor-pointer"
+            >
+              Discuss finance options
+            </button>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--sc-slate)]">
+              Want to take the next step? Tell the SmartComms team a little more about the project and we&apos;ll suggest
+              the finance provider or specialist we think is most relevant to contact. Your enquiry goes to T3 Labs first;
+              a provider receives your contact details only if you agree to a direct introduction.
+            </p>
+          </div>
+          <p className="mt-5 text-xs leading-relaxed text-[var(--sc-slate)]">Preliminary guidance only — not an approval or finance offer.</p>
+        </section>
+
+        {/* Compact personalised answer summary */}
+        <div className="sc-card mt-6 p-6">
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-[var(--sc-slate)]">Your answers</h3>
+          <dl className="mt-3 grid gap-x-8 gap-y-2 sm:grid-cols-2">
+            {answerSummary.map(([term, value]) => (
+              <div key={term} className="flex flex-col sm:flex-row sm:gap-2">
+                <dt className="text-sm font-medium text-[var(--sc-slate)]">{term}:</dt>
+                <dd className="text-sm font-semibold text-[var(--sc-blue-900)]">{value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
 
         <div className="sc-card mt-6 p-6">
           <h3 className="font-semibold text-[var(--sc-blue-900)]">What your answers tell us</h3>
           <ul className="mt-4 space-y-3">
             {result.reasons.map((reason) => <CheckLine key={reason}>{reason}</CheckLine>)}
           </ul>
-        </div>
-
-        <div className="mt-6 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6">
-          <h3 className="text-xl font-semibold text-[var(--sc-blue-900)]">Want to take the conversation further?</h3>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--sc-slate)]">{result.nextStep}</p>
-          <button
-            type="button"
-            onClick={() => {
-              setEnquiryOpen(true);
-              track("finance_help_opened", { result_level: result.level });
-            }}
-            className="sc-btn-primary mt-5 cursor-pointer"
-          >
-            Discuss finance options
-          </button>
         </div>
 
         {isStateSchool && (
@@ -245,7 +286,21 @@ export function FinanceCheckTool() {
   }
 
   return (
-    <div>
+    <div ref={toolTopRef} className="scroll-mt-6">
+      {!resultReady && (
+        <div className="mb-9">
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">New Zealand equipment finance</p>
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-[var(--sc-blue-900)] sm:text-4xl">
+            Is finance or leasing worth exploring for your communications project?
+          </h1>
+          <p className="mt-3 text-[var(--sc-slate)]">
+            Answer three short questions about the organisation, rough project value and budget. We&apos;ll give you a practical starting point and, if you want, help identify an appropriate finance specialist to speak with.
+          </p>
+          <p className="mt-2 text-xs leading-relaxed text-[var(--sc-slate)]">
+            Preliminary guidance only — not a finance application, credit assessment or approval. <Link href="/financing" className="underline">Read how equipment finance and leasing can work</Link>.
+          </p>
+        </div>
+      )}
       <div className="mb-8">
         <div className="flex items-center justify-between text-xs font-medium text-[var(--sc-slate)]">
           <span>Step {screen + 1} of 3</span>

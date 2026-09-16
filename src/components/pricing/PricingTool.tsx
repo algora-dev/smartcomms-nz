@@ -159,6 +159,20 @@ export function PricingTool() {
   }, [state, hydrated]);
 
   // Wipe the tool back to a fresh start (used by the restart confirmation).
+  const toolTopRef = useRef<HTMLDivElement>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
+  function scrollToolTo(ref: React.RefObject<HTMLDivElement | null>) {
+    requestAnimationFrame(() => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      ref.current?.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
+    });
+  }
+  /** Central navigation helper: set the visible screen and move the viewport to its top. */
+  function goToStep(next: number) {
+    setStep(next);
+    scrollToolTo(next === 3 ? resultRef : toolTopRef);
+  }
+
   const restartTool = () => {
     skipPersist.current = true;
     setState(defaultState());
@@ -166,6 +180,7 @@ export function PricingTool() {
     setFineTuneOpen(false);
     setConfirmRestart(false);
     window.history.replaceState(null, "", window.location.pathname);
+    scrollToolTo(toolTopRef);
   };
 
   // While a result exists: warn before refresh/leaving, and intercept any
@@ -239,7 +254,7 @@ export function PricingTool() {
   const showSticky = step >= 1 && step <= 2 && totalAreas > 0;
 
   return (
-    <div className="mx-auto max-w-3xl">
+    <div ref={toolTopRef} className="mx-auto max-w-3xl scroll-mt-6">
       {/* progress */}
       <div className="mb-8 flex items-center gap-2">
         {[1, 2, 3].map((n) => (
@@ -272,7 +287,7 @@ export function PricingTool() {
                 onClick={() => {
                   patch({ tier: t.value });
                   track("pricing_installation_selected", { installation_tier: t.value });
-                  setStep(1);
+                  goToStep(1);
                 }}
                 className="rounded-xl border-2 border-[var(--sc-border)] bg-white p-5 text-left hover:border-[var(--sc-teal)] hover:bg-[var(--sc-blue-50)] hover:shadow-md transition-all cursor-pointer"
               >
@@ -319,7 +334,7 @@ export function PricingTool() {
             </div>
           </div>
           <div className="mt-8 flex items-center justify-between">
-            <button type="button" onClick={() => setStep(0)} className="text-sm font-medium text-[var(--sc-slate)] hover:text-[var(--sc-navy)] cursor-pointer">← Back</button>
+            <button type="button" onClick={() => goToStep(0)} className="text-sm font-medium text-[var(--sc-slate)] hover:text-[var(--sc-navy)] cursor-pointer">← Back</button>
             <button
               type="button"
               disabled={totalAreas === 0}
@@ -328,7 +343,7 @@ export function PricingTool() {
                   total_areas: totalAreas,
                   endpoint_count: estimate.endpoints,
                 });
-                setStep(2);
+                goToStep(2);
               }}
               className="rounded-full bg-[var(--sc-navy)] px-6 py-3 text-sm font-semibold text-white hover:bg-[var(--sc-blue-700)] hover:shadow-lg transition-all cursor-pointer disabled:opacity-40"
             >
@@ -462,7 +477,7 @@ export function PricingTool() {
           </div>
 
           <div className="mt-8 flex items-center justify-between">
-            <button type="button" onClick={() => setStep(1)} className="text-sm font-medium text-[var(--sc-slate)] hover:text-[var(--sc-navy)] cursor-pointer">← Back</button>
+            <button type="button" onClick={() => goToStep(1)} className="text-sm font-medium text-[var(--sc-slate)] hover:text-[var(--sc-navy)] cursor-pointer">← Back</button>
             <button
               type="button"
               onClick={() => {
@@ -474,7 +489,7 @@ export function PricingTool() {
                   estimate_high: estimate.high,
                   over_30_endpoints: estimate.overThreshold,
                 });
-                setStep(3);
+                goToStep(3);
               }}
               className="rounded-full bg-[var(--sc-teal-strong)] px-8 py-3 text-sm font-semibold text-white hover:bg-[var(--sc-teal-strong-hover)] hover:shadow-lg transition-all cursor-pointer"
             >
@@ -486,12 +501,14 @@ export function PricingTool() {
 
       {/* RESULT */}
       {step === 3 && (
-        <ResultView
-          state={state}
-          estimate={estimate}
-          onEdit={() => setStep(1)}
-          onRestart={() => setConfirmRestart(true)}
-        />
+        <div ref={resultRef} className="scroll-mt-6">
+          <ResultView
+            state={state}
+            estimate={estimate}
+            onEdit={() => goToStep(1)}
+            onRestart={() => setConfirmRestart(true)}
+          />
+        </div>
       )}
 
       {/* Restart confirmation */}

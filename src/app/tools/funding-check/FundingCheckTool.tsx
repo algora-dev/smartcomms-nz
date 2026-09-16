@@ -7,7 +7,7 @@
  * follow-up project review.
  */
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { track } from "@/lib/analytics";
@@ -140,6 +140,7 @@ export function FundingCheckTool() {
   });
   const [result, setResult] = useState<AssessmentResult | null>(null);
   const [enquiry, setEnquiry] = useState<EnquiryMode | null>(null);
+  const toolTopRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     track("funding_tool_started");
@@ -352,6 +353,10 @@ export function FundingCheckTool() {
             setEnquiry(null);
             setAnswers({ reasons: [], features: [] });
             setScreen(0);
+            requestAnimationFrame(() => {
+              const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+              toolTopRef.current?.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
+            });
           }}
         >
           Start over
@@ -361,7 +366,7 @@ export function FundingCheckTool() {
   }
 
   return (
-    <div>
+    <div ref={toolTopRef} className="scroll-mt-6">
       <div className="mb-6">
         <div className="flex items-center justify-between text-xs font-medium text-[var(--sc-slate)]">
           <span>Step {screen + 1} of {totalScreens}</span>

@@ -33,6 +33,22 @@ const faqs = [
     a: "You can still use the finance checker with a rough site size, or use the SmartComms pricing calculator first and carry the indicative project range into the finance check.",
   },
   {
+    q: "Can installation costs be included in equipment finance?",
+    a: "Sometimes, depending on the provider, equipment and transaction. The finance provider decides which equipment, services and project costs can be included.",
+  },
+  {
+    q: "Can an existing PA or paging system upgrade be financed?",
+    a: "Potentially. Replacement, expansion and upgrade projects may be considered by commercial equipment-finance providers depending on the equipment and organisation.",
+  },
+  {
+    q: "Can IP paging systems be leased instead of purchased upfront?",
+    a: "Potentially. Commercial equipment finance can include leasing and rental-style structures as well as equipment loans. The available structure depends on the provider and transaction.",
+  },
+  {
+    q: "Can a school bell and PA upgrade be financed?",
+    a: "Potentially. Some NZ equipment-finance providers work with education organisations, but schools may also have governance, borrowing and property requirements that need to be considered.",
+  },
+  {
     q: "Does the SmartComms finance checker approve finance?",
     a: "No. SmartComms does not provide finance or make credit decisions. The checker only helps determine whether a specialist conversation looks useful and gives T3 Labs enough context to suggest an appropriate next step or provider from its selected network.",
   },
@@ -128,6 +144,60 @@ export default function FinancingPage() {
           New Zealand state schools may have property or capital-funding pathways for eligible projects, while finance or leasing is a separate commercial arrangement. School boards can also have specific governance, accounting and borrowing requirements. A school should therefore check the relevant Ministry/property position and the proposed finance structure rather than treating finance as a substitute for a funding approval.
         </p>
 
+        <h2>What parts of a PA, paging or intercom project may be financed?</h2>
+        <p>
+          Depending on the provider and transaction, a communications project can include items such as central paging or control hardware, IP paging speakers and horns, PA amplifiers and passive speakers, school bell and scheduling hardware or software, intercom and entrance communication equipment, network interfaces and gateways, installation and commissioning where accepted by the finance provider, and related project equipment. The finance provider decides which equipment, services and project costs it will include. SmartComms does not determine what is financeable.
+        </p>
+
+        <h2>Pay upfront, use a funding pathway or spread the cost?</h2>
+        <div className="not-prose my-7 grid gap-5 md:grid-cols-3">
+          <div className="sc-card bg-white p-5">
+            <h3 className="font-semibold text-[var(--sc-blue-900)]">Pay upfront</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Useful where the organisation already has capital available and wants no ongoing finance commitment.</p>
+          </div>
+          <div className="sc-card bg-white p-5">
+            <h3 className="font-semibold text-[var(--sc-blue-900)]">Funding</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Relevant mainly where a genuine funding or capital pathway applies — particularly the <Link href="/funding">school property pathways</Link> covered elsewhere on SmartComms.</p>
+          </div>
+          <div className="sc-card bg-white p-5">
+            <h3 className="font-semibold text-[var(--sc-blue-900)]">Finance / leasing</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Relevant where the organisation wants to spread the cost or does not want to fund the entire project upfront. Start with the <Link href="/tools/finance-check">finance check</Link>.</p>
+          </div>
+        </div>
+        <p>No option is universally better. The right answer depends on the organisation, the project and the pathways genuinely available to it.</p>
+
+        <h2>Why organisations explore finance for communications systems</h2>
+        <div className="not-prose my-7 grid gap-5 sm:grid-cols-2">
+          <div className="sc-card bg-white p-5">
+            <h3 className="font-semibold text-[var(--sc-blue-900)]">Schools and education</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">A communications upgrade may be needed before a preferred capital or funding timetable, or where a different payment structure is being considered.</p>
+          </div>
+          <div className="sc-card bg-white p-5">
+            <h3 className="font-semibold text-[var(--sc-blue-900)]">Aged care and healthcare</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">A site may need to replace or improve communications while preserving capital for other facility priorities.</p>
+          </div>
+          <div className="sc-card bg-white p-5">
+            <h3 className="font-semibold text-[var(--sc-blue-900)]">Commercial and industrial sites</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">A business may prefer predictable regular payments while replacing or expanding paging or intercom infrastructure.</p>
+          </div>
+          <div className="sc-card bg-white p-5">
+            <h3 className="font-semibold text-[var(--sc-blue-900)]">Public and community facilities</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Councils, venues, charities and other organisations may want to compare purchase and equipment-finance structures.</p>
+          </div>
+        </div>
+        <p>These examples do not mean every organisation in these categories qualifies for finance. Provider assessment and approval criteria always apply.</p>
+
+        <h2>What happens after the finance check?</h2>
+        <ol>
+          <li><strong>Get your preliminary result.</strong> SmartComms shows whether a specialist finance conversation looks useful.</li>
+          <li><strong>Ask SmartComms for the next step.</strong> If you want help, send enough information for the SmartComms team to understand the project. Your enquiry goes to T3 Labs first.</li>
+          <li><strong>Contact the provider SmartComms suggests.</strong> SmartComms replies with the provider or providers it thinks may be appropriate and their public contact details. Your contact details are shared with a provider only if you agree to a direct introduction. You choose whether to contact them.</li>
+        </ol>
+
+        <p>
+          Useful companions along the way: estimate the project first with the <Link href="/pricing-tool">pricing calculator</Link> or the <Link href="/pricing">pricing guide</Link>, check the <Link href="/tools/funding-check">school funding checker</Link> if a funding pathway may apply, compare equipment options in the <Link href="/compare">platform comparison</Link>, or revisit the <Link href="/systems/ip-paging-pa">IP paging architecture guide</Link>.
+        </p>
+
         <div className="not-prose mt-10 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6">
           <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">Check in about a minute</h2>
           <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">
@@ -149,6 +219,12 @@ export default function FinancingPage() {
 
         <div className="not-prose mt-8 rounded-xl border border-[var(--sc-border)] bg-white p-5 text-sm leading-relaxed text-[var(--sc-slate)]">
           SmartComms NZ is an information and planning resource operated by T3 Labs. It does not provide financial advice, finance products, credit assessment or approval. If you ask for practical help, T3 Labs can review the information supplied and suggest an appropriate next step or provider from its selected network.
+        </div>
+
+        <div className="not-prose mt-8 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6 text-center">
+          <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">Not sure whether finance is worth exploring?</h2>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">It takes about a minute to get a preliminary result.</p>
+          <Link href="/tools/finance-check" className="sc-btn-primary mt-4 inline-flex">Run the finance check</Link>
         </div>
       </article>
 

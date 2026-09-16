@@ -8,6 +8,7 @@ import { organizationSchema, websiteSchema } from "@/lib/seo";
 import { GA4_MEASUREMENT_ID } from "@/lib/analytics";
 import { Suspense } from "react";
 import { AttributionBoot } from "@/components/attribution-boot";
+import { ScrollToTopOnNavigation } from "@/components/scroll-to-top-on-navigation";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
@@ -54,6 +55,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         ) : null}
         <Suspense>
           <AttributionBoot />
+        </Suspense>
+        <Suspense>
+          <ScrollToTopOnNavigation />
         </Suspense>
         <SiteHeader />
         <main className="flex-1">{children}</main>
