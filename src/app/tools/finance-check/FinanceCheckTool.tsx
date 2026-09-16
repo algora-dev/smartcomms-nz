@@ -21,6 +21,13 @@ import {
   type UpfrontBand,
 } from "@/lib/finance-check/config";
 import { assessFinanceFit, type FinanceAnswers } from "@/lib/finance-check/engine";
+import {
+  buildIndustryToolHref,
+  financeOrganisationForIndustry,
+  industryFromParams,
+  resolveIndustryContext,
+  INDUSTRY_CONTEXTS,
+} from "@/lib/industry-context";
 
 function OptionCard({
   label,
@@ -89,10 +96,13 @@ export function FinanceCheckTool() {
   const hasCarriedEstimate = Boolean(carriedLow && carriedHigh && carriedHigh >= carriedLow);
   const sourceParam = searchParams.get("source");
   const fundingResult = searchParams.get("fundingResult") ?? undefined;
+  // Non-personal journey context: preselects (does not lock) the organisation.
+  const incomingIndustry = industryFromParams(searchParams);
 
   const [screen, setScreen] = useState(0);
   const [answers, setAnswers] = useState<FinanceAnswers>({
     paymentFrequency: "monthly",
+    organisationType: financeOrganisationForIndustry(incomingIndustry),
     source: sourceParam === "pricing" || sourceParam === "funding" ? sourceParam : "financing",
     fundingResult,
     carriedEstimateLow: carriedLow,
@@ -118,6 +128,9 @@ export function FinanceCheckTool() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const result = useMemo(() => assessFinanceFit(answers), [answers]);
+  // Outgoing context follows the CURRENT answer, not the incoming query:
+  // an explicit change of organisation always overrides the sector hint.
+  const effectiveIndustry = resolveIndustryContext(incomingIndustry, answers.organisationType);
   const paymentOptions = answers.paymentFrequency === "weekly" ? WEEKLY_BUDGETS : MONTHLY_BUDGETS;
   const projectValueUnknown = answers.projectValueBand === "unsure";
 
@@ -161,6 +174,7 @@ export function FinanceCheckTool() {
     setResultReady(false);
     setAnswers({
       paymentFrequency: "monthly",
+      organisationType: financeOrganisationForIndustry(incomingIndustry),
       source: sourceParam === "pricing" || sourceParam === "funding" ? sourceParam : "financing",
       fundingResult,
       carriedEstimateLow: carriedLow,
@@ -177,6 +191,7 @@ export function FinanceCheckTool() {
 
   if (resultReady) {
     const financeContext: Record<string, string> = {
+      ...(effectiveIndustry ? { Industry: INDUSTRY_CONTEXTS[effectiveIndustry].label } : {}),
       "Finance-fit result": result.eyebrow,
       Organisation: result.organisationLabel,
       "Project value": result.projectValueLabel,
@@ -380,7 +395,7 @@ export function FinanceCheckTool() {
                 ))}
               </div>
               <p className="mt-4 text-xs leading-relaxed text-[var(--sc-slate)]">
-                If you want a more useful project range first, use the <Link href="/pricing-tool?source=finance" onClick={() => track("finance_to_pricing_clicked")} className="font-semibold underline underline-offset-2">SmartComms pricing calculator</Link> and come back to this checker afterwards.
+                If you want a more useful project range first, use the <Link href={buildIndustryToolHref("/pricing-tool", { industry: effectiveIndustry, source: "other" })} onClick={() => track("finance_to_pricing_clicked")} className="font-semibold underline underline-offset-2">SmartComms pricing calculator</Link> and come back to this checker afterwards.
               </p>
             </div>
           )}

@@ -4,6 +4,8 @@ import { useState } from "react";
 import type { CalculatorState, EstimateResult } from "@/lib/pricing/types";
 import { formatNZD, pricingConfig } from "@/lib/pricing/config";
 import { packageLabel } from "@/lib/pricing/calculate";
+import type { IndustryContext } from "@/lib/industry-context";
+import { INDUSTRY_CONTEXTS } from "@/lib/industry-context";
 import { InquiryModal } from "./InquiryModal";
 import { ToolCrossSell } from "@/components/tool-cross-sell";
 import { track } from "@/lib/analytics";
@@ -13,12 +15,16 @@ const pdfLabel = "SmartComms NZ ballpark system estimate";
 export function ResultView({
   state,
   estimate,
+  industry,
   onEdit,
+  onLeaveIndustry,
   onRestart,
 }: {
   state: CalculatorState;
   estimate: EstimateResult;
+  industry?: IndustryContext;
   onEdit: () => void;
+  onLeaveIndustry?: () => void;
   onRestart: () => void;
 }) {
   const [breakdownOpen, setBreakdownOpen] = useState(false);
@@ -35,6 +41,7 @@ export function ResultView({
   const needsCablingNote = state.tier !== "B";
 
   const rangeSuffix = estimate.overThreshold ? "+" : "";
+  const isAgedCare = industry === "aged-care";
 
   const disclaimer =
     state.tier === "A"
@@ -55,7 +62,7 @@ export function ResultView({
   const included: string[] = [
     "Central paging and control platform",
     "Live and zoned paging",
-    "Scheduled announcements and bells",
+    isAgedCare ? "Scheduled announcements" : "Scheduled announcements and bells",
     "Installation allowance based on the site type selected",
     "Remote programming and commissioning",
   ];
@@ -158,7 +165,13 @@ export function ResultView({
     doc.setFont("helvetica", "normal");
     doc.setFontSize(9);
     doc.setTextColor(90);
-    const lines = doc.splitTextToSize(disclaimer + " This document is an indicative estimate from a SmartComms planning model, not a formal quote. For a formal quote, SmartComms can review the project information and suggest an appropriate provider from its selected network.", W - 100);
+    const lines = doc.splitTextToSize(
+      (isAgedCare
+        ? "This is a general paging and intercom planning estimate for a care-site project, not a complete nurse-call or certified evacuation-system quote. "
+        : "") +
+      disclaimer + " This document is an indicative estimate from a SmartComms planning model, not a formal quote. For a formal quote, SmartComms can review the project information and suggest an appropriate provider from its selected network.",
+      W - 100,
+    );
     if (y + lines.length * 11 > 780) { doc.addPage(); y = 60; }
     doc.text(lines, 50, y);
 
@@ -199,6 +212,23 @@ export function ResultView({
           <strong>Large-system estimate:</strong> this configuration is beyond the standard range validated by the
           SmartComms calculator. Larger systems may require different control, network, amplification or licensing
           architecture, so this estimate may understate the final installed cost and a site-specific design is recommended.
+        </div>
+      )}
+
+      {isAgedCare && (
+        <div className="mt-4 rounded-xl border-l-4 border-[var(--sc-teal)] bg-[var(--sc-blue-50)] p-4 text-sm text-[var(--sc-navy)]">
+          <strong>Aged-care / retirement-village scope.</strong> This is a general paging and intercom planning
+          estimate, not a complete nurse-call or certified evacuation-system quote. Scheduled-announcement wording
+          is used throughout.{' '}
+          {onLeaveIndustry && (
+            <button
+              type="button"
+              onClick={onLeaveIndustry}
+              className="mt-2 block font-semibold text-[var(--sc-teal-strong)] underline decoration-2 underline-offset-2 hover:text-[var(--sc-blue-700)] cursor-pointer"
+            >
+              Use the general calculator →
+            </button>
+          )}
         </div>
       )}
 
@@ -295,7 +325,7 @@ export function ResultView({
         )}
       </div>
 
-      <ToolCrossSell variant="pricing-to-funding" estimateLow={estimate.low} estimateHigh={estimate.high} />
+      <ToolCrossSell variant="pricing-to-funding" estimateLow={estimate.low} estimateHigh={estimate.high} industry={industry} />
 
       {/* Quote / assessment CTAs */}
       <div className="mt-8 rounded-2xl bg-[var(--sc-navy)] p-8 text-center">
@@ -362,6 +392,7 @@ export function ResultView({
         estimateSummary={`${formatNZD(estimate.low)} - ${formatNZD(estimate.high)}${rangeSuffix} ex GST`}
         estimateLink={typeof window !== "undefined" ? window.location.href : undefined}
         context={{
+          ...(isAgedCare ? { Industry: INDUSTRY_CONTEXTS[industry!].label } : {}),
           "Site situation": tierText,
           "Feature package": packageLabel[state.featurePackage],
           "Standard indoor rooms": String(a.standardIndoor),

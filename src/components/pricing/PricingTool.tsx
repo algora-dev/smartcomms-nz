@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { industryFromParams, type IndustryContext } from "@/lib/industry-context";
 import type { AreaKey, CalculatorState, FeaturePackage, InstallationType } from "@/lib/pricing/types";
 import { calculateEstimate } from "@/lib/pricing/calculate";
 import { track } from "@/lib/analytics";
@@ -125,6 +126,7 @@ export function PricingTool() {
   const [fineTuneOpen, setFineTuneOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
   const [confirmRestart, setConfirmRestart] = useState(false);
+  const [industry, setIndustry] = useState<IndustryContext>();
   const skipPersist = useRef(false);
 
   useEffect(() => {
@@ -136,6 +138,7 @@ export function PricingTool() {
     queueMicrotask(() => {
       setHydrated(true);
       const params = new URLSearchParams(window.location.search);
+      setIndustry(industryFromParams(params));
       if (params.get("cfg")) {
         try {
           const parsed = JSON.parse(decodeURIComponent(params.get("cfg")!));
@@ -179,6 +182,18 @@ export function PricingTool() {
     setStep(0);
     setFineTuneOpen(false);
     setConfirmRestart(false);
+    window.history.replaceState(null, "", window.location.pathname);
+    // Retain validated industry context across a restart unless the user
+    // deliberately leaves the care scope (general-calculator action).
+    if (industry) {
+      window.history.replaceState(null, "", `?industry=${industry}`);
+    }
+    scrollToolTo(toolTopRef);
+  };
+
+  const leaveIndustryScope = () => {
+    skipPersist.current = true;
+    setIndustry(undefined);
     window.history.replaceState(null, "", window.location.pathname);
     scrollToolTo(toolTopRef);
   };
@@ -505,7 +520,9 @@ export function PricingTool() {
           <ResultView
             state={state}
             estimate={estimate}
+            industry={industry}
             onEdit={() => goToStep(1)}
+            onLeaveIndustry={industry ? leaveIndustryScope : undefined}
             onRestart={() => setConfirmRestart(true)}
           />
         </div>

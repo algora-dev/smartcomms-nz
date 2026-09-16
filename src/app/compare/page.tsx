@@ -812,6 +812,9 @@ export default function ComparePage() {
             integrated school workflows, classroom audio, SIP/VoIP, retained analogue PA, browser/security integration,
             room intercom or life-safety architecture. SPON is a strong all-round option for an integrated school brief
             covering bells, zoned paging and optional intercom — and the shortlists below change with the job, not the logo.
+            Planning for a rest home or retirement village?{" "}
+            <Link href="/industries/aged-care-retirement-villages" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">Use the aged-care comparison</Link>,
+            where the requirements and shortlist differ.
           </p>
           <div className="mt-6">
             <TableRegion label="Use-case shortlists. Editorial starting points, not measured rankings.">

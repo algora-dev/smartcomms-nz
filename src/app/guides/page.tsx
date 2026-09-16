@@ -11,6 +11,11 @@ export const metadata: Metadata = buildMetadata({
 
 const GUIDES = [
   {
+    title: "Aged Care & Retirement Village PA/Intercom Guide",
+    desc: "PA, paging, entrance intercom and staff communication for NZ rest homes and retirement villages, with use-case shortlists and indicative costs.",
+    href: "/industries/aged-care-retirement-villages",
+  },
+  {
     title: "NZ School PA & Paging Requirements",
     desc: "What Ministry design, cabling, funding and procurement guidance means for school PA, bells, intercom and emergency communications.",
     href: "/guides/nz-school-pa-paging-requirements",

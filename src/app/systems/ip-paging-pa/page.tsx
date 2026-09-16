@@ -123,7 +123,9 @@ export default function IpPagingPaPage() {
         approaches and specialist architectures from brands including SPON, FrontRow, Algo, Bosch, ITC, Axis, TOA and
         others relevant to the NZ market. Our{" "}
         <Link href="/compare">platform comparison guide</Link> matches those options to your priorities for
-        NZ buyers.
+        NZ buyers. Planning for a rest home or retirement village?{" "}
+        <Link href="/industries/aged-care-retirement-villages">Use the aged-care comparison</Link>, where
+        the requirements and shortlist differ.
       </p>
       <h2 id="next">Next steps</h2>
       <ul>

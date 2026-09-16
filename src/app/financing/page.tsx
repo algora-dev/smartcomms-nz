@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
+import { IndustryAwareToolLink } from "@/components/industry-aware-tool-link";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
@@ -89,8 +91,8 @@ export default function FinancingPage() {
             Paying the full project cost upfront is not the only possible route. Commercial equipment finance, leasing and lease-to-own-style structures may let an eligible organisation spread the cost of a communications-system project over regular payments.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/tools/finance-check" className="sc-btn-primary">Check whether finance is worth exploring</Link>
-            <Link href="/pricing-tool" className="sc-btn-secondary">Estimate the project cost first</Link>
+            <Suspense><IndustryAwareToolLink to="/tools/finance-check" className="sc-btn-primary">Check whether finance is worth exploring</IndustryAwareToolLink></Suspense>
+            <Suspense><IndustryAwareToolLink to="/pricing-tool" className="sc-btn-secondary">Estimate the project cost first</IndustryAwareToolLink></Suspense>
           </div>
           <p className="mt-4 text-xs leading-relaxed text-[var(--sc-slate)]">
             Last reviewed {reviewed}. SmartComms does not provide finance, quote interest rates or make credit decisions. Actual options and approval are determined by the relevant finance provider.
@@ -224,7 +226,7 @@ export default function FinancingPage() {
         <div className="not-prose mt-8 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6 text-center">
           <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">Not sure whether finance is worth exploring?</h2>
           <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">It takes about a minute to get a preliminary result.</p>
-          <Link href="/tools/finance-check" className="sc-btn-primary mt-4 inline-flex">Run the finance check</Link>
+          <Suspense><IndustryAwareToolLink to="/tools/finance-check" className="sc-btn-primary mt-4 inline-flex">Run the finance check</IndustryAwareToolLink></Suspense>
         </div>
       </article>
 

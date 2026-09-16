@@ -59,6 +59,11 @@ const INTENT_CARDS = [
     desc: "See why fixed school communications infrastructure may fit and what the school needs to do next.",
   },
   {
+    href: "/industries/aged-care-retirement-villages",
+    title: "Aged care & retirement village systems",
+    desc: "PA, paging, entrance intercom and staff communication guidance for rest homes and villages, with use-case shortlists and indicative costs.",
+  },
+  {
     href: "/contact",
     title: "Not sure what to do next?",
     desc: "Tell us about the site, what you need the system to achieve and your region. We’ll review it and point you towards the most useful next step.",

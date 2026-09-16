@@ -33,6 +33,7 @@ export const CONTENT_META: Record<string, ContentMeta> = {
   "/financing": { published: "2026-09-16", reviewed: "2026-09-16" },
   "/tools/finance-check": { published: "2026-09-16", reviewed: "2026-09-16" },
   "/compare": { published: "2026-09-12", reviewed: "2026-09-16" },
+  "/industries/aged-care-retirement-villages": { published: "2026-09-16", reviewed: "2026-09-16" },
   "/about": { published: "2026-09-05", reviewed: "2026-09-16" },
   "/about/methodology": { published: "2026-09-05", reviewed: "2026-09-16" },
   "/about/disclosure": { published: "2026-09-05", reviewed: "2026-09-16" },

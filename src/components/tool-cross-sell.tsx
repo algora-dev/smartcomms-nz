@@ -2,6 +2,10 @@
 
 import Link from "next/link";
 import { track } from "@/lib/analytics";
+import {
+  buildIndustryToolHref,
+  type IndustryContext,
+} from "@/lib/industry-context";
 
 type Variant = "pricing-to-funding" | "funding-to-pricing";
 
@@ -20,14 +24,45 @@ export function ToolCrossSell({
   estimateHigh,
   fundingResult,
   financePrimary = false,
+  industry,
 }: {
   variant: Variant;
   estimateLow?: number;
   estimateHigh?: number;
   fundingResult?: string;
   financePrimary?: boolean;
+  industry?: IndustryContext;
 }) {
   if (variant === "pricing-to-funding") {
+    // Known aged-care context: never offer school 5YA on a care journey.
+    if (industry === "aged-care") {
+      const financeHref = buildIndustryToolHref("/tools/finance-check", {
+        industry,
+        source: "pricing",
+        estimate: estimateLow && estimateHigh ? { low: estimateLow, high: estimateHigh } : undefined,
+      });
+      return (
+        <section className="mt-8 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6 sm:p-7">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">Payment options</p>
+          <h3 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Want to explore spreading the project cost?</h3>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--sc-slate)]">
+            Equipment finance or leasing may be worth discussing. Your estimate will carry into the finance check, so you do not need to enter the project value again.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Link href={financeHref} className="sc-btn-primary" onClick={() => track("pricing_to_finance_clicked", { industry })}>
+              Explore payment options
+            </Link>
+            <Link
+              href={buildIndustryToolHref("/financing", { industry })}
+              className="sc-btn-secondary"
+              onClick={() => track("pricing_to_finance_clicked", { industry })}
+            >
+              Read about finance and leasing
+            </Link>
+          </div>
+        </section>
+      );
+    }
     const fundingHref = `/tools/funding-check${queryString({
       source: "pricing",
       estimateLow: Math.round(estimateLow ?? 0) || undefined,
