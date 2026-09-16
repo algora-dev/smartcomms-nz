@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
@@ -26,6 +27,14 @@ export default function EditorialPolicyPage() {
       <p>
         Pricing and funding pages carry explicit review dates. When source rules or pricing assumptions change materially, the relevant page and tool configuration should be updated together.
       </p>
+      <h2>Comparison principles</h2>
+      <ul>
+        <li>Recommendation criteria are use-case specific: a product may appear prominently in one use case and not another.</li>
+        <li>Manufacturer evidence and New Zealand local evidence (availability, support, project precedent) are distinguished and labelled.</li>
+        <li>Lack of a referral partnership does not exclude a legitimate competitor from fair editorial coverage.</li>
+        <li>Commercial participation does not entitle a provider to a positive ranking or guaranteed placement.</li>
+        <li>Corrections can be submitted by any manufacturer or provider through the <Link href="/contact">contact page</Link>.</li>
+      </ul>
       <h2>What we avoid</h2>
       <ul>
         <li>Fabricated averages, sample sizes or customer outcomes</li>

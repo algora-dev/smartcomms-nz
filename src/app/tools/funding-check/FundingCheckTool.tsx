@@ -40,6 +40,7 @@ interface LeadForm {
   townRegion: string;
   contactMethod: "email" | "phone";
   cta: "review" | "quote";
+  companyWebsite?: string;
 }
 
 function InfoDot({ text }: { text: string }) {
@@ -176,14 +177,13 @@ export function FundingCheckTool() {
       const data = await response.json().catch(() => ({}));
       if (!response.ok || !data.ok) throw new Error(data.error || "Submission failed");
       setSent(true);
-      track("enquiry_submitted", {
-        enquiry_type: "funding_check",
+      track("funding_help_submitted", {
         cta: lead.cta,
         pathway: result.pathway,
         case_category: result.caseTier,
       });
     } catch (error) {
-      track("enquiry_failed", { enquiry_type: "funding_check", cta: lead.cta });
+      track("project_help_failed", { enquiry_type: "funding_check", cta: lead.cta });
       setSendError(
         error instanceof Error && error.message && !error.message.toLowerCase().includes("failed")
           ? error.message
@@ -210,23 +210,27 @@ export function FundingCheckTool() {
     const pathwayHeading =
       result.pathway === "five_ya"
         ? RESULT_COPY.pathway5ya
-        : result.pathway === "state_integrated"
-          ? RESULT_COPY.stateIntegrated.heading
-          : result.pathway === "private"
-            ? RESULT_COPY.private.heading
-            : result.pathway === "unknown"
-              ? RESULT_COPY.unknownSchool.heading
-              : RESULT_COPY.newBuild.heading;
+        : result.pathway === "maintenance_only"
+          ? RESULT_COPY.maintenanceOnly.heading
+          : result.pathway === "state_integrated"
+            ? RESULT_COPY.stateIntegrated.heading
+            : result.pathway === "private"
+              ? RESULT_COPY.private.heading
+              : result.pathway === "unknown"
+                ? RESULT_COPY.unknownSchool.heading
+                : RESULT_COPY.newBuild.heading;
     const pathwayBody =
       result.pathway === "five_ya"
         ? RESULT_COPY.pathway5yaBody
-        : result.pathway === "state_integrated"
-          ? RESULT_COPY.stateIntegrated.body
-          : result.pathway === "private"
-            ? RESULT_COPY.private.body
-            : result.pathway === "unknown"
-              ? RESULT_COPY.unknownSchool.body
-              : RESULT_COPY.newBuild.body;
+        : result.pathway === "maintenance_only"
+          ? RESULT_COPY.maintenanceOnly.body
+          : result.pathway === "state_integrated"
+            ? RESULT_COPY.stateIntegrated.body
+            : result.pathway === "private"
+              ? RESULT_COPY.private.body
+              : result.pathway === "unknown"
+                ? RESULT_COPY.unknownSchool.body
+                : RESULT_COPY.newBuild.body;
 
     return (
       <div>
@@ -265,6 +269,8 @@ export function FundingCheckTool() {
                 ? "Communications scope worth including"
                 : result.pathway === "private" || result.pathway === "unknown"
                   ? "Strong fixed communications scope to review"
+                : result.pathway === "maintenance_only"
+                  ? "Fixed communications scope (relevant only if a separate capital project is defined)"
                   : "What could potentially be funded"}
             </h2>
             <ul className="mt-3 space-y-2">
@@ -327,8 +333,7 @@ export function FundingCheckTool() {
                 onClick={() => {
                   setLead((current) => ({ ...current, cta: "review" }));
                   setShowLead(true);
-                  track("funding_review_opened", { cta: "review", pathway: result.pathway });
-                  track("enquiry_opened", { enquiry_type: "funding_check", cta: "review" });
+                  track("funding_help_opened", { cta: "review", pathway: result.pathway });
                 }}
               >
                 {result.pathway === "state_integrated"
@@ -339,7 +344,9 @@ export function FundingCheckTool() {
                       ? RESULT_COPY.newBuild.cta
                       : result.pathway === "unknown"
                         ? RESULT_COPY.unknownSchool.cta
-                        : RESULT_COPY.ctaPrimary}
+                        : result.pathway === "maintenance_only"
+                          ? RESULT_COPY.maintenanceOnly.cta
+                          : RESULT_COPY.ctaPrimary}
               </button>
               <button
                 type="button"
@@ -347,8 +354,7 @@ export function FundingCheckTool() {
                 onClick={() => {
                   setLead((current) => ({ ...current, cta: "quote" }));
                   setShowLead(true);
-                  track("funding_review_opened", { cta: "quote", pathway: result.pathway });
-                  track("enquiry_opened", { enquiry_type: "funding_check", cta: "quote" });
+                  track("funding_help_opened", { cta: "quote", pathway: result.pathway });
                 }}
               >
                 {RESULT_COPY.ctaSecondary}
@@ -364,6 +370,18 @@ export function FundingCheckTool() {
                 void submitLead();
               }}
             >
+              {/* Honeypot: real users never see this field. */}
+              <div className="hidden" aria-hidden="true">
+                <label>
+                  Website
+                  <input
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={lead.companyWebsite ?? ""}
+                    onChange={(event) => setLead({ ...lead, companyWebsite: event.target.value })}
+                  />
+                </label>
+              </div>
               <label className="text-sm font-medium text-[var(--sc-slate)]">
                 Your name
                 <input
@@ -430,13 +448,12 @@ export function FundingCheckTool() {
               <div className="sm:col-span-2">
                 {lead.cta === "review" && (
                   <p className="mb-3 text-xs leading-relaxed text-[var(--sc-slate)]">
-                    Send us your result and we can connect you with a trusted New Zealand technology or
-                    installation partner who can review the existing system, confirm scope, prepare an
-                    indicative project budget and help assemble the technical information needed for your
-                    property discussion.
+                    Send us your result and we can suggest an appropriate next step - or a suitable provider from our
+                    selected New Zealand partner network who can review the existing system, confirm scope and prepare
+                    an indicative project budget.
                   </p>
                 )}
-                <p className="text-xs text-[var(--sc-slate)]">Your funding-check answers are attached automatically. If you request a quote or project review, relevant details may be shared with a trusted installation partner. <Link href="/privacy" className="underline">Privacy</Link>.</p>
+                <p className="text-xs text-[var(--sc-slate)]">Your funding-check answers are attached automatically. Your enquiry goes to SmartComms / T3 Labs first; a provider receives your contact details only if you agree to a direct introduction. <Link href="/privacy" className="underline">Privacy</Link>.</p>
                 <button type="submit" disabled={sending} className="sc-btn-primary mt-3 disabled:opacity-50">
                   {sending ? "Sending..." : "Send my request"}
                 </button>
@@ -447,7 +464,9 @@ export function FundingCheckTool() {
 
           {sent && (
             <p className="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-emerald-700">
-              Thanks - your request has been sent. We will be in touch shortly.
+              Thanks - your request has been sent. We&apos;ll review the information you supplied and work out the most
+              useful next step. Where a specialist provider is appropriate, we can suggest someone from our selected
+              New Zealand partner network.
             </p>
           )}
         </div>

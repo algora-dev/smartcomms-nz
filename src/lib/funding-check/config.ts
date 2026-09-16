@@ -193,12 +193,21 @@ export const RESULT_COPY = {
     body: "The fixed communications scope is worth reviewing. If this is a state school, 5YA / 10YPP may be the relevant pathway. If it is state-integrated or private, a different property or capital funding route will apply.",
     cta: "Request a funding pathway review",
   },
+  maintenanceOnly: {
+    headline: "Maintenance-only work is not a 5YA project",
+    heading: "Maintenance-only work cannot be paid from 5YA",
+    body:
+      "Ministry guidance is explicit: 5YA projects are capital projects and you cannot use 5YA funding for maintenance. Ordinary repairs and maintenance need to be handled through the school's normal operational budget.",
+    cta: "Review the project scope",
+  },
   positiveOverride:
     "We found fixed communications elements with a strong potential funding fit. The overall case may simply need better supporting evidence before it is put forward.",
   maintenanceNote:
-    "Routine maintenance is a weaker 5YA basis. Some of the fixed communications components you selected may still have a strong capital-infrastructure fit, but ordinary maintenance alone is generally not the strongest 5YA case. A project review can help determine whether the work is better described as replacement, renewal or substantial upgrade.",
-  ctaPrimary: "Get a Funding-Ready Project Review",
+    "Maintenance-only work cannot be paid from 5YA funding - 5YA is for capital projects. Do not relabel ordinary maintenance as a capital project to make it fit.",
+  maintenanceUpgradeExtension:
+    "Your answers suggest the scope may extend beyond routine maintenance (failing / end-of-life equipment or full replacement). If a separate replacement or substantial-upgrade project is defined, review that capital project on its own merits through the 5YA / 10YPP process, subject to the school's property circumstances and Ministry rules.",
+  ctaPrimary: "Review the project scope",
   ctaPrimaryBody:
-    "We can review the existing system, confirm the likely scope, identify the strongest funding components and prepare an indicative budget and technical summary for discussion with the school's Property Advisor / 10YPP consultant.",
-  ctaSecondary: "Get an Indicative System Quote",
+    "A provider can help document the existing system, technical scope and indicative budget. The school, Property Advisor / 10YPP process and Ministry requirements determine the funding pathway and approval.",
+  ctaSecondary: "Ask about an indicative system quote",
 } as const;

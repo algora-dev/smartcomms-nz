@@ -178,7 +178,7 @@ export default function FundingPage() {
           <li>Network, cabling, refurbishment or other property work is already planned, making coordination sensible. If cabling is part of your project, our <Link href="/guides/ip-paging-network-readiness">network readiness checklist</Link> helps scope that work.</li>
         </ul>
         <p>
-          A project that is mainly routine maintenance or a discretionary technology refresh usually has a weaker 5YA argument than a genuine replacement or substantial fixed-infrastructure upgrade.
+          <strong>Maintenance-only work cannot be paid from 5YA.</strong> Ministry guidance is explicit that 5YA projects are capital projects and 5YA funding cannot be used for maintenance. If inspection shows that the real scope is replacement of an existing asset or a substantial capital upgrade, that separately defined project may be appropriate to review through the 5YA / 10YPP process, subject to the school&apos;s property circumstances and Ministry rules. Do not relabel ordinary maintenance as a capital project merely to make it fit.
         </p>
 
         <h2>Who actually handles the funding process?</h2>

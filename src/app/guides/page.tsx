@@ -26,8 +26,8 @@ const GUIDES = [
     href: "/guides/school-pa-specification-checklist",
   },
   {
-    title: "Best IP Paging & PA Systems: 2026 Buyer’s Guide",
-    desc: "Compare SPON, Algo, Axis, TOA, AtlasIED, Bosch and traditional 100V PA by cost, features, ease of use and value.",
+    title: "IP Paging & PA Systems: 2026 Buyer’s Guide",
+    desc: "Compare integrated school platforms, SIP-first options, browser-managed audio, hybrid approaches and specialist architectures for NZ buyers.",
     href: "/compare",
   },
   {

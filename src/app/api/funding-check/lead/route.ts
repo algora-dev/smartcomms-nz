@@ -14,6 +14,8 @@ interface LeadPayload {
   contactMethod: string;
   townRegion: string;
   cta: string;
+  /** Honeypot: real UI never fills this. */
+  companyWebsite?: string;
 }
 
 function escapeHtml(s: string): string {
@@ -42,7 +44,8 @@ function buildEmailHtml(
 
   return `<div style="font-family:system-ui,sans-serif;color:#1f2937;">
   <h2 style="color:#0b2d5b;">New funding-check lead: ${escapeHtml(lead.school)}</h2>
-  <p><strong>CTA:</strong> ${lead.cta === "review" ? "Funding-Ready Project Review" : "Indicative System Quote"}</p>
+  <p><strong>CTA:</strong> ${lead.cta === "review" ? "Project scope review" : "Indicative system quote"}</p>
+  <p style="padding:8px 12px;background:#fef3c7;border:1px solid #f59e0b;border-radius:6px;"><strong>ROUTING STATUS:</strong> T3 review required — NOT automatically forwarded to any partner. Share provider details only after the customer agrees to a direct introduction.</p>
   <h3 style="color:#0b2d5b;">Contact</h3>
   <ul>
     <li><strong>Name:</strong> ${escapeHtml(lead.name)}</li>
@@ -78,8 +81,16 @@ export async function POST(req: Request) {
   }
 
   const { answers, lead, source, attribution } = body;
+  // Honeypot: silently accept and discard obvious bot submissions.
+  if (lead?.companyWebsite) return NextResponse.json({ ok: true });
   if (!lead || !lead.name || !lead.school || !lead.email || !answers) {
     return NextResponse.json({ ok: false, error: "Missing required fields." }, { status: 400 });
+  }
+  // Bounded lengths / sane email shape (defence in depth).
+  const bounded = (v: string | undefined, max: number) => (v ?? "").toString().trim().length <= max;
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!EMAIL_RE.test(lead.email) || !bounded(lead.name, 300) || !bounded(lead.school, 300) || !bounded(lead.townRegion, 200) || !bounded(lead.phone, 60)) {
+    return NextResponse.json({ ok: false, error: "Please check the contact details you entered." }, { status: 400 });
   }
   // Server-side enforcement of the funding lead requirements (frontend
   // validation must never be the only gate).

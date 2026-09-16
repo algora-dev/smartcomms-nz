@@ -16,13 +16,24 @@ function subtotalForTier(state: CalculatorState, tier: Tier) {
 
   const add = (label: string, value: number, detail?: string) => {
     if (value > 0) {
-      lines.push({ label, detail, amount: value });
+      lines.push({
+        label,
+        detail,
+        amount: value,
+        amountLow: Math.round(value * c.estimateLowMultiplier),
+        amountHigh: Math.round(value * c.estimateHighMultiplier),
+      });
       amount += value;
     }
   };
 
-  // Headend / platform (flat across tiers)
-  add("Central paging / control platform", c.headendPrice, "Paging station, server, software, remote programming and commissioning");
+  // Headend / platform (flat across tiers). Model assumption: a combined
+  // platform allowance - other architectures distribute these costs differently.
+  add(
+    "Central paging / control platform",
+    c.headendPrice,
+    "Paging station, server, software, remote programming and commissioning (combined platform allowance - model assumption)"
+  );
 
   // Areas
   const a = state.areas;
@@ -69,13 +80,13 @@ function subtotalForTier(state: CalculatorState, tier: Tier) {
     add(
       `Two-way room call buttons (${twoWayRooms})`,
       twoWayRooms * unitPrice(c.intercoms.twoWayButton.priceA, c.intercoms.twoWayButton.priceB, tier),
-      "Push-button calling using the speaker's built-in microphone"
+      "Push-button calling using the speaker's built-in microphone (model assumption)"
     );
   }
 
-  // Fire interface
+  // Fire interface (model assumption - a combined interface allowance)
   if (resolveFire(state)) {
-    add("Fire alarm / lockdown / EVAC interface", c.fireInterfacePrice);
+    add("Fire alarm / lockdown / EVAC interface", c.fireInterfacePrice, "Model assumption - combined interface allowance");
   }
 
   // Additional control stations

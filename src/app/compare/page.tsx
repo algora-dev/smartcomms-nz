@@ -2,20 +2,21 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
-import { publishedDate } from "@/lib/content-meta";
+import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
+import { ProjectHelpLauncher } from "@/components/enquiry/ProjectHelpLauncher";
 
 /**
  * SmartComms NZ /compare — source review: 15 September 2026.
  * Server component: all comparisons, details and source links render in HTML.
  * No package, layout, CSS or client-state dependency has been added.
- * Keep this review date aligned with /compare in lib/content-meta when deploying.
+ * Review date lives in lib/content-meta (single source of truth).
  * Editorial fit is not a lab rating or a verified complete-system price ranking.
  */
-const REVIEW_DATE = "2026-09-15";
-const REVIEW_LABEL = "15 September 2026";
-const PAGE_TITLE = "Best School PA & IP Paging Systems NZ (2026 Guide)";
-const ARTICLE_HEADLINE = "Best school PA, IP paging, bell & intercom systems in NZ (2026)";
+const REVIEW_DATE = reviewedDate("/compare");
+const REVIEW_LABEL = reviewedLabel("/compare");
+const PAGE_TITLE = "Compare School PA & IP Paging Systems NZ (2026 Guide)";
+const ARTICLE_HEADLINE = "Compare school PA, IP paging, bell & intercom systems in New Zealand (2026)";
 const PAGE_DESCRIPTION =
   "Compare SPON, FrontRow, Algo, Bosch PROSPERO, ITC, Axis and TOA for NZ school PA, paging, bells and intercom: features, support and trade-offs.";
 const pageUrl = `${site.url.replace(/\/$/, "")}/compare`;
@@ -274,7 +275,7 @@ const platforms: readonly Platform[] = [
     "name": "SPON",
     "family": "IP PA / intercom with XC-9000 management",
     "category": "Integrated school platform",
-    "fit": "Our all-round starting point",
+    "fit": "A strong all-round option for an integrated school brief",
     "verdict": "A strong first quote for bells, zoned paging and optional room calling in one managed system.",
     "summary": "SPON is a strong all-round school shortlist when the aim is one managed environment for daily announcements, schedules and two-way communication. Its school solution documents zoned announcements, automated bells and priority messages; XC-9000 adds central device management, intercom and integration controls. That breadth is the reason to consider it—not an unverified claim that it is always cheapest.",
     "bells": "Central scheduling and zoned paging in the specified management package.",
@@ -543,7 +544,7 @@ const faqs: readonly Question[] = [
   {
     "id": "best-school-system",
     "question": "Which IP paging system is best for a New Zealand school?",
-    "answer": "For a typical brief covering bells, zoned announcements, indoor/outdoor coverage and optional room calling, SPON is our all-round starting point. FrontRow Conductor is a particularly important comparison when classroom audio is part of the project, and Algo when SIP or existing PA reuse is central. Bosch PROSPERO is also a direct school-specific network-paging option with a NZ-facing supply route. ITC, Axis and TOA remain worthwhile alternatives according to the supplied architecture and support. This is a fit-based shortlist, not a market-share ranking.",
+    "answer": "There is no single best system for every school. For an integrated bells + paging + optional intercom brief, SPON is one strong starting point. FrontRow becomes particularly relevant when classroom audio is part of the project; Algo is strong for SIP and staged migration; Bosch PROSPERO is a school-specific Bosch alternative; Axis, TOA and ITC suit other architectures and priorities. This is an editorial fit shortlist, not a market-share ranking.",
     "sources": [
       "spon-school",
       "frontrow",
@@ -621,6 +622,55 @@ const faqs: readonly Question[] = [
 
 const sourceEntries = Object.entries(evidence) as [EvidenceId, (typeof evidence)[EvidenceId]][];
 const sourceNumbers = Object.fromEntries(sourceEntries.map(([id], index) => [id, index + 1])) as Record<EvidenceId, number>;
+
+/**
+ * Use-case shortlists (editorial, evidence-bound). The strongest fit is listed
+ * first where the reviewed evidence supports a clear reason — this is not a
+ * measured 1–3 ranking, and no brand is guaranteed a place by code.
+ */
+const USE_CASES: { id: string; whatMatters: string; startingPoints: string[]; why: string }[] = [
+  {
+    id: "uc-school-bells",
+    whatMatters: "Integrated school bells + paging + optional intercom",
+    startingPoints: ["spon", "frontrow", "bosch-prospero"],
+    why: "Managed education platforms combining schedules, zoned announcements and room calling in one system.",
+  },
+  {
+    id: "uc-classroom-audio",
+    whatMatters: "Classroom audio + campus communication",
+    startingPoints: ["frontrow", "bosch-prospero", "spon"],
+    why: "Classroom voice amplification and AV join up with bells, paging and intercom workflows.",
+  },
+  {
+    id: "uc-sip-voip",
+    whatMatters: "SIP / VoIP + staged upgrade",
+    startingPoints: ["algo", "toa", "axis"],
+    why: "SIP-native endpoints and gateways that coexist with a phone system and grow area by area.",
+  },
+  {
+    id: "uc-hybrid-reuse",
+    whatMatters: "Reuse of suitable existing PA / hybrid migration",
+    startingPoints: ["algo", "toa", "itc"],
+    why: "Documented interfaces and amplifiers that feed retained 100V speaker lines alongside new IP endpoints.",
+  },
+  {
+    id: "uc-browser-security",
+    whatMatters: "Browser administration / security-system convergence",
+    startingPoints: ["axis", "algo", "toa"],
+    why: "Browser-based zone/schedule management and documented bridges to camera and access-control ecosystems.",
+  },
+  {
+    id: "uc-entrance-intercom",
+    whatMatters: "Entrance intercom / access communication",
+    startingPoints: ["2n", "axis", "toa"],
+    why: "Current intercom families with SIP calling, modules and NZ-facing listings (TOA via its dedicated N-8000 family).",
+  },
+];
+
+function platformName(id: string): string {
+  if (id === "2n") return "2N";
+  return platforms.find((p) => p.id === id)?.name ?? id;
+}
 
 function Sources({ ids, label = "Evidence" }: { ids: readonly EvidenceId[]; label?: string }) {
   if (ids.length === 0) return null;
@@ -725,7 +775,7 @@ export default function ComparePage() {
           {ARTICLE_HEADLINE}
         </h1>
         <p className="mt-5 max-w-4xl text-lg leading-relaxed text-[var(--sc-slate)]">
-          A school needs more than a speaker brand. It needs bells that follow the timetable, clear announcements in the right places, reliable emergency controls and a system staff can actually use. This 2026 guide compares <strong>SPON, FrontRow, Algo, Bosch PROSPERO, ITC, Axis and TOA</strong> for that job, with <strong>2N</strong> considered separately for current intercom needs and existing paging installations.
+          A school needs more than a speaker brand. It needs bells that follow the timetable, clear announcements in the right places, reliable emergency controls and a system staff can actually use. This 2026 guide compares <strong>SPON, FrontRow, Algo, Bosch PROSPERO, ITC, Axis and TOA</strong> for that job, with <strong>2N</strong> considered separately for current intercom needs and existing paging installations. The strongest starting point depends on the brief — use the shortlists below, not a universal winner.
         </p>
         <p className="mt-4 max-w-4xl leading-relaxed text-[var(--sc-slate)]">
           Compare the complete design: software, indoor and outdoor coverage, room calling, network requirements, installation and NZ support. Not every platform delivers these in the same way—and not every school needs every feature.
@@ -759,17 +809,29 @@ export default function ComparePage() {
             Which system belongs on your shortlist?
           </SectionHeading>
           <p className="mt-4 max-w-4xl leading-relaxed text-[var(--sc-slate)]">
-            <strong>SPON is our all-round starting point for a typical school wanting integrated bells, paging and intercom.</strong> FrontRow Conductor deserves a direct comparison where classroom audio matters; Algo is particularly compelling for SIP and staged upgrades. Bosch PROSPERO is a school-specific network-paging alternative with a NZ-facing channel, while ITC, Axis and TOA add credible options for different site requirements. This is an editorial fit judgement—not proof of a universal winner on price or performance.
+            There is no single universal winner. The right shortlist changes depending on whether the project prioritises
+            integrated school workflows, classroom audio, SIP/VoIP, retained analogue PA, browser/security integration,
+            room intercom or life-safety architecture. SPON is a strong all-round option for an integrated school brief
+            covering bells, zoned paging and optional intercom — and the shortlists below change with the job, not the logo.
           </p>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {platforms.slice(0, 3).map((platform, index) => (
-              <div key={platform.id} className="sc-card flex flex-col bg-white p-5 md:p-6">
-                <div><Badge tone={index === 0 ? "teal" : "blue"}>{["Integrated school brief", "School + classroom audio", "SIP + existing PA"][index]}</Badge></div>
-                <h3 className="mt-3 text-xl font-semibold text-[var(--sc-blue-900)]"><a href={`#${platform.id}`} className="hover:underline">{platform.name}</a></h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--sc-slate)]">{platform.verdict}</p>
-                <div className="mt-3"><Sources ids={platform.sources.slice(0, 2)} /></div>
-              </div>
-            ))}
+          <div className="mt-6">
+            <TableRegion label="Use-case shortlists. Editorial starting points, not measured rankings.">
+              <table className="w-full min-w-[720px] text-left text-sm leading-relaxed">
+                <caption className="border-b border-[var(--sc-border)] px-4 py-3 text-left text-xs text-[var(--sc-slate)]">Editorial shortlists drawn from the evidence on this page. The strongest fit is listed first where a clear reason exists — this is not a measured 1–3 ranking.</caption>
+                <thead className="bg-[var(--sc-blue-900)] text-white"><tr>
+                  <th scope="col" className="w-1/3 px-4 py-3">What matters most</th>
+                  <th scope="col" className="px-4 py-3">Strong starting points</th>
+                  <th scope="col" className="px-4 py-3">Why</th>
+                </tr></thead>
+                <tbody>{USE_CASES.map((uc, index) => (
+                  <tr key={uc.id} className={`border-t border-[var(--sc-border)] align-top ${index % 2 ? "bg-slate-50" : "bg-white"}`}>
+                    <th scope="row" className="px-4 py-4 font-semibold text-[var(--sc-blue-900)]">{uc.whatMatters}</th>
+                    <td className="px-4 py-4 text-[var(--sc-slate)]">{uc.startingPoints.map((id) => platformName(id)).join(" · ")}</td>
+                    <td className="px-4 py-4 text-[var(--sc-slate)]">{uc.why}</td>
+                  </tr>
+                ))}</tbody>
+              </table>
+            </TableRegion>
           </div>
           <TableRegion label="System shortlist. Scroll horizontally on smaller screens.">
             <table className="w-full min-w-[720px] text-left text-sm leading-relaxed">
@@ -838,7 +900,7 @@ export default function ComparePage() {
                     <h3 id={`${platform.id}-title`} className="text-2xl font-bold text-[var(--sc-blue-900)]">{platform.name}</h3>
                     <p className="mt-1 text-sm font-medium text-[var(--sc-blue-700)]">{platform.family}</p>
                   </div>
-                  <Badge tone={platform.id === "spon" ? "teal" : "slate"}>{platform.category}</Badge>
+                  <Badge tone="slate">{platform.category}</Badge>
                 </div>
                 <p className="mt-4 font-semibold text-[var(--sc-blue-900)]">{platform.fit}</p>
                 <p className="mt-2 leading-relaxed text-[var(--sc-slate)]">{platform.summary}</p>
@@ -1018,9 +1080,14 @@ export default function ComparePage() {
         <div className="sc-container max-w-4xl text-center">
           <h2 id="next-step-title" className="text-3xl font-bold">Define the requirement. Then choose the platform.</h2>
           <p className="mx-auto mt-4 max-w-3xl leading-relaxed text-blue-100">Start with the areas to cover, the equipment worth retaining and what staff need to do every day. Use the same brief for each proposal so a lower price does not hide missing coverage, intercom, licences or support.</p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <Link href="/pricing-tool" className="inline-flex items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[var(--sc-blue-900)]">Estimate project cost</Link>
-            <Link href="/contact" className="inline-flex items-center justify-center rounded-lg border border-white/40 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10">Discuss your system requirements</Link>
+            <ProjectHelpLauncher
+              mode="system_selection"
+              sourceTopic="compare"
+              buttonLabel="Not sure which shortlist fits your site?"
+              className="inline-flex items-center justify-center rounded-lg border border-white/40 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10 cursor-pointer"
+            />
             <Link href="/tools/funding-check" className="inline-flex items-center justify-center rounded-lg border border-white/40 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10">Check funding pathways</Link>
           </div>
         </div>

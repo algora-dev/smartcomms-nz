@@ -44,10 +44,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         {GA4_MEASUREMENT_ID ? (
           <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`} />
+            {/* Internal-only routes must never load analytics or leak into browser history-linked URLs. */}
             <script
               dangerouslySetInnerHTML={{
-                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA4_MEASUREMENT_ID}',{anonymize_ip:true});`,
+                __html: `if(!location.pathname.startsWith('/insights')){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}';document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA4_MEASUREMENT_ID}',{anonymize_ip:true});}`,
               }}
             />
           </>

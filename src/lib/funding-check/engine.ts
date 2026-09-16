@@ -32,7 +32,13 @@ export interface ComponentBreakdown {
   weak: string[];
 }
 
-export type PathwayKind = "five_ya" | "state_integrated" | "private" | "new_build" | "unknown";
+export type PathwayKind =
+  | "five_ya"
+  | "maintenance_only"
+  | "state_integrated"
+  | "private"
+  | "new_build"
+  | "unknown";
 
 export interface AssessmentResult {
   pathway: PathwayKind;
@@ -40,7 +46,7 @@ export interface AssessmentResult {
   pathwayLabel: string | null;
   positiveOverride: boolean;
   positiveOverrideMessage: string | null;
-  /** Set when the project is described as maintenance only, explaining the weaker basis. */
+  /** Set when the project is described as maintenance only: 5YA is a capital fund and cannot pay for maintenance. */
   maintenanceNote: string | null;
   components: ComponentBreakdown;
   hasStrongComponents: boolean;
@@ -164,6 +170,12 @@ function infrastructureSummary(answers: AssessmentAnswers): AssessmentResult["in
 }
 
 function confirmationsNeeded(pathway: PathwayKind): string[] {
+  if (pathway === "maintenance_only") {
+    return [
+      "Whether the real scope is routine maintenance or a separate replacement / substantial-upgrade project",
+      "Current 10YPP priorities and available 5YA budget (only if a separate capital project is defined)",
+    ];
+  }
   if (pathway === "five_ya") {
     return [
       "Current 10YPP priorities and available 5YA budget",
@@ -189,6 +201,9 @@ export function runAssessment(answers: AssessmentAnswers): AssessmentResult {
   else if (answers.schoolType === "private") pathway = "private";
   else if (answers.projectStatus === "new_build") pathway = "new_build";
   else if (answers.schoolType === "unsure_school") pathway = "unknown";
+  // Ministry guidance: "You cannot use 5YA funding for maintenance." A
+  // maintenance-only project at a state school is NOT a current 5YA pathway.
+  else if (answers.projectStatus === "maintenance_only") pathway = "maintenance_only";
   else pathway = "five_ya";
 
   const components = componentBreakdown(answers.features);
@@ -203,9 +218,18 @@ export function runAssessment(answers: AssessmentAnswers): AssessmentResult {
   else if (pathway === "private") headline = RESULT_COPY.private.headline;
   else if (pathway === "new_build") headline = RESULT_COPY.newBuild.headline;
   else if (pathway === "unknown") headline = RESULT_COPY.unknownSchool.headline;
+  else if (pathway === "maintenance_only") headline = RESULT_COPY.maintenanceOnly.headline;
   else if (caseTier === "strong" && hasStrong) headline = RESULT_COPY.headline.strong;
   else if (hasStrong) headline = RESULT_COPY.headline.partialStrong;
   else headline = RESULT_COPY.headline.investigate;
+
+  const maintenanceNote = isMaintenanceOnly
+    ? answers.currentSystem === "full_replacement" ||
+      answers.reasons.includes("old_or_failing") ||
+      answers.reasons.includes("emergency_gap")
+      ? `${RESULT_COPY.maintenanceNote} ${RESULT_COPY.maintenanceUpgradeExtension}`
+      : RESULT_COPY.maintenanceNote
+    : null;
 
   return {
     pathway,
@@ -213,7 +237,7 @@ export function runAssessment(answers: AssessmentAnswers): AssessmentResult {
     pathwayLabel: pathway === "five_ya" ? RESULT_COPY.pathway5ya : null,
     positiveOverride,
     positiveOverrideMessage: positiveOverride ? RESULT_COPY.positiveOverride : null,
-    maintenanceNote: isMaintenanceOnly ? RESULT_COPY.maintenanceNote : null,
+    maintenanceNote,
     components,
     hasStrongComponents: hasStrong,
     caseTier,

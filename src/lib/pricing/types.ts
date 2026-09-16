@@ -44,7 +44,11 @@ export interface CalculatorState {
 export interface BreakdownLine {
   label: string;
   detail?: string;
+  /** Mid/tier-basis amount (legacy single figure; still the deterministic model value). */
   amount: number;
+  /** Public range for this line (site-condition tolerance applied). */
+  amountLow?: number;
+  amountHigh?: number;
 }
 
 export interface EstimateResult {

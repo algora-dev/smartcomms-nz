@@ -8,7 +8,7 @@ Confirm that the production site is technically discoverable by Google, Bing and
 
 ## 1. Production URL and canonical checks
 
-Confirm the live canonical hostname is exactly the intended production domain (currently expected to be `https://www.smartcomms.co.nz`).
+Confirm the live canonical hostname is exactly the intended production domain (currently expected to be `https://smartcomms.co.nz`, non-www; www 308s to apex).
 
 Check:
 

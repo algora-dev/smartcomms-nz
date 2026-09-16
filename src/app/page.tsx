@@ -54,8 +54,8 @@ const INTENT_CARDS = [
   },
   {
     href: "/contact",
-    title: "Get a project reviewed",
-    desc: "Already have a site, quote or proposed design? Send the details for a practical next-step review.",
+    title: "Not sure what to do next?",
+    desc: "Tell us about the site, what you need the system to achieve and your region. We’ll review it and point you towards the most useful next step.",
   },
 ];
 
@@ -199,7 +199,7 @@ export default function HomePage() {
           <div className="mt-8 flex flex-wrap gap-4">
             <Link href="/systems" className="sc-btn-secondary">Compare system architectures</Link>
             <Link href="/guides" className="sc-btn-secondary">Browse practical guides</Link>
-            <Link href="/contact" className="sc-btn-primary">Ask about a project</Link>
+            <Link href="/contact" className="sc-btn-primary">Tell us about your project</Link>
           </div>
         </Reveal>
       </section>

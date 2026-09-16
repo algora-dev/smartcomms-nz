@@ -13,12 +13,39 @@ const MAX_FILES = 5;
 const ALLOWED_EXTENSIONS = new Set(["pdf", "png", "jpg", "jpeg", "webp", "dwg", "heic"]);
 
 const HELP_LABELS: Record<string, string> = {
-  formal_quote: "Formal quote",
-  site_assessment: "Site assessment",
-  funding_review: "Funding / project review",
   choosing_system: "Help choosing a system",
+  understanding_estimate: "Help understanding an estimate",
+  formal_quote: "Formal quote / installer",
+  site_assessment: "Site assessment",
+  funding_scope: "Funding / project-scope question",
+  cabling_network: "Network / cabling question",
+  quote_review: "Existing design / quote review",
+  general_question: "General question",
+  // legacy values (pre-triage modal)
   technical_review: "Technical / network review",
-  general_question: "General project question",
+  funding_review: "Funding / project review",
+};
+
+const MODE_LABELS: Record<string, string> = {
+  project_help: "Project help",
+  quote_help: "Quote help",
+  funding_help: "Funding / scope help",
+  site_assessment: "Site assessment enquiry",
+  cabling_help: "Cabling / network enquiry",
+  system_selection: "System selection help",
+  general_message: "General contact message",
+  // legacy values
+  quote: "Quote help",
+  assessment: "Site assessment enquiry",
+  message: "General contact message",
+  cabling: "Cabling / network enquiry",
+  connect: "Project help",
+};
+
+const EXISTING_PROVIDER_LABELS: Record<string, string> = {
+  yes: "Yes",
+  no: "No",
+  unsure: "Not sure",
 };
 
 function fileExtension(name: string): string {
@@ -73,8 +100,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: true });
     }
 
-    const mode = get("mode"); // quote | assessment | message
-    const isProject = mode === "quote" || mode === "assessment";
+    const mode = get("mode");
+    const isProject = mode !== "general_message" && mode !== "message";
     const name = get("name");
     const email = get("email");
     const organisation = get("organisation");
@@ -87,6 +114,21 @@ export async function POST(req: Request) {
     const estimateLink = get("estimateLink");
     const pageUrl = get("pageUrl");
     const referrer = get("referrer");
+    const existingProvider = get("existingProvider");
+    const providerName = get("providerName");
+    const brandPreference = get("brandPreference");
+    const sourceTopic = get("sourceTopic");
+
+    // Basic server-side sanity: email shape and bounded lengths.
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!EMAIL_RE.test(email)) {
+      return NextResponse.json({ error: "Please provide a valid email address." }, { status: 400 });
+    }
+    for (const [label, value] of [["name", name], ["email", email]] as const) {
+      if (value.length > 300) {
+        return NextResponse.json({ error: `The ${label} field is too long.` }, { status: 400 });
+      }
+    }
 
     // Project enquiries require name/organisation/email/town-region; generic
     // contact requires name/email/message. Phone is always optional.
@@ -139,35 +181,50 @@ export async function POST(req: Request) {
       attachments.push({ filename: f.name, content: Buffer.from(bytes) });
     }
 
+    // Structured tool/page context lines (ctx_* keys, non-PII).
+    const contextLines = [...fd.keys()]
+      .filter((k) => k.startsWith("ctx_"))
+      .map((k) => [k.slice(4), fd.get(k)?.toString().slice(0, 2000) ?? ""] as const)
+      .filter(([, v]) => v);
+
     // Attribution fields (internal only, never shown to users).
     const attribution = [...fd.keys()]
       .filter((k) => k.startsWith("attr_"))
       .map((k) => [k.slice(5), fd.get(k)?.toString() ?? ""] as const)
       .filter(([, v]) => v);
 
-    const modeLabel =
-      mode === "assessment" ? "Site assessment request"
-      : mode === "message" ? "General contact message"
-      : "Accurate quote request";
+    const modeLabel = MODE_LABELS[mode] ?? "Enquiry";
 
     const body = [
       `Type: ${modeLabel}`,
       helpType && HELP_LABELS[helpType] ? `Help requested: ${HELP_LABELS[helpType]}` : null,
+      sourceTopic ? `Source topic: ${sourceTopic}` : null,
       `Name: ${name}`,
       organisation ? `Organisation: ${organisation}` : null,
       `Email: ${email}`,
       phone ? `Phone: ${phone}` : "Phone: (not provided)",
       location ? `Town / region: ${location}` : null,
+      existingProvider && EXISTING_PROVIDER_LABELS[existingProvider]
+        ? `Existing provider relationship: ${EXISTING_PROVIDER_LABELS[existingProvider]}${providerName ? ` (${providerName})` : ""}`
+        : null,
+      brandPreference ? `Brand / product preference: ${brandPreference}` : null,
       estimate ? `Estimate: ${estimate}` : null,
       estimateLink ? `Estimate link: ${estimateLink}` : null,
       pageUrl ? `Page URL: ${pageUrl}` : null,
       referrer ? `Referrer: ${referrer}` : null,
       "",
+      ...(contextLines.length
+        ? ["Tool / page context (attached automatically):", ...contextLines.map(([k, v]) => `- ${k}: ${v}`), ""]
+        : []),
       isProject ? "Comments:" : "Message:",
       (isProject ? comments : message) || "(none)",
       "",
       "Attribution (internal only):",
       attribution.length ? attribution.map(([k, v]) => `- ${k}: ${v}`).join("\n") : "(none captured)",
+      "",
+      "=== ROUTING STATUS ===",
+      "T3 review required — NOT automatically forwarded to any partner.",
+      "Provider contact details are shared with the customer only after they agree to a direct introduction.",
     ].filter((line) => line !== null).join("\n");
 
     const sendResult = await resend.emails.send({

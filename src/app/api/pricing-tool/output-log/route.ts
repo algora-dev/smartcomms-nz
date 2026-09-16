@@ -18,7 +18,7 @@ export const runtime = "nodejs";
  * errors to the tool user. No PII collected.
  */
 
-type BreakdownLineIn = { label?: string; detail?: string; amount?: number };
+type BreakdownLineIn = { label?: string; detail?: string; amount?: number; amountLow?: number; amountHigh?: number };
 
 // Minimal typing so supabase-js accepts our table (no generated types in this repo)
 type Db = {
@@ -100,7 +100,9 @@ function buildPdf(args: {
   for (const l of breakdown.slice(0, 80)) {
     if (y > 780) { doc.addPage(); y = 50; }
     doc.text(String(l.label ?? "item").slice(0, 60), 40, y);
-    doc.text(money(Number(l.amount) || 0), W - 40, y, { align: "right" });
+    const lo = l.amountLow ?? (Number(l.amount) || 0);
+    const hi = l.amountHigh ?? lo;
+    doc.text(lo === hi ? money(lo) : `${money(lo)} - ${money(hi)}`, W - 40, y, { align: "right" });
     y += 14;
     if (l.detail) {
       doc.setFontSize(7.5);
@@ -138,6 +140,8 @@ export async function POST(req: NextRequest) {
           label: typeof l.label === "string" ? l.label.slice(0, 80) : undefined,
           detail: typeof l.detail === "string" ? l.detail.slice(0, 160) : undefined,
           amount: Number(l.amount) || 0,
+          amountLow: Number(l.amountLow) || undefined,
+          amountHigh: Number(l.amountHigh) || undefined,
         }))
       : [];
     const low = Number(b.low) || 0;

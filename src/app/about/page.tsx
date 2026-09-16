@@ -25,13 +25,23 @@ export default function AboutPage() {
         <li>Guidance for reviewing a proposed system, upgrade or quote</li>
         <li>Introductions to trusted installation or technology partners when a user asks for project delivery</li>
       </ul>
+      <h2>How SmartComms works</h2>
+      <ol>
+        <li><strong>Research the options.</strong> Use our guides, comparisons and planning tools to understand the system, features and architecture that may suit your site.</li>
+        <li><strong>Build a realistic project picture.</strong> Use our pricing and, where relevant, funding tools to understand likely scope, budget and questions that still need answering.</li>
+        <li><strong>Ask SmartComms for help.</strong> If you want to progress the project, send us enough information to understand what you need.</li>
+        <li><strong>Get the right next step.</strong> T3 Labs reviews the enquiry. Where specialist help is appropriate, we can suggest a suitable provider from our selected New Zealand partner network.</li>
+      </ol>
+      <p>
+        SmartComms does not manufacture or install the systems it researches. Our referral network does not include every provider in New Zealand.
+      </p>
       <h2>Who is behind SmartComms</h2>
       <p>
         SmartComms NZ is operated by {site.operator}. Technical, pricing and specification content is reviewed by {authors.shaun.name} ({authors.shaun.role}). {authors.shaun.note}
       </p>
       <h2>How we get our pricing</h2>
       <p>
-        Indicative pricing for the features and products in our tools is gathered from two to three independent sources, including supplier rate cards and installation quotes. It is not based on any one particular provider, which is why we publish indicative price ranges rather than exact prices. Final pricing always depends on the site, the completed design and the installer.
+        SmartComms pricing is a planning model informed by supplier pricing, product information and installation/project information available to us. It is designed to show a realistic order of magnitude for the modelled scope, not a market average or a quote from every brand. Individual assumptions may be informed by multiple supplier or project sources; we do not treat those inputs as a statistically representative market average unless we explicitly publish the sample and method. Final pricing always depends on the site, the completed design and the installer.
       </p>
       <h2>Our standards</h2>
       <p>

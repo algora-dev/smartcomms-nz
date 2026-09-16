@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
+import { cookies } from "next/headers";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
@@ -29,22 +30,38 @@ function getClient() {
 
 /**
  * Internal-only viewer for pricing tool output logs. Not linked anywhere.
- * Access: /insights/pricing-logs?key=<PRICING_LOGS_KEY env value>
+ * Access: HttpOnly cookie set via /insights/pricing-logs/login (key never
+ * appears in the URL). The old ?key= query-string access has been removed.
  */
 export default async function PricingLogsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ key?: string }>;
+  searchParams: Promise<{ e?: string }>;
 }) {
-  const { key } = await searchParams;
+  const { e } = await searchParams;
   const expected = process.env.PRICING_LOGS_KEY;
-  const ok = Boolean(expected) && key === expected;
+  const jar = await cookies();
+  const ok = Boolean(expected) && jar.get("pricing_logs_auth")?.value === expected;
 
   if (!ok) {
     return (
       <main className="sc-container py-16 max-w-2xl">
         <h1 className="text-2xl font-bold">Pricing tool output log</h1>
-        <p className="mt-3 text-sm">Invalid or missing access key.</p>
+        {e && <p className="mt-3 text-sm text-red-600">Invalid access key.</p>}
+        <form action="/insights/pricing-logs/login" method="post" className="mt-4 flex gap-2">
+          <input
+            type="password"
+            name="key"
+            required
+            placeholder="Access key"
+            className="rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            autoComplete="off"
+          />
+          <button type="submit" className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white">
+            Sign in
+          </button>
+        </form>
+        <p className="mt-3 text-xs text-slate-500">Internal T3 Labs use only.</p>
       </main>
     );
   }

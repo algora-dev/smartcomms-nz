@@ -17,7 +17,14 @@ export default function DisclosurePage() {
       </p>
       <h2>How referrals work</h2>
       <p>
-        Using a SmartComms partner is optional. Customers are free to use any provider they choose. T3 Labs is not paid a referral commission or placement fee for sending SmartComms NZ enquiries to installation partners.
+        Using a SmartComms partner is optional. Customers are free to use any provider they choose. T3 Labs is not paid a referral commission or placement fee for sending SmartComms NZ enquiries to installation partners. <em>(True as at the date of this page. If referral fees, sponsored placements or other material commercial arrangements are introduced later, this disclosure will be updated before those arrangements affect the site.)</em>
+      </p>
+      <h2>Editorial coverage and referral relationships are separate</h2>
+      <p>
+        SmartComms may research and discuss manufacturers, installers, distributors and public projects that are not members of our referral network. Editorial inclusion does not imply a commercial relationship. Being part of the referral network does not purchase a favourable product comparison or guaranteed recommendation.
+      </p>
+      <p>
+        When a user asks for practical help, T3 Labs recommends from the providers available in its selected network based on the information supplied, the project type, location and provider capability. This is not represented as a search of every provider in New Zealand.
       </p>
       <h2>Our commitments</h2>
       <ul>

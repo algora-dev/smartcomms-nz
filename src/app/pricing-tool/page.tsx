@@ -27,11 +27,11 @@ const faqs = [
   },
   {
     q: "Is network cabling included?",
-    a: "No. Estimates exclude site-wide network cabling. Our installation teams only carry out short patch-in runs (up to about 3 m using conduit). If your site has adequate cabling within about 3 m of each device location, the estimates apply as shown; otherwise cabling must be installed by a Ministry of Education approved ICT installation contractor (or an equivalent certified installer) at additional cost, and we can point you to trusted contractors.",
+    a: "No. The calculator excludes site-wide structured cabling. It assumes only limited local connection work around device locations where suitable cabling already exists. Where wider cabling is required, that work needs to be scoped separately by an appropriate ICT/cabling contractor. For NZ state-school projects, confirm the current Ministry requirements for approved ICT installation contractors with the school property / IT team.",
   },
   {
     q: "Where does this pricing come from?",
-    a: `Indicative pricing is taken from average pricing across the main product lines used in New Zealand, including installation costs gained from trusted installation partners. It is not based on any single provider, which is why the calculator shows ranges rather than exact prices. Full detail is on our pricing methodology page at /about/methodology.`,
+    a: `The calculator is an indicative planning model. It combines current SmartComms equipment and installation assumptions to show the likely order of magnitude for the modelled scope. It is not a formal quote, a statistical market average or a promise that every product architecture will price the same way. Full detail is on our pricing methodology page at /about/methodology.`,
   },
   {
     q: "Is this a formal quote?",

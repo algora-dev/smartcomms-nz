@@ -24,7 +24,7 @@ export default function MethodologyPage() {
       </ul>
       <h2>Pricing methodology</h2>
       <p>
-        The current ballpark calculator uses a central pricing configuration with disclosed installation assumptions. Indicative pricing for each feature and product is gathered from two to three independent sources and is not based on any single provider, which is why outputs are indicative ranges rather than exact prices. Those outputs are not represented as market averages. Where we later publish benchmarks based on completed projects, we will state the sample, period and limitations separately.
+        The calculator is an indicative planning model. It combines current SmartComms equipment and installation assumptions to show the likely order of magnitude for the modelled scope. It is not a formal quote, a statistical market average or a promise that every product architecture will price the same way. Individual assumptions may be informed by multiple supplier or project sources; we do not treat those inputs as a statistically representative market average unless we explicitly publish the sample and method. Where we later publish benchmarks based on completed projects, we will state the sample, period and limitations separately.
       </p>
       <h2>Comparison methodology</h2>
       <p>

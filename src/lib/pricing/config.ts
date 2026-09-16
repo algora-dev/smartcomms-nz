@@ -17,11 +17,14 @@ export const pricingConfig = {
   fireInterfacePrice: 1895,
   endpointWarningThreshold: 30,
   /**
-   * Site-wide cabling is excluded from all estimates (tiers A and C especially).
-   * Correct NZ terminology: Ministry of Education approved ICT installation contractor.
+   * Site-wide structured cabling is excluded from all estimates.
+   * Generic wording: the calculator serves schools, aged care, industrial and
+   * commercial sites - do not apply school procurement rules to everyone.
    */
   cablingDisclaimer:
-    "Site-wide cabling is installed by a Ministry of Education approved ICT contractor and is excluded from your estimate. Your school IT team may also be able to help with cabling, or we can put you in touch with the right people for your site and region.",
+    "Site-wide structured cabling is excluded from your estimate and must be scoped separately by an appropriate ICT / cabling contractor. If suitable cabling already exists near each device location, the estimates apply as shown.",
+  cablingDisclaimerSchool:
+    "For NZ state-school projects, confirm the current Ministry requirements for approved ICT installation contractors with the school property / IT team.",
 
   areas: {
     standardIndoor: {

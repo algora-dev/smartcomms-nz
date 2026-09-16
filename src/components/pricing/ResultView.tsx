@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { CalculatorState, EstimateResult } from "@/lib/pricing/types";
 import { formatNZD, pricingConfig } from "@/lib/pricing/config";
 import { packageLabel } from "@/lib/pricing/calculate";
-import { InquiryModal, type InquiryMode } from "./InquiryModal";
+import { InquiryModal } from "./InquiryModal";
 import { ToolCrossSell } from "@/components/tool-cross-sell";
 import { track } from "@/lib/analytics";
 
@@ -22,7 +22,7 @@ export function ResultView({
   onRestart: () => void;
 }) {
   const [breakdownOpen, setBreakdownOpen] = useState(false);
-  const [inquiry, setInquiry] = useState<InquiryMode | null>(null);
+  const [inquiry, setInquiry] = useState<string | null>(null);
 
   const tierText =
     state.tier === "A" ? "New build"
@@ -111,7 +111,9 @@ export function ResultView({
     for (const line of estimate.breakdown) {
       if (y > 700) { doc.addPage(); y = 60; }
       doc.text(line.label, 55, y);
-      doc.text(`${formatNZD(line.amount * pricingConfig.estimateLowMultiplier)} - ${formatNZD(line.amount)}`, W - 55, y, { align: "right" });
+      const lo = line.amountLow ?? line.amount;
+      const hi = line.amountHigh ?? line.amount;
+      doc.text(lo === hi ? formatNZD(lo) : `${formatNZD(lo)} - ${formatNZD(hi)}`, W - 55, y, { align: "right" });
       y += 14;
     }
     if (y > 660) { doc.addPage(); y = 60; }
@@ -135,9 +137,11 @@ export function ResultView({
     if (estimate.overThreshold) {
       doc.setFont("helvetica", "bold");
       doc.setTextColor(180, 80, 20);
-      doc.text("Large-system note: your configuration is above the standard 30-endpoint", 50, y);
+      doc.text("Large-system note: this configuration is beyond the standard range validated by", 50, y);
       y += 13;
-      doc.text("system allowance. Additional central hardware may be required.", 50, y);
+      doc.text("the SmartComms calculator. Larger systems may need different control, network,", 50, y);
+      y += 13;
+      doc.text("amplification or licensing architecture, so a site-specific design is recommended.", 50, y);
       y += 20;
       doc.setTextColor(20);
     }
@@ -186,22 +190,15 @@ export function ResultView({
           >
             Want more information?
           </button>
-          <button
-            type="button"
-            onClick={onRestart}
-            className="w-full rounded-full border border-[var(--sc-navy)]/30 px-6 py-3 text-center text-sm font-semibold text-[var(--sc-navy)] hover:border-[var(--sc-navy)]/60 hover:bg-[var(--sc-blue-50)] transition-all sm:w-auto cursor-pointer"
-          >
-            Start again
-          </button>
-          <span className="text-xs text-[var(--sc-slate)] sm:w-full sm:text-center">We can put you in touch with the right people for your site and region.</span>
+          <span className="text-xs text-[var(--sc-slate)]">We can put you in touch with the right people for your site and region.</span>
         </div>
       </div>
 
       {estimate.overThreshold && (
         <div className="mt-4 rounded-xl border-l-4 border-[#bd4a1a] bg-[#fdf3ec] p-4 text-sm text-[#7a3413]">
-          <strong>Large-system estimate:</strong> your configuration is above the standard 30-endpoint system allowance.
-          Additional central hardware may be required, so this estimate may understate the final installed cost.
-          Please request an accurate quote.
+          <strong>Large-system estimate:</strong> this configuration is beyond the standard range validated by the
+          SmartComms calculator. Larger systems may require different control, network, amplification or licensing
+          architecture, so this estimate may understate the final installed cost and a site-specific design is recommended.
         </div>
       )}
 
@@ -282,12 +279,14 @@ export function ResultView({
                   <div className="text-[var(--sc-charcoal)]">{l.label}</div>
                   {l.detail && <div className="text-xs text-[var(--sc-slate)]">{l.detail}</div>}
                 </div>
-                <div className="whitespace-nowrap font-medium text-[var(--sc-navy)]">{formatNZD(l.amount * pricingConfig.estimateLowMultiplier)} – {formatNZD(l.amount)}</div>
+                <div className="whitespace-nowrap font-medium text-[var(--sc-navy)]">
+                  {formatNZD(l.amountLow ?? l.amount)} – {formatNZD(l.amountHigh ?? l.amount)}
+                </div>
               </div>
             ))}
             <div className="mt-2 flex justify-between border-t border-[var(--sc-border)] pt-3 text-sm font-semibold text-[var(--sc-navy)]">
-              <span>Subtotal (indicative range)</span>
-              <span>{formatNZD(estimate.low)} – {formatNZD(estimate.high)}{rangeSuffix}</span>
+              <span>Subtotal</span>
+              <span>{formatNZD(estimate.low)} (range up to {formatNZD(estimate.high)}{rangeSuffix})</span>
             </div>
             <p className="mt-2 text-xs text-[var(--sc-slate)]">
               {estimate.basis === "unsure"
@@ -315,7 +314,7 @@ export function ResultView({
             }}
             className="w-full rounded-full bg-[var(--sc-teal-strong)] px-6 py-3 text-center text-sm font-semibold text-white hover:bg-[var(--sc-teal-strong-hover)] hover:shadow-lg transition-all sm:w-auto cursor-pointer"
           >
-            Get an accurate quote
+            Get help with a formal quote
           </button>
           <button
             type="button"
@@ -325,7 +324,7 @@ export function ResultView({
             }}
             className="w-full rounded-full border border-white/40 px-6 py-3 text-center text-sm font-semibold text-white hover:bg-white/10 transition-all sm:w-auto cursor-pointer"
           >
-            Book a site assessment
+            Ask about a site assessment
           </button>
         </div>
       </div>
@@ -356,13 +355,13 @@ export function ResultView({
 
       {/* disclaimer */}
       <div className="mt-8 rounded-xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-5 text-xs leading-relaxed text-[var(--sc-slate)]">
-        {disclaimer} Prices shown are ex GST. The standard system allowance covers up to {pricingConfig.endpointWarningThreshold} IP endpoints.
+        {disclaimer} Prices shown are ex GST. The standard model allowance covers up to {pricingConfig.endpointWarningThreshold} IP endpoints; beyond that a site-specific design is recommended.
       </div>
       <InquiryModal
         open={inquiry !== null}
         mode={inquiry ?? "quote"}
         onClose={() => setInquiry(null)}
-        estimateSummary={`${formatNZD(estimate.low)} - ${formatNZD(estimate.high)}${rangeSuffix} ex GST`}
+        estimateSummary={`${formatNZD(estimate.low)} - ${formatNZD(estimate.high)}${rangeSuffix}`}
         estimateLink={typeof window !== "undefined" ? window.location.href : undefined}
       />
     </div>

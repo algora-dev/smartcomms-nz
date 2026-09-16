@@ -119,9 +119,10 @@ export default function IpPagingPaPage() {
       </p>
       <h2 id="platforms">Choosing a platform</h2>
       <p>
-        SPON, Algo, Axis, TOA, AtlasIED and Bosch all take the IP approach but differ in cost,
-        ecosystem fit and complexity. Our{" "}
-        <Link href="/compare">platform comparison guide</Link> compares them on those dimensions for
+        SmartComms compares integrated school platforms, SIP-first options, browser-managed network audio, hybrid
+        approaches and specialist architectures from brands including SPON, FrontRow, Algo, Bosch, ITC, Axis, TOA and
+        others relevant to the NZ market. Our{" "}
+        <Link href="/compare">platform comparison guide</Link> matches those options to your priorities for
         NZ buyers.
       </p>
       <h2 id="next">Next steps</h2>
@@ -141,7 +142,7 @@ export default function IpPagingPaPage() {
       </ul>
       <ContinuePlanning
         items={[
-          { title: "Compare paging platforms", desc: "SPON, Algo, Axis, TOA, AtlasIED, Bosch and traditional 100V compared for NZ buyers.", href: "/compare" },
+          { title: "Compare paging platforms", desc: "Use-case shortlists for integrated school platforms, SIP-first paging, hybrid migration and specialist architectures.", href: "/compare" },
           { title: "Network readiness checklist", desc: "Check cabling, PoE and switch capacity before requesting IP paging quotes.", href: "/guides/ip-paging-network-readiness" },
           { title: "Replacing an old PA system", desc: "What can be kept, what usually changes and how to plan the replacement.", href: "/systems/traditional-vs-ip" },
         ]}

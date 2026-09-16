@@ -22,7 +22,7 @@ export default function EmergencyLockdownPage() {
         title="Emergency, Lockdown & Safety Announcement Systems"
         description="A school emergency communication system needs to deliver clear, fast and intelligible messages to the right areas during lockdowns, evacuations and other incidents. This guide explains the role of paging, zoning, prerecorded messages, live announcements, outdoor coverage and system resilience."
         tags={["Lockdown announcements", "Emergency paging", "Evacuation messages", "Safety warnings", "Site-wide coverage"]}
-        primaryCta={{ label: "Review your system requirements", href: "/contact" }}
+        primaryCta={{ label: "Discuss the technical scope", href: "/contact" }}
         secondaryCta={{ label: "Check school funding", href: "/tools/funding-check" }}
         reviewed={reviewedLabel("/systems/emergency-lockdown")}
         note="Planning guidance, not procedure advice"
