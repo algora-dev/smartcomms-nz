@@ -21,7 +21,7 @@ export const pricingConfig = {
    * Correct NZ terminology: Ministry of Education approved ICT installation contractor.
    */
   cablingDisclaimer:
-    "These estimates do not include network cabling throughout the site. Site-wide data cabling must be installed by a Ministry of Education approved ICT installation contractor (or an equivalently certified installer for non-school sites), and is an additional cost. Our installation teams only carry out short patch-in runs (up to about 3 m using conduit). We can put you in touch with trusted cabling contractors for pricing.",
+    "Site-wide cabling is installed by a Ministry of Education approved ICT contractor and is excluded from your estimate. Your school IT team may also be able to help with cabling, or we can put you in touch with the right people for your site and region.",
 
   areas: {
     standardIndoor: {

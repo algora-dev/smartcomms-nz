@@ -5,7 +5,7 @@ import Link from "next/link";
 import { track } from "@/lib/analytics";
 import { attributionForSubmission } from "@/lib/attribution";
 
-export type InquiryMode = "quote" | "assessment" | "message" | "cabling";
+export type InquiryMode = "quote" | "assessment" | "message" | "cabling" | "connect";
 
 const HELP_OPTIONS = [
   { value: "formal_quote", label: "Formal quote" },
@@ -38,6 +38,8 @@ export function InquiryModal({
   const dialogRef = useRef<HTMLDivElement>(null);
   const restoreFocusRef = useRef<HTMLElement | null>(null);
   const isProject = mode !== "message";
+  // Slim referral modes: neutral connector framing, minimal fields.
+  const slim = mode === "cabling" || mode === "connect";
   const defaultHelp = mode === "assessment" ? "site_assessment" : mode === "cabling" ? "technical_review" : "formal_quote";
   const [helpType, setHelpType] = useState(defaultHelp);
 
@@ -143,16 +145,19 @@ export function InquiryModal({
   const title =
     mode === "quote" ? "Get an accurate quote"
     : mode === "assessment" ? "Book a site assessment"
-    : mode === "cabling" ? "Ask about network cabling"
+    : mode === "cabling" ? "Network cabling for your site"
+    : mode === "connect" ? "Want more information?"
     : "Send us a message";
   const blurb =
     mode === "quote"
-      ? "Send us your details and one of our trusted installation partners can review the site and provide a proper project quote."
+      ? "Send us your details and we can put you in touch with the right people for a proper project quote."
       : mode === "assessment"
         ? "A short site review usually narrows the estimate considerably. Send us your details and we will be in touch to arrange a visit."
         : mode === "cabling"
-          ? "These estimates exclude site-wide network cabling, which must be installed by a Ministry of Education approved ICT installation contractor (or equivalent certified installer). Give us a few details and we can assess your situation and point you to the right contractor."
-          : "Questions, corrections, or a proposed system you would like us to look at. We read everything.";
+          ? "Site-wide cabling is installed by a Ministry of Education approved ICT contractor. Your school IT team may also be able to help, or give us a few details and we can point you to the right people for your site and region."
+          : mode === "connect"
+            ? "Tell us about your site and we can put you in touch with the right people for your region and project, whether that is a quote, a site assessment or cabling advice."
+            : "Questions, corrections, or a proposed system you would like us to look at. We read everything.";
 
   const inputClass =
     "mt-1 w-full rounded-lg border border-[var(--sc-border)] px-3 py-2 text-sm focus:border-[var(--sc-teal)] focus:outline-none";
@@ -208,7 +213,7 @@ export function InquiryModal({
                 <label>Website<input name="company_website" tabIndex={-1} autoComplete="off" /></label>
               </div>
 
-              {isProject && (
+              {isProject && !slim && (
                 <label className="block text-sm">
                   <span className="font-medium text-[var(--sc-charcoal)]">What help do you need? *</span>
                   <select
@@ -292,7 +297,7 @@ export function InquiryModal({
                 </label>
               )}
 
-              {isProject && (
+              {isProject && !slim && (
                 <p className="rounded-lg border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-3 text-xs leading-relaxed text-[var(--sc-slate)]">
                   {PARTNER_HANDOFF_COPY}
                 </p>
@@ -303,7 +308,13 @@ export function InquiryModal({
                 disabled={sending}
                 className="w-full rounded-full bg-[var(--sc-teal-strong)] px-6 py-3 text-sm font-semibold text-white hover:bg-[var(--sc-teal-strong-hover)] hover:shadow-lg transition-all cursor-pointer disabled:opacity-50"
               >
-                {sending ? "Sending…" : mode === "quote" || mode === "message" ? "Send enquiry" : "Request site assessment"}
+                {sending
+                  ? "Sending…"
+                  : slim
+                    ? "Be put in touch with the right people"
+                    : mode === "assessment"
+                      ? "Request site assessment"
+                      : "Send enquiry"}
               </button>
               <p className="text-center text-xs leading-relaxed text-[var(--sc-slate)]">
                 We use your details to respond to this enquiry. If you request installation or a formal quote, relevant project details may be shared with a trusted installation partner. <Link href="/privacy" className="underline">Privacy</Link>.

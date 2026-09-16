@@ -26,7 +26,7 @@ export function ResultView({
 
   const tierText =
     state.tier === "A" ? "New build"
-    : state.tier === "B" ? "Existing site, cabling within 3 m"
+    : state.tier === "B" ? "Existing site, cabling within 3m"
     : state.tier === "C" ? "Existing site, new cabling required"
     : "Existing site, cabling not yet known";
 
@@ -175,6 +175,19 @@ export function ResultView({
         <p className="mt-3 text-sm text-[var(--sc-slate)]">
           This is a ballpark estimate based on standard installation assumptions. A site review can confirm the final equipment quantities, cabling requirements and installed price.
         </p>
+        <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <button
+            type="button"
+            onClick={() => {
+              track("pricing_connect_opened", { installation_tier: state.tier });
+              setInquiry("connect");
+            }}
+            className="w-full rounded-full bg-[var(--sc-teal-strong)] px-6 py-3 text-center text-sm font-semibold text-white hover:bg-[var(--sc-teal-strong-hover)] hover:shadow-lg transition-all sm:w-auto cursor-pointer"
+          >
+            Want more information?
+          </button>
+          <span className="text-xs text-[var(--sc-slate)]">We can put you in touch with the right people for your site and region.</span>
+        </div>
       </div>
 
       {estimate.overThreshold && (
@@ -198,7 +211,7 @@ export function ResultView({
             }}
             className="mt-2 block font-semibold text-[var(--sc-teal-strong)] underline decoration-2 underline-offset-2 hover:text-[var(--sc-blue-700)] cursor-pointer"
           >
-            Ask us to point you to a cabling contractor →
+            Be put in touch with the right people →
           </button>
         </div>
       )}
@@ -284,7 +297,7 @@ export function ResultView({
       <div className="mt-8 rounded-2xl bg-[var(--sc-navy)] p-8 text-center">
         <div className="text-lg font-semibold text-white">Want a proper number?</div>
         <p className="mx-auto mt-2 max-w-md text-sm text-white/80">
-          Send us this estimate and one of our trusted installation partners can review the site and provide a proper project quote.
+          Send us this estimate and we can put you in touch with the right people to review the site and provide a proper project quote.
         </p>
         <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <button

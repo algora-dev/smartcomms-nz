@@ -19,17 +19,17 @@ const TIER_CARDS: { value: InstallationType; title: string; desc: string }[] = [
   {
     value: "A",
     title: "New build / major construction",
-    desc: "The system is being installed while the building is being constructed or substantially refurbished. Site-wide network cabling is not included - it is priced separately as part of the wider building works.",
+    desc: "The system is being installed while the building is being constructed or substantially refurbished. Site-wide cabling is installed by a Ministry of Education approved ICT contractor and is excluded from your estimate.",
   },
   {
     value: "B",
     title: "Existing site, cabling nearby",
-    desc: "Adequate network cabling already exists within about 3 m of each device location. Our teams can patch in short runs using conduit where needed.",
+    desc: "Adequate network cabling exists within 3m of installed products. If needed, short runs of cable can be patched in with conduit.",
   },
   {
     value: "C",
     title: "Existing site, new cabling required",
-    desc: "The site needs new network cabling to many areas. Site-wide cabling is installed by a Ministry of Education approved ICT contractor and is excluded from your estimate.",
+    desc: "Site-wide cabling is installed by a Ministry of Education approved ICT contractor and is excluded from your estimate.",
   },
   {
     value: "unsure",
