@@ -26,18 +26,22 @@ export function ResultView({
 
   const tierText =
     state.tier === "A" ? "New build"
-    : state.tier === "B" ? "Existing site, cabling available"
+    : state.tier === "B" ? "Existing site, cabling within 3 m"
     : state.tier === "C" ? "Existing site, new cabling required"
     : "Existing site, cabling not yet known";
+
+  // Site-wide cabling is excluded for every tier except B (adequate cabling
+  // within 3 m of each device location).
+  const needsCablingNote = state.tier !== "B";
 
   const rangeSuffix = estimate.overThreshold ? "+" : "";
 
   const disclaimer =
     state.tier === "A"
-      ? "This is an indicative communications-system estimate only, ex GST. It assumes suitable network/data cabling to device locations is provided as part of the wider building works. Final pricing depends on the completed design, equipment quantities and project conditions."
+      ? "This is an indicative communications-system estimate only, ex GST. It excludes network cabling throughout the site (see the cabling note above). Final pricing depends on the completed design, equipment quantities and project conditions."
       : state.tier === "unsure"
-        ? "This is a wider indicative range because existing cabling and site conditions are not yet known. A short site review can usually narrow the estimate considerably."
-        : "This is an indicative estimate only, ex GST. We have not inspected the site. Final pricing may vary depending on cable routes, ceiling and wall access, network switch capacity, mounting requirements and the final system design.";
+        ? "This is an indicative estimate because existing cabling and site conditions are not yet known. If site-wide cabling is required, it is excluded from this estimate and is an additional cost. A short site review can usually narrow the estimate considerably."
+        : "This is an indicative estimate only, ex GST. We have not inspected the site. It excludes site-wide network cabling (see the cabling note above). Final pricing may vary depending on cable routes, ceiling and wall access, network switch capacity, mounting requirements and the final system design.";
 
   const summaryChips: string[] = [tierText];
   const a = state.areas;
@@ -114,7 +118,7 @@ export function ResultView({
     y += 6;
     doc.setFont("helvetica", "bold");
     doc.text("Subtotal", 55, y);
-    doc.text(`${formatNZD(estimate.low)} + up to 20% contingency`, W - 55, y, { align: "right" });
+    doc.text(`${formatNZD(estimate.high)} (indicative range down to ${formatNZD(estimate.low)})`, W - 55, y, { align: "right" });
     y += 22;
 
     if (estimate.monitoringAnnual !== null) {
@@ -136,6 +140,17 @@ export function ResultView({
       doc.text("system allowance. Additional central hardware may be required.", 50, y);
       y += 20;
       doc.setTextColor(20);
+    }
+
+    // cabling exclusion box
+    if (needsCablingNote) {
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(9);
+      doc.setTextColor(20);
+      const cablingLines = doc.splitTextToSize("Network cabling is not included. " + pricingConfig.cablingDisclaimer, W - 100);
+      if (y + cablingLines.length * 11 > 780) { doc.addPage(); y = 60; }
+      doc.text(cablingLines, 50, y);
+      y += cablingLines.length * 11 + 10;
     }
 
     // disclaimer box
@@ -167,6 +182,24 @@ export function ResultView({
           <strong>Large-system estimate:</strong> your configuration is above the standard 30-endpoint system allowance.
           Additional central hardware may be required, so this estimate may understate the final installed cost.
           Please request an accurate quote.
+        </div>
+      )}
+
+      {/* site-wide cabling exclusion (all tiers except B) */}
+      {needsCablingNote && (
+        <div className="mt-4 rounded-xl border-l-4 border-[var(--sc-teal-strong)] bg-[var(--sc-blue-50)] p-4 text-sm text-[var(--sc-navy)]">
+          <strong>Network cabling is not included.</strong>{" "}
+          {pricingConfig.cablingDisclaimer}{" "}
+          <button
+            type="button"
+            onClick={() => {
+              track("pricing_cabling_enquiry_opened", { installation_tier: state.tier });
+              setInquiry("cabling");
+            }}
+            className="mt-2 block font-semibold text-[var(--sc-teal-strong)] underline decoration-2 underline-offset-2 hover:text-[var(--sc-blue-700)] cursor-pointer"
+          >
+            Ask us to point you to a cabling contractor →
+          </button>
         </div>
       )}
 
@@ -238,8 +271,8 @@ export function ResultView({
             </div>
             <p className="mt-2 text-xs text-[var(--sc-slate)]">
               {estimate.basis === "unsure"
-                ? "Low side assumes existing cabling is available; high side assumes new cabling is required plus contingency."
-                : "Range allows up to 20% contingency on the calculated subtotal."}
+                ? "Priced on existing-site rates. If site-wide cabling is required, it is excluded from this estimate and is an additional cost."
+                : "Top of range reflects the calculated subtotal; the lower end allows for favourable site conditions."}
             </p>
           </div>
         )}

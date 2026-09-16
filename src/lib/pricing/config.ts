@@ -3,19 +3,25 @@
 
 import type { EntryIntercomType, Tier } from "./types";
 
-export const tierCMultiplier = 1.25;
-export const estimateHighMultiplier = 1.2;
+export const estimateLowMultiplier = 0.8;
+export const estimateHighMultiplier = 1;
 
 export const pricingConfig = {
-  reviewedAt: "2026-09-11",
-  reviewedAtLabel: "11 September 2026",
-  headendPrice: 4995,
-  tierCMultiplier,
+  reviewedAt: "2026-09-16",
+  reviewedAtLabel: "16 September 2026",
+  headendPrice: 5995,
+  estimateLowMultiplier,
   estimateHighMultiplier,
   monitoringAnnualPrice: 650,
   monitoringFreeMonthsTierA: 24,
   fireInterfacePrice: 1895,
   endpointWarningThreshold: 30,
+  /**
+   * Site-wide cabling is excluded from all estimates (tiers A and C especially).
+   * Correct NZ terminology: Ministry of Education approved ICT installation contractor.
+   */
+  cablingDisclaimer:
+    "These estimates do not include network cabling throughout the site. Site-wide data cabling must be installed by a Ministry of Education approved ICT installation contractor (or an equivalently certified installer for non-school sites), and is an additional cost. Our installation teams only carry out short patch-in runs (up to about 3 m using conduit). We can put you in touch with trusted cabling contractors for pricing.",
 
   areas: {
     standardIndoor: {
@@ -67,11 +73,11 @@ export const pricingConfig = {
   },
 } as const;
 
-/** Resolve a unit price for a tier. Tier C = B x 1.25 (never hard-coded). */
+/* Tier C prices identically to tier B: site-wide cabling is excluded from all
+   estimates and handled by the cabling disclaimer + partner referral instead. */
 export function unitPrice(priceA: number, priceB: number, tier: Tier): number {
   if (tier === "A") return priceA;
-  const base = priceB;
-  return tier === "B" ? base : base * tierCMultiplier;
+  return priceB;
 }
 
 export function formatNZD(n: number): string {

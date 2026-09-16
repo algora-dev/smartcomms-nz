@@ -8,27 +8,27 @@ const t = (over) => {
   return s;
 };
 
-// Test A: Tier B, 10 rooms, Essential
+// Test A: Tier B, 10 rooms, Essential (headend 5995 + 10 x 685 = 12845; low = 80%)
 let r = calculateEstimate(t({ tier: "B", areas: { ...defaultState().areas, standardIndoor: 10 } }));
-console.log("A low", formatNZD(r.low), "expect $11,845");
-console.log("A high", formatNZD(r.high), "expect $14,214");
+console.log("A low", formatNZD(r.low), "expect $10,276");
+console.log("A high", formatNZD(r.high), "expect $12,845");
 
-// Test B: Tier C, 10 rooms, Essential
+// Test B: Tier C, 10 rooms, Essential (C no longer carries a cabling uplift)
 r = calculateEstimate(t({ tier: "C", areas: { ...defaultState().areas, standardIndoor: 10 } }));
-console.log("B low", r.low.toFixed(2), "expect 4995 + 10*856.25 = 13557.5");
+console.log("B low", r.low.toFixed(2), "expect 10276 (= B low, no 25% uplift)");
 
-// Test C: Tier B safety
+// Test C: Tier B safety (5995 + 6850 + 1895 = 14740; low = 11792)
 r = calculateEstimate(t({ tier: "B", featurePackage: "safety", areas: { ...defaultState().areas, standardIndoor: 10 } }));
-console.log("C low", formatNZD(r.low), "expect $13,740");
+console.log("C low", formatNZD(r.low), "expect $11,792");
 
-// Test D: Tier B interactive
+// Test D: Tier B interactive (5995 + 6850 + 1895 + 10*285 = 17590; low = 14072)
 r = calculateEstimate(t({ tier: "B", featurePackage: "interactive", areas: { ...defaultState().areas, standardIndoor: 10 } }));
-console.log("D low", formatNZD(r.low), "expect $16,590");
+console.log("D low", formatNZD(r.low), "expect $14,072");
 
-// Test E: unsure
+// Test E: unsure (B basis, same 80-100% range)
 r = calculateEstimate(t({ tier: "unsure", areas: { ...defaultState().areas, standardIndoor: 10 } }));
-console.log("E low", formatNZD(r.low), "expect $11,845");
-console.log("E high", formatNZD(r.high), "expect 13557.5*1.2 = $16,269");
+console.log("E low", formatNZD(r.low), "expect $10,276");
+console.log("E high", formatNZD(r.high), "expect $12,845");
 
 // endpoints check
 r = calculateEstimate(t({ tier: "B", areas: { standardIndoor: 20, largeIndoor: 2, outdoor: 1, largeOutdoor: 1, entry: 2 } }));

@@ -123,19 +123,21 @@ function countEndpoints(state: CalculatorState): number {
 
 export function calculateEstimate(state: CalculatorState): EstimateResult {
   const c = pricingConfig;
+  const lo = c.estimateLowMultiplier;
   const hi = c.estimateHighMultiplier;
 
   let low: number;
   let high: number;
 
   if (state.tier === "unsure") {
+    // Unsure = existing site; priced on tier B. If site-wide cabling turns out
+    // to be required, it is excluded (see cabling disclaimer), not an uplift.
     const b = subtotalForTier(state, "B").amount;
-    const ch = subtotalForTier(state, "C").amount * hi;
-    low = b;
-    high = ch;
+    low = b * lo;
+    high = b * hi;
   } else {
     const s = subtotalForTier(state, state.tier).amount;
-    low = s;
+    low = s * lo;
     high = s * hi;
   }
 

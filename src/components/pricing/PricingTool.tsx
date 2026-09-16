@@ -19,22 +19,22 @@ const TIER_CARDS: { value: InstallationType; title: string; desc: string }[] = [
   {
     value: "A",
     title: "New build / major construction",
-    desc: "The system is being installed while the building is being constructed or substantially refurbished. Network cabling is provided as part of the wider building works.",
+    desc: "The system is being installed while the building is being constructed or substantially refurbished. Site-wide network cabling is not included - it is priced separately as part of the wider building works.",
   },
   {
     value: "B",
-    title: "Existing site, cabling available",
-    desc: "The building already has suitable network/data points near most areas where equipment will be installed.",
+    title: "Existing site, cabling nearby",
+    desc: "Adequate network cabling already exists within about 3 m of each device location. Our teams can patch in short runs using conduit where needed.",
   },
   {
     value: "C",
     title: "Existing site, new cabling required",
-    desc: "The site will probably need new network/data cabling run to many of the required areas.",
+    desc: "The site needs new network cabling to many areas. Site-wide cabling is installed by a Ministry of Education approved ICT contractor and is excluded from your estimate.",
   },
   {
     value: "unsure",
     title: "Not sure",
-    desc: "That is fine. We will show a wider estimate covering both common retrofit scenarios.",
+    desc: "That is fine. We will show a typical existing-site estimate, and flag anything that depends on your cabling.",
   },
 ];
 

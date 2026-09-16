@@ -5,7 +5,7 @@ import Link from "next/link";
 import { track } from "@/lib/analytics";
 import { attributionForSubmission } from "@/lib/attribution";
 
-export type InquiryMode = "quote" | "assessment" | "message";
+export type InquiryMode = "quote" | "assessment" | "message" | "cabling";
 
 const HELP_OPTIONS = [
   { value: "formal_quote", label: "Formal quote" },
@@ -38,7 +38,7 @@ export function InquiryModal({
   const dialogRef = useRef<HTMLDivElement>(null);
   const restoreFocusRef = useRef<HTMLElement | null>(null);
   const isProject = mode !== "message";
-  const defaultHelp = mode === "assessment" ? "site_assessment" : "formal_quote";
+  const defaultHelp = mode === "assessment" ? "site_assessment" : mode === "cabling" ? "technical_review" : "formal_quote";
   const [helpType, setHelpType] = useState(defaultHelp);
 
   useEffect(() => {
@@ -140,13 +140,19 @@ export function InquiryModal({
     }
   }
 
-  const title = mode === "quote" ? "Get an accurate quote" : mode === "assessment" ? "Book a site assessment" : "Send us a message";
+  const title =
+    mode === "quote" ? "Get an accurate quote"
+    : mode === "assessment" ? "Book a site assessment"
+    : mode === "cabling" ? "Ask about network cabling"
+    : "Send us a message";
   const blurb =
     mode === "quote"
       ? "Send us your details and one of our trusted installation partners can review the site and provide a proper project quote."
       : mode === "assessment"
         ? "A short site review usually narrows the estimate considerably. Send us your details and we will be in touch to arrange a visit."
-        : "Questions, corrections, or a proposed system you would like us to look at. We read everything.";
+        : mode === "cabling"
+          ? "These estimates exclude site-wide network cabling, which must be installed by a Ministry of Education approved ICT installation contractor (or equivalent certified installer). Give us a few details and we can assess your situation and point you to the right contractor."
+          : "Questions, corrections, or a proposed system you would like us to look at. We read everything.";
 
   const inputClass =
     "mt-1 w-full rounded-lg border border-[var(--sc-border)] px-3 py-2 text-sm focus:border-[var(--sc-teal)] focus:outline-none";

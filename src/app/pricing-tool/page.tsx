@@ -27,11 +27,11 @@ const faqs = [
   },
   {
     q: "Is network cabling included?",
-    a: "The calculator treats new builds, existing sites with suitable network points and retrofits needing new cabling differently. New-build pricing assumes device cabling is part of the wider construction work, while retrofit-cabling-required pricing includes a 25% uplift on affected installed unit rates.",
+    a: "No. Estimates exclude site-wide network cabling. Our installation teams only carry out short patch-in runs (up to about 3 m using conduit). If your site has adequate cabling within about 3 m of each device location, the estimates apply as shown; otherwise cabling must be installed by a Ministry of Education approved ICT installation contractor (or an equivalent certified installer) at additional cost, and we can point you to trusted contractors.",
   },
   {
     q: "Is this a formal quote?",
-    a: "No. The calculator gives an indicative ballpark based on standard assumptions and the pricing configuration last reviewed on 11 September 2026. Final pricing depends on the completed design, site conditions and installation requirements.",
+    a: `No. The calculator gives an indicative ballpark based on standard assumptions and the pricing configuration last reviewed on ${pricingConfig.reviewedAtLabel}. Final pricing depends on the completed design, site conditions and installation requirements.`,
   },
 ];
 
