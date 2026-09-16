@@ -13,11 +13,11 @@ export default function DisclosurePage() {
     <div className="sc-container max-w-3xl py-16 sc-prose">
       <h1 className="text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">Commercial relationships</h1>
       <p className="mt-4 text-lg text-[var(--sc-slate)]">
-        SmartComms NZ is an information and planning resource operated by T3 Labs. Where a user wants a formal quote, installation or site assessment, we may introduce them to a trusted installation or technology partner that can carry out the work.
+        SmartComms NZ is an information and planning resource operated by T3 Labs. Where a user wants a formal quote, installation or site assessment, SmartComms may recommend one or more suitable providers and give the user those providers&apos; public contact details.
       </p>
-      <h2>How referrals work</h2>
+      <h2>How provider recommendations work</h2>
       <p>
-        Using a SmartComms partner is optional. Customers are free to use any provider they choose. T3 Labs is not paid a referral commission or placement fee for sending SmartComms NZ enquiries to installation partners. <em>(True as at the date of this page. If referral fees, sponsored placements or other material commercial arrangements are introduced later, this disclosure will be updated before those arrangements affect the site.)</em>
+        Using a provider suggested by SmartComms is optional. Customers are free to use any provider they choose. SmartComms reviews the information supplied and may recommend one or more providers based on project type, location, requirements and known provider capability. SmartComms sends the recommendation to the customer; it does not forward the customer&apos;s enquiry or personal information to the provider. T3 Labs is not currently paid a referral commission or placement fee for recommending providers to SmartComms users. <em>(True as at the date of this page. If referral fees, sponsored placements or other material commercial arrangements are introduced later, this disclosure will be updated before those arrangements affect the site.)</em>
       </p>
       <h2>Editorial coverage and referral relationships are separate</h2>
       <p>

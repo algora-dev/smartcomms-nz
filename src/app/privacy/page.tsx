@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "Privacy",
-  description: "How SmartComms NZ collects, uses and shares information submitted through project, pricing, funding and finance enquiry forms.",
+  description: "How SmartComms NZ collects and uses information submitted through project, pricing, funding and finance enquiry forms.",
   path: "/privacy",
 });
 
@@ -23,15 +23,16 @@ export default function PrivacyPage() {
       </p>
       <h2>How enquiries are handled</h2>
       <p>
-        Your enquiry goes to SmartComms / T3 Labs first. We use the information to answer your enquiry, understand the
-        project requirements, suggest a suitable next step or provider, keep internal enquiry/attribution records, and
-        improve the tools and site.
+        Your enquiry is handled by the SmartComms team. We use the information to respond to you, understand the
+        project requirements, suggest a suitable next step or provider for you to contact, maintain internal enquiry
+        and attribution records, and improve the tools and site.
       </p>
-      <h2>When information is shared with a provider</h2>
+      <h2>Provider recommendations</h2>
       <p>
-        A provider receives personally identifying project information only when you agree to a direct introduction
-        (or otherwise where appropriate and disclosed to you). We do not automatically forward your enquiry details to
-        any partner. SmartComms NZ does not sell personal information to unrelated third parties.
+        SmartComms does not send your enquiry, contact details, project information, uploaded files or tool answers to
+        the providers we recommend. Where appropriate, we reply to you with the public contact details of the provider
+        or providers we think may be suitable and explain why. You decide whether to contact them. SmartComms does not
+        sell personal information to unrelated third parties.
       </p>
       <h2>Analytics and attribution</h2>
       <ul>
@@ -41,7 +42,7 @@ export default function PrivacyPage() {
           attaches it to enquiry emails so we know which page or tool an enquiry came from.
         </li>
         <li>
-          Pricing-tool outputs may be logged without personal information when configured, to improve the model. Finance-check and funding-check answers may be attached to an enquiry when you choose to contact SmartComms, so T3 Labs can understand the context you supplied.
+          Pricing-tool outputs may be logged without personal information when configured, to improve the model. Finance-check and funding-check answers may be attached to an enquiry when you choose to contact SmartComms, so the SmartComms team can understand the context you supplied.
           No names, emails or free-text notes are sent to analytics.
         </li>
       </ul>
@@ -49,7 +50,8 @@ export default function PrivacyPage() {
       <p>
         Where configured, the site uses third-party services to operate — for example an email delivery service (such
         as Resend) to send enquiry notifications and a hosted database service (such as Supabase) for non-personal tool
-        output logs. Those providers process information on our behalf to deliver the service.
+        output logs. Those technical services process information on SmartComms&apos; behalf to deliver the service.
+        They are not receiving your enquiry as recommended installers, finance providers or project partners.
       </p>
       <h2>Data retention</h2>
       <p>

@@ -6,10 +6,11 @@ import { track } from "@/lib/analytics";
 import { attributionForSubmission } from "@/lib/attribution";
 
 /**
- * Site-wide project enquiry modal (T3-triage model).
+ * Site-wide SmartComms project enquiry modal.
  *
- * One component, contextual modes. Enquiries go to SmartComms / T3 Labs
- * first; provider introductions happen only after the customer agrees.
+ * Enquiries are reviewed by the SmartComms team. SmartComms replies to the
+ * user with suitable provider recommendations and public contact details.
+ * Customer enquiry data is not forwarded to recommended providers.
  */
 
 export type EnquiryMode =
@@ -51,9 +52,9 @@ const EXISTING_PROVIDER_OPTIONS = [
   { value: "unsure", label: "Not sure" },
 ] as const;
 
-/** How enquiries are actually handled: T3 triage, no automatic forwarding. */
-export const T3_HANDOFF_COPY =
-  "Your enquiry goes to SmartComms / T3 Labs first. We use it to understand the project and suggest an appropriate next step. If we recommend a provider and you want a direct introduction, we will confirm that before sharing your contact details with them.";
+/** How enquiries are actually handled: recommendation only, no forwarding. */
+const ENQUIRY_PROCESS_COPY =
+  "Your enquiry goes to the SmartComms team. We'll review the information you provide to understand what you need, then respond with the provider or providers we think are best suited to help you take the next step.";
 
 const MODE_COPY: Record<EnquiryMode, { title: string; blurb: string; submit: string }> = {
   project_help: {
@@ -65,7 +66,7 @@ const MODE_COPY: Record<EnquiryMode, { title: string; blurb: string; submit: str
   quote_help: {
     title: "Get help with a formal quote",
     blurb:
-      "Send us enough information to understand the project and we can suggest a suitable provider from our selected New Zealand partner network for a formal quote.",
+      "Send us enough information to understand the project and we can suggest suitable providers from our selected New Zealand network for a formal quote.",
     submit: "Send enquiry",
   },
   funding_help: {
@@ -148,11 +149,13 @@ export function ProjectEnquiryModal({
       });
       document.body.style.overflow = "hidden";
       track("project_help_opened", { enquiry_type: mode, source_page: window.location.pathname });
+      // Always open at the top of the modal: reset scroll explicitly and
+      // focus without causing browser scrolling.
       requestAnimationFrame(() => {
-        const first = dialogRef.current?.querySelector<HTMLElement>(
-          "input, select, textarea, button:not([aria-label='Close'])",
-        );
-        (first ?? dialogRef.current)?.focus();
+        const dialog = dialogRef.current;
+        if (!dialog) return;
+        dialog.scrollTop = 0;
+        dialog.focus({ preventScroll: true });
       });
     } else {
       document.body.style.overflow = "";
@@ -196,6 +199,16 @@ export function ProjectEnquiryModal({
       restoreFocusRef.current = null;
     };
   }, [open, onClose]);
+
+  useEffect(() => {
+    if (!open || !done) return;
+    // The success state replaces the form inside the same scrollable
+    // container: make sure it begins at the top.
+    requestAnimationFrame(() => {
+      dialogRef.current?.scrollTo({ top: 0, behavior: "auto" });
+      dialogRef.current?.focus({ preventScroll: true });
+    });
+  }, [open, done]);
 
   if (!open) return null;
 
@@ -268,8 +281,8 @@ export function ProjectEnquiryModal({
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[var(--sc-teal)]/10 text-2xl text-[var(--sc-teal)]">✓</div>
             <h3 className="mt-4 text-xl font-semibold text-[var(--sc-navy)]">Thanks — we&apos;ve received your enquiry</h3>
             <p className="mt-2 text-sm text-[var(--sc-slate)]">
-              We&apos;ll review the information you supplied and work out the most useful next step. Where a specialist
-              provider is appropriate, we can suggest someone from our selected New Zealand partner network.
+              The SmartComms team will review what you sent and reply with the provider or providers we think are the
+              best fit, including their public contact details and why they may suit your requirements.
             </p>
             <button
               type="button"
@@ -371,7 +384,7 @@ export function ProjectEnquiryModal({
 
                   <fieldset className="rounded-xl border border-[var(--sc-border)] p-3">
                     <legend className="px-1 text-sm font-medium text-[var(--sc-charcoal)]">
-                      Are you already working with an installer, IT provider or consultant? *{existingProvider ? "" : " (required)"}
+                      Are you already working with an installer, IT provider or consultant? *
                     </legend>
                     <div className="mt-1 flex flex-wrap gap-3">
                       {EXISTING_PROVIDER_OPTIONS.map((o) => (
@@ -434,7 +447,7 @@ export function ProjectEnquiryModal({
               )}
 
               <p className="rounded-lg border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-3 text-xs leading-relaxed text-[var(--sc-slate)]">
-                {T3_HANDOFF_COPY}
+                {ENQUIRY_PROCESS_COPY}
               </p>
               {error && <p className="rounded-lg bg-[#fdf3ec] p-3 text-sm text-[#7a3413]">{error}</p>}
               <button
@@ -445,8 +458,9 @@ export function ProjectEnquiryModal({
                 {sending ? "Sending…" : submitLabel}
               </button>
               <p className="text-center text-xs leading-relaxed text-[var(--sc-slate)]">
-                We use your details to respond to this enquiry. A provider receives your contact details only if you
-                agree to a direct introduction. <Link href="/privacy" className="underline">Privacy</Link>.
+                Your enquiry stays with SmartComms. We use it to respond and identify suitable next steps. We do not
+                send your contact details, project information or attachments to the providers we recommend.{" "}
+                <Link href="/privacy" className="underline">Privacy</Link>.
               </p>
             </form>
           </>

@@ -5,7 +5,7 @@ import { ProjectEnquiryModal, type EnquiryMode } from "./ProjectEnquiryModal";
 
 /**
  * Reusable button that opens the unified project enquiry modal with
- * contextual mode/source. Use on any page that wants the T3-triage CTA.
+ * contextual mode/source. SmartComms project-help CTA for any page.
  */
 export function ProjectHelpLauncher({
   mode = "project_help",

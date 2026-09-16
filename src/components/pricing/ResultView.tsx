@@ -169,7 +169,7 @@ export function ResultView({
       (isAgedCare
         ? "This is a general paging and intercom planning estimate for a care-site project, not a complete nurse-call or certified evacuation-system quote. "
         : "") +
-      disclaimer + " This document is an indicative estimate from a SmartComms planning model, not a formal quote. For a formal quote, SmartComms can review the project information and suggest an appropriate provider from its selected network.",
+      disclaimer + " This document is an indicative estimate from a SmartComms planning model, not a formal quote. For a formal quote, SmartComms can review the project information and suggest an appropriate provider to contact from its selected network.",
       W - 100,
     );
     if (y + lines.length * 11 > 780) { doc.addPage(); y = 60; }
@@ -203,7 +203,7 @@ export function ResultView({
           >
             Want more information?
           </button>
-          <span className="text-xs text-[var(--sc-slate)]">We can put you in touch with the right people for your site and region.</span>
+          <span className="text-xs text-[var(--sc-slate)]">We can suggest the provider or providers we think are most relevant for your site and region.</span>
         </div>
       </div>
 
@@ -331,7 +331,7 @@ export function ResultView({
       <div className="mt-8 rounded-2xl bg-[var(--sc-navy)] p-8 text-center">
         <div className="text-lg font-semibold text-white">Want a proper number?</div>
         <p className="mx-auto mt-2 max-w-md text-sm text-white/80">
-          Send us this estimate and we can put you in touch with the right people to review the site and provide a proper project quote.
+          Send us this estimate and the SmartComms team can review the project information and suggest an appropriate provider to contact about a formal quote.
         </p>
         <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <button

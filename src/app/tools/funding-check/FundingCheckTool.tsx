@@ -338,7 +338,7 @@ export function FundingCheckTool() {
               </button>
             </div>
           )}
-          <p className="mt-3 text-xs text-[var(--sc-slate)]">Your funding-check answers are attached automatically. Your enquiry goes to SmartComms / T3 Labs first; a provider receives your contact details only if you agree to a direct introduction. <Link href="/privacy" className="underline">Privacy</Link>.</p>
+          <p className="mt-3 text-xs text-[var(--sc-slate)]">Your funding-check answers are attached automatically so the SmartComms team can understand the context. Your enquiry stays with SmartComms; we do not send your details or funding-check answers to the providers we recommend. <Link href="/privacy" className="underline">Privacy</Link>.</p>
         </div>
 
         <p className="mt-6 rounded-lg border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-4 text-xs leading-relaxed text-[var(--sc-slate)]">

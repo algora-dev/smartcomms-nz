@@ -237,11 +237,6 @@ export function FinanceCheckTool() {
             >
               Discuss finance options
             </button>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--sc-slate)]">
-              Want to take the next step? Tell the SmartComms team a little more about the project and we&apos;ll suggest
-              the finance provider or specialist we think is most relevant to contact. Your enquiry goes to T3 Labs first;
-              a provider receives your contact details only if you agree to a direct introduction.
-            </p>
           </div>
           <p className="mt-5 text-xs leading-relaxed text-[var(--sc-slate)]">Preliminary guidance only — not an approval or finance offer.</p>
         </section>

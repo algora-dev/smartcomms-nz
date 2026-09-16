@@ -136,10 +136,15 @@ export default function FundingPage() {
           The first two examples are especially relevant because the schools&#39; own audited or annual financial statements explicitly name the projects as 5YA PA/bell upgrades. Greenhithe is included as a separate example of bell/paging work funded through another Ministry capital programme, the School Investment Package (SIP).
         </p>
         <ul>
-          <li><a href="https://www.tamakiprimary.school.nz/wp-content/uploads/sites/80/2023/06/Ta%CC%84maki-Primary-Annual-Report-to-31.12.22.pdf">Tāmaki Primary School annual report to 31 December 2022</a></li>
-          <li><a href="https://www.lincoln.school.nz/assets/PDF-Financials/Lincoln-High-School-YE-31-December-2024-Audited-Accounts.pdf">Lincoln High School 2024 audited financial statements</a></li>
-          <li><a href="https://www.greenhithe.school.nz/wp-content/uploads/sites/63/2024/04/Greenhithe-School-Final-Adjusted-Annual-Report-2022.pdf">Greenhithe School 2022 annual report</a></li>
+          <li>Tāmaki Primary School annual report to 31 December 2022 (Ministry receipts include the 5YA PA/Bell project)</li>
+          <li>Lincoln High School 2024 audited financial statements (5YA Bell/PA Upgrade capital commitment)</li>
+          <li>Greenhithe School 2022 annual report (SIP Bell/Paging project)</li>
         </ul>
+        <p className="text-xs leading-relaxed text-[var(--sc-slate)]">
+          These published reports were verified at the time of writing. Direct document links are temporarily removed
+          while the schools&apos; websites are reorganised; the reports remain publicly available from each school&apos;s
+          financial-reports page.
+        </p>
         <div className="not-prose my-8 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6">
           <p className="text-sm font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">What this means for your school</p>
           <h3 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">There is documented precedent for funding PA and bell infrastructure.</h3>

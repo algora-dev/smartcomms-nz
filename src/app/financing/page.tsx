@@ -52,7 +52,7 @@ const faqs = [
   },
   {
     q: "Does the SmartComms finance checker approve finance?",
-    a: "No. SmartComms does not provide finance or make credit decisions. The checker only helps determine whether a specialist conversation looks useful and gives T3 Labs enough context to suggest an appropriate next step or provider from its selected network.",
+    a: "No. SmartComms does not provide finance or make credit decisions. The checker only helps determine whether a specialist conversation looks useful and gives the SmartComms team enough context to suggest an appropriate next step or provider from its selected network.",
   },
 ];
 
@@ -192,8 +192,8 @@ export default function FinancingPage() {
         <h2>What happens after the finance check?</h2>
         <ol>
           <li><strong>Get your preliminary result.</strong> SmartComms shows whether a specialist finance conversation looks useful.</li>
-          <li><strong>Ask SmartComms for the next step.</strong> If you want help, send enough information for the SmartComms team to understand the project. Your enquiry goes to T3 Labs first.</li>
-          <li><strong>Contact the provider SmartComms suggests.</strong> SmartComms replies with the provider or providers it thinks may be appropriate and their public contact details. Your contact details are shared with a provider only if you agree to a direct introduction. You choose whether to contact them.</li>
+          <li><strong>Ask SmartComms for the next step.</strong> If you want help, send enough information for the SmartComms team to understand the project.</li>
+          <li><strong>Contact the provider SmartComms suggests.</strong> SmartComms replies with the provider or providers it thinks may be appropriate, their public contact details and why they may fit. You decide whether to contact them.</li>
         </ol>
 
         <p>
@@ -220,7 +220,7 @@ export default function FinancingPage() {
         </ul>
 
         <div className="not-prose mt-8 rounded-xl border border-[var(--sc-border)] bg-white p-5 text-sm leading-relaxed text-[var(--sc-slate)]">
-          SmartComms NZ is an information and planning resource operated by T3 Labs. It does not provide financial advice, finance products, credit assessment or approval. If you ask for practical help, T3 Labs can review the information supplied and suggest an appropriate next step or provider from its selected network.
+          SmartComms NZ is an information and planning resource operated by T3 Labs. It does not provide financial advice, finance products, credit assessment or approval. If you ask for practical help, the SmartComms team can review the information supplied and suggest an appropriate next step or provider to contact.
         </div>
 
         <div className="not-prose mt-8 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6 text-center">

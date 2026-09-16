@@ -5,7 +5,7 @@ import { ProjectHelpLauncher } from "@/components/enquiry/ProjectHelpLauncher";
 
 export const metadata: Metadata = buildMetadata({
   title: "Contact",
-  description: "Send SmartComms NZ a question, correction or project enquiry. T3 Labs reviews every enquiry and suggests the most useful next step.",
+  description: "Send SmartComms NZ a question, correction or project enquiry. The SmartComms team reviews project enquiries and suggests the most useful next step.",
   path: "/contact",
 });
 
@@ -28,8 +28,7 @@ export default function ContactPage() {
         <div className="rounded-2xl border border-[var(--sc-border)] bg-white p-5">
           <h2 className="font-semibold text-[var(--sc-blue-900)]">Project help</h2>
           <p className="mt-2 text-sm text-[var(--sc-slate)]">
-            A quote or installer, site assessment, system selection, or a funding / project-scope question. T3 Labs
-            reviews the enquiry and suggests an appropriate next step or provider from our selected New Zealand network.
+            A quote or installer, site assessment, system selection, or a funding / project-scope question. The SmartComms team reviews the enquiry and replies with the next step or provider we think is most appropriate to contact.
           </p>
           <ProjectHelpLauncher buttonLabel="Tell us about your project" className="sc-btn-primary mt-6 inline-flex cursor-pointer" />
         </div>

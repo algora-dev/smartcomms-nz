@@ -231,10 +231,18 @@ export async function POST(req: Request) {
       "Attribution (internal only):",
       attribution.length ? attribution.map(([k, v]) => `- ${k}: ${v}`).join("\n") : "(none captured)",
       "",
-      "=== ROUTING STATUS ===",
-      "T3 review required — not automatically forwarded.",
-      "You may recommend a provider and send the customer the provider's public contact details.",
-      "Do NOT share the customer's personal/contact/project information with any provider unless the customer agrees to a direct introduction.",
+      "=== SMARTCOMMS ROUTING ===",
+      "SmartComms review required — do not forward this enquiry.",
+      "",
+      "Recommend the provider or providers that appear most suitable based on the information supplied.",
+      "Reply to the customer with:",
+      "- provider name;",
+      "- provider public website/email/phone;",
+      "- a short explanation of why the provider may be a good fit.",
+      "",
+      "Do NOT send the customer's contact details, enquiry, attachments, tool answers or other project information to the recommended provider.",
+      "The customer decides whether to contact the provider themselves.",
+      "Where useful, ask the customer to mention SmartComms when they make contact.",
     ].filter((line) => line !== null).join("\n");
 
     const sendResult = await resend.emails.send({

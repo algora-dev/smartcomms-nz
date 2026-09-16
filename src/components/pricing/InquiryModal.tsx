@@ -6,9 +6,8 @@
  * ProjectEnquiryModal from @/components/enquiry directly.
  */
 
-import { ProjectEnquiryModal, T3_HANDOFF_COPY, type EnquiryMode } from "@/components/enquiry/ProjectEnquiryModal";
+import { ProjectEnquiryModal, type EnquiryMode } from "@/components/enquiry/ProjectEnquiryModal";
 
-export { T3_HANDOFF_COPY as PARTNER_HANDOFF_COPY };
 export type { EnquiryMode as InquiryMode };
 
 const LEGACY_MODE_MAP: Record<string, EnquiryMode> = {

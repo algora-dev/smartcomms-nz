@@ -23,17 +23,17 @@ export default function AboutPage() {
         <li>Indicative NZ pricing examples with disclosed assumptions</li>
         <li>Interactive planning, pricing, school-funding and finance/leasing tools</li>
         <li>Guidance for reviewing a proposed system, upgrade or quote</li>
-        <li>Introductions to trusted installation or technology partners when a user asks for project delivery</li>
+        <li>Help identifying suitable installation, technology or finance providers to contact when a user wants to progress a project</li>
       </ul>
       <h2>How SmartComms works</h2>
       <ol>
         <li><strong>Research the options.</strong> Use our guides, comparisons and planning tools to understand the system, features and architecture that may suit your site.</li>
         <li><strong>Build a realistic project picture.</strong> Use our pricing and, where relevant, funding or finance tools to understand likely scope, budget and questions that still need answering.</li>
         <li><strong>Ask SmartComms for help.</strong> If you want to progress the project, send us enough information to understand what you need.</li>
-        <li><strong>Get the right next step.</strong> T3 Labs reviews the enquiry. Where specialist help is appropriate, we can suggest a suitable provider from our selected New Zealand partner network.</li>
+        <li><strong>Get the right next step.</strong> The SmartComms team reviews the enquiry and, where specialist help is appropriate, replies with the provider or providers we think are most suitable to contact.</li>
       </ol>
       <p>
-        SmartComms does not manufacture or install the systems it researches. Our referral network does not include every provider in New Zealand.
+        SmartComms does not manufacture or install the systems it researches. Our selected provider network does not include every provider in New Zealand.
       </p>
       <h2>Who is behind SmartComms</h2>
       <p>
