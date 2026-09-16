@@ -169,11 +169,8 @@ export function PricingTool() {
   // Wipe the tool back to a fresh start (used by the restart confirmation).
   const toolTopRef = useRef<HTMLDivElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
-  function scrollToolTo(ref: React.RefObject<HTMLDivElement | null>) {
-    requestAnimationFrame(() => {
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      ref.current?.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
-    });
+  function scrollToolTo() {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }
   /** Central navigation helper: the scroll itself happens in a post-render
    *  effect on [step] — scrolling from inside the click handler races React
@@ -187,7 +184,7 @@ export function PricingTool() {
     const first = prevStepRef.current === null;
     prevStepRef.current = step;
     if (first) return; // initial mount / deep-link hydration: don't hijack scroll
-    scrollToolTo(step === 3 ? resultRef : toolTopRef);
+    scrollToolTo();
   }, [step]);
 
   const restartTool = () => {
@@ -208,7 +205,7 @@ export function PricingTool() {
     skipPersist.current = true;
     setIndustry(undefined);
     window.history.replaceState(null, "", window.location.pathname);
-    scrollToolTo(toolTopRef);
+    scrollToolTo();
   };
 
   // While a result exists: warn before refresh/leaving, and intercept any

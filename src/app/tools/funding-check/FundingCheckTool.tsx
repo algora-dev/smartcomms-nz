@@ -153,10 +153,8 @@ export function FundingCheckTool() {
     const first = prevScrollKeyRef.current === null;
     prevScrollKeyRef.current = key;
     if (first) return; // initial page load: keep natural position
-    requestAnimationFrame(() => {
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      (result ? resultRef.current : toolTopRef.current)?.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
-    });
+    // Scrollbar to absolute maximum height (scrollY 0), instantly.
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [screen, result]);
 
   useEffect(() => {

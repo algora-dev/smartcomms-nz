@@ -116,11 +116,11 @@ export function FinanceCheckTool() {
   // content can live above/below the tool.
   const toolTopRef = useRef<HTMLDivElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
-  function scrollToElement(el: HTMLElement | null) {
-    requestAnimationFrame(() => {
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      el?.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
-    });
+  // Scroll policy: every step/result/restart transition puts the scrollbar
+  // at absolute maximum height (scrollY 0), instantly. No element anchoring,
+  // no animation - anchoring to an element mid-page leaves dead content above.
+  function scrollToPageTop() {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }
 
   useEffect(() => {
@@ -184,7 +184,7 @@ export function FinanceCheckTool() {
   // click handler races React: the target element may not exist yet, which
   // silently cancelled the scroll and left the user at the bottom.
   useEffect(() => {
-    scrollToElement(resultReady ? resultRef.current : toolTopRef.current);
+    scrollToPageTop();
   }, [resultReady, screen]);
 
   const canContinue =
