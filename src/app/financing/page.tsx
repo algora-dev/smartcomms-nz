@@ -210,7 +210,7 @@ export default function FinancingPage() {
 
         <h2>Sources and market context</h2>
         <p>
-          The descriptions above are based on publicly available New Zealand equipment-finance information. They establish that these kinds of commercial structures exist; they do not mean SmartComms has a referral relationship with every provider referenced.
+          The descriptions above are based on publicly available New Zealand equipment-finance information. They establish that these kinds of commercial structures exist; they do not mean SmartComms has a commercial relationship with every provider referenced.
         </p>
         <ul>
           <li><a href="https://www.eleasing.co.nz/customers/">eLeasing — NZ commercial equipment finance and leasing options</a></li>

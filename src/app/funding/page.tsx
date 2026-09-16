@@ -34,6 +34,10 @@ const faqs = [
     q: "Are there real examples of New Zealand schools using Ministry funding for PA or bell upgrades?",
     a: "Yes. Public school financial statements include examples such as Tāmaki Primary School&#39;s MOE 5YA - PA/Bell project and Lincoln High School&#39;s MOE 5YA Bell/PA Upgrade. These examples show precedent, but they do not guarantee approval for another school.",
   },
+  {
+    q: "What changes when the New Zealand School Property Agency starts on 1 October 2026?",
+    a: "The NZSPA will take responsibility for managing the Crown school-property portfolio from 1 October 2026. The Ministry currently says there are no immediate changes for schools or school boards and existing property plans or projects are not affected. Schools should continue using the normal property-support process unless new guidance is issued.",
+  },
 ];
 
 export default function FundingPage() {
@@ -66,6 +70,30 @@ export default function FundingPage() {
           <p className="mt-4 text-xs text-[var(--sc-slate)]">Last reviewed {reviewed}. This page is general guidance, not a funding approval.</p>
         </div>
       </div>
+
+      <section className="border-b border-[var(--sc-border)] bg-white">
+        <div className="sc-container max-w-4xl py-10">
+          <div className="rounded-2xl border-2 border-[var(--sc-blue-700)] bg-[var(--sc-blue-50)] p-6 md:p-8">
+            <h2 className="text-xl font-bold text-[var(--sc-blue-900)]">2026 update: 5YA allocations increased for new funding cycles</h2>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">
+              From 1 July 2026, the Ministry increased the 5YA base funding rate from $30 to $45 per square metre and doubled the minimum allocation from $45,000 to $90,000 for schools beginning a new 5YA funding cycle. The calculation was also simplified (Catch-Up and Top-Up funding were removed).
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">
+              This does not mean every school automatically has extra money available for a communications project. The amount and timing still depend on the school&apos;s current 5YA cycle, 10YPP priorities and property requirements.
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">
+              If your school is entering a new cycle, it may be a useful time to reassess fixed communications infrastructure that has previously been deferred.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <Link href="/tools/funding-check" className="sc-btn-primary">Check your project</Link>
+              <Link href="/pricing-tool" className="sc-btn-secondary">Estimate project cost</Link>
+            </div>
+            <p className="mt-4 text-xs text-[var(--sc-slate)]">
+              Source: <a href="https://www.education.govt.nz/education-professionals/schools-year-0-13/property/5-year-agreement-funding" className="font-medium text-[var(--sc-blue-700)] underline">Ministry: 5 Year Agreement funding</a>
+            </p>
+          </div>
+        </div>
+      </section>
 
       <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)]">
         <div className="sc-container max-w-4xl py-14">
@@ -108,6 +136,7 @@ export default function FundingPage() {
                 <th className="px-4 py-3 font-semibold">Published project</th>
                 <th className="px-4 py-3 font-semibold">Published amount</th>
                 <th className="px-4 py-3 font-semibold">Funding route</th>
+                <th className="px-4 py-3 font-semibold">Source</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[var(--sc-border)] text-[var(--sc-slate)]">
@@ -116,18 +145,21 @@ export default function FundingPage() {
                 <td className="px-4 py-3">MOE 5YA - PA/Bell</td>
                 <td className="px-4 py-3">$38,392 in Ministry receipts reported for 2022</td>
                 <td className="px-4 py-3">5YA</td>
+                <td className="px-4 py-3"><a href="https://www.tamakiprimary.school.nz/our-school/financial-report/" className="font-medium text-[var(--sc-blue-700)] underline">Financial reports</a></td>
               </tr>
               <tr>
                 <td className="px-4 py-3 font-medium text-[var(--sc-blue-900)]">Lincoln High School</td>
                 <td className="px-4 py-3">MOE 5YA Bell/PA Upgrade</td>
                 <td className="px-4 py-3">$108,492 capital commitment reported at 31 Dec 2024</td>
                 <td className="px-4 py-3">5YA</td>
+                <td className="px-4 py-3"><a href="https://www.lincoln.school.nz/school/board-trustees" className="font-medium text-[var(--sc-blue-700)] underline">2024 audited accounts</a></td>
               </tr>
               <tr>
                 <td className="px-4 py-3 font-medium text-[var(--sc-blue-900)]">Greenhithe School</td>
                 <td className="px-4 py-3">MOE SIP Bell/Paging</td>
                 <td className="px-4 py-3">$7,143 in Ministry receipts reported during 2022</td>
                 <td className="px-4 py-3">SIP (not 5YA)</td>
+                <td className="px-4 py-3"><a href="https://www.greenhithe.school.nz/strategic-and-annual-plans/" className="font-medium text-[var(--sc-blue-700)] underline">2022 annual financial report</a></td>
               </tr>
             </tbody>
           </table>
@@ -141,9 +173,8 @@ export default function FundingPage() {
           <li>Greenhithe School 2022 annual report (SIP Bell/Paging project)</li>
         </ul>
         <p className="text-xs leading-relaxed text-[var(--sc-slate)]">
-          These published reports were verified at the time of writing. Direct document links are temporarily removed
-          while the schools&apos; websites are reorganised; the reports remain publicly available from each school&apos;s
-          financial-reports page.
+          Sources were rechecked on 16 September 2026. Where a school provides a stable financial-reports index rather
+          than a permanent document URL, SmartComms links to that index and identifies the relevant report by year.
         </p>
         <div className="not-prose my-8 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6">
           <p className="text-sm font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">What this means for your school</p>
@@ -204,6 +235,7 @@ export default function FundingPage() {
         <h2>Official Ministry starting points</h2>
         <ul>
           <li><a href="https://www.education.govt.nz/education-professionals/schools-year-0-13/property/5-year-agreement-funding">5 Year Agreement funding</a></li>
+          <li><a href="https://www.education.govt.nz/our-work/strategies-policies-and-programmes/property-and-infrastructure/school-property-group/new-zealand-school-property-agency">New Zealand School Property Agency (NZSPA)</a></li>
           <li><a href="https://www.education.govt.nz/education-professionals/schools-year-0-13/property/overview-10-year-property-plan">10 Year Property Plan overview</a></li>
           <li><a href="https://www.education.govt.nz/education-professionals/schools-year-0-13/property/furniture-and-equipment-funding-state-schools/what-items-we-classify-furniture-and-equipment">How the Ministry classifies furniture, equipment and fixed infrastructure</a></li>
         </ul>

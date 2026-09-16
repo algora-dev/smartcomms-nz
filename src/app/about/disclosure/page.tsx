@@ -19,12 +19,12 @@ export default function DisclosurePage() {
       <p>
         Using a provider suggested by SmartComms is optional. Customers are free to use any provider they choose. SmartComms reviews the information supplied and may recommend one or more providers based on project type, location, requirements and known provider capability. SmartComms sends the recommendation to the customer; it does not forward the customer&apos;s enquiry or personal information to the provider. T3 Labs is not currently paid a referral commission or placement fee for recommending providers to SmartComms users. <em>(True as at the date of this page. If referral fees, sponsored placements or other material commercial arrangements are introduced later, this disclosure will be updated before those arrangements affect the site.)</em>
       </p>
-      <h2>Editorial coverage and referral relationships are separate</h2>
+      <h2>Editorial coverage and provider relationships are separate</h2>
       <p>
-        SmartComms may research and discuss manufacturers, installers, distributors and public projects that are not members of our referral network. Editorial inclusion does not imply a commercial relationship. Being part of the referral network does not purchase a favourable product comparison or guaranteed recommendation.
+        SmartComms may research and discuss manufacturers, installers, distributors and public projects that are not members of our selected provider network. Editorial inclusion does not imply a commercial relationship. Being part of the selected provider network does not purchase a favourable product comparison or guaranteed recommendation.
       </p>
       <p>
-        When a user asks for practical help, T3 Labs recommends from the providers available in its selected network based on the information supplied, the project type, location and provider capability. This is not represented as a search of every provider in New Zealand.
+        When a user asks for practical help, SmartComms recommends from the providers available in its selected network based on the information supplied, project type, location and known provider capability. This is not represented as a search of every provider in New Zealand.
       </p>
       <h2>Our commitments</h2>
       <ul>

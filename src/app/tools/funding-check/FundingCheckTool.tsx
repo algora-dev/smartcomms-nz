@@ -315,6 +315,10 @@ export function FundingCheckTool() {
           <p className="mt-3 text-sm text-[var(--sc-slate)]">
             The next review can also confirm {result.confirmationsNeeded.slice(0, 2).join(" and ").toLowerCase()}.
           </p>
+          <p className="mt-2 text-xs leading-relaxed text-[var(--sc-slate)]">
+            If your school is starting a new 5YA cycle from 1 July 2026, the updated base rate and minimum allocation
+            may be relevant to the amount available. Confirm the school&apos;s actual allocation and 10YPP priorities.
+          </p>
 
           {!enquiry && (
             <div className="mt-4 flex flex-wrap gap-4">
