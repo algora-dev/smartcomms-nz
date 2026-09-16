@@ -111,7 +111,7 @@ export function ResultView({
     for (const line of estimate.breakdown) {
       if (y > 700) { doc.addPage(); y = 60; }
       doc.text(line.label, 55, y);
-      doc.text(formatNZD(line.amount), W - 55, y, { align: "right" });
+      doc.text(`${formatNZD(line.amount * pricingConfig.estimateLowMultiplier)} - ${formatNZD(line.amount)}`, W - 55, y, { align: "right" });
       y += 14;
     }
     if (y > 660) { doc.addPage(); y = 60; }
@@ -186,7 +186,14 @@ export function ResultView({
           >
             Want more information?
           </button>
-          <span className="text-xs text-[var(--sc-slate)]">We can put you in touch with the right people for your site and region.</span>
+          <button
+            type="button"
+            onClick={onRestart}
+            className="w-full rounded-full border border-[var(--sc-navy)]/30 px-6 py-3 text-center text-sm font-semibold text-[var(--sc-navy)] hover:border-[var(--sc-navy)]/60 hover:bg-[var(--sc-blue-50)] transition-all sm:w-auto cursor-pointer"
+          >
+            Start again
+          </button>
+          <span className="text-xs text-[var(--sc-slate)] sm:w-full sm:text-center">We can put you in touch with the right people for your site and region.</span>
         </div>
       </div>
 
@@ -275,12 +282,12 @@ export function ResultView({
                   <div className="text-[var(--sc-charcoal)]">{l.label}</div>
                   {l.detail && <div className="text-xs text-[var(--sc-slate)]">{l.detail}</div>}
                 </div>
-                <div className="whitespace-nowrap font-medium text-[var(--sc-navy)]">{formatNZD(l.amount)}</div>
+                <div className="whitespace-nowrap font-medium text-[var(--sc-navy)]">{formatNZD(l.amount * pricingConfig.estimateLowMultiplier)} – {formatNZD(l.amount)}</div>
               </div>
             ))}
             <div className="mt-2 flex justify-between border-t border-[var(--sc-border)] pt-3 text-sm font-semibold text-[var(--sc-navy)]">
-              <span>Subtotal</span>
-              <span>{formatNZD(estimate.low)} (range up to {formatNZD(estimate.high)}{rangeSuffix})</span>
+              <span>Subtotal (indicative range)</span>
+              <span>{formatNZD(estimate.low)} – {formatNZD(estimate.high)}{rangeSuffix}</span>
             </div>
             <p className="mt-2 text-xs text-[var(--sc-slate)]">
               {estimate.basis === "unsure"
@@ -355,7 +362,7 @@ export function ResultView({
         open={inquiry !== null}
         mode={inquiry ?? "quote"}
         onClose={() => setInquiry(null)}
-        estimateSummary={`${formatNZD(estimate.low)} - ${formatNZD(estimate.high)}${rangeSuffix}`}
+        estimateSummary={`${formatNZD(estimate.low)} - ${formatNZD(estimate.high)}${rangeSuffix} ex GST`}
         estimateLink={typeof window !== "undefined" ? window.location.href : undefined}
       />
     </div>

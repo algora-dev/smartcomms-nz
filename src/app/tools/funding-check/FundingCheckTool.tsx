@@ -12,6 +12,7 @@ import Link from "next/link";
 import { track } from "@/lib/analytics";
 import { attributionForSubmission } from "@/lib/attribution";
 import { ToolCrossSell } from "@/components/tool-cross-sell";
+import { InquiryModal } from "@/components/pricing/InquiryModal";
 import {
   CABLING_STATUS,
   CABLING_TOOLTIP,
@@ -111,6 +112,7 @@ export function FundingCheckTool() {
     features: [],
   });
   const [result, setResult] = useState<AssessmentResult | null>(null);
+  const [connectOpen, setConnectOpen] = useState(false);
   const [showLead, setShowLead] = useState(false);
   const [lead, setLead] = useState<LeadForm>({
     name: "",
@@ -229,6 +231,14 @@ export function FundingCheckTool() {
     return (
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-[var(--sc-blue-900)]">{result.headline}</h1>
+        <InquiryModal
+          open={connectOpen}
+          mode="connect"
+          onClose={() => setConnectOpen(false)}
+          summaryLabel="Your funding result"
+          estimateSummary={`Funding case: ${result.caseTier === "strong" ? "Strong" : result.caseTier === "moderate" ? "Potential" : "Needs supporting evidence"}; Pathway: ${result.pathway === "five_ya" ? "5-Year property plan" : result.pathway === "state_integrated" ? "State integrated" : result.pathway === "private" ? "Private" : result.pathway === "unknown" ? "School type unknown" : "New build"}`}
+          estimateLink={typeof window !== "undefined" ? window.location.href : undefined}
+        />
 
         <div className="sc-card mt-6 p-6">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--sc-slate)]">Likely pathway</h2>
@@ -301,6 +311,16 @@ export function FundingCheckTool() {
 
           {!showLead && !sent && (
             <div className="mt-4 flex flex-wrap gap-4">
+              <button
+                type="button"
+                className="sc-btn-secondary"
+                onClick={() => {
+                  setConnectOpen(true);
+                  track("funding_connect_opened", { pathway: result.pathway });
+                }}
+              >
+                Want more information?
+              </button>
               <button
                 type="button"
                 className="sc-btn-primary"

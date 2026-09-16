@@ -25,12 +25,15 @@ export function InquiryModal({
   onClose,
   estimateSummary,
   estimateLink,
+  summaryLabel,
 }: {
   open: boolean;
   mode: InquiryMode;
   onClose: () => void;
   estimateSummary?: string; // e.g. "$11,845 - $14,214 ex GST"
   estimateLink?: string;
+  /** Label for the context chip, e.g. "Your funding result" */
+  summaryLabel?: string;
 }) {
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
@@ -195,7 +198,7 @@ export function InquiryModal({
                 <p id="sc-inquiry-desc" className="mt-1 text-sm text-[var(--sc-slate)]">{blurb}</p>
                 {estimateSummary && (
                   <p className="mt-2 rounded-full bg-[var(--sc-blue-50)] px-3 py-1 text-xs font-medium text-[var(--sc-navy)]">
-                    Your estimate: {estimateSummary} ex GST
+                    {summaryLabel ?? "Your estimate"}: {estimateSummary}
                   </p>
                 )}
               </div>
@@ -308,13 +311,7 @@ export function InquiryModal({
                 disabled={sending}
                 className="w-full rounded-full bg-[var(--sc-teal-strong)] px-6 py-3 text-sm font-semibold text-white hover:bg-[var(--sc-teal-strong-hover)] hover:shadow-lg transition-all cursor-pointer disabled:opacity-50"
               >
-                {sending
-                  ? "Sending…"
-                  : slim
-                    ? "Be put in touch with the right people"
-                    : mode === "assessment"
-                      ? "Request site assessment"
-                      : "Send enquiry"}
+                {sending ? "Sending…" : "Put me in touch"}
               </button>
               <p className="text-center text-xs leading-relaxed text-[var(--sc-slate)]">
                 We use your details to respond to this enquiry. If you request installation or a formal quote, relevant project details may be shared with a trusted installation partner. <Link href="/privacy" className="underline">Privacy</Link>.
