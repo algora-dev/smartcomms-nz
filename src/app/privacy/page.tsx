@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
@@ -13,20 +12,24 @@ export default function PrivacyPage() {
     <div className="sc-container max-w-3xl py-16 sc-prose">
       <h1 className="text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">Privacy</h1>
       <p className="mt-4 text-lg text-[var(--sc-slate)]">
-        SmartComms NZ is operated by T3 Labs. This page explains how information submitted through the site is used.
+        SmartComms NZ collects information that you choose to submit through this website, including project, pricing,
+        funding and finance enquiry forms.
       </p>
       <h2>Information you may provide</h2>
       <p>
         For project enquiries, name, organisation, email and town/region are required. For a general message, name,
-        email and the message are required. Other fields — including phone, brand preference and attachments — are
+        email and the message are required. Other fields, including phone, brand preference and attachments, are
         optional unless the form specifically says otherwise.
       </p>
-      <h2>How enquiries are handled</h2>
-      <p>
-        Your enquiry is handled by the SmartComms team. We use the information to respond to you, understand the
-        project requirements, suggest a suitable next step or provider for you to contact, maintain internal enquiry
-        and attribution records, and improve the tools and site.
-      </p>
+      <h2>How we use your information</h2>
+      <p>We use the information you provide to:</p>
+      <ul>
+        <li>respond to your enquiry;</li>
+        <li>understand your project or question;</li>
+        <li>suggest suitable next steps or providers for you to contact;</li>
+        <li>maintain useful project history and follow-up;</li>
+        <li>improve SmartComms tools and content.</li>
+      </ul>
       <h2>Provider recommendations</h2>
       <p>
         SmartComms does not send your enquiry, contact details, project information, uploaded files or tool answers to
@@ -42,33 +45,40 @@ export default function PrivacyPage() {
           attaches it to enquiry emails so we know which page or tool an enquiry came from.
         </li>
         <li>
-          Pricing-tool outputs may be logged without personal information when configured, to improve the model. Finance-check and funding-check answers may be attached to an enquiry when you choose to contact SmartComms, so the SmartComms team can understand the context you supplied.
-          No names, emails or free-text notes are sent to analytics.
+          Pricing-tool outputs may be logged without personal information when configured, to improve the model.
+          Finance-check and funding-check answers may be attached to an enquiry when you choose to contact SmartComms,
+          so the SmartComms team can understand the context you supplied. No names, emails or free-text notes are sent
+          to analytics.
         </li>
       </ul>
       <h2>Service providers</h2>
       <p>
-        Where configured, the site uses third-party services to operate — for example an email delivery service (such
-        as Resend) to send enquiry notifications and a hosted database service (such as Supabase) for non-personal tool
-        output logs. Those technical services process information on SmartComms&apos; behalf to deliver the service.
-        They are not receiving your enquiry as recommended installers, finance providers or project partners.
+        SmartComms may use third-party services to operate the website, including hosting, email delivery and database
+        services. Those services may process information on SmartComms&apos; behalf for the purpose of operating the
+        site and enquiry service. They are not receiving your enquiry as recommended installers, finance providers or
+        project partners.
       </p>
-      <h2>Data retention</h2>
+      <h2>Retention</h2>
       <p>
-        {/* TODO(owner): confirm the real operational retention period for enquiry emails and any stored records, then state it here. */}
-        We keep enquiry records only as long as needed to respond and maintain accurate internal records. A specific
-        retention period will be stated here once confirmed. To ask what we hold about you, <Link href="/contact">send us a message</Link>.
+        We keep enquiry information only for as long as reasonably necessary to respond, maintain useful project
+        history and deal with follow-up. Information that is no longer required is deleted or anonymised.
       </p>
-      <h2>Corrections and deletion</h2>
+      <h2>Access and correction</h2>
       <p>
-        To ask about information you have submitted, request a correction or request deletion,{" "}
-        <Link href="/contact">send us a message through the contact form</Link> and we will respond to the email
-        address you provided.
+        You can ask SmartComms to provide access to personal information held about you, or request that incorrect
+        information be corrected. Email the Privacy Officer below and we will respond to the email address you
+        provided.
       </p>
-      <p className="text-sm text-[var(--sc-slate)]">
-        {/* TODO(owner): insert the correct legal/business name, contact email and business address for privacy disclosures once confirmed. */}
-        Formal privacy contact details (legal entity name, contact email and postal address) will be added to this
-        page once confirmed.
+      <h2>Privacy contact</h2>
+      <p>
+        <strong>SmartComms NZ</strong>
+        <br />
+        <strong>Privacy Officer:</strong> Cece
+        <br />
+        <strong>Email:</strong>{" "}
+        <a href="mailto:insights@t3labs.co.nz">insights@t3labs.co.nz</a>
+        <br />
+        <strong>Address:</strong> 85 Tongariro Street, Halswell, Christchurch 8025, New Zealand
       </p>
     </div>
   );
