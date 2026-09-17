@@ -110,6 +110,7 @@ export default function SchoolsPage() {
         </div>
       </section>
 
+      <section className="sc-container max-w-4xl py-14">
       <ContinuePlanning
         items={[
           { title: "NZ school requirements", desc: "Ministry design, cabling and procurement guidance for school PA and paging.", href: "/guides/nz-school-pa-paging-requirements" },
@@ -120,6 +121,7 @@ export default function SchoolsPage() {
           { title: "School funding", desc: "Whether fixed communications work may fit a 5YA / 10YPP pathway.", href: "/funding" },
         ]}
       />
+      </section>
 
       <article className="sc-container max-w-3xl py-14 sc-prose">
         <h2>When should a school consider replacing its current system?</h2>
