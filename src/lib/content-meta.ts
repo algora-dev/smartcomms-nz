@@ -28,7 +28,7 @@ export const CONTENT_META: Record<string, ContentMeta> = {
   "/pricing": { published: "2026-09-11", reviewed: "2026-09-16" },
   "/pricing-tool": { published: "2026-09-11", reviewed: "2026-09-16" },
   "/funding": { published: "2026-09-11", reviewed: "2026-09-16" },
-  "/tools": { published: "2026-09-11", reviewed: "2026-09-11" },
+  "/tools": { published: "2026-09-11", reviewed: "2026-09-17" },
   "/tools/funding-check": { published: "2026-09-11", reviewed: "2026-09-16" },
   "/financing": { published: "2026-09-16", reviewed: "2026-09-16" },
   "/tools/finance-check": { published: "2026-09-16", reviewed: "2026-09-16" },
@@ -38,7 +38,7 @@ export const CONTENT_META: Record<string, ContentMeta> = {
   "/about/methodology": { published: "2026-09-05", reviewed: "2026-09-16" },
   "/about/disclosure": { published: "2026-09-05", reviewed: "2026-09-16" },
   "/about/editorial-policy": { published: "2026-09-05", reviewed: "2026-09-16" },
-  "/privacy": { published: "2026-09-05", reviewed: "2026-09-16" },
+  "/privacy": { published: "2026-09-05", reviewed: "2026-09-17" },
   "/contact": { published: "2026-09-05", reviewed: "2026-09-16" },
 };
 

@@ -1,18 +1,17 @@
 # Public project examples — source check
 
-**Reviewed for release:** 17 September 2026
-**Scope:** three attributed NZ installation examples added to `/compare` (Edwards / Three Kings Primary, Pacific AV / Ormiston Junior College) and `/industries/aged-care-retirement-villages` (G&S Technologies / Summerset St Johns).
+**Last verified:** 17 September 2026 (live fetch, all three sources)
+**Scope:** three attributed NZ installation examples on `/compare` (Edwards / Three Kings Primary, Pacific AV / Ormiston Junior College) and `/industries/aged-care-retirement-villages` (G&S Technologies / Summerset St Johns).
 
-## Status of sources
+## Source status
 
-| Ref | Source | Check status (2026-09-17) |
+| Ref | Source | Status |
 |---|---|---|
-| P1 | Edwards — Three Kings Primary, https://www.edwardsnz.co.nz/school-uses-paging-system-for-tighter-lockdown-procedures | Readable as indexed source text in the research browser; direct page fetch failed there. No fresh HTTP-200 verified from the code environment. Not evidence the site is down. |
-| P2 | Pacific AV — Ormiston Junior College, https://www.pacificav.co.nz/ormiston-junior-college-auckland/ | Readable through the research browser. No fresh HTTP-200 verified from the code environment. |
-| P3 | G&S Technologies — Summerset St Johns, https://gstechnologies.co.nz/case-studies/summerset-st-johns/ | Readable through the research browser. Publication/installation year not established from the visible account. No fresh HTTP-200 verified from the code environment. |
-| L1 | 2N — Net Audio Systems discontinued support, https://www.2n.com/en-GB/support/discontinued/2n-net-audio-systems/ | Available as indexed manufacturer support content. Existing `2n-legacy` evidence entry still points at the products/discontinued URL; switch to this support URL only after the release link check confirms which resolves. |
+| P1 | Edwards — Three Kings Primary, https://www.edwardsnz.co.nz/school-uses-paging-system-for-tighter-lockdown-procedures | Verified live 17 September 2026; expected project page loads (HTTP 200, Three Kings lockdown/2N paging story present). |
+| P2 | Pacific AV — Ormiston Junior College, https://www.pacificav.co.nz/ormiston-junior-college-auckland/ | Verified live 17 September 2026; expected project page loads (HTTP 200, Australasian Audio Engineering named as dealer, FrontRow equipment list present). |
+| P3 | G&S Technologies — Summerset St Johns, https://gstechnologies.co.nz/case-studies/summerset-st-johns/ | Verified live 17 September 2026; expected project page loads (HTTP 200, Austco nurse call system and Auckland location present). |
 
-DNS resolution from the code environment failed for these hosts, so **no live HTTP-200 verification is claimed**. Before release, open all three project links in a normal browser and confirm the actual project account loads (not a homepage, verification screen or soft-404). If one fails, resolve the authoritative destination or hold that card — do not substitute unrelated evidence. Held cards must be reported explicitly.
+Maintenance: these sources should be rechecked when the associated SmartComms comparison page is substantively reviewed or when an external-link check reports a failure. If a URL stops loading, record the actual result and hold or remove the card — do not substitute unrelated evidence.
 
 ## Attribution limits
 
@@ -26,4 +25,4 @@ DNS resolution from the code environment failed for these hosts, so **no live HT
 
 ## Regression coverage
 
-`scripts/test-public-project-examples.mjs` checks anchor uniqueness, evidence registry reuse (no duplicate Edwards entry), source-ID resolution, dealer-naming preservation and absence of out-of-scope claims. Run with plain Node.
+`npm run test:public-project-examples` (scripts/test-public-project-examples.mjs) checks anchor uniqueness, evidence registry reuse (no duplicate Edwards entry), source-ID resolution, dealer-naming preservation and absence of out-of-scope claims. Run with plain Node.

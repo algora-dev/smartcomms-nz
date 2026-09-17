@@ -3,9 +3,9 @@ import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Free Paging, PA & School Funding Tools NZ",
+  title: "Free PA, Paging Pricing, Funding & Finance Tools NZ",
   description:
-    "Free SmartComms tools: get a ballpark installed system price or check whether an NZ school communications project may have a 5YA funding pathway.",
+    "Free SmartComms tools for indicative PA and paging project pricing, NZ school funding pathways, and equipment finance or leasing options.",
   path: "/tools",
 });
 

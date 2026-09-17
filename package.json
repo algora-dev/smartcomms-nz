@@ -10,7 +10,8 @@
     "test:pricing": "tsx scripts/test-pricing.mjs",
     "indexnow": "node scripts/indexnow.mjs",
     "test:finance": "tsx scripts/test-finance.mjs",
-    "test:aged-care": "tsx scripts/test-aged-care.mjs"
+    "test:aged-care": "tsx scripts/test-aged-care.mjs",
+    "test:public-project-examples": "node scripts/test-public-project-examples.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.116.0",
