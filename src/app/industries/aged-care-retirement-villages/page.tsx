@@ -223,6 +223,24 @@ export default function AgedCareRetirementVillagesPage() {
               ["Nurse call and staff alerts", "Resident assistance, pendants, call escalation or staff-device alerts need a separately specified response system—not just a speaker with a microphone."],
             ].map(([title, text]) => <div key={title} className="sc-card p-5"><h3 className="font-bold text-[var(--sc-blue-900)]">{title}</h3><p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">{text}</p></div>)}
           </div>
+          <article id="care-example-summerset-st-johns" aria-labelledby="care-example-summerset-st-johns-title" className="mt-6 scroll-mt-24 rounded-xl border border-[var(--sc-border)] bg-white p-5">
+            <p className="text-xs leading-relaxed text-[var(--sc-slate)]">Published NZ project account · G&amp;S Technologies</p>
+            <h3 id="care-example-summerset-st-johns-title" className="mt-2 text-lg font-semibold text-[var(--sc-blue-900)]">
+              Summerset St Johns — nurse call and entrance intercom
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">
+              G&amp;S Technologies describes an Austco nurse-call system with call points, staff consoles and displays at Summerset St Johns. Its account separately lists Gallagher access control and Aiphone GT intercoms.
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">
+              <strong className="text-[var(--sc-blue-900)]">SmartComms takeaway:</strong> Scope resident-assistance calls and entrance conversations separately, including how each reaches staff. Do not use an ordinary PA allowance as the budget for all care communications.
+            </p>
+            <a href={careSources["gs-summerset-st-johns"].href} target="_blank" rel="noopener noreferrer" className={`mt-4 inline-block text-sm ${linkClass}`}>
+              Read G&amp;S Technologies&rsquo; Summerset St Johns account<span className="sr-only"> (opens in a new tab)</span>
+            </a>
+            <p className="mt-2 text-xs leading-relaxed text-[var(--sc-slate)]">
+              This example illustrates project scope; it does not verify a PA brand or a complete project price.
+            </p>
+          </article>
           <div className="mt-6 rounded-xl border border-[var(--sc-border)] bg-white p-5">
             <h3 className="font-bold text-[var(--sc-blue-900)]">A useful NZ example: quieter staff notification</h3>
             <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">In its September 2017 account of a Levin memory-care centre, Summerset describes silent nurse-call paging carried by staff. It illustrates why more overhead announcements are not always the right answer. This is a historical operator-published example, not an audit of the current installation or an endorsement of any PA brand in this guide.</p>

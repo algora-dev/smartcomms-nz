@@ -231,6 +231,11 @@ const evidence = {
     "label": "Northamber — IP-A1PG displayed UK price",
     "href": "https://www.northamber.com/audio-visual/professional-audio/audio-over-ip/ip-paging-gateway-25-w",
     "kind": "International price example"
+  },
+  "frontrow-ormiston-project": {
+    "label": "Pacific AV — Ormiston Junior College project, August 2017",
+    "href": "https://www.pacificav.co.nz/ormiston-junior-college-auckland/",
+    "kind": "Historical NZ project account; Australasian Audio Engineering named as dealer"
   }
 } as const;
 
@@ -795,6 +800,7 @@ export default function ComparePage() {
               ["#2n", "2N and legacy systems"],
               ["#costs", "Cost and value"],
               ["#school-scenario", "30-area school"],
+              ["#nz-school-examples", "NZ project examples"],
               ["#questions", "Buyer questions"],
               ["#sources", "Sources"],
             ].map(([href, text]) => <li key={href}><a href={href} className="rounded hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">{text}</a></li>)}
@@ -944,7 +950,7 @@ export default function ComparePage() {
           2N: current IP intercom and legacy school paging
         </SectionHeading>
         <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">
-          <strong>2N has genuine NZ school-paging history.</strong> Edwards describes a Three Kings Primary installation using 2N network speakers, outdoor zones, paging microphones, scheduled bells and lockdown messages in a project article dated 1 March 2024. That is useful local evidence—but it does not establish that the same equipment remains a current new-build platform.
+          The <a href="#example-three-kings" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">Three Kings Primary example below</a> illustrates 2N’s historical school-paging role. Keep that project history separate from a current equipment specification.
         </p>
         <Sources ids={["2n-school"]} label="Historical NZ project" />
         <div className="mt-5 grid gap-5 md:grid-cols-2">
@@ -1056,6 +1062,68 @@ export default function ComparePage() {
             </ol>
           </details>
           <p className="mt-5 text-sm leading-relaxed text-[var(--sc-slate)]">Use the <Link href="/guides/ip-paging-network-readiness" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">network readiness checklist</Link> alongside this brief. A PoE label, SIP logo or “emergency” button alone does not verify the complete design.</p>
+        </div>
+      </section>
+
+      <section id="nz-school-examples" aria-labelledby="nz-school-examples-title" className="sc-container max-w-5xl scroll-mt-24 py-12">
+        <SectionHeading
+          id="nz-school-examples-title"
+          eyebrow="Published NZ projects"
+          description="These published accounts illustrate different design approaches. They are not SmartComms installations, current quotes or independently audited results."
+        >
+          School PA, paging and bell systems in practice
+        </SectionHeading>
+        <div className="mt-6 grid gap-5 md:grid-cols-2">
+          <article id="example-three-kings" aria-labelledby="example-three-kings-title" className="sc-card scroll-mt-24 p-5 md:p-6">
+            <p className="text-xs leading-relaxed text-[var(--sc-slate)]">
+              Edwards Sound Systems · Published <time dateTime="2024-03-01">1 March 2024</time>
+            </p>
+            <h3 id="example-three-kings-title" className="mt-2 text-lg font-semibold text-[var(--sc-blue-900)]">
+              Three Kings Primary — zoned paging and school bells
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">
+              Edwards describes a 2N network-paging installation with classroom and outdoor coverage, selectable zones, scheduled bells and prerecorded emergency messages. This is a historical project example, not confirmation that the same equipment is supplied today.
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">
+              <strong className="text-[var(--sc-blue-900)]">SmartComms takeaway:</strong> Write the required routines into the brief: everyday bells, a page to selected areas and a priority message are distinct tasks to demonstrate.
+            </p>
+            <a href={evidence["2n-school"].href} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block rounded text-sm font-semibold text-[var(--sc-blue-700)] underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">
+              Read Edwards&rsquo; Three Kings Primary account<span className="sr-only"> (opens in a new tab)</span>
+            </a>
+            <p className="mt-2 text-xs leading-relaxed text-[var(--sc-slate)]">
+              Buying new equipment? <a href="#2n" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">Read the current-versus-legacy 2N notes</a>.
+            </p>
+          </article>
+          <article id="example-ormiston" aria-labelledby="example-ormiston-title" className="sc-card scroll-mt-24 p-5 md:p-6">
+            <p className="text-xs leading-relaxed text-[var(--sc-slate)]">
+              Pacific AV · Published <time dateTime="2017-08-23">23 August 2017</time>
+            </p>
+            <h3 id="example-ormiston-title" className="mt-2 text-lg font-semibold text-[var(--sc-blue-900)]">
+              Ormiston Junior College — FrontRow paging and bells
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">
+              Pacific AV&rsquo;s account names Australasian Audio Engineering as the dealer. It describes a FrontRow system in which 21 network decoders feed amplifier-driven speaker zones, with paging and bell schedules managed by a server.
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">
+              <strong className="text-[var(--sc-blue-900)]">SmartComms takeaway:</strong> A network-based system need not use a powered IP speaker in every room. Compare the endpoint-and-amplifier design against the zones and local audio functions you need.
+            </p>
+            <a href={evidence["frontrow-ormiston-project"].href} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block rounded text-sm font-semibold text-[var(--sc-blue-700)] underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">
+              Read Pacific AV&rsquo;s Ormiston project account<span className="sr-only"> (opens in a new tab)</span>
+            </a>
+            <p className="mt-2 text-xs leading-relaxed text-[var(--sc-slate)]">
+              Project name as published by Pacific AV. The historical equipment list is not a current purchasing specification.
+            </p>
+          </article>
+        </div>
+        <div className="mt-6">
+          <p className="text-sm leading-relaxed text-[var(--sc-slate)]">Planning a similar upgrade? Tell us what you need the system to do.</p>
+          <ProjectHelpLauncher
+            mode="system_selection"
+            sourceTopic="school_public_project_examples"
+            buttonLabel="Ask about a similar school project"
+            className="sc-btn-primary mt-3 inline-flex cursor-pointer"
+            context={{ sourcePage: "/compare", topic: "Published NZ school project examples" }}
+          />
         </div>
       </section>
 

@@ -53,6 +53,11 @@ export const careSources = {
   "rauland": { label: "Rauland NZ — Pinpoint aged-care communications", href: "https://rauland.co.nz/pinpoint/aged-care/", kind: "NZ specialist supplier" },
   "finance-market": { label: "eLeasing NZ — equipment-finance sectors and structures", href: "https://www.eleasing.co.nz/", kind: "Finance-provider market example; no SmartComms partnership implied" },
   "care-scope": { label: "Health New Zealand — residential care and retirement-village distinction", href: "https://www.healthnz.govt.nz/hospitals-services/services-support/older-people/residential-care", kind: "Public health-service information" },
+  "gs-summerset-st-johns": {
+    label: "G&S Technologies — Summerset St Johns project account",
+    href: "https://gstechnologies.co.nz/case-studies/summerset-st-johns/",
+    kind: "NZ contractor-published project account; publication date not stated",
+  },
 } as const;
 export type CareSourceId = keyof typeof careSources;
 export type CarePlatformId = "axis" | "2n" | "algo" | "toa" | "spon" | "prospero" | "itc" | "frontrow";
