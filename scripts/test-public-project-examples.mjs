@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const read = (p) => readFileSync(join(root, p), "utf8");
-const compare = read("src/app/compare/page.tsx");
+const compare = read("src/app/compare/schools/page.tsx");
 const agedCarePage = read("src/app/industries/aged-care-retirement-villages/page.tsx");
 const agedCareGuide = read("src/lib/content/aged-care-guide.ts");
 

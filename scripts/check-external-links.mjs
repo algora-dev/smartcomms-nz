@@ -2,7 +2,7 @@ import fs from "node:fs";
 
 const routes = [
   "src/app/funding/page.tsx",
-  "src/app/compare/page.tsx",
+  "src/app/compare/schools/page.tsx",
   "src/app/industries/aged-care-retirement-villages/page.tsx",
   "src/app/financing/page.tsx",
   "src/app/about/methodology/page.tsx",

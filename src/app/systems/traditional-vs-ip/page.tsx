@@ -42,7 +42,7 @@ export default function TraditionalVsIpPage() {
         description="Replacing an old PA system does not always mean replacing every speaker and cable. This guide compares traditional 100V, full-IP and hybrid paging systems so you can decide what is worth retaining and what should change."
         tags={["Traditional 100V PA", "IP paging", "Hybrid systems", "Staged upgrades", "Network readiness"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
-        secondaryCta={{ label: "Compare platforms", href: "/compare" }}
+        secondaryCta={{ label: "Compare platforms", href: "/compare/schools" }}
         reviewed={reviewedLabel("/systems/traditional-vs-ip")}
         note="NZ-focused guidance"
         breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "Traditional vs IP" }]}

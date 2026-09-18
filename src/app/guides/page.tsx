@@ -33,7 +33,7 @@ const GUIDES = [
   {
     title: "IP Paging & PA Systems: 2026 Buyer’s Guide",
     desc: "Compare integrated school platforms, SIP-first options, browser-managed audio, hybrid approaches and specialist architectures for NZ buyers.",
-    href: "/compare",
+    href: "/compare/schools",
   },
   {
     title: "School PA, Paging, Bell & Intercom Systems",

@@ -136,7 +136,7 @@ export default function NetworkReadinessPage() {
       <ContinuePlanning
         items={[
           { title: "IP paging architecture guide", desc: "How Audio over IP, PoE endpoints and zoning actually work.", href: "/systems/ip-paging-pa" },
-          { title: "Compare paging platforms", desc: "Which platforms fit which networks, budgets and support models.", href: "/compare" },
+          { title: "Compare paging platforms", desc: "Which platforms fit which networks, budgets and support models.", href: "/compare/schools" },
           { title: "School systems overview", desc: "Features, indicative costs and upgrade decisions for schools.", href: "/schools" },
         ]}
       />

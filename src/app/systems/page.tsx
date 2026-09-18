@@ -74,7 +74,7 @@ const FUNCTIONS = [
 
 const RESOURCES = [
   {
-    href: "/compare",
+    href: "/compare/schools",
     title: "Compare platforms",
     desc: "Side-by-side comparison of leading paging and PA platforms sold in New Zealand.",
   },
@@ -118,7 +118,7 @@ export default function SystemsPage() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/pricing-tool" className="sc-btn-primary">Estimate project cost</Link>
-            <Link href="/compare" className="sc-btn-secondary">Compare platforms</Link>
+            <Link href="/compare/schools" className="sc-btn-secondary">Compare platforms</Link>
           </div>
           <p className="mt-6 text-xs text-[var(--sc-slate)]">
             Last reviewed {reviewedLabel("/systems")}

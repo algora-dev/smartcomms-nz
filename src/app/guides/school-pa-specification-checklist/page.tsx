@@ -138,7 +138,7 @@ export default function SpecificationChecklistPage() {
         <li>Send the checklist with the same maps, photos and network information to every bidder</li>
         <li>Require a compliance response per section (&quot;complies / partially / not included + price&quot;)</li>
         <li>Score on lifecycle and support, not just the bottom line — see the{" "}
-          <Link href="/compare">platform comparison</Link> for the dimensions that matter</li>
+          <Link href="/compare/schools">platform comparison</Link> for the dimensions that matter</li>
         <li>Check indicative market pricing with the <Link href="/pricing-tool">ballpark calculator</Link>{" "}
           before accepting anything outlier-high or suspiciously low</li>
       </ol>
@@ -153,7 +153,7 @@ export default function SpecificationChecklistPage() {
         items={[
           { title: "Pricing guide", desc: "Indicative NZ installed ranges so you can sanity-check every quote.", href: "/pricing" },
           { title: "5YA funding guide", desc: "How a clearly specified project fits the property funding process.", href: "/funding" },
-          { title: "Compare paging platforms", desc: "Which platforms and ecosystems suit which specifications.", href: "/compare" },
+          { title: "Compare paging platforms", desc: "Which platforms and ecosystems suit which specifications.", href: "/compare/schools" },
         ]}
       />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">

@@ -23,7 +23,7 @@ export default function IpIntercomPage() {
         description="IP intercom systems add two-way communication to a wider paging network, allowing reception, classrooms, gates, offices and other locations to call or speak back. This guide explains fixed call points, SIP intercoms, classroom call buttons, video entry and how intercom functions can share the same infrastructure as paging and announcements."
         tags={["IP intercom", "Two-way paging", "SIP intercom", "Call points", "Video entry"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
-        secondaryCta={{ label: "Compare system platforms", href: "/compare" }}
+        secondaryCta={{ label: "Compare system platforms", href: "/compare/schools" }}
         reviewed={reviewedLabel("/systems/ip-intercom")}
         note="NZ-focused guidance"
         breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "IP Intercom & Two-Way Paging" }]}
@@ -104,11 +104,11 @@ export default function IpIntercomPage() {
       <ul>
         <li><Link href="/systems/school-bell-announcements">School bells and announcements</Link></li>
         <li><Link href="/systems/emergency-lockdown">Emergency and lockdown communication</Link></li>
-        <li><Link href="/compare">IP paging platform comparison</Link></li>
+        <li><Link href="/compare/schools">IP paging platform comparison</Link></li>
       </ul>
       <ContinuePlanning
         items={[
-          { title: "Compare system platforms", desc: "Which IP paging and intercom platforms fit NZ sites and budgets.", href: "/compare" },
+          { title: "Compare system platforms", desc: "Which IP paging and intercom platforms fit NZ sites and budgets.", href: "/compare/schools" },
           { title: "Emergency & lockdown communication", desc: "How intercom call points support school emergency planning.", href: "/systems/emergency-lockdown" },
           { title: "Pricing guide", desc: "Indicative NZ installed ranges and the main cost drivers.", href: "/pricing" },
         ]}

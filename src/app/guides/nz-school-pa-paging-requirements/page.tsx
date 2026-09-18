@@ -130,7 +130,7 @@ export default function NzSchoolPaRequirementsPage() {
         <li>Get indicative costs with the <Link href="/pricing-tool">ballpark calculator</Link> and
           the funding read with the <Link href="/tools/funding-check">funding checker</Link></li>
         <li>Raise the project with your property advisor for 10YPP / 5YA inclusion</li>
-        <li>Compare platform options on the <Link href="/compare">comparison guide</Link> and seek
+        <li>Compare platform options on the <Link href="/compare/schools">comparison guide</Link> and seek
           comparable quotes</li>
       </ol>
       <h2 id="sources">Primary sources to consult directly</h2>

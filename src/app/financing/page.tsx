@@ -197,7 +197,7 @@ export default function FinancingPage() {
         </ol>
 
         <p>
-          Useful companions along the way: estimate the project first with the <Link href="/pricing-tool">pricing calculator</Link> or the <Link href="/pricing">pricing guide</Link>, check the <Link href="/tools/funding-check">school funding checker</Link> if a funding pathway may apply, compare equipment options in the <Link href="/compare">platform comparison</Link>, or revisit the <Link href="/systems/ip-paging-pa">IP paging architecture guide</Link>.
+          Useful companions along the way: estimate the project first with the <Link href="/pricing-tool">pricing calculator</Link> or the <Link href="/pricing">pricing guide</Link>, check the <Link href="/tools/funding-check">school funding checker</Link> if a funding pathway may apply, compare equipment options in the <Link href="/compare/schools">platform comparison</Link>, or revisit the <Link href="/systems/ip-paging-pa">IP paging architecture guide</Link>.
         </p>
 
         <div className="not-prose mt-10 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6">

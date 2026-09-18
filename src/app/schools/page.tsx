@@ -116,7 +116,7 @@ export default function SchoolsPage() {
           { title: "NZ school requirements", desc: "Ministry design, cabling and procurement guidance for school PA and paging.", href: "/guides/nz-school-pa-paging-requirements" },
           { title: "Specification checklist", desc: "Define scope so every quote covers the same things and compares fairly.", href: "/guides/school-pa-specification-checklist" },
           { title: "Network readiness", desc: "Check cabling, PoE and switching before an IP paging project.", href: "/guides/ip-paging-network-readiness" },
-          { title: "Compare platforms", desc: "Side-by-side comparison of paging and PA platforms available in NZ.", href: "/compare" },
+          { title: "Compare platforms", desc: "Side-by-side comparison of paging and PA platforms available in NZ.", href: "/compare/schools" },
           { title: "Pricing", desc: "Indicative installed cost ranges and how they are built up.", href: "/pricing" },
           { title: "School funding", desc: "Whether fixed communications work may fit a 5YA / 10YPP pathway.", href: "/funding" },
         ]}

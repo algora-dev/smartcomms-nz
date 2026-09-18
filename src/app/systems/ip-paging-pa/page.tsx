@@ -23,7 +23,7 @@ export default function IpPagingPaPage() {
         description="Modern IP paging systems use the data network to deliver live announcements, scheduled messages, emergency audio and zoned communication across classrooms, offices, warehouses and multi-building sites. This guide explains how the architecture works, when full-IP or hybrid systems make sense, and what to consider before specifying one."
         tags={["IP paging", "Network PA", "PoE speakers", "Zoned announcements", "Hybrid systems"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
-        secondaryCta={{ label: "Compare paging platforms", href: "/compare" }}
+        secondaryCta={{ label: "Compare paging platforms", href: "/compare/schools" }}
         reviewed={reviewedLabel("/systems/ip-paging-pa")}
         note="NZ-focused guidance"
         breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "IP Paging & Network PA" }]}
@@ -122,7 +122,7 @@ export default function IpPagingPaPage() {
         SmartComms compares integrated school platforms, SIP-first options, browser-managed network audio, hybrid
         approaches and specialist architectures from brands including SPON, FrontRow, Algo, Bosch, ITC, Axis, TOA and
         others relevant to the NZ market. Our{" "}
-        <Link href="/compare">platform comparison guide</Link> matches those options to your priorities for
+        <Link href="/compare/schools">platform comparison guide</Link> matches those options to your priorities for
         NZ buyers. Planning for a rest home or retirement village?{" "}
         <Link href="/industries/aged-care-retirement-villages">Use the aged-care comparison</Link>, where
         the requirements and shortlist differ.
@@ -144,7 +144,7 @@ export default function IpPagingPaPage() {
       </ul>
       <ContinuePlanning
         items={[
-          { title: "Compare paging platforms", desc: "Use-case shortlists for integrated school platforms, SIP-first paging, hybrid migration and specialist architectures.", href: "/compare" },
+          { title: "Compare paging platforms", desc: "Use-case shortlists for integrated school platforms, SIP-first paging, hybrid migration and specialist architectures.", href: "/compare/schools" },
           { title: "Network readiness checklist", desc: "Check cabling, PoE and switch capacity before requesting IP paging quotes.", href: "/guides/ip-paging-network-readiness" },
           { title: "Replacing an old PA system", desc: "What can be kept, what usually changes and how to plan the replacement.", href: "/systems/traditional-vs-ip" },
         ]}
