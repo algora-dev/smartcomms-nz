@@ -53,10 +53,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             />
           </>
         ) : null}
-        {/* Microsoft Clarity - session recording & heatmaps */}
+        {/* Microsoft Clarity - session recording & heatmaps. Production only:
+         off in dev/preview and on /insights; QA override via
+         NEXT_PUBLIC_CLARITY_OVERRIDE=true (SC-04.A). */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `if(!location.pathname.startsWith('/insights')){(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","yjvsei2syf");}`,
+            __html: `if(!location.pathname.startsWith('/insights')&&(location.hostname==='smartcomms.co.nz'||location.hostname==='www.smartcomms.co.nz'||window.__CLARITY_QA__===true)){(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","yjvsei2syf");}`,
           }}
         />
         <Suspense>

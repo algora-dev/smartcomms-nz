@@ -41,6 +41,14 @@ export default function PrivacyPage() {
       <ul>
         <li>Google Analytics may load when configured, to measure aggregate site usage.</li>
         <li>
+          We use Microsoft Clarity to understand how visitors use the site through interaction
+          measurements, heatmaps and session replay. We use this to improve the website and tools.
+          Customer enquiry fields and sensitive content are masked, and our internal administration
+          pages are excluded. Clarity may use cookies and similar technologies; Microsoft&apos;s{" "}
+          <a href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noopener noreferrer" className="underline">privacy statement</a>{" "}
+          explains its data handling.
+        </li>
+        <li>
           The site records first- and last-touch attribution in your browser&apos;s local storage for up to 180 days and
           attaches it to enquiry emails so we know which page or tool an enquiry came from.
         </li>

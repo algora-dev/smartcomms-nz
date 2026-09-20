@@ -220,6 +220,15 @@ export function ProjectEnquiryModal({
       setError("Please tell us whether you are already working with an installer, IT provider or consultant (or choose Not sure).");
       return;
     }
+    // Validate attachments against the honest hosting-supported limit before
+    // upload (SC-05.A): 4MB combined across all files.
+    const chosen = [...e.currentTarget.querySelectorAll<HTMLInputElement>('input[name="attachments"]')]
+      .flatMap((input) => Array.from(input.files ?? []));
+    const totalBytes = chosen.reduce((sum, f) => sum + f.size, 0);
+    if (totalBytes > 4_000_000) {
+      setError("Attachments are too large in total. Please keep combined uploads under 4MB.");
+      return;
+    }
     setSending(true);
     setError(null);
     try {
@@ -442,7 +451,7 @@ export function ProjectEnquiryModal({
                     accept=".pdf,.png,.jpg,.jpeg,.webp,.dwg,.heic"
                     className="mt-1 w-full cursor-pointer rounded-lg border border-dashed border-[var(--sc-border)] px-3 py-2.5 text-sm text-[var(--sc-slate)] file:mr-3 file:cursor-pointer file:rounded-full file:border-0 file:bg-[var(--sc-blue-50)] file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-[var(--sc-navy)] hover:border-[var(--sc-teal)]"
                   />
-                  <span className="mt-1 block text-xs text-[var(--sc-slate)]">PDFs, images or plans. Up to 8MB per file and 20MB total.</span>
+                  <span className="mt-1 block text-xs text-[var(--sc-slate)]">PDFs, images or plans. Up to 4MB total across all files.</span>
                 </label>
               )}
 

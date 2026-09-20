@@ -6,8 +6,12 @@ export const maxDuration = 30;
 // Destination inbox is configured exclusively via environment variables.
 // No hardcoded fallback: a missing variable must fail safely (503) rather
 // than expose or rely on a private address in a public repository.
-const MAX_ATTACHMENT_BYTES = 8 * 1024 * 1024; // per file
-const MAX_TOTAL_ATTACHMENT_BYTES = 20 * 1024 * 1024;
+// Honest hosting-supported limits (SC-05.A, 2026-09-20): Vercel functions cap
+// request bodies at ~4.5MB. Combined attachments are limited to 4,000,000
+// bytes with headroom for multipart overhead and form fields.
+const MAX_TOTAL_ATTACHMENT_BYTES = 4_000_000; // combined, all files
+const MAX_FILE_BYTES = 4_000_000;
+const MAX_REQUEST_BYTES = 4_400_000; // under Vercel's documented 4.5MB cap
 const MAX_FILES = 5;
 
 /**
@@ -158,19 +162,19 @@ export async function POST(req: Request) {
 
     const totalBytes = files.reduce((sum, file) => sum + file.size, 0);
     if (totalBytes > MAX_TOTAL_ATTACHMENT_BYTES) {
-      return NextResponse.json({ error: "Attachments are too large in total. Please keep combined uploads under 20MB." }, { status: 400 });
+      return NextResponse.json({ error: "Attachments are too large in total. Please keep combined uploads under 4MB." }, { status: 400 });
     }
 
     // Enforce a sane overall request size (defence in depth against oversized posts).
     const requestSize = Number(req.headers.get("content-length") ?? "0");
-    if (requestSize > MAX_TOTAL_ATTACHMENT_BYTES + 2 * 1024 * 1024) {
+    if (requestSize > MAX_REQUEST_BYTES) {
       return NextResponse.json({ error: "Request is too large. Please reduce the size of your attachments." }, { status: 413 });
     }
 
     const attachments: { filename: string; content: Buffer }[] = [];
     for (const f of files) {
-      if (f.size > MAX_ATTACHMENT_BYTES) {
-        return NextResponse.json({ error: `${f.name} is larger than 8MB. Please attach a smaller file.` }, { status: 400 });
+      if (f.size > MAX_FILE_BYTES) {
+        return NextResponse.json({ error: `${f.name} is too large. Please keep combined uploads under 4MB.` }, { status: 400 });
       }
       const ext = fileExtension(f.name);
       if (!ALLOWED_EXTENSIONS.has(ext)) {

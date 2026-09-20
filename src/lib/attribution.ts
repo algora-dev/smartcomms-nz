@@ -20,7 +20,42 @@ export interface AttributionData {
 
 const FIRST_TOUCH_KEY = "scnz_first_touch";
 const LAST_TOUCH_KEY = "scnz_last_touch";
-const WINDOW_DAYS = 180;
+const WINDOW_MS = 180 * 24 * 60 * 60 * 1000;
+
+/** True when a path must never be captured (internal/insights routes). */
+function isPrivatePath(pathname: string): boolean {
+  return pathname.startsWith("/insights");
+}
+
+/** URL capture is bounded: pathname + allowlisted params only (utm_*, partner,
+ * industry). Arbitrary query params (incl. cfg blobs) are stripped. */
+function sanitizeLanding(): string {
+  const params = new URLSearchParams(window.location.search);
+  const kept = new URLSearchParams();
+  for (const key of ["utm_source", "utm_medium", "utm_campaign", "utm_content", "partner", "industry"]) {
+    const v = params.get(key);
+    if (v) kept.set(key, v.slice(0, 200));
+  }
+  const qs = kept.toString();
+  return window.location.pathname + (qs ? `?${qs}` : "");
+}
+
+/** Purge expired records so the 180-day window is enforced on read/write, not
+ * just at first-touch creation (SC-04.E). */
+function purgeExpired(): void {
+  try {
+    for (const key of [FIRST_TOUCH_KEY, LAST_TOUCH_KEY]) {
+      const raw = window.localStorage.getItem(key);
+      if (!raw) continue;
+      const parsed = JSON.parse(raw) as Partial<AttributionData>;
+      const first = new Date(parsed.firstVisitAt ?? 0).getTime();
+      const expired = Number.isNaN(first) || Date.now() - first > WINDOW_MS;
+      if (expired) window.localStorage.removeItem(key);
+    }
+  } catch {
+    // storage unavailable; attribution is best-effort
+  }
+}
 
 function readJson(key: string): Partial<AttributionData> | null {
   try {
@@ -54,9 +89,11 @@ function fresh(): boolean {
 /** Call once per client page load (component mount) to record touch data. */
 export function captureAttribution(): void {
   if (typeof window === "undefined") return;
+  if (isPrivatePath(window.location.pathname)) return; // never capture internal routes
+  purgeExpired();
   const params = new URLSearchParams(window.location.search);
   const snap: Partial<AttributionData> = {
-    landingPage: window.location.pathname + window.location.search,
+    landingPage: sanitizeLanding(),
     referrer: document.referrer,
     utmSource: params.get("utm_source") ?? "",
     utmMedium: params.get("utm_medium") ?? "",
@@ -78,9 +115,11 @@ export function captureAttribution(): void {
  */
 export function refreshLastTouch(): void {
   if (typeof window === "undefined") return;
+  if (isPrivatePath(window.location.pathname)) return;
+  purgeExpired();
   const params = new URLSearchParams(window.location.search);
   const last = {
-    landingPage: window.location.pathname + window.location.search,
+    landingPage: sanitizeLanding(),
     referrer: document.referrer,
     utmSource: params.get("utm_source") ?? "",
     utmMedium: params.get("utm_medium") ?? "",
@@ -99,6 +138,7 @@ export function refreshLastTouch(): void {
  */
 export function attributionForSubmission(): Record<string, string> {
   if (typeof window === "undefined") return {};
+  purgeExpired(); // expired entries are excluded, not submitted
   const { firstTouch, lastTouch } = attributionBlocks();
   const out: Record<string, string> = { currentPage: window.location.href };
   for (const [key, value] of Object.entries(firstTouch)) {

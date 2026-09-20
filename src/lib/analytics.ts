@@ -23,6 +23,8 @@ export const GA4_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID;
 
 export function track(event: string, payload: EventPayload = {}): void {
   if (typeof window === "undefined") return;
+  // Internal routes are never tracked, even after client-side navigation.
+  if (window.location.pathname.startsWith("/insights")) return;
   const clean: EventPayload = {};
   for (const [key, value] of Object.entries(payload)) {
     if (value !== undefined && value !== "") clean[key] = value;
