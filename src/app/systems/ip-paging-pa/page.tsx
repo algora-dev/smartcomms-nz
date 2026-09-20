@@ -125,7 +125,8 @@ export default function IpPagingPaPage() {
         <Link href="/compare/schools">platform comparison guide</Link> matches those options to your priorities for
         NZ buyers. Planning for a rest home or retirement village?{" "}
         <Link href="/industries/aged-care-retirement-villages">Use the aged-care comparison</Link>, where
-        the requirements and shortlist differ.
+        the requirements and shortlist differ. For warehouse announcements, shift bells and noisy work areas, see the{" "}
+        <Link href="/industries/warehouses-manufacturing-industrial">warehouse and industrial comparison</Link>.
       </p>
       <h2 id="next">Next steps</h2>
       <ul>

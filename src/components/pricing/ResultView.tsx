@@ -42,6 +42,8 @@ export function ResultView({
 
   const rangeSuffix = estimate.overThreshold ? "+" : "";
   const isAgedCare = industry === "aged-care";
+  const isIndustrial = industry === "industrial";
+  const industrialScope = "This is a general paging and intercom planning estimate. It does not price specialist acoustic engineering, high-bay access, hazardous-area equipment or a certified evacuation system. Have the required speaker quantities and industrial installation scope confirmed.";
 
   const disclaimer =
     state.tier === "A"
@@ -62,7 +64,7 @@ export function ResultView({
   const included: string[] = [
     "Central paging and control platform",
     "Live and zoned paging",
-    isAgedCare ? "Scheduled announcements" : "Scheduled announcements and bells",
+    isAgedCare ? "Scheduled announcements" : isIndustrial ? "Scheduled announcements and shift / break bells" : "Scheduled announcements and bells",
     "Installation allowance based on the site type selected",
     "Remote programming and commissioning",
   ];
@@ -169,6 +171,7 @@ export function ResultView({
       (isAgedCare
         ? "This is a general paging and intercom planning estimate for a care-site project, not a complete nurse-call or certified evacuation-system quote. "
         : "") +
+      (isIndustrial ? industrialScope + " " : "") +
       disclaimer + " This document is an indicative estimate from a SmartComms planning model, not a formal quote. For a formal quote, SmartComms can review the project information and suggest an appropriate provider to contact from its selected network.",
       W - 100,
     );
@@ -220,6 +223,21 @@ export function ResultView({
           <strong>Aged-care / retirement-village scope.</strong> This is a general paging and intercom planning
           estimate, not a complete nurse-call or certified evacuation-system quote. Scheduled-announcement wording
           is used throughout.{' '}
+          {onLeaveIndustry && (
+            <button
+              type="button"
+              onClick={onLeaveIndustry}
+              className="mt-2 block font-semibold text-[var(--sc-teal-strong)] underline decoration-2 underline-offset-2 hover:text-[var(--sc-blue-700)] cursor-pointer"
+            >
+              Use the general calculator →
+            </button>
+          )}
+        </div>
+      )}
+
+      {isIndustrial && (
+        <div className="mt-4 rounded-xl border-l-4 border-[var(--sc-teal)] bg-[var(--sc-blue-50)] p-4 text-sm text-[var(--sc-navy)]">
+          <strong>Warehouse / industrial scope.</strong> {industrialScope}{" "}
           {onLeaveIndustry && (
             <button
               type="button"
@@ -392,7 +410,7 @@ export function ResultView({
         estimateSummary={`${formatNZD(estimate.low)} - ${formatNZD(estimate.high)}${rangeSuffix} ex GST`}
         estimateLink={typeof window !== "undefined" ? window.location.href : undefined}
         context={{
-          ...(isAgedCare ? { Industry: INDUSTRY_CONTEXTS[industry!].label } : {}),
+          ...(industry ? { Industry: INDUSTRY_CONTEXTS[industry].label } : {}),
           "Site situation": tierText,
           "Feature package": packageLabel[state.featurePackage],
           "Standard indoor rooms": String(a.standardIndoor),

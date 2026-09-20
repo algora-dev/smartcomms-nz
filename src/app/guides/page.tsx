@@ -11,6 +11,11 @@ export const metadata: Metadata = buildMetadata({
 
 const GUIDES = [
   {
+    title: "Warehouse, Factory & Industrial PA Comparison",
+    desc: "Shift bells, announcements, horns, intercom and existing-PA reuse, with noise considerations, use-case shortlists and pricing.",
+    href: "/industries/warehouses-manufacturing-industrial",
+  },
+  {
     title: "Aged Care & Retirement Village PA/Intercom Guide",
     desc: "PA, paging, entrance intercom and staff communication for NZ rest homes and retirement villages, with use-case shortlists and indicative costs.",
     href: "/industries/aged-care-retirement-villages",

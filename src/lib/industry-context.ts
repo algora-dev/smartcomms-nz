@@ -7,12 +7,13 @@ import type { OrganisationType } from "./finance-check/config";
 
 export const INDUSTRY_CONTEXTS = {
   "aged-care": { label: "Aged care / retirement village", financeOrganisation: "aged_care" },
+  industrial: { label: "Warehouse / industrial / manufacturing", financeOrganisation: "industrial" },
 } as const satisfies Record<string, { label: string; financeOrganisation: OrganisationType }>;
 export type IndustryContext = keyof typeof INDUSTRY_CONTEXTS;
 type ParamsReader = { get(name: string): string | null };
 
 export function parseIndustryContext(value: unknown): IndustryContext | undefined {
-  return value === "aged-care" ? value : undefined;
+  return value === "aged-care" || value === "industrial" ? value : undefined;
 }
 export function industryFromParams(params: ParamsReader): IndustryContext | undefined {
   return parseIndustryContext(params.get("industry"));
@@ -24,12 +25,19 @@ export function resolveIndustryContext(
   selectedOrganisation?: OrganisationType,
 ): IndustryContext | undefined {
   if (selectedOrganisation !== undefined) {
-    return selectedOrganisation === "aged_care" ? "aged-care" : undefined;
+    if (selectedOrganisation === "aged_care") return "aged-care";
+    if (selectedOrganisation === "industrial") return "industrial";
+    return undefined;
   }
   return incoming;
 }
 export function financeOrganisationForIndustry(industry?: IndustryContext): OrganisationType | undefined {
   return industry ? INDUSTRY_CONTEXTS[industry].financeOrganisation : undefined;
+}
+
+/** Only explicitly recognised non-school contexts suppress school funding CTAs. */
+export function isNonSchoolIndustry(industry?: IndustryContext): boolean {
+  return industry === "aged-care" || industry === "industrial";
 }
 
 export function readEstimateRange(params: ParamsReader): { low: number; high: number } | undefined {

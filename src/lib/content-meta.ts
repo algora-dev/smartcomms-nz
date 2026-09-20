@@ -13,15 +13,16 @@ export interface ContentMeta {
 }
 
 export const CONTENT_META: Record<string, ContentMeta> = {
+  "/industries/warehouses-manufacturing-industrial": { published: "2026-09-20", reviewed: "2026-09-20" },
   "/": { published: "2026-09-05", reviewed: "2026-09-16" },
   "/schools": { published: "2026-09-11", reviewed: "2026-09-13" },
   "/systems": { published: "2026-09-11", reviewed: "2026-09-13" },
-  "/systems/ip-paging-pa": { published: "2026-09-12", reviewed: "2026-09-16" },
+  "/systems/ip-paging-pa": { published: "2026-09-12", reviewed: "2026-09-20" },
   "/systems/school-bell-announcements": { published: "2026-09-12", reviewed: "2026-09-12" },
   "/systems/emergency-lockdown": { published: "2026-09-12", reviewed: "2026-09-16" },
   "/systems/ip-intercom": { published: "2026-09-12", reviewed: "2026-09-12" },
   "/systems/traditional-vs-ip": { published: "2026-09-11", reviewed: "2026-09-13" },
-  "/guides": { published: "2026-09-12", reviewed: "2026-09-16" },
+  "/guides": { published: "2026-09-12", reviewed: "2026-09-20" },
   "/guides/nz-school-pa-paging-requirements": { published: "2026-09-12", reviewed: "2026-09-12" },
   "/guides/ip-paging-network-readiness": { published: "2026-09-12", reviewed: "2026-09-12" },
   "/guides/school-pa-specification-checklist": { published: "2026-09-12", reviewed: "2026-09-12" },
@@ -32,7 +33,7 @@ export const CONTENT_META: Record<string, ContentMeta> = {
   "/tools/funding-check": { published: "2026-09-11", reviewed: "2026-09-16" },
   "/financing": { published: "2026-09-16", reviewed: "2026-09-16" },
   "/tools/finance-check": { published: "2026-09-16", reviewed: "2026-09-16" },
-  "/compare": { published: "2026-09-18", reviewed: "2026-09-18" },
+  "/compare": { published: "2026-09-18", reviewed: "2026-09-20" },
   "/compare/schools": { published: "2026-09-12", reviewed: "2026-09-17" },
   "/industries/aged-care-retirement-villages": { published: "2026-09-16", reviewed: "2026-09-17" },
   "/about": { published: "2026-09-05", reviewed: "2026-09-16" },

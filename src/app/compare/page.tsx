@@ -9,7 +9,7 @@ import { site } from "@/lib/site";
  */
 const PAGE_TITLE = "Compare PA, Paging & Intercom Systems by Industry";
 const PAGE_DESCRIPTION =
-  "Side-by-side comparisons of PA, paging, bell and intercom systems sold in New Zealand, matched to the site they serve — schools, aged care and more.";
+  "Side-by-side comparisons of PA, paging, bell and intercom systems sold in New Zealand, matched to the site they serve — schools, aged care, warehouses and manufacturing.";
 
 export const metadata: Metadata = buildMetadata({
   title: PAGE_TITLE,
@@ -34,6 +34,13 @@ const COMPARISONS = [
     desc: "PA, IP paging, announcement and intercom systems for NZ rest homes and retirement villages, including visitor video, existing-PA reuse and indicative pricing.",
     points: ["Systems for care environments", "Existing-PA reuse options", "Indicative pricing and finance"],
   },
+  {
+    href: "/industries/warehouses-manufacturing-industrial",
+    tag: "Warehouses, manufacturing & industrial",
+    title: "Warehouse & Factory PA, Paging & Intercom Systems",
+    desc: "Compare shift bells, operational announcements, outdoor horns, industrial intercom and existing-PA reuse for NZ workplaces.",
+    points: ["Use-case shortlists", "Noise and coverage planning", "Indicative pricing and finance"],
+  },
 ];
 
 export default function CompareHubPage() {
@@ -50,7 +57,7 @@ export default function CompareHubPage() {
           <p className="mt-5 max-w-3xl text-[1.125rem] leading-relaxed text-[var(--sc-slate)] sm:text-lg">
             The right paging, PA or intercom system depends on where it lives. We compare the systems
             sold and supported in New Zealand for the jobs they actually suit — schools, aged care
-            facilities and other site types — so you can shortlist with confidence.
+            facilities, warehouses and manufacturing sites — so you can shortlist with confidence.
           </p>
         </div>
       </section>

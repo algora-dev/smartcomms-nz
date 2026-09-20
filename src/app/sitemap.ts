@@ -3,6 +3,7 @@ import { site } from "@/lib/site";
 import { reviewedDateStrict } from "@/lib/content-meta";
 
 export const SITEMAP_ROUTES: { path: string; priority: number }[] = [
+  { path: "/industries/warehouses-manufacturing-industrial", priority: 0.9 },
   { path: "/", priority: 1 },
   { path: "/schools", priority: 0.98 },
   { path: "/systems", priority: 0.9 },

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { track } from "@/lib/analytics";
 import {
   buildIndustryToolHref,
+  isNonSchoolIndustry,
   type IndustryContext,
 } from "@/lib/industry-context";
 
@@ -34,8 +35,8 @@ export function ToolCrossSell({
   industry?: IndustryContext;
 }) {
   if (variant === "pricing-to-funding") {
-    // Known aged-care context: never offer school 5YA on a care journey.
-    if (industry === "aged-care") {
+    // Known non-school journeys retain their estimate and offer finance, not school funding.
+    if (isNonSchoolIndustry(industry)) {
       const financeHref = buildIndustryToolHref("/tools/finance-check", {
         industry,
         source: "pricing",
@@ -53,7 +54,11 @@ export function ToolCrossSell({
               Explore payment options
             </Link>
             <Link
-              href={buildIndustryToolHref("/financing", { industry })}
+              href={buildIndustryToolHref("/financing", {
+                industry,
+                source: "pricing",
+                estimate: estimateLow && estimateHigh ? { low: estimateLow, high: estimateHigh } : undefined,
+              })}
               className="sc-btn-secondary"
               onClick={() => track("pricing_to_finance_clicked", { industry })}
             >
