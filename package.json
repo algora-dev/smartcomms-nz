@@ -9,6 +9,7 @@
     "lint": "eslint",
     "test:pricing": "tsx scripts/test-pricing.mjs",
     "test:validation": "tsx scripts/test-validation.mjs",
+    "test:assessment": "tsx scripts/test-assessment.mjs",
     "indexnow": "node scripts/indexnow.mjs",
     "test:finance": "tsx scripts/test-finance.mjs",
     "test:aged-care": "tsx scripts/test-aged-care.mjs",

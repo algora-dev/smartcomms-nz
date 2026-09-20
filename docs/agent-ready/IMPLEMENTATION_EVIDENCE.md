@@ -47,3 +47,11 @@ None on main pages/tools/navigation/modal. Exceptions, exactly as allowed: (1) /
 - Commit D: metadata/serializer/robots revert independently; robots change should not be reverted without owner decision on GPTBot policy.
 
 **Stopping here for owner review, per the brief.**
+
+## Owner decisions (2026-09-20 14:08, Shaun)
+
+- Vercel rate-limit rules and preview protection: **deferred until go-live** (site is in testing phase). Code-side baselines remain; dashboard controls are a go-live checklist item.
+- Clarity masking: owner reports **Balanced** mode in project settings.
+- Upload limit: **4MB confirmed** by owner.
+- Release 1 **pushed to production `main`** (2026-09-20, commit 6b8d39e).
+- Release 2 authorised to start immediately.
