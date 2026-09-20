@@ -155,7 +155,7 @@ export function buildResult(
     limitations: [
       "An indicative SmartComms planning range informed by supplier and installation pricing, for the scope entered. Actual project quotes can differ.",
       "Not a formal quote and not verified by an installer.",
-      `Whole-NZD allowances; band ${PRICING_PROVENANCE.band} of configured baseline amounts.`,
+      `Whole-NZD allowances; band ${PRICING_PROVENANCE.band}.`,
     ],
     next_actions: nextActions,
   };
