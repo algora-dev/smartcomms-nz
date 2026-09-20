@@ -80,7 +80,7 @@ function fresh(): boolean {
     if (!existing) return true;
     const first = new Date(existing.firstVisitAt ?? 0).getTime();
     if (Number.isNaN(first)) return true;
-    return Date.now() - first > WINDOW_DAYS * 24 * 60 * 60 * 1000;
+    return Date.now() - first > WINDOW_MS;
   } catch {
     return true;
   }

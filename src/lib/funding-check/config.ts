@@ -9,6 +9,10 @@
 export type FitTier = "strong" | "moderate" | "weak";
 export type CaseTier = "strong" | "moderate" | "weak";
 
+/** Rule-set version + provenance (SC-03.A). Sources are the existing cited
+ * public references; not revalidated in this engineering pass. */
+export const FUNDING_MODEL_VERSION = "smartcomms-nz-funding-v2";
+
 export const SCORE_THRESHOLDS = {
   caseStrongMin: 2,
   caseModerateMin: 1,

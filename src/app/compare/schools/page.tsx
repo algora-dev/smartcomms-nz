@@ -734,7 +734,10 @@ function TableRegion({ label, children }: { label: string; children: ReactNode }
 }
 
 function JsonLd({ data }: { data: unknown }) {
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\u003c") }} />;
+  // Serialize < as the literal \u003c escape so a value containing </script>
+  // can never break out of the inline JSON-LD block (SC-03.C, matches the
+  // aged-care helper).
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }} />;
 }
 
 export default function ComparePage() {

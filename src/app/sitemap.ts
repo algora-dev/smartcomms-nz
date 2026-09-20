@@ -38,7 +38,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // content-metadata registry so it stays truthful per page.
   return routes.map((route) => ({
     url: `${site.url}${route.path}`,
-    lastModified: new Date(reviewedDate(route.path)),
+    // Registry-missing routes now yield an empty date (detected in dev via
+    // console.warn) rather than a fabricated one; omit lastModified then.
+    lastModified: reviewedDate(route.path) || undefined,
     priority: route.priority,
   }));
 }

@@ -4,7 +4,7 @@ import AuthorityHero from "@/components/content/AuthorityHero";
 import AtAGlance from "@/components/content/AtAGlance";
 import ContinuePlanning from "@/components/content/ContinuePlanning";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
-import { reviewedDate, reviewedLabel } from "@/lib/content-meta";
+import { publishedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
@@ -126,7 +126,7 @@ export default function IpIntercomPage() {
               description:
                 "What IP intercoms add to a paging system: two-way audio, SIP integration, classroom call points, gate entry and specification considerations.",
               url: `${site.url}/systems/ip-intercom`,
-              datePublished: reviewedDate("/systems/ip-intercom"),
+              datePublished: publishedDate("/systems/ip-intercom"),
             })
           ),
         }}

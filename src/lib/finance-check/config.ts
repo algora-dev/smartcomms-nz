@@ -1,3 +1,7 @@
+/** Rule-set version + provenance (SC-03.A). Conversation-readiness guidance
+ * only — not lending eligibility, approval probability, or credit assessment. */
+export const FINANCE_MODEL_VERSION = "smartcomms-nz-finance-v1";
+
 export const ORGANISATION_TYPES = [
   { value: "state_school", label: "State school / kura", group: "Education" },
   { value: "state_integrated_school", label: "State-integrated school", group: "Education" },

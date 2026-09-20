@@ -27,7 +27,7 @@ function isObject(v: unknown): v is Record<string, unknown> {
 }
 
 /** Non-negative finite integer within [0, max]. */
-function count(v: unknown, max: number, label: string): number | null {
+function count(v: unknown, max: number): number | null {
   const n = v;
   if (n === undefined) return null; // absent → caller decides (documented default)
   if (n === null || typeof n !== "number" || !Number.isInteger(n) || n < 0 || n > max) return -1;
@@ -64,7 +64,7 @@ export function parseCalculatorState(input: unknown): ParsedState {
     entry: 0,
   };
   for (const key of Object.keys(areas) as (keyof AreaQuantities)[]) {
-    const n = count(areasIn[key], MAX_AREA_COUNT, key);
+    const n = count(areasIn[key], MAX_AREA_COUNT);
     if (n === null) appliedDefaults.push(`areas.${key}`);
     else if (n === -1) return { ok: false, error: `invalid areas.${key}` };
     else areas[key] = n;
@@ -98,7 +98,7 @@ export function parseCalculatorState(input: unknown): ParsedState {
   }
   let twoWayQty = 0;
   {
-    const n = count(ftIn.twoWayQty, MAX_TWO_WAY_QTY, "twoWayQty");
+    const n = count(ftIn.twoWayQty, MAX_TWO_WAY_QTY);
     if (n === null) appliedDefaults.push("fineTune.twoWayQty");
     else if (n === -1) return { ok: false, error: "invalid fineTune.twoWayQty" };
     else twoWayQty = n;
@@ -110,7 +110,7 @@ export function parseCalculatorState(input: unknown): ParsedState {
   }
   let stations = 0;
   {
-    const n = count(ftIn.additionalControlStations, MAX_CONTROL_STATIONS, "stations");
+    const n = count(ftIn.additionalControlStations, MAX_CONTROL_STATIONS);
     if (n === null) appliedDefaults.push("fineTune.additionalControlStations");
     else if (n === -1) return { ok: false, error: "invalid fineTune.additionalControlStations" };
     else stations = n;

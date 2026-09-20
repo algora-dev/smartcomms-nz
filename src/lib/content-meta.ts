@@ -61,12 +61,42 @@ export function reviewedLabel(path: string): string {
   return meta ? formatContentDate(meta.reviewed) : "";
 }
 
-/** ISO reviewed date for Article dateModified / sitemap lastModified. */
+/** Strict variants: throw when a page is missing from the registry so missing
+ * dates are DETECTED at build/test time instead of silently fabricated (SC-03.B). */
+export function reviewedDateStrict(path: string): string {
+  const meta = CONTENT_META[path];
+  if (!meta) throw new Error(`content-meta: missing registry entry for ${path}`);
+  return meta.reviewed;
+}
+
+export function publishedDateStrict(path: string): string {
+  const meta = CONTENT_META[path];
+  if (!meta) throw new Error(`content-meta: missing registry entry for ${path}`);
+  return meta.published;
+}
+
+/** ISO reviewed date for Article dateModified / sitemap lastModified.
+ * Legacy fallback kept for dynamic/legacy route trees (e.g. /tools/system-planner
+ * redirect); unknown paths WARN in development instead of inventing a date. */
 export function reviewedDate(path: string): string {
-  return CONTENT_META[path]?.reviewed ?? "2026-09-11";
+  const meta = CONTENT_META[path];
+  if (!meta) {
+    if (process.env.NODE_ENV !== "production") {
+      console.warn(`content-meta: no registry entry for ${path} (reviewed)`);
+    }
+    return "";
+  }
+  return meta.reviewed;
 }
 
 /** ISO published date for Article datePublished (NOT the reviewed date). */
 export function publishedDate(path: string): string {
-  return CONTENT_META[path]?.published ?? "2026-09-11";
+  const meta = CONTENT_META[path];
+  if (!meta) {
+    if (process.env.NODE_ENV !== "production") {
+      console.warn(`content-meta: no registry entry for ${path} (published)`);
+    }
+    return "";
+  }
+  return meta.published;
 }
