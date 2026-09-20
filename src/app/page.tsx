@@ -64,6 +64,11 @@ const INTENT_CARDS = [
     desc: "PA, paging, entrance intercom and staff communication guidance for rest homes and villages, with use-case shortlists and indicative costs.",
   },
   {
+    href: "/industries/warehouses-manufacturing-industrial",
+    title: "Warehouse, factory & industrial systems",
+    desc: "Compare shift and break bells, live paging, horns, intercom, yard coverage and existing-PA upgrade options for warehouses, factories and industrial sites.",
+  },
+  {
     href: "/contact",
     title: "Not sure what to do next?",
     desc: "Tell us about the site, what you need the system to achieve and your region. We’ll review it and point you towards the most useful next step.",
@@ -82,8 +87,8 @@ const UTILITY_LINKS = [
     event: "funding_guide_cta_clicked",
   },
   {
-    href: "/compare/schools",
-    label: "Buyer comparison guide",
+    href: "/compare",
+    label: "Compare systems by site type",
     event: "compare_cta_clicked",
   },
   {

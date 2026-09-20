@@ -86,3 +86,13 @@ None on main pages/tools/navigation/modal. Exceptions, exactly as allowed: (1) /
 - `npx --no-install tsc --noEmit` / `npm run lint` / `npm run build` ? see final report
 
 ### Visible difference: none. Pricing model, calculator, tools, pages untouched.
+
+## Industrial vertical + cleanup pass (2026-09-20, commits 1ba51d5 + cleanup)
+
+- **Route:** `/industries/warehouses-manufacturing-industrial` (external package merge; 4 additive files, manifest hashes verified; integration merged manually preserving R2.1).
+- **Industry context:** `industrial` registered; `isNonSchoolIndustry` suppresses school-funding CTAs; ResultView industrial scope note (screen + PDF + enquiry context); cross-sell offers payment options.
+- **Cleanup pass:** homepage industrial card + generic compare link -> /compare; footer compare -> /compare; external assessment `industry=industrial` returns finance-check + contact absolute URLs (parity with website journey; no school funding); compare-hub claim softened to "systems and architectures relevant to New Zealand buyers, using manufacturer documentation and NZ market evidence where it is available"; README verification block includes `test:industrial`.
+- **Source maintenance:** `test:industrial` extended with deterministic source-registry checks (label/kind present, well-formed hostnames, no duplicate hrefs, all references resolve). Remote HTTP status remains a separate periodic check. Axis Cesari-Terloc + Audio Connect Sanitarium URLs verified live 2026-09-20 (200, content matches).
+- **Citation-diversity review (cleanup SS8/9):** all platform capability claims cite first-party manufacturer documentation; NZ-local evidence spans Everlea, JD Security, Sound Choice Pro Audio (SPON, ITC), Australis Music, NAS NZ, Pacific AV, Sektor, Edwards, Audio Connect — no NZAV dependence exists anywhere in the industrial register; no citation changes required, none added.
+- **Rankings unchanged** (shift-sip Algo, shopfloor TOA, visual AtlasIED, integrated SPON etc. — test-asserted).
+- **Gates (actual):** tsc 0, lint 0, build 0; test:pricing, test:validation (14), test:assessment (17), test:content-meta (29), test:finance, test:aged-care, test:industrial (8 profiles/7 use cases/12 FAQs + source registry), test:public-project-examples — all passed.

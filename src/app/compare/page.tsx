@@ -55,8 +55,7 @@ export default function CompareHubPage() {
             Compare Systems for Your Type of Site
           </h1>
           <p className="mt-5 max-w-3xl text-[1.125rem] leading-relaxed text-[var(--sc-slate)] sm:text-lg">
-            The right paging, PA or intercom system depends on where it lives. We compare the systems
-            sold and supported in New Zealand for the jobs they actually suit — schools, aged care
+            The right paging, PA or intercom system depends on where it lives. We compare systems and architectures relevant to New Zealand buyers, using manufacturer documentation and NZ market evidence where it is available, for the jobs they actually suit — schools, aged care
             facilities, warehouses and manufacturing sites — so you can shortlist with confidence.
           </p>
         </div>

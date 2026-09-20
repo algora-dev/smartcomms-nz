@@ -107,17 +107,27 @@ export function buildResult(
   const cfgParam = encodeURIComponent(JSON.stringify(state));
 
   // Absolute, agent-safe URLs derived from the central site config (Release 2.1 §5).
+  // Known non-school industries (aged-care, industrial) get the finance-check
+  // next step mirroring the website journey — never school funding (cleanup §3).
   const nextActions = [
     {
       label: "Open this configuration in the SmartComms pricing tool",
       url: `${origin}/pricing-tool?cfg=${cfgParam}`,
     },
+    ...(industry === "aged-care" || industry === "industrial"
+      ? [
+          {
+            label:
+              industry === "aged-care"
+                ? "Finance / leasing readiness guidance (aged care)"
+                : "Explore payment options for this project (industrial)",
+            url: `${origin}/tools/finance-check?industry=${industry}&source=assessment`,
+          },
+        ]
+      : []),
     {
-      label:
-        industry === "aged-care"
-          ? "Finance / leasing readiness guidance (aged care)"
-          : "Human-reviewed enquiry (SmartComms replies with provider suggestions)",
-      url: industry === "aged-care" ? `${origin}/tools/finance-check` : `${origin}/contact`,
+      label: "Human-reviewed enquiry (SmartComms replies with provider suggestions)",
+      url: `${origin}/contact`,
     },
   ];
 

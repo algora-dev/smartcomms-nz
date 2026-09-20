@@ -31,6 +31,7 @@ npm run test:public-project-examples
 npm run test:validation
 npm run test:assessment
 npm run test:content-meta
+npm run test:industrial
 npm run build
 ```
 

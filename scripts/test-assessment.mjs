@@ -56,14 +56,23 @@ ok("unknown top-level input fields are rejected, not silently converted", () => 
   assert.ok(r.message.includes("extra"));
 });
 
+ok("industrial industry mirrors the website journey: finance + contact, no school funding", () => {
+  const r = assessPricing({ state: tenRoomsB, industry: "industrial" });
+  assert.equal(r.status, "ok");
+  const urls = r.next_actions.map((a) => a.url);
+  assert.ok(urls.some((u) => u.startsWith("https://") && u.includes("/tools/finance-check?industry=industrial")));
+  assert.ok(urls.some((u) => u.endsWith("/contact")));
+  assert.ok(!urls.some((u) => u.includes("funding-check")));
+});
+
 ok("optional industry accepted without modifying pricing state or numbers", () => {
   const withIndustry = assessPricing({ state: tenRoomsB, industry: "aged-care" });
   const without = assessPricing({ state: tenRoomsB });
   assert.equal(withIndustry.status, "ok");
   assert.equal(withIndustry.low, without.low);
   assert.equal(withIndustry.high, without.high);
-  // aged-care routes the second next action to the finance tool, not school funding
-  assert.ok(withIndustry.next_actions.some((a) => a.url.endsWith("/tools/finance-check")));
+  // aged-care routes the finance next action to the finance tool, not school funding
+  assert.ok(withIndustry.next_actions.some((a) => a.url.includes("/tools/finance-check?industry=aged-care")));
 });
 
 ok("invalid industry rejected", () => {

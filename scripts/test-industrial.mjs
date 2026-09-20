@@ -28,6 +28,20 @@ for (const item of industrialUseCases) {
  assert.ok(item.why && item.changes && item.sources.length);
 }
 for (const s of Object.values(industrialSources)) assert.equal(new URL(s.href).protocol, "https:");
+// Deterministic source-registry maintenance (cleanup §5): label/kind present,
+// well-formed hostnames, no duplicate source hrefs. Remote HTTP status is a
+// separate periodic check, not part of this deterministic test.
+{
+  const seen = new Map();
+  for (const [id, s] of Object.entries(industrialSources)) {
+    assert.ok(s.label && typeof s.label === "string", `Source ${id} missing label`);
+    assert.ok(s.kind && typeof s.kind === "string", `Source ${id} missing kind`);
+    const u = new URL(s.href);
+    assert.ok(u.hostname.includes(".") && !u.hostname.includes(" "), `Source ${id} malformed domain`);
+    assert.ok(!seen.has(s.href), `Duplicate source href ${s.href} (${id} and ${seen.get(s.href)})`);
+    seen.set(s.href, id);
+  }
+}
 // These record this editorial release, not a rule that any brand must always win.
 const uc = Object.fromEntries(industrialUseCases.map((r) => [r.id, r]));
 assert.equal(uc["shift-sip"].startingPoints[0], "algo");
