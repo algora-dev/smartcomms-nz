@@ -7,6 +7,7 @@ import { calculateEstimate } from "@/lib/pricing/calculate";
 import { track } from "@/lib/analytics";
 import { formatK, formatNZD, pricingConfig } from "@/lib/pricing/config";
 import { defaultState } from "@/lib/pricing/presets";
+import { parseCalculatorState } from "@/lib/pricing/validation";
 import { ResultView } from "./ResultView";
 
 const AREAS: { key: AreaKey; fineTunable: boolean }[] = [
@@ -127,6 +128,7 @@ export function PricingTool() {
   const [hydrated, setHydrated] = useState(false);
   const [confirmRestart, setConfirmRestart] = useState(false);
   const [industry, setIndustry] = useState<IndustryContext>();
+  const [cfgError, setCfgError] = useState(false);
   const skipPersist = useRef(false);
   const userTouchedRef = useRef(false);
 
@@ -143,9 +145,18 @@ export function PricingTool() {
       if (params.get("cfg")) {
         try {
           const parsed = JSON.parse(decodeURIComponent(params.get("cfg")!));
-          if (parsed && parsed.areas && parsed.tier) setState({ ...defaultState(), ...parsed });
-          if (parsed?.tier) setStep(3);
-        } catch { /* ignore bad params */ }
+          const result = parseCalculatorState(parsed);
+          if (result.ok) {
+            setState(result.state);
+            setStep(3);
+          } else {
+            // Invalid saved link: stay on a usable calculator start, never
+            // render fabricated totals or emit a completion log.
+            setCfgError(true);
+          }
+        } catch {
+          setCfgError(true);
+        }
       }
     });
   }, []);
@@ -285,6 +296,11 @@ export function PricingTool() {
 
   return (
     <div ref={toolTopRef} className="mx-auto max-w-3xl scroll-mt-6">
+      {cfgError && (
+        <div className="mb-4 rounded-xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] px-4 py-3 text-sm text-[var(--sc-slate)]">
+          That saved estimate link wasn&apos;t valid, so we&apos;ve started a fresh estimate below.
+        </div>
+      )}
       {/* progress */}
       <div className="mb-8 flex items-center gap-2">
         {[1, 2, 3].map((n) => (

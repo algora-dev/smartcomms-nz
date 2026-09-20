@@ -6,7 +6,23 @@ import type { EntryIntercomType, Tier } from "./types";
 export const estimateLowMultiplier = 0.8;
 export const estimateHighMultiplier = 1;
 
+export const PRICING_MODEL_VERSION = "smartcomms-nz-pricing-v1";
+
+/** Owner-confirmed provenance: indicative planning allowances informed by multiple
+ * partner/supplier pricing inputs. Not a live supplier-price feed, observed min/max
+ * range, or statistical confidence interval. See docs/agent-ready/SMARTCOMMS_PROFILE.md. */
+export const PRICING_PROVENANCE = {
+  modelVersion: PRICING_MODEL_VERSION,
+  businessOwner: "T3 Labs / SmartComms NZ (owner-approved)",
+  provenance: "owner-confirmed: partner/supplier-informed planning allowances",
+  currency: "NZD",
+  taxBasis: "excludes GST",
+  band: `${estimateLowMultiplier} - ${estimateHighMultiplier} of configured allowances`,
+  reviewedAt: "2026-09-16",
+} as const;
+
 export const pricingConfig = {
+  modelVersion: PRICING_MODEL_VERSION,
   reviewedAt: "2026-09-16",
   reviewedAtLabel: "16 September 2026",
   headendPrice: 5995,
