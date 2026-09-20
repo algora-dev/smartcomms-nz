@@ -29,6 +29,8 @@ npm run test:finance
 npm run test:aged-care
 npm run test:public-project-examples
 npm run test:validation
+npm run test:assessment
+npm run test:content-meta
 npm run build
 ```
 

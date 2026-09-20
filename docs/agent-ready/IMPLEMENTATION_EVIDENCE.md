@@ -55,3 +55,34 @@ None on main pages/tools/navigation/modal. Exceptions, exactly as allowed: (1) /
 - Upload limit: **4MB confirmed** by owner.
 - Release 1 **pushed to production `main`** (2026-09-20, commit 6b8d39e).
 - Release 2 authorised to start immediately.
+
+## Release 2 — IMPLEMENTED (2026-09-20, commit c68a9a5) + Release 2.1 (this pass)
+
+- **Capability:** read-only pricing assessment, result_type `budget_estimate`, schema_version 1, `smartcomms-nz-pricing-v1`.
+- **Route:** `POST /api/business/v1/assessments` (+ gated `GET` discovery).
+- **Canonical request (2.1):** `{ assessment_type: "pricing", input: { state: <cfg-format calculator state>, industry?: "schools"|"aged-care"|"industrial"|"commercial" } }` — industry is contextual only, never merged into state; unknown top-level input fields rejected.
+- **Engine + validation:** same `parseCalculatorState` + `calculateEstimate` as the public site; server-recomputed; client totals never authoritative (output-log authority re-verified: schema v2 route recomputes from validated state; regression covered by test:assessment "forged low/high/breakdown" + test:validation).
+- **Statuses:** canonical set `ok | needs_input | not_supported | requires_human_review | unavailable`; "unsupported" removed from contracts.
+- **Next actions:** absolute URLs derived from `site.url` (cfg deep link to /pricing-tool; /contact, or /tools/finance-check for industry=aged-care).
+- **Feature flag:** `BUSINESS_API_ENABLED` — **currently DISABLED in all environments**; GET and POST both return 404 while off; no config values exposed. Rollback: unset the env var (or revert commit); no data migrations involved.
+- **Telemetry:** one JSON console line per request (req id, capability, adapter=http, status, elapsed, model version) — no PII, no bodies.
+- **Side effects:** none — no email, lead, provider contact, booking, subscription or data mutation (test:assessment asserts statelessness of result; route performs no writes).
+- **Deployment dependency:** durable rate limiting on the route BEFORE enabling the flag (owner action — see checklist below).
+
+### Release 2.1 additional changes
+
+- Contract standardised to `input.state`; `not_supported` canonical; absolute next-action URLs; GET+POST gated identically; telemetry added.
+- Sitemap now uses `reviewedDateStrict` (exported `SITEMAP_ROUTES`); new `npm run test:content-meta` fails if a public sitemap route lacks a CONTENT_META record (28 routes verified).
+- Clarity documentation corrected to match reality: project-level **Balanced** masking (owner-confirmed dashboard setting); QA override is `window.__CLARITY_QA__ = true` before page load on non-production hosts (comment previously named a non-existent env var — Option B fix, comment only).
+- README test list now includes `test:assessment` and `test:content-meta`.
+
+### Gates (Release 2.1) — actual results
+
+- `npm run test:assessment` ? 16/16 passed
+- `npm run test:content-meta` ? 28/28 sitemap routes registered
+- `npm run test:validation` ? 14/14 passed
+- `npm run test:pricing` ? passed (A $10,276–$12,845; safety $11,792; interactive $14,072)
+- `npm run test:finance` ? passed · `npm run test:aged-care` ? passed · `npm run test:public-project-examples` ? all passed
+- `npx --no-install tsc --noEmit` / `npm run lint` / `npm run build` ? see final report
+
+### Visible difference: none. Pricing model, calculator, tools, pages untouched.

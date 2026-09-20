@@ -1,11 +1,25 @@
-// Business-core result contracts (Release 2).
+// Business-core result contracts (Release 2 / 2.1).
 // Wire shapes for the versioned, read-only assessment API. Pricing-only for
 // now; other assessment_type variants return not_supported until implemented.
 
 export const BUSINESS_ID = "smartcomms-nz" as const;
 export const ASSESSMENT_SCHEMA_VERSION = 1;
 
+/** Canonical domain status set (Agent-Ready standard). "not_supported" is the
+ * ONLY unsupported-status name — do not introduce "unsupported". */
+export type DomainStatus =
+  | "ok"
+  | "needs_input"
+  | "not_supported"
+  | "requires_human_review"
+  | "unavailable";
+
 export type AssessmentType = "pricing" | "funding" | "finance";
+
+/** Known verticals for optional context. Contextual only — never merged into
+ * calculator state. */
+export const KNOWN_INDUSTRIES = ["schools", "aged-care", "industrial", "commercial"] as const;
+export type Industry = (typeof KNOWN_INDUSTRIES)[number];
 
 export type FreshnessState = "current_approved_model" | "review_due" | "withdrawn";
 
@@ -13,11 +27,11 @@ export interface AssessmentRequestBase {
   assessment_type: AssessmentType;
 }
 
+/** External request shape (Release 2.1, canonical):
+ * { assessment_type: "pricing", input: { state: <cfg-format calculator state>, industry?: "aged-care" } } */
 export interface PricingAssessmentInput {
-  /** Calculator state in the public cfg format (validated by parseCalculatorState). */
   state: unknown;
-  /** Optional sector hint; aged-care links finance-check instead of school funding. */
-  industry?: string;
+  industry?: Industry;
 }
 
 export interface BreakdownLineOut {
@@ -57,7 +71,7 @@ export interface AssessmentError {
   business_id: typeof BUSINESS_ID;
   schema_version: number;
   assessment_type: AssessmentType | "unknown";
-  status: "needs_input" | "unsupported" | "error";
+  status: Exclude<DomainStatus, "ok">;
   message: string;
   missing?: string[];
 }

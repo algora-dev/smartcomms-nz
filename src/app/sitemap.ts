@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
-import { reviewedDate } from "@/lib/content-meta";
+import { reviewedDateStrict } from "@/lib/content-meta";
 
-const routes: { path: string; priority: number }[] = [
+export const SITEMAP_ROUTES: { path: string; priority: number }[] = [
   { path: "/", priority: 1 },
   { path: "/schools", priority: 0.98 },
   { path: "/systems", priority: 0.9 },
@@ -35,12 +35,12 @@ const routes: { path: string; priority: number }[] = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Each route appears exactly once; lastModified comes from the central
-  // content-metadata registry so it stays truthful per page.
-  return routes.map((route) => ({
+  // content-metadata registry via the STRICT helper — a public sitemap route
+  // without a registry entry throws at build time instead of silently
+  // omitting or fabricating a review date (Release 2.1 §9).
+  return SITEMAP_ROUTES.map((route) => ({
     url: `${site.url}${route.path}`,
-    // Registry-missing routes now yield an empty date (detected in dev via
-    // console.warn) rather than a fabricated one; omit lastModified then.
-    lastModified: reviewedDate(route.path) || undefined,
+    lastModified: new Date(reviewedDateStrict(route.path)),
     priority: route.priority,
   }));
 }
