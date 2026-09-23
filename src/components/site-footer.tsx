@@ -11,7 +11,7 @@ export function SiteFooter() {
         </div>
         <div>
           <p className="font-semibold text-[var(--sc-blue-900)]">Explore</p>
-          <ul className="mt-2 space-y-1 text-[var(--sc-slate)]">
+          <ul className="mt-2 space-y-2 text-[var(--sc-slate)] [&_a]:inline-block [&_a]:py-1">
             <li><Link href="/schools">School communications</Link></li>
             <li><Link href="/systems">System types</Link></li>
             <li><Link href="/compare">Compare systems</Link></li>
@@ -26,7 +26,7 @@ export function SiteFooter() {
         </div>
         <div>
           <p className="font-semibold text-[var(--sc-blue-900)]">About this site</p>
-          <ul className="mt-2 space-y-1 text-[var(--sc-slate)]">
+          <ul className="mt-2 space-y-2 text-[var(--sc-slate)] [&_a]:inline-block [&_a]:py-1">
             <li><Link href="/about">About SmartComms</Link></li>
             <li><Link href="/about/methodology">Research methodology</Link></li>
             <li><Link href="/about/disclosure">Commercial relationships</Link></li>

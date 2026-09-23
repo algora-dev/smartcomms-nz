@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
+import { createPortal } from "react-dom";
 import { track } from "@/lib/analytics";
 import { attributionForSubmission } from "@/lib/attribution";
 
@@ -130,87 +131,57 @@ export function ProjectEnquiryModal({
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const restoreFocusRef = useRef<HTMLElement | null>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const successRef = useRef<HTMLHeadingElement>(null);
+  const titleId = useId();
+  const descriptionId = useId();
+  const successId = useId();
   const isProject = mode !== "general_message";
   const [helpType, setHelpType] = useState<string>(DEFAULT_HELP[mode]);
   const [existingProvider, setExistingProvider] = useState<string>("");
   const [providerName, setProviderName] = useState("");
 
   useEffect(() => {
-    if (open) {
-      restoreFocusRef.current = document.activeElement as HTMLElement | null;
-      queueMicrotask(() => {
-        setDone(false);
-        setError(null);
-        setHelpType(DEFAULT_HELP[mode]);
-        setExistingProvider("");
-        setProviderName("");
-      });
-      document.body.style.overflow = "hidden";
-      track("project_help_opened", { enquiry_type: mode, source_page: window.location.pathname });
-      // Always open at the top of the modal: reset scroll explicitly and
-      // focus without causing browser scrolling.
-      requestAnimationFrame(() => {
-        const dialog = dialogRef.current;
-        if (!dialog) return;
-        dialog.scrollTop = 0;
-        dialog.focus({ preventScroll: true });
-      });
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!open) return;
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const previousOverflow = document.body.style.overflow;
+    queueMicrotask(() => {
+      setDone(false);
+      setError(null);
+      setHelpType(DEFAULT_HELP[mode]);
+      setExistingProvider("");
+      setProviderName("");
+    });
+    document.body.style.overflow = "hidden";
+    // Native showModal provides an inert background and keyboard focus containment.
+    if (!dialog.open) dialog.showModal();
+    track("project_help_opened", { enquiry_type: mode, source_page: window.location.pathname });
+    const frame = requestAnimationFrame(() => {
+      if (panelRef.current) panelRef.current.scrollTop = 0;
+      titleRef.current?.focus({ preventScroll: true });
+    });
     return () => {
-      document.body.style.overflow = "";
+      cancelAnimationFrame(frame);
+      if (dialog.open) dialog.close();
+      document.body.style.overflow = previousOverflow;
+      if (opener?.isConnected) opener.focus({ preventScroll: true });
     };
   }, [open, mode]);
 
   useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-        return;
-      }
-      if (e.key !== "Tab") return;
-      const dialog = dialogRef.current;
-      if (!dialog) return;
-      const focusables = Array.from(
-        dialog.querySelectorAll<HTMLElement>(
-          "a[href], button:not([disabled]), input:not([disabled]):not([tabindex='-1']), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex='-1'])",
-        ),
-      ).filter((el) => el.offsetParent !== null || el === document.activeElement);
-      if (focusables.length === 0) return;
-      const first = focusables[0];
-      const last = focusables[focusables.length - 1];
-      const active = document.activeElement as HTMLElement | null;
-      if (e.shiftKey && (active === first || !dialog.contains(active))) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && (active === last || !dialog.contains(active))) {
-        e.preventDefault();
-        first.focus();
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      restoreFocusRef.current?.focus?.();
-      restoreFocusRef.current = null;
-    };
-  }, [open, onClose]);
-
-  useEffect(() => {
     if (!open || !done) return;
-    // The success state replaces the form inside the same scrollable
-    // container: make sure it begins at the top.
-    requestAnimationFrame(() => {
-      dialogRef.current?.scrollTo({ top: 0, behavior: "auto" });
-      dialogRef.current?.focus({ preventScroll: true });
+    const frame = requestAnimationFrame(() => {
+      if (panelRef.current) panelRef.current.scrollTop = 0;
+      successRef.current?.focus({ preventScroll: true });
     });
+    return () => cancelAnimationFrame(frame);
   }, [open, done]);
 
-  if (!open) return null;
+  if (!open || typeof document === "undefined") return null;
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -272,23 +243,18 @@ export function ProjectEnquiryModal({
   const { title, blurb, submit: submitLabel } = MODE_COPY[mode];
   const contextLines = Object.entries(context ?? {}).filter(([, v]) => v);
 
-  const inputClass =
-    "mt-1 w-full rounded-lg border border-[var(--sc-border)] px-3 py-2 text-sm focus:border-[var(--sc-teal)] focus:outline-none";
+  const inputClass = "sc-input";
 
-  return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 backdrop-blur-sm"
-      onMouseDown={(e) => { if (e.target === e.currentTarget) onClose(); }}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="sc-enquiry-title"
-      aria-describedby="sc-enquiry-desc"
-    >
-      <div ref={dialogRef} className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl sm:p-8" tabIndex={-1}>
+  return createPortal(
+    <dialog ref={dialogRef} className="sc-dialog not-prose" aria-modal="true"
+      aria-labelledby={done ? successId : titleId} aria-describedby={done ? undefined : descriptionId}
+      onCancel={(event) => { event.preventDefault(); onClose(); }}
+      onClick={(event) => { if (event.target === event.currentTarget) onClose(); }}>
+      <div ref={panelRef} className="sc-dialog-panel" data-clarity-mask="true">
         {done ? (
           <div className="py-8 text-center">
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[var(--sc-teal)]/10 text-2xl text-[var(--sc-teal)]">✓</div>
-            <h3 className="mt-4 text-xl font-semibold text-[var(--sc-navy)]">Thanks — we&apos;ve received your enquiry</h3>
+            <h3 id={successId} ref={successRef} tabIndex={-1} className="sc-dialog-title mt-4 text-xl font-semibold text-[var(--sc-navy)]">Thanks — we&apos;ve received your enquiry</h3>
             <p className="mt-2 text-sm text-[var(--sc-slate)]">
               The SmartComms team will review what you sent and reply with the provider or providers we think are the
               best fit, including their public contact details and why they may suit your requirements.
@@ -296,7 +262,7 @@ export function ProjectEnquiryModal({
             <button
               type="button"
               onClick={onClose}
-              className="mt-6 rounded-full bg-[var(--sc-navy)] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[var(--sc-blue-700)] hover:shadow-md transition-all cursor-pointer"
+              className="sc-btn-primary mt-6"
             >
               Close
             </button>
@@ -305,8 +271,8 @@ export function ProjectEnquiryModal({
           <>
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h3 id="sc-enquiry-title" className="text-xl font-semibold text-[var(--sc-navy)]">{title}</h3>
-                <p id="sc-enquiry-desc" className="mt-1 text-sm text-[var(--sc-slate)]">{blurb}</p>
+                <h3 id={titleId} ref={titleRef} tabIndex={-1} className="sc-dialog-title text-xl font-semibold text-[var(--sc-navy)]">{title}</h3>
+                <p id={descriptionId} className="mt-1 text-sm text-[var(--sc-slate)]">{blurb}</p>
                 {estimateSummary && (
                   <p className="mt-2 rounded-full bg-[var(--sc-blue-50)] px-3 py-1 text-xs font-medium text-[var(--sc-navy)]">
                     Your estimate: {estimateSummary} ex GST
@@ -322,7 +288,7 @@ export function ProjectEnquiryModal({
                 type="button"
                 onClick={onClose}
                 aria-label="Close"
-                className="rounded-full p-1.5 text-[var(--sc-slate)] hover:bg-[var(--sc-blue-50)] hover:text-[var(--sc-navy)] transition-colors cursor-pointer"
+                className="sc-icon-button"
               >
                 ✕
               </button>
@@ -397,7 +363,7 @@ export function ProjectEnquiryModal({
                     </legend>
                     <div className="mt-1 flex flex-wrap gap-3">
                       {EXISTING_PROVIDER_OPTIONS.map((o) => (
-                        <label key={o.value} className="flex cursor-pointer items-center gap-1.5 text-sm text-[var(--sc-slate)]">
+                        <label key={o.value} className="flex min-h-11 cursor-pointer items-center gap-2 text-sm text-[var(--sc-slate)]">
                           <input
                             type="radio"
                             name="existingProviderChoice"
@@ -458,11 +424,11 @@ export function ProjectEnquiryModal({
               <p className="rounded-lg border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-3 text-xs leading-relaxed text-[var(--sc-slate)]">
                 {ENQUIRY_PROCESS_COPY}
               </p>
-              {error && <p className="rounded-lg bg-[#fdf3ec] p-3 text-sm text-[#7a3413]">{error}</p>}
+              {error && <p role="alert" className="rounded-lg bg-[var(--sc-warning-surface)] p-3 text-sm text-[var(--sc-warning-text)]">{error}</p>}
               <button
                 type="submit"
                 disabled={sending}
-                className="w-full rounded-full bg-[var(--sc-teal-strong)] px-6 py-3 text-sm font-semibold text-white hover:bg-[var(--sc-teal-strong-hover)] hover:shadow-lg transition-all cursor-pointer disabled:opacity-50"
+                className="sc-btn-help w-full"
               >
                 {sending ? "Sending…" : submitLabel}
               </button>
@@ -475,6 +441,7 @@ export function ProjectEnquiryModal({
           </>
         )}
       </div>
-    </div>
+    </dialog>,
+    document.body,
   );
 }

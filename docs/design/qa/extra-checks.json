@@ -1,0 +1,302 @@
+[
+  {
+    "width": 320,
+    "tooltip": 0,
+    "visible": true,
+    "overflow": 0,
+    "box": {
+      "x": 16,
+      "y": 694,
+      "width": 240,
+      "height": 104
+    },
+    "withinViewport": true,
+    "escapeCloses": true,
+    "keyboardOpens": true
+  },
+  {
+    "width": 320,
+    "tooltip": 1,
+    "visible": true,
+    "overflow": 0,
+    "box": {
+      "x": 16,
+      "y": 441.765625,
+      "width": 240,
+      "height": 84.5
+    },
+    "withinViewport": true,
+    "escapeCloses": true,
+    "keyboardOpens": true
+  },
+  {
+    "width": 320,
+    "tooltip": 2,
+    "visible": true,
+    "overflow": 0,
+    "box": {
+      "x": 16,
+      "y": 622.28125,
+      "width": 240,
+      "height": 65
+    },
+    "withinViewport": true,
+    "escapeCloses": true,
+    "keyboardOpens": true
+  },
+  {
+    "width": 320,
+    "tooltip": 3,
+    "visible": true,
+    "overflow": 0,
+    "box": {
+      "x": 16,
+      "y": 694,
+      "width": 240,
+      "height": 84.5
+    },
+    "withinViewport": true,
+    "escapeCloses": true,
+    "keyboardOpens": true
+  },
+  {
+    "width": 320,
+    "tooltip": 4,
+    "visible": true,
+    "overflow": 0,
+    "box": {
+      "x": 16,
+      "y": 442.484375,
+      "width": 240,
+      "height": 84.5
+    },
+    "withinViewport": true,
+    "escapeCloses": true,
+    "keyboardOpens": true
+  },
+  {
+    "width": 320,
+    "menuClosed": true
+  },
+  {
+    "width": 390,
+    "tooltip": 0,
+    "visible": true,
+    "overflow": 0,
+    "box": {
+      "x": 16,
+      "y": 651.078125,
+      "width": 240,
+      "height": 104
+    },
+    "withinViewport": true,
+    "escapeCloses": true,
+    "keyboardOpens": true
+  },
+  {
+    "width": 390,
+    "tooltip": 1,
+    "visible": true,
+    "overflow": 0,
+    "box": {
+      "x": 16,
+      "y": 694,
+      "width": 240,
+      "height": 84.5
+    },
+    "withinViewport": true,
+    "escapeCloses": true,
+    "keyboardOpens": true
+  },
+  {
+    "width": 390,
+    "tooltip": 2,
+    "visible": true,
+    "overflow": 0,
+    "box": {
+      "x": 26.078125,
+      "y": 441.71875,
+      "width": 240,
+      "height": 65
+    },
+    "withinViewport": true,
+    "escapeCloses": true,
+    "keyboardOpens": true
+  },
+  {
+    "width": 390,
+    "tooltip": 3,
+    "visible": true,
+    "overflow": 0,
+    "box": {
+      "x": 16,
+      "y": 590.234375,
+      "width": 240,
+      "height": 84.5
+    },
+    "withinViewport": true,
+    "escapeCloses": true,
+    "keyboardOpens": true
+  },
+  {
+    "width": 390,
+    "tooltip": 4,
+    "visible": true,
+    "overflow": 0,
+    "box": {
+      "x": 16,
+      "y": 694,
+      "width": 240,
+      "height": 84.5
+    },
+    "withinViewport": true,
+    "escapeCloses": true,
+    "keyboardOpens": true
+  },
+  {
+    "width": 390,
+    "menuClosed": true
+  },
+  {
+    "width": 768,
+    "tooltip": 0,
+    "visible": true,
+    "overflow": 0,
+    "box": {
+      "x": 99.953125,
+      "y": 506.40625,
+      "width": 240,
+      "height": 104
+    },
+    "withinViewport": true,
+    "escapeCloses": true,
+    "keyboardOpens": true
+  },
+  {
+    "width": 768,
+    "tooltip": 1,
+    "visible": true,
+    "overflow": 0,
+    "box": {
+      "x": 80.921875,
+      "y": 596.53125,
+      "width": 240,
+      "height": 84.5
+    },
+    "withinViewport": true,
+    "escapeCloses": true,
+    "keyboardOpens": true
+  },
+  {
+    "width": 768,
+    "tooltip": 2,
+    "visible": true,
+    "overflow": 0,
+    "box": {
+      "x": 34.078125,
+      "y": 686.65625,
+      "width": 240,
+      "height": 65
+    },
+    "withinViewport": true,
+    "escapeCloses": true,
+    "keyboardOpens": true
+  },
+  {
+    "width": 768,
+    "tooltip": 3,
+    "visible": true,
+    "overflow": 0,
+    "box": {
+      "x": 142.078125,
+      "y": 694,
+      "width": 240,
+      "height": 84.5
+    },
+    "withinViewport": true,
+    "escapeCloses": true,
+    "keyboardOpens": true
+  },
+  {
+    "width": 768,
+    "tooltip": 4,
+    "visible": true,
+    "overflow": 0,
+    "box": {
+      "x": 98.546875,
+      "y": 694,
+      "width": 240,
+      "height": 84.5
+    },
+    "withinViewport": true,
+    "escapeCloses": true,
+    "keyboardOpens": true
+  },
+  {
+    "width": 768,
+    "menuClosed": true
+  },
+  {
+    "width": 320,
+    "route": "/compare/schools",
+    "expandedOverflow": 0,
+    "hintCount": 4,
+    "tableCount": 4
+  },
+  {
+    "width": 320,
+    "route": "/industries/aged-care-retirement-villages",
+    "expandedOverflow": 0,
+    "hintCount": 3,
+    "tableCount": 3
+  },
+  {
+    "width": 320,
+    "route": "/industries/warehouses-manufacturing-industrial",
+    "expandedOverflow": 0,
+    "hintCount": 3,
+    "tableCount": 3
+  },
+  {
+    "width": 390,
+    "route": "/compare/schools",
+    "expandedOverflow": 0,
+    "hintCount": 4,
+    "tableCount": 4
+  },
+  {
+    "width": 390,
+    "route": "/industries/aged-care-retirement-villages",
+    "expandedOverflow": 0,
+    "hintCount": 3,
+    "tableCount": 3
+  },
+  {
+    "width": 390,
+    "route": "/industries/warehouses-manufacturing-industrial",
+    "expandedOverflow": 0,
+    "hintCount": 3,
+    "tableCount": 3
+  },
+  {
+    "width": 1440,
+    "route": "/compare/schools",
+    "expandedOverflow": 0,
+    "hintCount": 0,
+    "tableCount": 4
+  },
+  {
+    "width": 1440,
+    "route": "/industries/aged-care-retirement-villages",
+    "expandedOverflow": 0,
+    "hintCount": 0,
+    "tableCount": 3
+  },
+  {
+    "width": 1440,
+    "route": "/industries/warehouses-manufacturing-industrial",
+    "expandedOverflow": 0,
+    "hintCount": 0,
+    "tableCount": 3
+  }
+]

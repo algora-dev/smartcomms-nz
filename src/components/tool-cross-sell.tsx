@@ -49,7 +49,7 @@ export function ToolCrossSell({
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--sc-slate)]">
             Equipment finance or leasing may be worth discussing. Your estimate will carry into the finance check, so you do not need to enter the project value again.
           </p>
-          <div className="mt-4 flex flex-wrap gap-3">
+          <div className="mt-4 sc-actions">
             <Link href={financeHref} className="sc-btn-primary" onClick={() => track("pricing_to_finance_clicked", { industry })}>
               Explore payment options
             </Link>
@@ -90,7 +90,7 @@ export function ToolCrossSell({
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--sc-slate)]">
           If this is a New Zealand school project, a property/funding pathway may be worth checking. Schools and other organisations can also explore equipment finance or leasing if they want to spread the project cost.
         </p>
-        <div className="mt-4 flex flex-wrap gap-3">
+        <div className="mt-4 sc-actions">
           <Link
             href={fundingHref}
             className="sc-btn-primary"
@@ -134,7 +134,7 @@ export function ToolCrossSell({
           ? "The pathway assessed may not be the strongest fit as entered. Equipment finance or leasing can still be worth discussing, and you can also estimate the project cost if it is not yet clear."
           : "A funding pathway and commercial finance are different options. You can estimate the likely project cost or explore finance and leasing without changing this funding result."}
       </p>
-      <div className="mt-4 flex flex-wrap gap-3">
+      <div className="mt-4 sc-actions">
         <Link
           href={financeHref}
           className={financePrimary ? "sc-btn-primary" : "sc-btn-secondary"}

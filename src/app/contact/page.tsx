@@ -11,8 +11,8 @@ export const metadata: Metadata = buildMetadata({
 
 export default function ContactPage() {
   return (
-    <div className="sc-container py-16 max-w-3xl sc-prose">
-      <h1 className="text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">Contact</h1>
+    <div className="sc-container sc-container-prose py-16 sc-prose">
+      <h1 className="sc-title">Contact</h1>
       <p className="mt-4 text-lg text-[var(--sc-slate)]">
         Ask a question, suggest a correction or tell us about a project. If you need practical project help, give us
         enough information to understand the site and we&apos;ll work out the most useful next step.
@@ -30,7 +30,7 @@ export default function ContactPage() {
           <p className="mt-2 text-sm text-[var(--sc-slate)]">
             A quote or installer, site assessment, system selection, or a funding / project-scope question. The SmartComms team reviews the enquiry and replies with the next step or provider we think is most appropriate to contact.
           </p>
-          <ProjectHelpLauncher buttonLabel="Tell us about your project" className="sc-btn-primary mt-6 inline-flex cursor-pointer" />
+          <ProjectHelpLauncher buttonLabel="Tell us about your project" className="sc-btn-help mt-6" />
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { ProjectHelpPanel } from "@/components/content/ProjectHelpPanel";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
@@ -12,8 +13,8 @@ export const metadata: Metadata = buildMetadata({
 
 export default function AboutPage() {
   return (
-    <div className="sc-container max-w-3xl py-16 sc-prose">
-      <h1 className="text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">About SmartComms NZ</h1>
+    <div className="sc-container sc-container-prose py-16 sc-prose">
+      <h1 className="sc-title">About SmartComms NZ</h1>
       <p className="mt-4 text-lg text-[var(--sc-slate)]">
         SmartComms NZ is a New Zealand information and planning resource for paging, PA, bell, intercom and integrated communication systems. It is designed to make the early project decisions easier: what the system should do, what it may cost, what funding or finance options may be worth exploring and what to resolve before requesting a final quote.
       </p>
@@ -47,6 +48,7 @@ export default function AboutPage() {
       <p>
         We separate indicative calculator assumptions from formal quotes, link funding guidance back to official sources, and avoid presenting configuration examples as market averages. See our <Link href="/about/methodology">research methodology</Link>, <Link href="/about/disclosure">commercial relationships</Link> and <Link href="/about/editorial-policy">editorial policy</Link> for more detail.
       </p>
+      <ProjectHelpPanel {...{"title": "Have a communications project in mind?", "description": "Tell us a little about the site and the question you need help with.", "buttonLabel": "Ask SmartComms", "mode": "project_help", "sourceTopic": "about"}} />
     </div>
   );
 }

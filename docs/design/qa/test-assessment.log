@@ -1,0 +1,22 @@
+(node:11533) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/mnt/data/smartcomms_design_work/audit-loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS  valid input.state (10-room B Essential) returns the exact public fixture band
+PASS  forged low/high/breakdown inside state payload cannot change the result
+PASS  unspecified project returns needs_input, not a controller-only quote
+PASS  missing input.state returns needs_input
+PASS  invalid state returns needs_input with the validation reason
+PASS  unknown top-level input fields are rejected, not silently converted
+PASS  industrial industry mirrors the website journey: finance + contact, no school funding
+PASS  optional industry accepted without modifying pricing state or numbers
+PASS  invalid industry rejected
+PASS  monitoring is reported separately from installed low/high
+PASS  freshness reflects the model review date (review_due after 90d)
+PASS  limitations include the owner-approved public description, never 'formal quote'
+PASS  next-action URLs are absolute, derived from central site config
+PASS  applied defaults are reported (older-cfg omitted fields)
+PASS  large-system warning surfaces when endpoints exceed the threshold
+PASS  no PII-bearing or unknown fields are echoed into normalized_input
+PASS  canonical status names only — no 'unsupported' anywhere in the domain
+
+assessment tests: all 17 assertions passed

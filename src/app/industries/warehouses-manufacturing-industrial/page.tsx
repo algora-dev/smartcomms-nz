@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { PageContents } from "@/components/content/PageContents";
+import { SectionHeading, TableRegion, Badge, EvidenceReferences } from "@/components/ui/comparison";
 import { ProjectHelpLauncher } from "@/components/enquiry/ProjectHelpLauncher";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { publishedDateStrict, reviewedDateStrict, reviewedLabel } from "@/lib/content-meta";
@@ -31,35 +33,15 @@ const sourceNumbers = Object.fromEntries(sourceEntries.map(([id], index) => [id,
 const names = Object.fromEntries(industrialPlatforms.map(({ id, name }) => [id, name]));
 const linkClass = "rounded font-semibold text-[var(--sc-blue-700)] underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4";
 
-function Sources({ ids }: { ids: readonly IndustrialSourceId[] }) {
-  if (!ids.length) return null;
-  return <span className="mt-2 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-xs leading-relaxed text-[var(--sc-slate)]">
-    <span>Evidence:</span>
-    {ids.map((id) => <a key={id} href={industrialSources[id].href} target="_blank" rel="noopener noreferrer"
-      className={linkClass} title={`${industrialSources[id].kind}: ${industrialSources[id].label}`}
-      aria-label={`${industrialSources[id].label}, source ${sourceNumbers[id]} (opens in a new tab)`}>[{sourceNumbers[id]}]</a>)}
-  </span>;
+function Sources({ ids, label = "Evidence" }: { ids: readonly IndustrialSourceId[]; label?: string }) {
+  return <EvidenceReferences label={label} items={ids.map((id) => ({ id, ...industrialSources[id], number: sourceNumbers[id] }))} />;
 }
-function Badge({ children }: { children: ReactNode }) {
-  return <span className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold leading-relaxed text-slate-700">{children}</span>;
-}
-function SectionHeading({ id, eyebrow, children, description }: { id: string; eyebrow: string; children: ReactNode; description?: string }) {
-  return <div className="max-w-4xl">
-    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">{eyebrow}</p>
-    <h2 id={id} className="mt-2 text-2xl font-bold tracking-tight text-[var(--sc-blue-900)] md:text-3xl">{children}</h2>
-    {description && <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">{description}</p>}
-  </div>;
-}
-function TableRegion({ label, children }: { label: string; children: ReactNode }) {
-  return <div className="mt-6">
-    <p className="mb-2 text-xs text-[var(--sc-slate)] lg:hidden">Scroll across the table to compare all columns.</p>
-    <div role="region" aria-label={label} tabIndex={0}
-      className="overflow-x-auto rounded-xl border border-[var(--sc-border)] bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--sc-blue-700)]">{children}</div>
-  </div>;
-}
+
+
+
 function Help({ topic, label = "Ask SmartComms who to contact", className }: { topic: string; label?: string; className?: string }) {
   return <ProjectHelpLauncher mode="system_selection" sourceTopic="warehouses_manufacturing_industrial"
-    buttonLabel={label} className={className ?? "sc-btn-primary cursor-pointer"}
+    buttonLabel={label} className={className ?? "sc-btn-help"}
     context={{ industry: "Warehouse / industrial / manufacturing", sourcePage: INDUSTRIAL_PATH, topic }} />;
 }
 function JsonLd({ data }: { data: unknown }) {
@@ -91,22 +73,18 @@ export default function IndustrialComparisonPage() {
     })),
   };
   return <article aria-labelledby="industrial-title">
-    <header className="sc-container max-w-5xl py-12 md:py-16">
+    <header className="sc-container sc-container-reading py-12 md:py-16">
       <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">New Zealand · Warehouses, manufacturing & industrial sites</p>
-      <h1 id="industrial-title" className="mt-3 max-w-4xl text-4xl font-bold tracking-tight text-[var(--sc-blue-900)] md:text-5xl">{INDUSTRIAL_HEADLINE}</h1>
-      <p className="mt-5 max-w-4xl text-lg leading-relaxed text-[var(--sc-slate)]">Planning warehouse announcements, factory break bells, workshop intercom or loading-yard paging? Start with what staff need to hear and do: a live callout, a timed signal, a two-way conversation or a visible message.</p>
+      <h1 id="industrial-title" className="sc-title mt-3">{INDUSTRIAL_HEADLINE}</h1>
+      <p className="sc-lead mt-5">Planning warehouse announcements, factory break bells, workshop intercom or loading-yard paging? Start with what staff need to hear and do: a live callout, a timed signal, a two-way conversation or a visible message.</p>
       <p className="mt-4 max-w-4xl leading-relaxed text-[var(--sc-slate)]">Compare <strong>Algo, Axis, SPON, TOA, AtlasIED, Bosch PROSPERO and ITC</strong>, with <strong>2N</strong> for entrance communication and a simpler bell-only option below. The best starting point changes with the site, existing equipment and operating conditions.</p>
-      <div className="mt-6 flex flex-wrap gap-3"><Link href={pricingHref} className="sc-btn-primary">Estimate project cost</Link><a href="#industrial-shortlists" className="sc-btn-secondary">Compare the shortlist</a></div>
+      <div className="mt-6 sc-actions"><Link href={pricingHref} className="sc-btn-primary">Estimate project cost</Link><a href="#industrial-shortlists" className="sc-btn-secondary">Compare the shortlist</a></div>
       <p className="mt-5 text-xs leading-relaxed text-[var(--sc-slate)]">SmartComms editorial guide · Reviewed <time dateTime={reviewedDateStrict(INDUSTRIAL_PATH)}>{reviewedLabel(INDUSTRIAL_PATH)}</time> · Document-based recommendations, not hands-on test scores. <a href="#industrial-methodology" className={linkClass}>How we compare</a></p>
-      <nav aria-label="Industrial comparison contents" className="mt-7 border-t border-[var(--sc-border)] pt-5">
-        <ul className="flex flex-wrap gap-x-5 gap-y-3 text-sm">
-          {[["#industrial-shortlists", "Which system fits?"], ["#industrial-capabilities", "Feature comparison"], ["#industrial-noise", "Noise & coverage"], ["#industrial-platforms", "Platform profiles"], ["#industrial-alternatives", "Simpler / specialist options"], ["#industrial-projects", "Real examples"], ["#industrial-cost", "Cost example"], ["#industrial-questions", "Buyer questions"], ["#industrial-sources", "Sources"]].map(([href, label]) => <li key={href}><a href={href} className={linkClass}>{label}</a></li>)}
-        </ul>
-      </nav>
+      <PageContents label="Industrial comparison contents" items={[["#industrial-shortlists", "Which system fits?"], ["#industrial-capabilities", "Feature comparison"], ["#industrial-noise", "Noise & coverage"], ["#industrial-platforms", "Platform profiles"], ["#industrial-alternatives", "Simpler / specialist options"], ["#industrial-projects", "Real examples"], ["#industrial-cost", "Cost example"], ["#industrial-questions", "Buyer questions"], ["#industrial-sources", "Sources"]]} />
     </header>
 
     <section id="industrial-shortlists" aria-labelledby="industrial-shortlists-title" className="scroll-mt-24 border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-12">
-      <div className="sc-container max-w-6xl">
+      <div className="sc-container sc-container-wide">
         <SectionHeading id="industrial-shortlists-title" eyebrow="Start with the job, not the logo">Which system belongs on your industrial shortlist?</SectionHeading>
         <p className="mt-4 max-w-4xl leading-relaxed text-[var(--sc-slate)]"><strong>For routine SIP paging and break schedules, start by comparing Algo, TOA and Axis.</strong> For a wider PA and audio/video intercom brief, compare SPON, TOA and Axis. A gate-only or display-led requirement has a different first choice. There is no measured overall winner or verified whole-system price ranking here.</p>
         <TableRegion label="Industrial use-case shortlists; scroll horizontally on smaller screens.">
@@ -131,7 +109,7 @@ export default function IndustrialComparisonPage() {
       </div>
     </section>
 
-    <section id="industrial-capabilities" aria-labelledby="industrial-capabilities-title" className="sc-container max-w-6xl scroll-mt-24 py-12">
+    <section id="industrial-capabilities" aria-labelledby="industrial-capabilities-title" className="sc-container sc-container-wide scroll-mt-24 py-12">
       <SectionHeading id="industrial-capabilities-title" eyebrow="Apples to apples" description="Compare the specified family and software, not every product a manufacturer has ever made. Confirm the exact local package before committing.">Factory paging, shift bells, intercom and visual alerts compared</SectionHeading>
       <TableRegion label="Industrial capability comparison; scroll horizontally on smaller screens.">
         <table className="w-full min-w-[920px] text-left text-sm leading-relaxed">
@@ -144,7 +122,7 @@ export default function IndustrialComparisonPage() {
     </section>
 
     <section id="industrial-noise" aria-labelledby="industrial-noise-title" className="scroll-mt-24 border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-12">
-      <div className="sc-container max-w-5xl">
+      <div className="sc-container sc-container-reading">
         <SectionHeading id="industrial-noise-title" eyebrow="What changes in a working industrial site">Clear messages, not just more volume</SectionHeading>
         <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">WorkSafe flags difficulty hearing warnings or instructions as a reason to investigate workplace noise. For PA selection, that means checking real listening positions and operating conditions. Adding volume is not a substitute for controlling harmful noise.<Sources ids={["noise", "noise-controls"]} /></p>
         <div className="mt-6 grid gap-5 md:grid-cols-3">
@@ -172,7 +150,7 @@ export default function IndustrialComparisonPage() {
       </div>
     </section>
 
-    <section id="industrial-platforms" aria-labelledby="industrial-platforms-title" className="sc-container max-w-5xl scroll-mt-24 py-12">
+    <section id="industrial-platforms" aria-labelledby="industrial-platforms-title" className="sc-container sc-container-reading scroll-mt-24 py-12">
       <SectionHeading id="industrial-platforms-title" eyebrow="The system behind the brand" description="These profiles separate technical capability from local supply evidence. A NZ listing establishes a route for enquiry—not stock, market share or compatibility between all products under one brand.">Detailed platform comparison and NZ market fit</SectionHeading>
       <div className="mt-7 space-y-5">{industrialPlatforms.map((p) => <article id={`industrial-${p.id}`} key={p.id} aria-labelledby={`industrial-${p.id}-title`} className="sc-card scroll-mt-24 bg-white p-5 md:p-7">
         <div className="flex flex-wrap items-start justify-between gap-3"><div><h3 id={`industrial-${p.id}-title`} className="text-2xl font-bold text-[var(--sc-blue-900)]">{p.name}</h3><p className="mt-1 text-sm font-medium text-[var(--sc-blue-700)]">{p.family}</p></div><Badge>{p.category}</Badge></div>
@@ -187,7 +165,7 @@ export default function IndustrialComparisonPage() {
     </section>
 
     <section id="industrial-alternatives" aria-labelledby="industrial-alternatives-title" className="scroll-mt-24 border-y border-[var(--sc-border)] bg-slate-50 py-12">
-      <div className="sc-container max-w-5xl">
+      <div className="sc-container sc-container-reading">
         <SectionHeading id="industrial-alternatives-title" eyebrow="When the brief is different">A break buzzer, a simple PA or a specialist system?</SectionHeading>
         <div className="mt-6 grid gap-5 md:grid-cols-2">
           <div className="sc-card p-5"><h3 className="text-lg font-semibold text-[var(--sc-blue-900)]">Only need shift or break bells? Compare Netbell.</h3><p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">A factory wanting scheduled tones may not need a full PA/intercom platform. Linortek’s Netbell family includes dedicated bell/buzzer controllers; Edwards NZ lists the KMB multi-tone system. Specify tone-only versus live voice explicitly: a buzzer package is not automatically a two-way intercom. Linortek also offers separate IP-paging products.</p><Sources ids={["netbell", "netbell-nz"]} /></div>
@@ -198,13 +176,13 @@ export default function IndustrialComparisonPage() {
       </div>
     </section>
 
-    <section id="industrial-projects" aria-labelledby="industrial-projects-title" className="sc-container max-w-5xl scroll-mt-24 py-12">
+    <section id="industrial-projects" aria-labelledby="industrial-projects-title" className="sc-container sc-container-reading scroll-mt-24 py-12">
       <SectionHeading id="industrial-projects-title" eyebrow="Published project examples" description="Different projects illustrate different design choices. These are attributed public accounts, not SmartComms installations or independent performance audits.">What real warehouse and industrial projects can teach us</SectionHeading>
       <div className="mt-6 grid gap-5 md:grid-cols-3">{industrialProjects.map((project) => <article key={project.id} className="sc-card p-5"><p className="text-xs font-semibold leading-relaxed text-[var(--sc-blue-700)]">{project.label}</p><h3 className="mt-3 text-lg font-semibold text-[var(--sc-blue-900)]">{project.title}</h3><p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">{project.body}</p><p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]"><strong>Buying lesson:</strong> {project.lesson}</p><Sources ids={project.sources} /></article>)}</div>
     </section>
 
     <section id="industrial-cost" aria-labelledby="industrial-cost-title" className="scroll-mt-24 border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-12">
-      <div className="sc-container max-w-5xl">
+      <div className="sc-container sc-container-reading">
         <SectionHeading id="industrial-cost-title" eyebrow="Price, scope and value">What might a warehouse PA or intercom upgrade cost?</SectionHeading>
         <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">Start with a planning range, then ask a provider to confirm speaker placement, access, power, network and retained equipment. A small workplace and a noisy, high-bay or hazardous process plant should not be priced as the same installation.</p>
         <div className="mt-6 rounded-xl border border-[var(--sc-border)] bg-white p-5 md:p-7">
@@ -213,7 +191,7 @@ export default function IndustrialComparisonPage() {
           <p className="mt-5 text-3xl font-bold tracking-tight text-[var(--sc-blue-900)]">NZ{formatNZD(example.low)}–{formatNZD(example.high)}</p>
           <p className="mt-1 text-sm text-[var(--sc-slate)]">Indicative modelled installed range · excluding GST · {example.endpoints} modelled endpoints</p>
           <p className="mt-4 text-sm leading-relaxed text-[var(--sc-slate)]">Calculated by the same SmartComms pricing engine as the public tool. This is not a supplier quote, real project price or validated industrial bill of materials. It does not price specialist acoustic engineering, high-bay access, hazardous-area equipment, a certified evacuation system, or site-wide structured cabling.</p>
-          <div className="mt-5 flex flex-wrap gap-3"><Link href={industrialExamplePricingHref()} className="sc-btn-primary">Adjust this example</Link><Link href={pricingHref} className="sc-btn-secondary">Start my own estimate</Link></div>
+          <div className="mt-5 sc-actions"><Link href={industrialExamplePricingHref()} className="sc-btn-primary">Adjust this example</Link><Link href={pricingHref} className="sc-btn-secondary">Start my own estimate</Link></div>
           <p className="mt-4 text-xs text-[var(--sc-slate)]">Pricing model: {PRICING_PROVENANCE.modelVersion}. Model review date: {PRICING_PROVENANCE.reviewedAt}. Article research dates do not imply the pricing assumptions were revalidated.</p>
         </div>
         <div className="mt-5 grid gap-4 md:grid-cols-3">{[["Coverage and environment", "Racking, sound levels, PPE, exposed yards, washdown and mounting access can change equipment and labour."], ["Reuse and network", "Condition of speaker lines, amplifier inputs, PoE capacity, fibre/backhaul and independent zones change the design."], ["Operation and support", "Specify shift calendars, consoles, intercom, visual messages, licences, backups and replacement arrangements."]].map(([title, text]) => <div key={title} className="sc-card bg-white p-5"><h3 className="font-semibold text-[var(--sc-blue-900)]">{title}</h3><p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">{text}</p></div>)}</div>
@@ -221,15 +199,15 @@ export default function IndustrialComparisonPage() {
       </div>
     </section>
 
-    <section id="industrial-finance" aria-labelledby="industrial-finance-title" className="sc-container max-w-5xl scroll-mt-24 py-12">
+    <section id="industrial-finance" aria-labelledby="industrial-finance-title" className="sc-container sc-container-reading scroll-mt-24 py-12">
       <SectionHeading id="industrial-finance-title" eyebrow="Payment options">Finance and leasing for workplace communications</SectionHeading>
       <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">NZ equipment-finance providers publish options for business technology and AV equipment. Whether a particular paging project, installation cost or lease structure can be included is a provider decision. The SmartComms checker is a quick way to prepare for that conversation, not a finance offer or credit assessment.<Sources ids={["finance-nz"]} /></p>
-      <div className="mt-5 flex flex-wrap gap-3"><Link href={exampleFinanceHref} className="sc-btn-primary">Explore payment options for this example</Link><Link href={financeHref} className="sc-btn-secondary">Check my own project</Link></div>
+      <div className="mt-5 sc-actions"><Link href={exampleFinanceHref} className="sc-btn-primary">Explore payment options for this example</Link><Link href={financeHref} className="sc-btn-secondary">Check my own project</Link></div>
       <p className="mt-4 text-sm leading-relaxed text-[var(--sc-slate)]">Read about <Link href={financingHref} className={linkClass}>finance and leasing for PA, paging and intercom</Link>. Not knowing the final cost or upfront contribution does not stop you asking SmartComms for a useful next step.</p>
     </section>
 
     <section id="industrial-design" aria-labelledby="industrial-design-title" className="scroll-mt-24 border-y border-[var(--sc-border)] bg-slate-50 py-12">
-      <div className="sc-container max-w-5xl">
+      <div className="sc-container sc-container-reading">
         <SectionHeading id="industrial-design-title" eyebrow="Compare proposals, not brochures">Ask every provider to demonstrate the same workplace tasks</SectionHeading>
         <ol className="mt-5 list-decimal space-y-3 pl-5 leading-relaxed text-[var(--sc-slate)]">
           <li>Page dispatch only, the work floor only and the intended all-call group. Include loading areas and occupied spaces behind racking.</li>
@@ -243,16 +221,16 @@ export default function IndustrialComparisonPage() {
       </div>
     </section>
 
-    <section id="industrial-questions" aria-labelledby="industrial-questions-title" className="sc-container max-w-4xl scroll-mt-24 py-12">
+    <section id="industrial-questions" aria-labelledby="industrial-questions-title" className="sc-container sc-container-reading scroll-mt-24 py-12">
       <SectionHeading id="industrial-questions-title" eyebrow="Buyer questions">Warehouse and factory PA, paging and intercom FAQs</SectionHeading>
       <div className="mt-6 divide-y divide-[var(--sc-border)]">{industrialQuestions.map((q) => <section id={`industrial-faq-${q.id}`} key={q.id} aria-labelledby={`industrial-faq-${q.id}-title`} className="scroll-mt-24 py-5"><h3 id={`industrial-faq-${q.id}-title`} className="text-lg font-semibold text-[var(--sc-blue-900)]">{q.question}</h3><p className="mt-2 leading-relaxed text-[var(--sc-slate)]">{q.answer}</p><Sources ids={q.sources} /></section>)}</div>
     </section>
 
     <section aria-labelledby="industrial-next-title" className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-900)] py-12 text-white">
-      <div className="sc-container max-w-4xl text-center"><h2 id="industrial-next-title" className="text-3xl font-bold">Define what staff need to hear and do. Then choose the system.</h2><p className="mx-auto mt-4 max-w-3xl leading-relaxed text-white/80">Tell us your region, what is already installed and the problem you need to solve. You do not need a finished specification to ask who could help.</p><div className="mt-6 flex flex-wrap justify-center gap-3"><Help topic="Industrial communications project" className="inline-flex cursor-pointer items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[var(--sc-blue-900)]" /><Link href={pricingHref} className="inline-flex items-center justify-center rounded-lg border border-white/40 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10">Estimate project cost</Link></div></div>
+      <div className="sc-container sc-container-reading text-center"><h2 id="industrial-next-title" className="sc-section-title  text-white">Define what staff need to hear and do. Then choose the system.</h2><p className="mx-auto mt-4 max-w-3xl leading-relaxed text-white/80">Tell us your region, what is already installed and the problem you need to solve. You do not need a finished specification to ask who could help.</p><div className="mt-6 flex flex-wrap justify-center gap-3"><Help topic="Industrial communications project" className="sc-btn-light" /><Link href={pricingHref} className="sc-btn-outline-light">Estimate project cost</Link></div></div>
     </section>
 
-    <section id="industrial-methodology" aria-labelledby="industrial-methodology-title" className="sc-container max-w-5xl scroll-mt-24 py-10">
+    <section id="industrial-methodology" aria-labelledby="industrial-methodology-title" className="sc-container sc-container-reading scroll-mt-24 py-10">
       <h2 id="industrial-methodology-title" className="text-xl font-bold text-[var(--sc-blue-900)]">How this comparison was prepared</h2>
       <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">The shortlist orders are SmartComms editorial judgements for the stated tasks. We prioritise relevant current manufacturer documentation, then attribute NZ product/channel evidence and published projects separately. This is not a hands-on group test, market-share survey, credit assessment or verified brand-wide price ranking.</p>
       <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">We have not compared every industrial communication product. Confirm firmware, power, environmental suitability, licences and local support for the proposed system. A video intercom, a warning strobe and a readable display are not interchangeable. General communication is not a substitute for a separately required safety system.</p>

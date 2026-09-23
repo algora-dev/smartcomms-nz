@@ -23,7 +23,9 @@ export default function IpPagingPaPage() {
         description="Modern IP paging systems use the data network to deliver live announcements, scheduled messages, emergency audio and zoned communication across classrooms, offices, warehouses and multi-building sites. This guide explains how the architecture works, when full-IP or hybrid systems make sense, and what to consider before specifying one."
         tags={["IP paging", "Network PA", "PoE speakers", "Zoned announcements", "Hybrid systems"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
-        secondaryCta={{ label: "Compare paging platforms", href: "/compare/schools" }}
+        secondaryCta={{ label: "Compare paging platforms", href: "/compare" }}
+        help={{"label": "Ask about your site", "mode": "system_selection", "sourceTopic": "ip_paging_pa"}}
+        contents={[["#what-is", "What \"Audio over IP\" actually means"], ["#poe", "Power over Ethernet (PoE) endpoints"], ["#zoning", "Zoning, scheduling and per-endpoint control"], ["#emergency", "Emergency and lockdown capability"], ["#intercom", "Two-way communication and intercom"], ["#vs-traditional", "IP vs traditional vs hybrid"], ["#cost", "What IP paging tends to cost"], ["#platforms", "Choosing a platform"], ["#next", "Next steps"]]}
         reviewed={reviewedLabel("/systems/ip-paging-pa")}
         note="NZ-focused guidance"
         breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "IP Paging & Network PA" }]}
@@ -36,7 +38,7 @@ export default function IpPagingPaPage() {
           { label: "Next step", value: "Estimate a system or compare platform options" },
         ]}
       />
-      <article className="sc-container max-w-[800px] py-8 sc-prose">
+      <article className="sc-container sc-container-prose py-8 sc-prose">
       <h2 id="what-is">What &quot;Audio over IP&quot; actually means</h2>
       <p>
         In a traditional PA system, audio travels as an analogue signal from a microphone or source
@@ -144,8 +146,9 @@ export default function IpPagingPaPage() {
         </li>
       </ul>
       <ContinuePlanning
+        help={{"title": "Not sure which paging approach fits?", "description": "Describe the areas to cover and the equipment worth keeping. You do not need a finished specification.", "buttonLabel": "Ask about your site", "mode": "system_selection", "sourceTopic": "ip_paging_pa"}}
         items={[
-          { title: "Compare paging platforms", desc: "Use-case shortlists for integrated school platforms, SIP-first paging, hybrid migration and specialist architectures.", href: "/compare/schools" },
+          { title: "Compare paging platforms", desc: "Use-case shortlists for integrated school platforms, SIP-first paging, hybrid migration and specialist architectures.", href: "/compare" },
           { title: "Network readiness checklist", desc: "Check cabling, PoE and switch capacity before requesting IP paging quotes.", href: "/guides/ip-paging-network-readiness" },
           { title: "Replacing an old PA system", desc: "What can be kept, what usually changes and how to plan the replacement.", href: "/systems/traditional-vs-ip" },
         ]}

@@ -14,13 +14,6 @@ export const metadata: Metadata = buildMetadata({
   path: "/systems/school-bell-announcements",
 });
 
-const reviewed = "12 September 2026";
-
-function unusedReviewedGuard() {
-  return reviewed;
-}
-void unusedReviewedGuard;
-
 export default function SchoolBellPage() {
   return (
     <div>
@@ -31,6 +24,8 @@ export default function SchoolBellPage() {
         tags={["School bells", "Scheduled announcements", "Zoned paging", "Emergency messaging", "Outdoor coverage"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
         secondaryCta={{ label: "Check school funding", href: "/tools/funding-check" }}
+        help={{"label": "Ask about your school bell project", "mode": "system_selection", "sourceTopic": "school_bell_announcements"}}
+        contents={[["#how", "How modern school bell systems work"], ["#schedules", "What schools typically need from a schedule"], ["#announcements", "Live announcements and daily use"], ["#replacing", "Replacing an aging bell system"], ["#emergency", "Bells and emergency communication"], ["#requirements", "What the Ministry expects"], ["#cost-funding", "Costs and funding"], ["#specifying", "Specifying the system"]]}
         reviewed={reviewedLabel("/systems/school-bell-announcements")}
         note="NZ-focused guidance"
         breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "School Bells & Announcements" }]}
@@ -43,7 +38,7 @@ export default function SchoolBellPage() {
           { label: "Next step", value: "Estimate cost or check potential funding" },
         ]}
       />
-      <article className="sc-container max-w-[800px] py-8 sc-prose">
+      <article className="sc-container sc-container-prose py-8 sc-prose">
       <h2 id="how">How modern school bell systems work</h2>
       <p>
         Modern school bells are usually software schedules playing through a paging platform.
@@ -127,6 +122,7 @@ export default function SchoolBellPage() {
         you a like-for-like comparison framework.
       </p>
       <ContinuePlanning
+        help={{"title": "Need help with bells or announcements?", "description": "Tell us about your timetable, the areas that need coverage and the system you have now.", "buttonLabel": "Ask about your school bell project", "mode": "system_selection", "sourceTopic": "school_bell_announcements"}}
         items={[
           { title: "Specification checklist", desc: "Define the scope so every quote covers the same bells, zones and emergency functions.", href: "/guides/school-pa-specification-checklist" },
           { title: "IP intercom & two-way paging", desc: "Add two-way communication at gates, reception and selected classrooms.", href: "/systems/ip-intercom" },

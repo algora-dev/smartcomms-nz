@@ -14,8 +14,9 @@ export function ContactLauncher() {
     <>
       <button
         type="button"
+        aria-haspopup="dialog"
         onClick={() => setOpen(true)}
-        className="sc-btn-primary mt-6 inline-flex cursor-pointer"
+        className="sc-btn-secondary mt-6"
       >
         Send us a message
       </button>

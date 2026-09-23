@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { ProjectHelpLauncher } from "@/components/enquiry/ProjectHelpLauncher";
 
 const NAV = [
   { href: "/schools", label: "Schools" },
@@ -17,95 +19,53 @@ const NAV = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && !document.querySelector("dialog[open]")) { setOpen(false); toggleRef.current?.focus({ preventScroll: true }); }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+  const active = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
+    || (href === "/compare" && pathname.startsWith("/industries/"))
+    || (href === "/pricing" && pathname === "/pricing-tool");
 
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--sc-border)] bg-white/95 backdrop-blur">
-      <div className="sc-container flex h-20 items-center justify-between gap-6">
-        <Link href="/" className="flex shrink-0 items-center gap-3" aria-label="SmartComms NZ home">
-          <Image
-            src="/brand/scnz-logo-colour-trans.png"
-            alt="SmartComms New Zealand"
-            width={43}
-            height={60}
-            className="h-[3.75rem] w-auto cursor-pointer transition-all duration-200 ease-out hover:scale-[1.05] hover:drop-shadow-[0_6px_22px_rgba(44,177,165,0.55)]"
-            priority
-          />
-          <span className="hidden cursor-pointer text-xl font-bold tracking-tight text-[var(--sc-blue-900)] transition-all duration-200 ease-out hover:scale-[1.08] hover:drop-shadow-[0_8px_30px_rgba(44,177,165,0.95)] xl:inline-block">SCNZ</span>
+      <div className="sc-container flex h-20 items-center justify-between gap-3 sm:gap-5">
+        <Link href="/" className="flex shrink-0 items-center gap-3" aria-label="SmartComms NZ home" onClick={() => setOpen(false)}>
+          <Image src="/brand/scnz-logo-colour-trans.png" alt="SmartComms New Zealand" width={43} height={60}
+            className="h-[3.75rem] w-auto" priority />
+          <span className="hidden text-xl font-bold tracking-tight text-[var(--sc-blue-900)] xl:inline-block">SCNZ</span>
         </Link>
-
-        <nav aria-label="Main navigation" className="hidden items-center gap-5 lg:flex">
-          {NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="inline-block origin-left text-sm font-medium text-[var(--sc-slate)] transition-all duration-200 ease-out hover:scale-[1.06] hover:text-[var(--sc-blue-900)] hover:drop-shadow-[0_4px_14px_rgba(44,177,165,0.5)]"
-            >
-              {item.label}
-            </Link>
-          ))}
+        <nav aria-label="Main navigation" className="hidden items-center gap-4 xl:flex">
+          {NAV.map((item) => <Link key={item.href} href={item.href} aria-current={active(item.href) ? "page" : undefined}
+            className="sc-nav-link">{item.label}</Link>)}
         </nav>
-
-        <div className="flex items-center gap-3">
-          <Link href="/pricing-tool" className="sc-btn-primary hidden text-sm sm:inline-flex">
-            Get a ballpark price
-          </Link>
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            aria-controls="sc-nav-menu"
-            aria-label={open ? "Close menu" : "Open menu"}
-            className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--sc-border)] text-[var(--sc-blue-900)] transition-colors hover:bg-[var(--sc-blue-50)] lg:hidden"
-          >
-            <svg
-              width="20"
-              height="14"
-              viewBox="0 0 20 14"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              aria-hidden="true"
-              style={{ display: open ? "none" : "block" }}
-            >
-              <path d="M1 1h18M1 7h18M1 13h18" />
-            </svg>
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              aria-hidden="true"
-              style={{ display: open ? "block" : "none" }}
-            >
-              <path d="M2 2l12 12M14 2L2 14" />
-            </svg>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Link href="/pricing-tool" className="sc-btn-primary hidden sm:inline-flex" onClick={() => setOpen(false)}>Get a ballpark price</Link>
+          <ProjectHelpLauncher buttonLabel="Ask SmartComms" sourceTopic="site_header" className="sc-btn-secondary" />
+          <button ref={toggleRef} type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open}
+            aria-controls="sc-nav-menu" aria-label={open ? "Close menu" : "Open menu"}
+            className="sc-icon-button border border-[var(--sc-border)] xl:hidden">
+            {open
+              ? <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="m3 3 12 12M15 3 3 15" /></svg>
+              : <svg width="20" height="16" viewBox="0 0 20 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M1 2h18M1 8h18M1 14h18" /></svg>}
           </button>
         </div>
       </div>
-
-      {open && (
-        <nav id="sc-nav-menu" aria-label="Mobile navigation" className="border-t border-[var(--sc-border)] bg-white lg:hidden">
-          <div className="sc-container flex flex-col py-4">
-            {NAV.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="border-b border-[var(--sc-grey)] py-3 text-base font-medium text-[var(--sc-slate)] transition-colors last:border-0 hover:text-[var(--sc-blue-700)]"
-              >
-                {item.label}
-              </Link>
-            ))}
-            <Link href="/pricing-tool" onClick={() => setOpen(false)} className="sc-btn-primary mt-4 justify-center sm:hidden">
-              Get a ballpark price
-            </Link>
-          </div>
-        </nav>
-      )}
+      {open && <nav id="sc-nav-menu" aria-label="Mobile navigation" className="max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-[var(--sc-border)] bg-white xl:hidden">
+        <div className="sc-container flex flex-col py-4">
+          {NAV.map((item) => <Link key={item.href} href={item.href} onClick={() => setOpen(false)}
+            aria-current={active(item.href) ? "page" : undefined}
+            className="sc-nav-link border-b border-[var(--sc-grey)] py-3 text-base last:border-0">{item.label}</Link>)}
+          <Link href="/contact" className="sc-nav-link py-3" onClick={() => setOpen(false)}>Contact / corrections</Link>
+          <Link href="/pricing-tool" onClick={() => setOpen(false)} className="sc-btn-primary mt-4 sm:hidden">Get a ballpark price</Link>
+        </div>
+      </nav>}
     </header>
   );
 }

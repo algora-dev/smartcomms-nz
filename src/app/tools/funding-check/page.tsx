@@ -12,11 +12,12 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function FundingCheckPage() {
-  return (
-    <div className="sc-container max-w-3xl py-12">
-      <div className="mb-9">
+  // Keep the original explanation in server-rendered fallback HTML too; once
+  // the tool resolves, its completed result replaces this introduction.
+  const introduction = (
+<div className="mb-9">
         <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">NZ state schools</p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-[var(--sc-blue-900)] sm:text-4xl">School communications funding check</h1>
+        <h1 className="sc-tool-title mt-2">School communications funding check</h1>
         <p className="mt-3 text-[var(--sc-slate)]">
           Answer a few simple questions to see whether parts of a proposed paging, PA, bell, intercom or communications project appear worth investigating through the Ministry 5YA / 10YPP property pathway.
         </p>
@@ -24,8 +25,11 @@ export default function FundingCheckPage() {
           Indicative only. This tool does not approve funding. <Link href="/funding" className="underline">Read how the funding pathway works</Link>.
         </p>
       </div>
-      <Suspense fallback={<div className="sc-card p-6 text-sm text-[var(--sc-slate)]">Loading funding checker…</div>}>
-        <FundingCheckTool />
+  );
+  return (
+    <div className="sc-container sc-container-prose py-12">
+      <Suspense fallback={<>{introduction}<div role="status" className="sc-card p-6 text-sm text-[var(--sc-slate)]">Loading funding checker…</div></>}>
+        <FundingCheckTool introduction={introduction} />
       </Suspense>
     </div>
   );

@@ -12,7 +12,7 @@ export const metadata: Metadata = buildMetadata({
 
 export default function FinanceCheckPage() {
   return (
-    <div className="sc-container max-w-3xl py-12">
+    <div className="sc-container sc-container-prose py-12">
       {/* The introduction is rendered by FinanceCheckTool only while the
           questionnaire is active, so the completed result is the first
           content on the page. */}

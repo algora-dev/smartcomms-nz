@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { PageContents } from "./PageContents";
+import { ProjectHelpLauncher } from "@/components/enquiry/ProjectHelpLauncher";
+import type { EnquiryMode } from "@/components/enquiry/ProjectEnquiryModal";
 
 export type AuthorityHeroBreadcrumb = { name: string; href?: string };
 
@@ -13,6 +16,8 @@ export default function AuthorityHero({
   reviewed,
   note,
   breadcrumb,
+  help,
+  contents,
 }: {
   eyebrow: string;
   title: string;
@@ -25,9 +30,11 @@ export default function AuthorityHero({
   reviewed: string;
   note?: string;
   breadcrumb?: AuthorityHeroBreadcrumb[];
+  contents?: readonly (readonly [string, string])[];
+  help?: { label: string; mode?: EnquiryMode; sourceTopic: string; context?: Record<string, string> };
 }) {
   return (
-    <section className="sc-container max-w-[1150px] pt-10 pb-6">
+    <section className="sc-container sc-container-wide pt-10 pb-6">
       {breadcrumb?.length ? (
         <nav className="text-sm text-[var(--sc-slate)]" aria-label="Breadcrumb">
           {breadcrumb.map((crumb, i) => (
@@ -45,13 +52,13 @@ export default function AuthorityHero({
         </nav>
       ) : null}
       <div className="mt-4 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] px-6 py-10 sm:px-10 sm:py-12">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">
+        <p className="sc-eyebrow">
           {eyebrow}
         </p>
-        <h1 className="mt-3 text-[2.1rem] font-bold leading-[1.1] tracking-tight text-[var(--sc-blue-900)] sm:text-[3rem]">
+        <h1 className="sc-title mt-3">
           {title}
         </h1>
-        <p className="mt-5 max-w-3xl text-[1.125rem] leading-relaxed text-[var(--sc-slate)] sm:text-lg">
+        <p className="sc-lead mt-5">
           {description}
         </p>
         <div className="mt-6 flex flex-wrap gap-2">
@@ -64,7 +71,7 @@ export default function AuthorityHero({
             </span>
           ))}
         </div>
-        <div className="mt-8 flex flex-wrap gap-3">
+        <div className="sc-actions mt-8">
           {primaryCtaNode ?? (
             <Link href={primaryCta.href} className="sc-btn-primary">
               {primaryCta.label}
@@ -76,12 +83,15 @@ export default function AuthorityHero({
             </Link>
           ) : null}
         </div>
+        {help && <ProjectHelpLauncher mode={help.mode ?? "system_selection"} sourceTopic={help.sourceTopic}
+          buttonLabel={help.label} className="sc-text-action mt-3" context={help.context} />}
         <p className="mt-6 text-xs text-[var(--sc-slate)]">
           Last reviewed {reviewed}
           {note ? <span aria-hidden> · </span> : null}
           {note ? <span className="ml-1 font-medium text-[var(--sc-teal-strong)]">{note}</span> : null}
         </p>
       </div>
+      {contents?.length ? <PageContents items={contents} /> : null}
     </section>
   );
 }

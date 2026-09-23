@@ -1,0 +1,390 @@
+[
+  {
+    "route": "/",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Tell us about your project",
+        "mode": "project_help",
+        "source": "homepage_bottom_cta"
+      }
+    ],
+    "table_count": 0
+  },
+  {
+    "route": "/about",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Ask SmartComms",
+        "mode": "project_help",
+        "source": "about"
+      }
+    ],
+    "table_count": 0
+  },
+  {
+    "route": "/about/disclosure",
+    "initial_body_enquiry_actions": [],
+    "table_count": 0
+  },
+  {
+    "route": "/about/editorial-policy",
+    "initial_body_enquiry_actions": [],
+    "table_count": 0
+  },
+  {
+    "route": "/about/methodology",
+    "initial_body_enquiry_actions": [],
+    "table_count": 0
+  },
+  {
+    "route": "/compare",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Ask about your site",
+        "mode": "system_selection",
+        "source": "compare_hub"
+      }
+    ],
+    "table_count": 0
+  },
+  {
+    "route": "/compare/schools",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Ask about your school’s requirements",
+        "mode": "system_selection",
+        "source": "school_comparison_shortlist"
+      },
+      {
+        "text": "Ask about a similar school project",
+        "mode": "system_selection",
+        "source": "school_public_project_examples"
+      },
+      {
+        "text": "Not sure which shortlist fits your site?",
+        "mode": "system_selection",
+        "source": "compare"
+      }
+    ],
+    "table_count": 4
+  },
+  {
+    "route": "/contact",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Tell us about your project",
+        "mode": "project_help",
+        "source": null
+      }
+    ],
+    "table_count": 0
+  },
+  {
+    "route": "/financing",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Discuss finance options",
+        "mode": "finance_help",
+        "source": "financing_guide"
+      },
+      {
+        "text": "Discuss finance options",
+        "mode": "finance_help",
+        "source": "financing_guide"
+      }
+    ],
+    "table_count": 0
+  },
+  {
+    "route": "/funding",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Ask about your project pathway",
+        "mode": "funding_help",
+        "source": "funding_guide"
+      },
+      {
+        "text": "Ask about your project pathway",
+        "mode": "funding_help",
+        "source": "funding_guide"
+      }
+    ],
+    "table_count": 2
+  },
+  {
+    "route": "/guides",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Ask about your project",
+        "mode": "project_help",
+        "source": "guides_hub"
+      }
+    ],
+    "table_count": 0
+  },
+  {
+    "route": "/guides/ip-paging-network-readiness",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Ask about network readiness",
+        "mode": "cabling_help",
+        "source": "network_readiness"
+      },
+      {
+        "text": "Ask about network readiness",
+        "mode": "cabling_help",
+        "source": "network_readiness"
+      }
+    ],
+    "table_count": 0
+  },
+  {
+    "route": "/guides/nz-school-pa-paging-requirements",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Ask about your school’s project",
+        "mode": "funding_help",
+        "source": "school_requirements"
+      },
+      {
+        "text": "Ask about your school’s project",
+        "mode": "funding_help",
+        "source": "school_requirements"
+      }
+    ],
+    "table_count": 0
+  },
+  {
+    "route": "/guides/school-pa-specification-checklist",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Ask about your specification",
+        "mode": "quote_help",
+        "source": "school_specification"
+      },
+      {
+        "text": "Ask about your specification",
+        "mode": "quote_help",
+        "source": "school_specification"
+      }
+    ],
+    "table_count": 0
+  },
+  {
+    "route": "/industries/aged-care-retirement-villages",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Tell us what needs to happen",
+        "mode": "system_selection",
+        "source": "aged_care_retirement_villages"
+      },
+      {
+        "text": "Tell us what needs to happen",
+        "mode": "system_selection",
+        "source": "aged_care_retirement_villages"
+      },
+      {
+        "text": "Help me find the right provider",
+        "mode": "system_selection",
+        "source": "aged_care_retirement_villages"
+      },
+      {
+        "text": "ask who to contact about your scope",
+        "mode": "system_selection",
+        "source": "aged_care_retirement_villages"
+      },
+      {
+        "text": "Ask SmartComms who to contact",
+        "mode": "system_selection",
+        "source": "aged_care_retirement_villages"
+      }
+    ],
+    "table_count": 3
+  },
+  {
+    "route": "/industries/warehouses-manufacturing-industrial",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Ask about your project",
+        "mode": "system_selection",
+        "source": "warehouses_manufacturing_industrial"
+      },
+      {
+        "text": "ask who can help define the scope",
+        "mode": "system_selection",
+        "source": "warehouses_manufacturing_industrial"
+      },
+      {
+        "text": "Ask who can help with a formal quote",
+        "mode": "system_selection",
+        "source": "warehouses_manufacturing_industrial"
+      },
+      {
+        "text": "Ask SmartComms who to contact",
+        "mode": "system_selection",
+        "source": "warehouses_manufacturing_industrial"
+      }
+    ],
+    "table_count": 3
+  },
+  {
+    "route": "/pricing",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Get help with a formal quote",
+        "mode": "quote_help",
+        "source": "pricing_guide"
+      },
+      {
+        "text": "Get help with a formal quote",
+        "mode": "quote_help",
+        "source": "pricing_guide"
+      }
+    ],
+    "table_count": 0
+  },
+  {
+    "route": "/pricing-tool",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Ask about your estimate",
+        "mode": "quote_help",
+        "source": "pricing_tool_questions"
+      }
+    ],
+    "table_count": 0
+  },
+  {
+    "route": "/privacy",
+    "initial_body_enquiry_actions": [],
+    "table_count": 0
+  },
+  {
+    "route": "/schools",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Ask about your school project",
+        "mode": "system_selection",
+        "source": "schools"
+      },
+      {
+        "text": "Ask about your school project",
+        "mode": "system_selection",
+        "source": "schools"
+      }
+    ],
+    "table_count": 0
+  },
+  {
+    "route": "/systems",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Ask about your requirements",
+        "mode": "system_selection",
+        "source": "systems_hub"
+      }
+    ],
+    "table_count": 0
+  },
+  {
+    "route": "/systems/emergency-lockdown",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Discuss the technical scope",
+        "mode": "system_selection",
+        "source": "emergency_lockdown"
+      },
+      {
+        "text": "Ask about your communications requirements",
+        "mode": "system_selection",
+        "source": "emergency_lockdown"
+      }
+    ],
+    "table_count": 0
+  },
+  {
+    "route": "/systems/ip-intercom",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Ask about your intercom requirements",
+        "mode": "system_selection",
+        "source": "ip_intercom"
+      },
+      {
+        "text": "Ask about your intercom requirements",
+        "mode": "system_selection",
+        "source": "ip_intercom"
+      }
+    ],
+    "table_count": 0
+  },
+  {
+    "route": "/systems/ip-paging-pa",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Ask about your site",
+        "mode": "system_selection",
+        "source": "ip_paging_pa"
+      },
+      {
+        "text": "Ask about your site",
+        "mode": "system_selection",
+        "source": "ip_paging_pa"
+      }
+    ],
+    "table_count": 0
+  },
+  {
+    "route": "/systems/school-bell-announcements",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Ask about your school bell project",
+        "mode": "system_selection",
+        "source": "school_bell_announcements"
+      },
+      {
+        "text": "Ask about your school bell project",
+        "mode": "system_selection",
+        "source": "school_bell_announcements"
+      }
+    ],
+    "table_count": 0
+  },
+  {
+    "route": "/systems/traditional-vs-ip",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Ask about keeping your existing PA",
+        "mode": "system_selection",
+        "source": "traditional_vs_ip"
+      },
+      {
+        "text": "Ask about keeping your existing PA",
+        "mode": "system_selection",
+        "source": "traditional_vs_ip"
+      }
+    ],
+    "table_count": 1
+  },
+  {
+    "route": "/tools",
+    "initial_body_enquiry_actions": [
+      {
+        "text": "Ask SmartComms",
+        "mode": "project_help",
+        "source": "tools_hub"
+      }
+    ],
+    "table_count": 0
+  },
+  {
+    "route": "/tools/finance-check",
+    "initial_body_enquiry_actions": [],
+    "table_count": 0
+  },
+  {
+    "route": "/tools/funding-check",
+    "initial_body_enquiry_actions": [],
+    "table_count": 0
+  }
+]

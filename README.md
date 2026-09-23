@@ -38,3 +38,19 @@ npm run build
 **Agent instructions:** read `docs/agent-ready/SMARTCOMMS_PROFILE.md` first. It is the
 active authority map and policy record; `AUDIT_IMPLEMENTATION.md` and the
 `FREE-TOOLS-*.md` plans are historical.
+
+
+## Design and UX standard
+
+The current presentation standard is `docs/design/SMARTCOMMS_DESIGN_UX_STANDARD.md`.
+Use the shared components and page-family rules for future pages. The design
+release handoff is `DESIGN_UX_IMPLEMENTATION_HANDOFF.md`; page coverage and
+verification evidence are in `docs/design/`.
+
+Add this to normal verification:
+
+```bash
+npm run test:design-ux
+```
+
+Browser QA and the full Next.js build remain separate release gates.

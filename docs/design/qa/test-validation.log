@@ -1,0 +1,19 @@
+(node:11520) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/mnt/data/smartcomms_design_work/audit-loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS  valid full state round-trips with fixed numbers
+PASS  null speaker override preserved (not zero, not dropped)
+PASS  explicit false/0 monitoring and quantities survive (no || fallback collapse)
+PASS  unknown/extra nested fields are dropped, not stored
+PASS  negative / fractional / non-finite / over-max counts rejected
+PASS  invalid enums rejected (tier, package, twoWayMode, entryIntercom)
+PASS  speaker override 0 rejected (0 means zero speakers — not a valid override)
+PASS  control stations capped at 5, matching UI stepper
+PASS  two-way qty cannot exceed standard indoor rooms
+PASS  valid older cfg with omitted optional fields gets documented defaults
+PASS  default empty state is parseable but has no scope (not a completed run)
+PASS  hasScope true for any real scope (areas, entry, stations)
+PASS  interactive fixture unchanged: 10 rooms -> $14,072-$17,590
+PASS  malformed non-object / array inputs rejected
+
+validation tests: all 14 assertions passed

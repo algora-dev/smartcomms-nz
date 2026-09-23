@@ -1,0 +1,37 @@
+[
+  {
+    "file": "src/app/compare/schools/page.tsx",
+    "missing": [
+      "Scroll across the table to compare all columns."
+    ]
+  },
+  {
+    "file": "src/app/industries/aged-care-retirement-villages/page.tsx",
+    "missing": [
+      "Evidence:",
+      "Scroll across the table to compare all columns."
+    ]
+  },
+  {
+    "file": "src/app/industries/warehouses-manufacturing-industrial/page.tsx",
+    "missing": [
+      "Evidence:",
+      "Scroll across the table to compare all columns."
+    ]
+  },
+  {
+    "file": "src/components/pricing/PricingTool.tsx",
+    "missing": [
+      "Start a new estimate?",
+      "This will clear your current ballpark price. If you want to keep it, download the PDF estimate first — you will not be able to recover it after starting again.",
+      "Keep my estimate",
+      "Start new estimate"
+    ]
+  },
+  {
+    "file": "src/components/pricing/ResultView.tsx",
+    "missing": [
+      "Be put in touch with the right people →"
+    ]
+  }
+]

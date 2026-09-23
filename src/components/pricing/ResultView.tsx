@@ -183,9 +183,9 @@ export function ResultView({
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-[var(--sc-navy)]">Your ballpark installed price</h2>
-      <div className="mt-4 rounded-2xl border border-[var(--sc-border)] bg-white p-8 text-center shadow-sm">
-        <div className="text-4xl font-bold tracking-tight text-[var(--sc-navy)] sm:text-5xl">
+      <h1 tabIndex={-1} className="sc-tool-title outline-none">Your ballpark installed price</h1>
+      <div className="mt-4 rounded-2xl border border-[var(--sc-border)] bg-white p-5 text-center shadow-sm sm:p-8">
+        <div className="text-3xl font-bold leading-tight tracking-tight text-[var(--sc-navy)] sm:text-5xl">
           {formatNZD(estimate.low)} – {formatNZD(estimate.high)}{rangeSuffix}
           <span className="ml-2 align-middle text-sm font-normal text-[var(--sc-slate)]">ex GST</span>
         </div>
@@ -202,7 +202,7 @@ export function ResultView({
               track("pricing_connect_opened", { installation_tier: state.tier });
               setInquiry("connect");
             }}
-            className="w-full rounded-full bg-[var(--sc-teal-strong)] px-6 py-3 text-center text-sm font-semibold text-white hover:bg-[var(--sc-teal-strong-hover)] hover:shadow-lg transition-all sm:w-auto cursor-pointer"
+            className="sc-btn-help w-full sm:w-auto"
           >
             Want more information?
           </button>
@@ -211,7 +211,7 @@ export function ResultView({
       </div>
 
       {estimate.overThreshold && (
-        <div className="mt-4 rounded-xl border-l-4 border-[#bd4a1a] bg-[#fdf3ec] p-4 text-sm text-[#7a3413]">
+        <div className="mt-4 rounded-xl border-l-4 border-[var(--sc-warning-border)] bg-[var(--sc-warning-surface)] p-4 text-sm text-[var(--sc-warning-text)]">
           <strong>Large-system estimate:</strong> this configuration is beyond the standard range validated by the
           SmartComms calculator. Larger systems may require different control, network, amplification or licensing
           architecture, so this estimate may understate the final installed cost and a site-specific design is recommended.
@@ -263,7 +263,7 @@ export function ResultView({
             }}
             className="mt-2 block font-semibold text-[var(--sc-teal-strong)] underline decoration-2 underline-offset-2 hover:text-[var(--sc-blue-700)] cursor-pointer"
           >
-            Be put in touch with the right people →
+            Ask who can help with cabling →
           </button>
         </div>
       )}
@@ -312,15 +312,17 @@ export function ResultView({
         <button
           type="button"
           onClick={() => setBreakdownOpen((o) => !o)}
+          aria-expanded={breakdownOpen}
+          aria-controls="pricing-breakdown"
           className="flex w-full items-center justify-between p-4 text-left font-medium text-[var(--sc-navy)] hover:bg-[var(--sc-blue-50)] rounded-xl transition-colors cursor-pointer"
         >
           View estimate breakdown
           <span className="text-[var(--sc-slate)]">{breakdownOpen ? "▲" : "▼"}</span>
         </button>
         {breakdownOpen && (
-          <div className="border-t border-[var(--sc-border)] p-4">
+          <div id="pricing-breakdown" className="border-t border-[var(--sc-border)] p-4">
             {estimate.breakdown.map((l) => (
-              <div key={l.label} className="flex items-start justify-between gap-4 py-2 text-sm">
+              <div key={l.label} className="flex flex-col gap-1 py-3 text-sm sm:flex-row sm:justify-between sm:gap-4">
                 <div>
                   <div className="text-[var(--sc-charcoal)]">{l.label}</div>
                   {l.detail && <div className="text-xs text-[var(--sc-slate)]">{l.detail}</div>}
@@ -330,7 +332,7 @@ export function ResultView({
                 </div>
               </div>
             ))}
-            <div className="mt-2 flex justify-between border-t border-[var(--sc-border)] pt-3 text-sm font-semibold text-[var(--sc-navy)]">
+            <div className="mt-2 flex flex-wrap justify-between gap-2 border-t border-[var(--sc-border)] pt-3 text-sm font-semibold text-[var(--sc-navy)]">
               <span>Subtotal</span>
               <span>{formatNZD(estimate.low)} (range up to {formatNZD(estimate.high)}{rangeSuffix})</span>
             </div>
@@ -346,7 +348,7 @@ export function ResultView({
       <ToolCrossSell variant="pricing-to-funding" estimateLow={estimate.low} estimateHigh={estimate.high} industry={industry} />
 
       {/* Quote / assessment CTAs */}
-      <div className="mt-8 rounded-2xl bg-[var(--sc-navy)] p-8 text-center">
+      <div className="mt-8 rounded-2xl bg-[var(--sc-navy)] p-5 text-center sm:p-8">
         <div className="text-lg font-semibold text-white">Want a proper number?</div>
         <p className="mx-auto mt-2 max-w-md text-sm text-white/80">
           Send us this estimate and the SmartComms team can review the project information and suggest an appropriate provider to contact about a formal quote.
@@ -358,7 +360,7 @@ export function ResultView({
               track("pricing_quote_opened");
               setInquiry("quote");
             }}
-            className="w-full rounded-full bg-[var(--sc-teal-strong)] px-6 py-3 text-center text-sm font-semibold text-white hover:bg-[var(--sc-teal-strong-hover)] hover:shadow-lg transition-all sm:w-auto cursor-pointer"
+            className="sc-btn-help w-full sm:w-auto"
           >
             Get help with a formal quote
           </button>
@@ -386,14 +388,14 @@ export function ResultView({
         <button
           type="button"
           onClick={onEdit}
-          className="text-sm font-medium text-[var(--sc-slate)] hover:text-[var(--sc-navy)] cursor-pointer"
+          className="sc-text-action"
         >
           ← Change my answers
         </button>
         <button
           type="button"
           onClick={onRestart}
-          className="text-sm font-medium text-[var(--sc-slate)] hover:text-[var(--sc-navy)] cursor-pointer"
+          className="sc-text-action"
         >
           ↻ Start again
         </button>

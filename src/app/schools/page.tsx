@@ -36,6 +36,7 @@ export default function SchoolsPage() {
         tags={["School paging", "Bell systems", "Emergency announcements", "Intercom", "5YA funding"]}
         primaryCta={{ label: "Get a ballpark price", href: "/pricing-tool" }}
         secondaryCta={{ label: "Check school funding", href: "/tools/funding-check" }}
+        help={{"label": "Ask about your school project", "mode": "system_selection", "sourceTopic": "schools"}}
         reviewed={reviewedLabel("/schools")}
         note="Indicative pricing and funding guidance"
         breadcrumb={[{ name: "Schools", href: "/schools" }]}
@@ -51,8 +52,8 @@ export default function SchoolsPage() {
       <div className="h-8" />
 
       <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-14">
-        <div className="sc-container max-w-4xl">
-          <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">What a school system can provide</h2>
+        <div className="sc-container sc-container-reading">
+          <h2 className="sc-section-title">What a school system can provide</h2>
           <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {capabilities.map(([title, desc]) => (
               <div key={title} className="sc-card bg-white p-5">
@@ -64,8 +65,8 @@ export default function SchoolsPage() {
         </div>
       </section>
 
-      <section className="sc-container max-w-4xl py-14">
-        <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">How much can a school system cost?</h2>
+      <section className="sc-container sc-container-reading py-14">
+        <h2 className="sc-section-title">How much can a school system cost?</h2>
         <p className="mt-3 max-w-3xl text-[var(--sc-slate)]">
           The ranges below are planning examples generated from the same pricing model as the SmartComms calculator. They are designed to answer the early budgeting question, not replace a site-specific quote. Existing cabling, room count, outdoor coverage and intercom/emergency features can move a project materially within or beyond these bands.
         </p>
@@ -91,27 +92,28 @@ export default function SchoolsPage() {
         <p className="mt-4 text-xs leading-relaxed text-[var(--sc-slate)]">
           All values are indicative installed planning ranges, ex GST. They are based on the current SmartComms pricing methodology and standard assumptions, not a supplier quote or promise of final price.
         </p>
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-6 sc-actions">
           <Link href="/pricing-tool" className="sc-btn-primary">Price your own school</Link>
           <Link href="/pricing" className="sc-btn-secondary">See pricing methodology</Link>
         </div>
       </section>
 
       <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-14">
-        <div className="sc-container max-w-4xl">
-          <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">Could a state school fund the upgrade through 5YA?</h2>
+        <div className="sc-container sc-container-reading">
+          <h2 className="sc-section-title">Could a state school fund the upgrade through 5YA?</h2>
           <p className="mt-3 max-w-3xl leading-relaxed text-[var(--sc-slate)]">
             Potentially. The strongest argument is usually where the project creates, replaces or substantially upgrades fixed communications infrastructure and addresses a genuine property, coverage or safety need. The school&#39;s 10YPP, available 5YA allocation, Ministry ownership and project priorities still determine the actual pathway.
           </p>
-          <div className="mt-5 flex flex-wrap gap-3">
+          <div className="mt-5 sc-actions">
             <Link href="/tools/funding-check" className="sc-btn-primary">Check your project</Link>
             <Link href="/funding" className="sc-btn-secondary">Read the 5YA guide</Link>
           </div>
         </div>
       </section>
 
-      <section className="sc-container max-w-4xl py-14">
+      <section className="sc-container sc-container-reading py-14">
       <ContinuePlanning
+        help={{"title": "Ready to discuss your school’s requirements?", "description": "Tell us what needs to work better, what is already installed and your region.", "buttonLabel": "Ask about your school project", "mode": "system_selection", "sourceTopic": "schools"}}
         items={[
           { title: "NZ school requirements", desc: "Ministry design, cabling and procurement guidance for school PA and paging.", href: "/guides/nz-school-pa-paging-requirements" },
           { title: "Specification checklist", desc: "Define scope so every quote covers the same things and compares fairly.", href: "/guides/school-pa-specification-checklist" },
@@ -123,7 +125,7 @@ export default function SchoolsPage() {
       />
       </section>
 
-      <article className="sc-container max-w-3xl py-14 sc-prose">
+      <article className="sc-container sc-container-prose py-14 sc-prose">
         <h2>When should a school consider replacing its current system?</h2>
         <p>Common triggers include unreliable bells or paging, unsupported equipment, classrooms or outdoor areas that cannot hear announcements, poor speech intelligibility, expansion into new blocks, and emergency messages that do not reliably reach the entire site. If bells are the main concern, see our <Link href="/systems/school-bell-announcements">school bell system guide</Link>; for safety messaging, see <Link href="/systems/emergency-lockdown">emergency and lockdown communication</Link>.</p>
         <h2>Does a school need to replace everything?</h2>

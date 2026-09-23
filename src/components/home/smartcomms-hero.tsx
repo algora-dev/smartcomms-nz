@@ -199,7 +199,7 @@ export function SmartcommsHero() {
     <section className="sc-hero" ref={heroRef} aria-labelledby="sc-heading">
       <div className="sc-main">
         <div className="sc-copy">
-          <p className="sc-eyebrow">IP PAGING · SCHOOL BELLS · PA · INTERCOM · NEW ZEALAND</p>
+          <p className="sc-hero-eyebrow">IP PAGING · SCHOOL BELLS · PA · INTERCOM · NEW ZEALAND</p>
           <div className="sc-headline-space">
             <h1 id="sc-heading" className="sc-stable-heading">
               Plan the right IP paging, PA, bell or intercom <span>system.</span>
@@ -217,7 +217,7 @@ export function SmartcommsHero() {
             New Zealand guidance, comparisons and planning tools for IP paging, school bell, PA,
             intercom and integrated communication systems.
           </p>
-          <div className="sc-actions">
+          <div className="sc-hero-actions">
             <Link className="sc-button sc-button-primary" href="/pricing-tool">
               Estimate your system <span aria-hidden="true">↗</span>
             </Link>

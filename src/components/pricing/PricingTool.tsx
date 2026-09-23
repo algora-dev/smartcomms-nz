@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState, type ReactNode } from "react";
 import { industryFromParams, type IndustryContext } from "@/lib/industry-context";
 import type { AreaKey, CalculatorState, FeaturePackage, InstallationType } from "@/lib/pricing/types";
 import { calculateEstimate } from "@/lib/pricing/calculate";
@@ -9,6 +9,7 @@ import { formatK, formatNZD, pricingConfig } from "@/lib/pricing/config";
 import { defaultState } from "@/lib/pricing/presets";
 import { parseCalculatorState } from "@/lib/pricing/validation";
 import { ResultView } from "./ResultView";
+import { ConfirmationDialog } from "@/components/ui/ConfirmationDialog";
 
 const AREAS: { key: AreaKey; fineTunable: boolean }[] = [
   { key: "standardIndoor", fineTunable: false },
@@ -78,7 +79,7 @@ function Stepper({ value, onChange, min = 0, max = 99 }: { value: number; onChan
       <button
         type="button"
         aria-label="Decrease"
-        className="h-9 w-9 rounded-full border border-[var(--sc-border)] bg-white text-lg font-semibold text-[var(--sc-navy)] hover:bg-[var(--sc-blue-50)] hover:border-[var(--sc-teal)] transition-colors cursor-pointer disabled:opacity-40"
+        className="h-11 w-11 shrink-0 rounded-full border border-[var(--sc-border)] bg-white text-lg font-semibold text-[var(--sc-navy)] hover:bg-[var(--sc-blue-50)] hover:border-[var(--sc-teal)] transition-colors cursor-pointer disabled:opacity-40"
         disabled={value <= min}
         onClick={() => onChange(Math.max(min, value - 1))}
       >
@@ -88,7 +89,7 @@ function Stepper({ value, onChange, min = 0, max = 99 }: { value: number; onChan
       <button
         type="button"
         aria-label="Increase"
-        className="h-9 w-9 rounded-full border border-[var(--sc-border)] bg-white text-lg font-semibold text-[var(--sc-navy)] hover:bg-[var(--sc-blue-50)] hover:border-[var(--sc-teal)] transition-colors cursor-pointer disabled:opacity-40"
+        className="h-11 w-11 shrink-0 rounded-full border border-[var(--sc-border)] bg-white text-lg font-semibold text-[var(--sc-navy)] hover:bg-[var(--sc-blue-50)] hover:border-[var(--sc-teal)] transition-colors cursor-pointer disabled:opacity-40"
         disabled={value >= max}
         onClick={() => onChange(Math.min(max, value + 1))}
       >
@@ -98,30 +99,39 @@ function Stepper({ value, onChange, min = 0, max = 99 }: { value: number; onChan
   );
 }
 
+/** Click/tap/keyboard help: no hover/click race and no mobile-edge clipping. */
 function InfoDot({ text }: { text: string }) {
   const [open, setOpen] = useState(false);
-  return (
-    <span className="relative inline-block">
-      <button
-        type="button"
-        aria-label="More information"
-        className="ml-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full border border-[var(--sc-border)] text-xs text-[var(--sc-slate)] hover:bg-[var(--sc-blue-50)] hover:border-[var(--sc-teal)] hover:text-[var(--sc-navy)] transition-colors cursor-pointer"
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
-        onClick={() => setOpen((o) => !o)}
-      >
-        i
-      </button>
-      {open && (
-        <span className="absolute left-1/2 top-7 z-20 w-60 -translate-x-1/2 rounded-lg border border-[var(--sc-border)] bg-white p-3 text-xs leading-relaxed text-[var(--sc-slate)] shadow-lg">
-          {text}
-        </span>
-      )}
-    </span>
-  );
+  const [position, setPosition] = useState({ left: 16, top: 0, width: 240 });
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const id = useId();
+  useEffect(() => {
+    if (!open) return;
+    const dismiss = () => setOpen(false);
+    window.addEventListener("scroll", dismiss, true);
+    window.addEventListener("resize", dismiss);
+    return () => { window.removeEventListener("scroll", dismiss, true); window.removeEventListener("resize", dismiss); };
+  }, [open]);
+  function toggle() {
+    if (open) { setOpen(false); return; }
+    const rect = buttonRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const width = Math.min(240, window.innerWidth - 32);
+    setPosition({ width, left: Math.max(16, Math.min(rect.left - width / 2, window.innerWidth - width - 16)),
+      top: Math.max(16, Math.min(rect.bottom + 8, window.innerHeight - 150)) });
+    setOpen(true);
+  }
+  return <span className="inline-block align-middle">
+    <button ref={buttonRef} type="button" aria-label="More information" aria-expanded={open}
+      aria-controls={id} aria-describedby={open ? id : undefined}
+      className="ml-1 inline-flex h-6 w-6 items-center justify-center rounded-full border border-[var(--sc-border)] text-xs text-[var(--sc-slate)] hover:bg-[var(--sc-blue-50)]"
+      onClick={toggle} onBlur={() => setOpen(false)} onKeyDown={(event) => { if (event.key === "Escape") setOpen(false); }}>i</button>
+    {open && <span id={id} role="tooltip" style={position}
+      className="fixed z-30 rounded-lg border border-[var(--sc-border)] bg-white p-3 text-xs leading-relaxed text-[var(--sc-slate)] shadow-lg">{text}</span>}
+  </span>;
 }
 
-export function PricingTool() {
+export function PricingTool({ introduction }: { introduction?: ReactNode }) {
   const [state, setState] = useState<CalculatorState>(defaultState);
   const [step, setStep] = useState(0); // 0 installation, 1 areas, 2 features, 3 result
   const [fineTuneOpen, setFineTuneOpen] = useState(false);
@@ -196,6 +206,7 @@ export function PricingTool() {
     prevStepRef.current = step;
     if (first) return; // initial mount / deep-link hydration: don't hijack scroll
     scrollToolTo();
+    if (step === 3) resultRef.current?.querySelector<HTMLElement>("h1")?.focus({ preventScroll: true });
   }, [step]);
 
   const restartTool = () => {
@@ -296,13 +307,15 @@ export function PricingTool() {
 
   return (
     <div ref={toolTopRef} className="mx-auto max-w-3xl scroll-mt-6">
+      {step !== 3 && introduction}
+      <p role="status" className="sr-only">{step === 3 ? "Your pricing result is ready." : `Step ${step + 1} of 3`}</p>
       {cfgError && (
         <div className="mb-4 rounded-xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] px-4 py-3 text-sm text-[var(--sc-slate)]">
           That saved estimate link wasn&apos;t valid, so we&apos;ve started a fresh estimate below.
         </div>
       )}
       {/* progress */}
-      <div className="mb-8 flex items-center gap-2">
+      {step !== 3 && <div className="mb-8 flex items-center gap-2">
         {[1, 2, 3].map((n) => (
           <div key={n} className="flex flex-1 items-center gap-2">
             <div
@@ -319,12 +332,12 @@ export function PricingTool() {
             {n < 3 && <div className={`h-1 flex-1 rounded-full ${step >= n ? "bg-[var(--sc-teal)]" : "bg-[var(--sc-grey)]"}`} />}
           </div>
         ))}
-      </div>
+      </div>}
 
       {/* STEP 1 — installation */}
       {step === 0 && (
         <div>
-          <h2 className="text-2xl font-bold text-[var(--sc-navy)]">What best describes the site?</h2>
+          <h2 className="sc-section-title">What best describes the site?</h2>
           <div className="mt-6 grid gap-4">
             {TIER_CARDS.map((t) => (
               <button
@@ -348,7 +361,7 @@ export function PricingTool() {
       {/* STEP 2 — areas */}
       {step === 1 && (
         <div>
-          <h2 className="text-2xl font-bold text-[var(--sc-navy)]">Roughly how many areas need coverage?</h2>
+          <h2 className="sc-section-title">Roughly how many areas need coverage?</h2>
           <p className="mt-2 text-sm text-[var(--sc-slate)]">
             <strong>Not sure?</strong> A rough count is enough. You can refine the estimate later.
           </p>
@@ -380,7 +393,7 @@ export function PricingTool() {
             </div>
           </div>
           <div className="mt-8 flex items-center justify-between">
-            <button type="button" onClick={() => goToStep(0)} className="text-sm font-medium text-[var(--sc-slate)] hover:text-[var(--sc-navy)] cursor-pointer">← Back</button>
+            <button type="button" onClick={() => goToStep(0)} className="sc-text-action">← Back</button>
             <button
               type="button"
               disabled={totalAreas === 0}
@@ -391,7 +404,7 @@ export function PricingTool() {
                 });
                 goToStep(2);
               }}
-              className="rounded-full bg-[var(--sc-navy)] px-6 py-3 text-sm font-semibold text-white hover:bg-[var(--sc-blue-700)] hover:shadow-lg transition-all cursor-pointer disabled:opacity-40"
+              className="sc-btn-primary disabled:opacity-40"
             >
               Next step →
             </button>
@@ -402,7 +415,7 @@ export function PricingTool() {
       {/* STEP 3 — feature level + optional fine-tune */}
       {step === 2 && (
         <div>
-          <h2 className="text-2xl font-bold text-[var(--sc-navy)]">How capable do you want the system to be?</h2>
+          <h2 className="sc-section-title">How capable do you want the system to be?</h2>
           <div className="mt-6 grid gap-4">
             {PACKAGES.map((p) => (
               <button
@@ -442,13 +455,15 @@ export function PricingTool() {
                 if (!fineTuneOpen) track("pricing_customisation_opened");
                 setFineTuneOpen((o) => !o);
               }}
+              aria-expanded={fineTuneOpen}
+              aria-controls="pricing-fine-tune"
               className="flex w-full items-center justify-between p-4 text-left font-medium text-[var(--sc-navy)] hover:bg-[var(--sc-blue-50)] rounded-xl transition-colors cursor-pointer"
             >
               Fine-tune this estimate (optional)
               <span className="text-[var(--sc-slate)]">{fineTuneOpen ? "▲" : "▼"}</span>
             </button>
             {fineTuneOpen && (
-              <div className="space-y-6 border-t border-[var(--sc-border)] p-4">
+              <div id="pricing-fine-tune" className="space-y-6 border-t border-[var(--sc-border)] p-4">
                 {/* two-way */}
                 <div>
                   <div className="text-sm font-medium text-[var(--sc-charcoal)]">Two-way room call buttons</div>
@@ -458,7 +473,8 @@ export function PricingTool() {
                         key={mode}
                         type="button"
                         onClick={() => setState((s) => ({ ...s, fineTune: { ...s.fineTune, twoWayMode: mode } }))}
-                        className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer ${
+                        aria-pressed={state.fineTune.twoWayMode === mode}
+                        className={`min-h-11 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer ${
                           state.fineTune.twoWayMode === mode
                             ? "border-[var(--sc-navy)] bg-[var(--sc-navy)] text-white"
                             : "border-[var(--sc-border)] bg-white text-[var(--sc-slate)] hover:border-[var(--sc-teal)]"
@@ -485,7 +501,8 @@ export function PricingTool() {
                           key={t}
                           type="button"
                           onClick={() => setState((s) => ({ ...s, fineTune: { ...s.fineTune, entryIntercom: t } }))}
-                          className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer ${
+                          aria-pressed={state.fineTune.entryIntercom === t}
+                          className={`min-h-11 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer ${
                             state.fineTune.entryIntercom === t
                               ? "border-[var(--sc-navy)] bg-[var(--sc-navy)] text-white"
                               : "border-[var(--sc-border)] bg-white text-[var(--sc-slate)] hover:border-[var(--sc-teal)]"
@@ -523,7 +540,7 @@ export function PricingTool() {
           </div>
 
           <div className="mt-8 flex items-center justify-between">
-            <button type="button" onClick={() => goToStep(1)} className="text-sm font-medium text-[var(--sc-slate)] hover:text-[var(--sc-navy)] cursor-pointer">← Back</button>
+            <button type="button" onClick={() => goToStep(1)} className="sc-text-action">← Back</button>
             <button
               type="button"
               onClick={() => {
@@ -559,49 +576,12 @@ export function PricingTool() {
         </div>
       )}
 
-      {/* Restart confirmation */}
-      {confirmRestart && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 backdrop-blur-sm"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="restart-modal-title"
-          onClick={() => setConfirmRestart(false)}
-        >
-          <div
-            className="w-full max-w-md rounded-2xl border border-[var(--sc-border)] bg-white p-7 shadow-[0_24px_64px_rgba(11,45,91,0.25)]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h2 id="restart-modal-title" className="text-lg font-semibold text-[var(--sc-navy)]">
-              Start a new estimate?
-            </h2>
-            <p className="mt-3 text-sm leading-6 text-[var(--sc-slate)]">
-              This will clear your current ballpark price. If you want to keep it,
-              download the PDF estimate first — you will not be able to recover it after
-              starting again.
-            </p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-end">
-              <button
-                type="button"
-                onClick={() => setConfirmRestart(false)}
-                className="w-full rounded-full border border-[var(--sc-navy)]/30 px-6 py-3 text-sm font-semibold text-[var(--sc-navy)] transition-all hover:bg-[var(--sc-blue-50)] sm:w-auto cursor-pointer"
-              >
-                Keep my estimate
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  track("pricing_restart_confirmed");
-                  restartTool();
-                }}
-                className="w-full rounded-full bg-[var(--sc-teal-strong)] px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-[var(--sc-teal-strong-hover)] hover:shadow-lg sm:w-auto cursor-pointer"
-              >
-                Start new estimate
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Restart confirmation changes presentation only; the original reset function is retained. */}
+      <ConfirmationDialog open={confirmRestart} title="Start a new estimate?"
+        description="This will clear your current ballpark price. If you want to keep it, download the PDF estimate first — you will not be able to recover it after starting again."
+        cancelLabel="Keep my estimate" confirmLabel="Start new estimate"
+        onCancel={() => setConfirmRestart(false)}
+        onConfirm={() => { track("pricing_restart_confirmed"); restartTool(); }} />
 
       {/* sticky running range */}
       {showSticky && (

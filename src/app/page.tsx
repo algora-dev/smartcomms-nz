@@ -138,7 +138,7 @@ export default function HomePage() {
         <Reveal>
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">Free planning tools</p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-[var(--sc-blue-900)]">
+            <h2 className="sc-section-title mt-2">
               Start with cost, funding or finance
             </h2>
             <p className="mt-3 text-lg text-[var(--sc-slate)]">
@@ -152,7 +152,7 @@ export default function HomePage() {
               <p className="mt-2 text-[var(--sc-slate)]">
                 Choose the site situation, areas to cover and feature level to get an indicative installed price range.
               </p>
-              <div className="mt-5 flex flex-wrap gap-3">
+              <div className="mt-5 sc-actions">
                 <Link href="/pricing-tool" className="sc-btn-primary">Get a ballpark price</Link>
                 <Link href="/pricing" className="sc-btn-secondary">See how pricing works</Link>
               </div>
@@ -163,7 +163,7 @@ export default function HomePage() {
               <p className="mt-2 text-[var(--sc-slate)]">
                 See whether fixed paging, bells, emergency communication, intercoms or cabling may have a potential Ministry 5YA / 10YPP funding pathway.
               </p>
-              <div className="mt-5 flex flex-wrap gap-3">
+              <div className="mt-5 sc-actions">
                 <Link href="/tools/funding-check" className="sc-btn-primary">Check potential funding</Link>
                 <Link href="/funding" className="sc-btn-secondary">Read the funding guide</Link>
               </div>
@@ -174,7 +174,7 @@ export default function HomePage() {
               <p className="mt-2 text-[var(--sc-slate)]">
                 If paying the full project cost upfront is not ideal, see whether equipment finance or leasing is worth discussing.
               </p>
-              <div className="mt-5 flex flex-wrap gap-3">
+              <div className="mt-5 sc-actions">
                 <Link href="/tools/finance-check" className="sc-btn-primary">Check finance options</Link>
                 <Link href="/financing" className="sc-btn-secondary">How finance can work</Link>
               </div>
@@ -186,7 +186,7 @@ export default function HomePage() {
       <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)]">
         <div className="sc-container py-16">
           <Reveal>
-            <h2 className="text-3xl font-bold tracking-tight text-[var(--sc-blue-900)]">
+            <h2 className="sc-section-title">
               What these systems can cover
             </h2>
             <p className="mt-3 max-w-3xl text-lg text-[var(--sc-slate)]">
@@ -210,11 +210,11 @@ export default function HomePage() {
         <Reveal>
           <div className="rounded-2xl border border-[var(--sc-border)] bg-white p-7 sm:p-9">
             <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">For New Zealand schools</p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-[var(--sc-blue-900)]">Cost, system design and funding in one place</h2>
+            <h2 className="sc-section-title mt-2">Cost, system design and funding in one place</h2>
             <p className="mt-3 max-w-3xl text-lg text-[var(--sc-slate)]">
               The school guide brings together the questions schools usually research separately: what a modern paging and bell system can do, what a small, medium or large project may cost, and whether fixed communications work has a potential 5YA pathway.
             </p>
-            <div className="mt-5 flex flex-wrap gap-3">
+            <div className="mt-5 sc-actions">
               <TrackedLink href="/schools" event="school_guide_cta_clicked" payload={{ source: "homepage_school_band" }} className="sc-btn-primary">Explore school systems</TrackedLink>
               <TrackedLink href="/pricing" event="pricing_guide_cta_clicked" payload={{ source: "homepage_school_band" }} className="sc-btn-secondary">See indicative school costs</TrackedLink>
             </div>
@@ -224,7 +224,7 @@ export default function HomePage() {
 
       <section className="sc-container py-16">
         <Reveal>
-          <h2 className="text-3xl font-bold tracking-tight text-[var(--sc-blue-900)]">Built to make the next step easier</h2>
+          <h2 className="sc-section-title">Built to make the next step easier</h2>
           <p className="mt-3 max-w-3xl text-lg text-[var(--sc-slate)]">
             Whether you are researching a future project or already talking to an installer, the site is designed to help you understand the architecture, budget, funding possibilities and questions worth resolving before a final quote.
           </p>

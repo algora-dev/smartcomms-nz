@@ -10,8 +10,8 @@ export const metadata: Metadata = buildMetadata({
 
 export default function MethodologyPage() {
   return (
-    <div className="sc-container max-w-3xl py-16 sc-prose">
-      <h1 className="text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">Research methodology</h1>
+    <div className="sc-container sc-container-prose py-16 sc-prose">
+      <h1 className="sc-title">Research methodology</h1>
       <p className="mt-4 text-lg text-[var(--sc-slate)]">
         SmartComms NZ distinguishes between verified rules, indicative assumptions and formal project information so users can see how much confidence to place in a claim.
       </p>

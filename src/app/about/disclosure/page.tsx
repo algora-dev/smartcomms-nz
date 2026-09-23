@@ -10,8 +10,8 @@ export const metadata: Metadata = buildMetadata({
 
 export default function DisclosurePage() {
   return (
-    <div className="sc-container max-w-3xl py-16 sc-prose">
-      <h1 className="text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">Commercial relationships</h1>
+    <div className="sc-container sc-container-prose py-16 sc-prose">
+      <h1 className="sc-title">Commercial relationships</h1>
       <p className="mt-4 text-lg text-[var(--sc-slate)]">
         SmartComms NZ is an information and planning resource operated by T3 Labs. Where a user wants a formal quote, installation or site assessment, SmartComms may recommend one or more suitable providers and give the user those providers&apos; public contact details.
       </p>

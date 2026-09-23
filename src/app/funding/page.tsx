@@ -1,5 +1,9 @@
+import { PageContents } from "@/components/content/PageContents";
+import { ProjectHelpPanel } from "@/components/content/ProjectHelpPanel";
+import { ProjectHelpLauncher } from "@/components/enquiry/ProjectHelpLauncher";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { TableRegion } from "@/components/ui/TableRegion";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
@@ -54,27 +58,28 @@ export default function FundingPage() {
         { name: "SmartComms NZ", url: site.url },
         { name: "Funding", url: `${site.url}/funding` },
       ])) }} />
-      <div className="sc-container max-w-4xl py-16">
+      <div className="sc-container sc-container-reading py-16">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">New Zealand state schools</p>
-          <h1 className="mt-2 text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">
+          <h1 className="sc-title mt-2">
             5YA funding for school paging, PA, bell and communications systems
           </h1>
-          <p className="mt-4 text-lg leading-relaxed text-[var(--sc-slate)]">
+          <p className="sc-lead mt-4">
             A school that needs a fixed communications upgrade may have a funding pathway through its Ministry 5 Year Agreement (5YA) and 10 Year Property Plan (10YPP). The opportunity is strongest where the work creates, replaces or substantially upgrades fixed communications infrastructure.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-6 sc-actions">
             <Link href="/tools/funding-check" className="sc-btn-primary">Check your project</Link>
             <Link href="/pricing-tool" className="sc-btn-secondary">Estimate project cost</Link>
           </div>
+          <ProjectHelpLauncher mode="funding_help" sourceTopic="funding_guide" buttonLabel="Ask about your project pathway" className="sc-text-action mt-3" />
           <p className="mt-4 text-xs text-[var(--sc-slate)]">Last reviewed {reviewed}. This page is general guidance, not a funding approval.</p>
         </div>
       </div>
 
       <section className="border-b border-[var(--sc-border)] bg-white">
-        <div className="sc-container max-w-4xl py-10">
+        <div className="sc-container sc-container-reading py-10">
           <div className="rounded-2xl border-2 border-[var(--sc-blue-700)] bg-[var(--sc-blue-50)] p-6 md:p-8">
-            <h2 className="text-xl font-bold text-[var(--sc-blue-900)]">2026 update: 5YA allocations increased for new funding cycles</h2>
+            <h2 id="funding-update" className="text-xl font-bold text-[var(--sc-blue-900)]">2026 update: 5YA allocations increased for new funding cycles</h2>
             <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">
               From 1 July 2026, the Ministry increased the 5YA base funding rate from $30 to $45 per square metre and doubled the minimum allocation from $45,000 to $90,000 for schools beginning a new 5YA funding cycle. The calculation was also simplified (Catch-Up and Top-Up funding were removed).
             </p>
@@ -84,7 +89,7 @@ export default function FundingPage() {
             <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">
               If your school is entering a new cycle, it may be a useful time to reassess fixed communications infrastructure that has previously been deferred.
             </p>
-            <div className="mt-4 flex flex-wrap gap-3">
+            <div className="mt-4 sc-actions">
               <Link href="/tools/funding-check" className="sc-btn-primary">Check your project</Link>
               <Link href="/pricing-tool" className="sc-btn-secondary">Estimate project cost</Link>
             </div>
@@ -96,8 +101,8 @@ export default function FundingPage() {
       </section>
 
       <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)]">
-        <div className="sc-container max-w-4xl py-14">
-          <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">The short version</h2>
+        <div className="sc-container sc-container-reading py-14">
+          <h2 className="sc-section-title">The short version</h2>
           <div className="mt-6 grid gap-5 md:grid-cols-3">
             <div className="sc-card bg-white p-5">
               <h3 className="font-semibold text-[var(--sc-blue-900)]">1. Identify the fixed infrastructure</h3>
@@ -115,7 +120,7 @@ export default function FundingPage() {
         </div>
       </section>
 
-      <article className="sc-container max-w-3xl py-14 sc-prose">
+      <article className="sc-container sc-container-prose py-14 sc-prose">
         <h2>Why these systems can fit the 5YA framework</h2>
         <p>
           Ministry property guidance distinguishes fixed ICT and communications infrastructure from movable equipment. That gives permanently installed paging, bell, intercom and communications infrastructure a credible capital pathway when the project is a genuine replacement, substantial upgrade or new fixed asset at an existing state school.
@@ -124,19 +129,19 @@ export default function FundingPage() {
           Ministry school-design guidance also recognises public-address and safety-warning functions including school bells, voiced announcements, paging and emergency communication. That does not make every project automatically funded, but it provides a strong basis for the school to put the need through its property-planning process.
         </p>
 
-        <h2>Published New Zealand school funding examples</h2>
+        <h2 id="funding-examples">Published New Zealand school funding examples</h2>
         <p>
           Public school financial reports provide useful real-world evidence that bell, paging and PA work has been funded through Ministry capital programmes. These examples do not guarantee that another school will receive funding, but they show that this type of communications infrastructure has been accepted as capital work in practice.
         </p>
-        <div className="not-prose my-7 overflow-x-auto rounded-2xl border border-[var(--sc-border)] bg-white">
-          <table className="w-full min-w-[680px] text-left text-sm">
+        <TableRegion label="Published NZ school funding examples">
+          <table className="sc-standard-table w-full min-w-[680px] text-left text-sm">
             <thead className="bg-[var(--sc-blue-50)] text-[var(--sc-blue-900)]">
               <tr>
-                <th className="px-4 py-3 font-semibold">School</th>
-                <th className="px-4 py-3 font-semibold">Published project</th>
-                <th className="px-4 py-3 font-semibold">Published amount</th>
-                <th className="px-4 py-3 font-semibold">Funding route</th>
-                <th className="px-4 py-3 font-semibold">Source</th>
+                <th scope="col" className="px-4 py-3 font-semibold">School</th>
+                <th scope="col" className="px-4 py-3 font-semibold">Published project</th>
+                <th scope="col" className="px-4 py-3 font-semibold">Published amount</th>
+                <th scope="col" className="px-4 py-3 font-semibold">Funding route</th>
+                <th scope="col" className="px-4 py-3 font-semibold">Source</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[var(--sc-border)] text-[var(--sc-slate)]">
@@ -163,7 +168,7 @@ export default function FundingPage() {
               </tr>
             </tbody>
           </table>
-        </div>
+        </TableRegion>
         <p>
           The first two examples are especially relevant because the schools&#39; own audited or annual financial statements explicitly name the projects as 5YA PA/bell upgrades. Greenhithe is included as a separate example of bell/paging work funded through another Ministry capital programme, the School Investment Package (SIP).
         </p>
@@ -182,13 +187,13 @@ export default function FundingPage() {
           <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">
             Your own project still needs to fit your property plan, available allocation and Ministry process. The useful next step is to identify the fixed-infrastructure components and build a clear project case. Our <Link href="/guides/nz-school-pa-paging-requirements">NZ school PA and paging requirements guide</Link> covers the Ministry context, and the <Link href="/guides/school-pa-specification-checklist">specification checklist</Link> helps you prepare evidence and scope that can be compared like-for-like.
           </p>
-          <div className="mt-4 flex flex-wrap gap-3">
+          <div className="mt-4 sc-actions">
             <Link href="/tools/funding-check" className="sc-btn-primary">Check your project</Link>
             <Link href="/pricing-tool" className="sc-btn-secondary">Estimate project cost</Link>
           </div>
         </div>
 
-        <h2>What tends to have the strongest funding fit</h2>
+        <h2 id="funding-fit">What tends to have the strongest funding fit</h2>
         <table>
           <thead>
             <tr><th>Project component</th><th>Initial fit</th></tr>
@@ -217,7 +222,7 @@ export default function FundingPage() {
           <strong>Maintenance-only work cannot be paid from 5YA.</strong> Ministry guidance is explicit that 5YA projects are capital projects and 5YA funding cannot be used for maintenance. If inspection shows that the real scope is replacement of an existing asset or a substantial capital upgrade, that separately defined project may be appropriate to review through the 5YA / 10YPP process, subject to the school&apos;s property circumstances and Ministry rules. Do not relabel ordinary maintenance as a capital project merely to make it fit.
         </p>
 
-        <h2>Who actually handles the funding process?</h2>
+        <h2 id="funding-process">Who actually handles the funding process?</h2>
         <p>
           The supplier can help inspect the system, document the problem, define the likely scope and prepare an indicative budget. The school still owns the property decision. In practice, the school then discusses the project with its Property Advisor and 10YPP consultant so they can confirm the correct property pathway, available funding and procurement process.
         </p>
@@ -245,7 +250,7 @@ export default function FundingPage() {
           <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">
             The funding check identifies which parts of a proposed system appear to have the strongest 5YA fit and what would still need to be confirmed before the school progresses the project.
           </p>
-          <div className="mt-4 flex flex-wrap gap-3">
+          <div className="mt-4 sc-actions">
             <Link href="/tools/funding-check" className="sc-btn-primary">Check potential funding</Link>
             <Link href="/pricing-tool" className="sc-btn-secondary">Estimate the likely cost</Link>
           </div>
@@ -265,8 +270,8 @@ export default function FundingPage() {
       </article>
 
       <section className="border-t border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-14">
-        <div className="sc-container max-w-3xl">
-          <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">Funding FAQs</h2>
+        <div className="sc-container sc-container-prose">
+          <h2 id="funding-questions" className="sc-section-title">Funding FAQs</h2>
           <div className="mt-6 space-y-4">
             {faqs.map((faq) => (
               <div key={faq.q} className="rounded-xl border border-[var(--sc-border)] bg-white p-5">
@@ -292,6 +297,9 @@ export default function FundingPage() {
           }),
         }}
       />
+      <div className="sc-container sc-container-reading pb-12">
+        <ProjectHelpPanel {...{"title": "Need help defining your school’s project?", "description": "Tell us what needs replacing or improving and which part of the scope or funding pathway is unclear.", "buttonLabel": "Ask about your project pathway", "mode": "funding_help", "sourceTopic": "funding_guide"}} />
+      </div>
     </div>
   );
 }

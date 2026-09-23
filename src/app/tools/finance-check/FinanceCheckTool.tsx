@@ -185,6 +185,7 @@ export function FinanceCheckTool() {
   // silently cancelled the scroll and left the user at the bottom.
   useEffect(() => {
     scrollToPageTop();
+    if (resultReady) resultRef.current?.querySelector<HTMLElement>("h1")?.focus({ preventScroll: true });
   }, [resultReady, screen]);
 
   const canContinue =
@@ -226,7 +227,7 @@ export function FinanceCheckTool() {
           <div className="mt-3">
             <span className="inline-flex rounded-full bg-[var(--sc-navy)] px-4 py-1.5 text-sm font-semibold text-white">{result.eyebrow}</span>
           </div>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-[var(--sc-blue-900)] md:text-4xl">{result.headline}</h2>
+          <h1 tabIndex={-1} className="sc-tool-title mt-4 outline-none">{result.headline}</h1>
           <p className="mt-4 max-w-2xl leading-relaxed text-[var(--sc-slate)]">{result.body}</p>
 
           <div className="mt-6">
@@ -280,7 +281,7 @@ export function FinanceCheckTool() {
           </div>
         )}
 
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-6 sc-actions">
           <button type="button" onClick={restart} className="text-sm font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">Start again</button>
           <Link href="/financing" className="text-sm font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">Read the finance & leasing guide</Link>
         </div>
@@ -303,7 +304,7 @@ export function FinanceCheckTool() {
       {!resultReady && (
         <div className="mb-9">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">New Zealand equipment finance</p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-[var(--sc-blue-900)] sm:text-4xl">
+          <h1 className="sc-tool-title mt-2">
             Is finance or leasing worth exploring for your communications project?
           </h1>
           <p className="mt-3 text-[var(--sc-slate)]">
@@ -326,7 +327,7 @@ export function FinanceCheckTool() {
 
       {screen === 0 && (
         <div>
-          <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">What type of organisation is this for?</h2>
+          <h2 className="sc-section-title ">What type of organisation is this for?</h2>
           <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">
             This helps us keep the result relevant and, if you enquire, point you towards the right type of finance specialist.
           </p>
@@ -352,7 +353,7 @@ export function FinanceCheckTool() {
 
       {screen === 1 && (
         <div>
-          <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">Roughly how much finance might the project need?</h2>
+          <h2 className="sc-section-title ">Roughly how much finance might the project need?</h2>
           <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">
             A rough range is enough. If you do not know yet, tell us approximately how many areas the system needs to cover.
           </p>
@@ -402,7 +403,7 @@ export function FinanceCheckTool() {
 
       {screen === 2 && (
         <div>
-          <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">What would feel manageable within your budget?</h2>
+          <h2 className="sc-section-title ">What would feel manageable within your budget?</h2>
           <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">
             This is not an affordability test. It simply gives a finance specialist a better starting point for the conversation.
           </p>

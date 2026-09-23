@@ -89,6 +89,7 @@ export default function NetworkReadinessPage() {
         tags={["Cat6 cabling", "PoE", "Network switches", "SIP", "Multicast", "VLANs"]}
         primaryCta={{ label: "Estimate an IP paging system", href: "/pricing-tool" }}
         secondaryCta={{ label: "Read the IP paging guide", href: "/systems/ip-paging-pa" }}
+        help={{"label": "Ask about network readiness", "mode": "cabling_help", "sourceTopic": "network_readiness"}}
         reviewed={reviewedLabel("/guides/ip-paging-network-readiness")}
         note="For school IT teams and MSPs"
         breadcrumb={[{ name: "Guides", href: "/guides" }, { name: "IP Paging Network Readiness" }]}
@@ -101,7 +102,7 @@ export default function NetworkReadinessPage() {
           { label: "Next step", value: "Identify gaps before requesting a final system quote" },
         ]}
       />
-      <article className="sc-container max-w-[800px] py-8 sc-prose">
+      <article className="sc-container sc-container-prose py-8 sc-prose">
       {CHECKS.map((section) => (
         <section key={section.title} className="sc-card p-6 not-prose">
           <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">{section.title}</h2>
@@ -134,9 +135,10 @@ export default function NetworkReadinessPage() {
         <Link href="/guides/nz-school-pa-paging-requirements">requirements guide</Link>.
       </p>
       <ContinuePlanning
+        help={{"title": "Unsure about the network or cabling?", "description": "Share the questions from this checklist that you need help resolving for your site.", "buttonLabel": "Ask about network readiness", "mode": "cabling_help", "sourceTopic": "network_readiness"}}
         items={[
           { title: "IP paging architecture guide", desc: "How Audio over IP, PoE endpoints and zoning actually work.", href: "/systems/ip-paging-pa" },
-          { title: "Compare paging platforms", desc: "Which platforms fit which networks, budgets and support models.", href: "/compare/schools" },
+          { title: "Compare paging platforms", desc: "Which platforms fit which networks, budgets and support models.", href: "/compare" },
           { title: "School systems overview", desc: "Features, indicative costs and upgrade decisions for schools.", href: "/schools" },
         ]}
       />

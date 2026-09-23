@@ -1,0 +1,246 @@
+{
+  "baseline_zip_sha256": "114042ad86f60e03db0f862567e056beab5ab46ce0396fa2124c6dd0b7bc7aa6",
+  "protected_files_identical": 40,
+  "protected": [
+    {
+      "path": "next.config.ts",
+      "sha256": "a972c4f0ffa6dd714e7909b02d1ac19d2f2fe3d01f191efd2c5054bd6f142ec1"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "2ff6105ad75112936b943d5d47695d2831b5497ace9d3c504aaca87a3b9a975f"
+    },
+    {
+      "path": "public/brand/branding-pack.png",
+      "sha256": "f75c25fb0291d5eb7426ad93e99e82e997d52dcfe94612db37621810967a024f"
+    },
+    {
+      "path": "public/brand/scnz-logo-colour-trans.png",
+      "sha256": "48710526d8e41d1f78ee1576f2acaf9434b033b349d8fc9803aec21c4dd17d17"
+    },
+    {
+      "path": "public/brand/scnz-logo-colour.png",
+      "sha256": "0428eb45ecfdd87dde98bb57126633e2ff0c6770da94b39a3e1e2b9caf919d9f"
+    },
+    {
+      "path": "public/brand/scnz-logo-mono.png",
+      "sha256": "ea09aa48a92d0a2eea1abe36b21579bb27659a3a4c698641c99e74c742b7c20a"
+    },
+    {
+      "path": "public/e5f35406b43b495b4dacb3ea8957792b.txt",
+      "sha256": "bbae8c62b4e599808fa74d89e33a7deaff109a1bb65a9861bcb97728af09d358"
+    },
+    {
+      "path": "public/file.svg",
+      "sha256": "2b67812c325c199a02536cdbeea0c593a72f707d323b72ee3e08dbab06753bd4"
+    },
+    {
+      "path": "public/globe.svg",
+      "sha256": "b614b9bf183925957661ac851498fe1d8029fd43a62fbfed86f9e2624a57e7cf"
+    },
+    {
+      "path": "public/next.svg",
+      "sha256": "55995dfad6ecb4945a1e856ddca03c5e16aa5bf13fd21b4df6a74ae79357bcfc"
+    },
+    {
+      "path": "public/og-image.png",
+      "sha256": "391e8deab635c4168fed40a0a617d3638b6a3afb83967148a254304ff65fc3a4"
+    },
+    {
+      "path": "public/vercel.svg",
+      "sha256": "f081337b2fee635b455b63275406a3e7f39d6a014e25ad90dab5a67e62a12ac4"
+    },
+    {
+      "path": "public/window.svg",
+      "sha256": "644768c4aaeb4767bce293344eeb0c125fb804a94d801440424072202d85e3a1"
+    },
+    {
+      "path": "src/app/api/business/v1/assessments/route.ts",
+      "sha256": "dbefe96f59b64ad99c579f2a92e3e73ad913ee9ae11beeb9490d7b5929f54941"
+    },
+    {
+      "path": "src/app/api/inquiry/route.ts",
+      "sha256": "ad3a60b210422c89da4dab30f174b516a25654a0a6daec59891e016b6376cf16"
+    },
+    {
+      "path": "src/app/api/pricing-tool/output-log/route.ts",
+      "sha256": "67cd9717548f12fca1f429535f44e675a16176d170a26de62f75ca5546eee7d7"
+    },
+    {
+      "path": "src/app/robots.ts",
+      "sha256": "4b4a436e4a03ddd2c5083a1cea66f5afb28418415b8f1b82514a6713c3d80ee7"
+    },
+    {
+      "path": "src/app/sitemap.ts",
+      "sha256": "1b07745c4e8ee0b6ea9245cb220233203e5c361a264ef000c75a9fcf4fc7f715"
+    },
+    {
+      "path": "src/lib/analytics.ts",
+      "sha256": "1fb5a86eb1616d68b07a072e12e053b429dbaa9297223287df045bd6dba4e03d"
+    },
+    {
+      "path": "src/lib/attribution.ts",
+      "sha256": "aa87733dd2489bac063c825d6fb176eff67e27a31b23b37f3fb3de8690197e36"
+    },
+    {
+      "path": "src/lib/business-core/assess-pricing.ts",
+      "sha256": "7469e95c77947a1b99194b84c683476242bd04573767df9c65b5c7bb1307e831"
+    },
+    {
+      "path": "src/lib/business-core/contracts.ts",
+      "sha256": "53ec7db6a03d9042f604cabb12cb87392716831952c7fe8313e9d5ec70a05b3c"
+    },
+    {
+      "path": "src/lib/content-meta.ts",
+      "sha256": "8e6f9bb8bcfc128c14828de6e10869ef5776fb4935838cb0c20d6b3cb1c8b1ed"
+    },
+    {
+      "path": "src/lib/content/aged-care-example.ts",
+      "sha256": "dc44555836e4a1b96b4a70da8ac0a1f8888e568ff59d78c35228d8a670029e32"
+    },
+    {
+      "path": "src/lib/content/aged-care-guide.ts",
+      "sha256": "e24b6e01e2a5a13546e30b425ea86ea7ebadbbdacd69218c50b78869f8245d19"
+    },
+    {
+      "path": "src/lib/content/industrial-example.ts",
+      "sha256": "3e090956235db93b096e46af28fd1c2ca0a06e622fbe88f99574d6c6606d7632"
+    },
+    {
+      "path": "src/lib/content/industrial-guide.ts",
+      "sha256": "48c112db302ae8fd66ea4428eca9702593768f846d9fa52cf6c1cc9463cd8032"
+    },
+    {
+      "path": "src/lib/finance-check/config.ts",
+      "sha256": "043dc3a5311f23ef76bc48ea54b0e1bce847b1d25a663104a934cf099739a1e0"
+    },
+    {
+      "path": "src/lib/finance-check/engine.ts",
+      "sha256": "dfb94fc4bb1c174327cedd088172d5369625388ecb0a82f691daa973f1eba4fc"
+    },
+    {
+      "path": "src/lib/funding-check/config.ts",
+      "sha256": "2bebecbfd0020e740986001f025d6604e401b103cbfe70b4805be9af4759cd95"
+    },
+    {
+      "path": "src/lib/funding-check/engine.ts",
+      "sha256": "c37ceee6d19835c52290a6c260084e58fa234c596a50fc4e4849814d90a02558"
+    },
+    {
+      "path": "src/lib/industry-context.ts",
+      "sha256": "fac7322230b8cfd0d2967e9f79b1ee3485ef0e797f594e39ed1eccb3607464b2"
+    },
+    {
+      "path": "src/lib/pricing/calculate.ts",
+      "sha256": "8c7e4b73e2a0b674336e572e57964645b4465eb0276bbf876f7c3273e31141a0"
+    },
+    {
+      "path": "src/lib/pricing/config.ts",
+      "sha256": "9f220f6f2bcb362db5ead4c7a87a2ec6255fe6091bf9aacbfdd4baf20f10197a"
+    },
+    {
+      "path": "src/lib/pricing/presets.ts",
+      "sha256": "9b78178860695ba64d8796336d7cc0e458d84835761b288fed4647cb7a5db1e9"
+    },
+    {
+      "path": "src/lib/pricing/school-bands.ts",
+      "sha256": "5474c04bf346ce8323c916adbbf28143f3b98972f8890eb6a7d2815d17b60b83"
+    },
+    {
+      "path": "src/lib/pricing/types.ts",
+      "sha256": "34680aa303266cfc5177f4ca4ffa5f381a32f8e0c6e0ece9a48a751b834671ef"
+    },
+    {
+      "path": "src/lib/pricing/validation.ts",
+      "sha256": "65b25571377fa56daff8da9e40862cdf73cd6bf181eebc8361e59c159caf15d9"
+    },
+    {
+      "path": "src/lib/seo.ts",
+      "sha256": "3172daeee751517cfbaf862ab2033adc3d12ffaadb54cd733c3ae39c0989b251"
+    },
+    {
+      "path": "src/lib/site.ts",
+      "sha256": "a0b50d8b74c6aafc0b46ba022e52cc9bf0842259385f48e0ddb6ed4cff7261a5"
+    }
+  ],
+  "deleted_files": [],
+  "changed": [
+    "AGENTS.md",
+    "README.md",
+    "package.json",
+    "src/app/about/disclosure/page.tsx",
+    "src/app/about/editorial-policy/page.tsx",
+    "src/app/about/methodology/page.tsx",
+    "src/app/about/page.tsx",
+    "src/app/compare/page.tsx",
+    "src/app/compare/schools/page.tsx",
+    "src/app/contact/page.tsx",
+    "src/app/financing/page.tsx",
+    "src/app/funding/page.tsx",
+    "src/app/globals.css",
+    "src/app/guides/ip-paging-network-readiness/page.tsx",
+    "src/app/guides/nz-school-pa-paging-requirements/page.tsx",
+    "src/app/guides/page.tsx",
+    "src/app/guides/school-pa-specification-checklist/page.tsx",
+    "src/app/industries/aged-care-retirement-villages/page.tsx",
+    "src/app/industries/warehouses-manufacturing-industrial/page.tsx",
+    "src/app/layout.tsx",
+    "src/app/page.tsx",
+    "src/app/pricing-tool/page.tsx",
+    "src/app/pricing/page.tsx",
+    "src/app/privacy/page.tsx",
+    "src/app/schools/page.tsx",
+    "src/app/smartcomms-hero.css",
+    "src/app/systems/emergency-lockdown/page.tsx",
+    "src/app/systems/ip-intercom/page.tsx",
+    "src/app/systems/ip-paging-pa/page.tsx",
+    "src/app/systems/page.tsx",
+    "src/app/systems/school-bell-announcements/page.tsx",
+    "src/app/systems/traditional-vs-ip/page.tsx",
+    "src/app/tools/finance-check/FinanceCheckTool.tsx",
+    "src/app/tools/finance-check/page.tsx",
+    "src/app/tools/funding-check/FundingCheckTool.tsx",
+    "src/app/tools/funding-check/page.tsx",
+    "src/app/tools/page.tsx",
+    "src/components/content/AtAGlance.tsx",
+    "src/components/content/AuthorityHero.tsx",
+    "src/components/content/ContinuePlanning.tsx",
+    "src/components/enquiry/ProjectEnquiryModal.tsx",
+    "src/components/enquiry/ProjectHelpLauncher.tsx",
+    "src/components/home/smartcomms-hero.tsx",
+    "src/components/pricing/ContactLauncher.tsx",
+    "src/components/pricing/PricingTool.tsx",
+    "src/components/pricing/ResultView.tsx",
+    "src/components/site-footer.tsx",
+    "src/components/site-header.tsx",
+    "src/components/tool-cross-sell.tsx"
+  ],
+  "added": [
+    "DESIGN_UX_IMPLEMENTATION_HANDOFF.md",
+    "docs/design/IMPLEMENTATION_AND_QA.md",
+    "docs/design/PAGE_AUDIT.md",
+    "docs/design/SMARTCOMMS_DESIGN_UX_STANDARD.md",
+    "docs/design/qa-summary.json",
+    "docs/design/qa/content-audit.json",
+    "docs/design/qa/extra-checks.json",
+    "docs/design/qa/funding-interactions.json",
+    "docs/design/qa/interactions.json",
+    "docs/design/qa/modal-final.json",
+    "docs/design/qa/page-inventory.json",
+    "docs/design/qa/test-aged-care.log",
+    "docs/design/qa/test-assessment.log",
+    "docs/design/qa/test-content-meta.log",
+    "docs/design/qa/test-design-ux.log",
+    "docs/design/qa/test-finance.log",
+    "docs/design/qa/test-industrial.log",
+    "docs/design/qa/test-pricing.log",
+    "docs/design/qa/test-public-project-examples.log",
+    "docs/design/qa/test-validation.log",
+    "scripts/test-design-ux.mjs",
+    "src/components/content/PageContents.tsx",
+    "src/components/content/ProjectHelpPanel.tsx",
+    "src/components/ui/ConfirmationDialog.tsx",
+    "src/components/ui/TableRegion.tsx",
+    "src/components/ui/comparison.tsx"
+  ]
+}

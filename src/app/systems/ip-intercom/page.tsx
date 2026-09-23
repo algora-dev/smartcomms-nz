@@ -23,7 +23,9 @@ export default function IpIntercomPage() {
         description="IP intercom systems add two-way communication to a wider paging network, allowing reception, classrooms, gates, offices and other locations to call or speak back. This guide explains fixed call points, SIP intercoms, classroom call buttons, video entry and how intercom functions can share the same infrastructure as paging and announcements."
         tags={["IP intercom", "Two-way paging", "SIP intercom", "Call points", "Video entry"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
-        secondaryCta={{ label: "Compare system platforms", href: "/compare/schools" }}
+        secondaryCta={{ label: "Compare system platforms", href: "/compare" }}
+        help={{"label": "Ask about your intercom requirements", "mode": "system_selection", "sourceTopic": "ip_intercom"}}
+        contents={[["#how", "How IP intercom works"], ["#school-use", "Where intercom earns its place in schools"], ["#sip", "SIP, Teams and VoIP integration"], ["#vs-one-way", "Two-way vs one-way: specifying the mix"], ["#cost", "Cost impact"], ["#more", "Related resources"]]}
         reviewed={reviewedLabel("/systems/ip-intercom")}
         note="NZ-focused guidance"
         breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "IP Intercom & Two-Way Paging" }]}
@@ -36,7 +38,7 @@ export default function IpIntercomPage() {
           { label: "Next step", value: "Define the required call points and estimate the project" },
         ]}
       />
-      <article className="sc-container max-w-[800px] py-8 sc-prose">
+      <article className="sc-container sc-container-prose py-8 sc-prose">
       <h2 id="how">How IP intercom works</h2>
       <p>
         An IP intercom endpoint is a network device with a speaker, a microphone and a call button
@@ -107,8 +109,9 @@ export default function IpIntercomPage() {
         <li><Link href="/compare/schools">IP paging platform comparison</Link></li>
       </ul>
       <ContinuePlanning
+        help={{"title": "Work out who needs to call whom", "description": "Tell us about the call points, answering locations and any existing phone or paging system.", "buttonLabel": "Ask about your intercom requirements", "mode": "system_selection", "sourceTopic": "ip_intercom"}}
         items={[
-          { title: "Compare system platforms", desc: "Which IP paging and intercom platforms fit NZ sites and budgets.", href: "/compare/schools" },
+          { title: "Compare system platforms", desc: "Which IP paging and intercom platforms fit NZ sites and budgets.", href: "/compare" },
           { title: "Emergency & lockdown communication", desc: "How intercom call points support school emergency planning.", href: "/systems/emergency-lockdown" },
           { title: "Pricing guide", desc: "Indicative NZ installed ranges and the main cost drivers.", href: "/pricing" },
         ]}

@@ -1,0 +1,98 @@
+{
+  "date": "2026-09-23",
+  "baseline_archive": "smartcomms-nz-current-source-2026-09-23.zip",
+  "baseline_sha256": "114042ad86f60e03db0f862567e056beab5ab46ce0396fa2124c6dd0b7bc7aa6",
+  "baseline_commit": "840b6dd61256f9f66d6a3895ad544dc6d2eda187",
+  "production_changed": false,
+  "application_dependencies_changed": false,
+  "original_files_deleted": [],
+  "protected_files_byte_identical": 40,
+  "syntax_transpile": {
+    "files": 86,
+    "errors": 0,
+    "typescript": "5.8.3",
+    "full_typecheck": false
+  },
+  "existing_test_scripts": {
+    "count": 8,
+    "passed": 8,
+    "runner": "Node 22.16.0 with isolated TypeScript ESM loader; not npm/tsx"
+  },
+  "new_design_test": {
+    "command": "node scripts/test-design-ux.mjs",
+    "assertions": 60,
+    "passed": 60
+  },
+  "offline_browser": {
+    "browser": "system Chromium via Playwright",
+    "react": "18.2.0 (audit harness only)",
+    "tailwind": "4.1.10 (audit harness only)",
+    "actual_repo_target": "Next 16.3.4 / React 19.2.8 / Tailwind 4 from supplied lockfile",
+    "page_matrix": [
+      {
+        "width": 320,
+        "routes": 29,
+        "page_errors": 0,
+        "horizontal_overflow_failures": 0,
+        "duplicate_id_failures": 0,
+        "missing_same_page_anchor_failures": 0,
+        "single_h1_failures": 0
+      },
+      {
+        "width": 390,
+        "routes": 29,
+        "page_errors": 0,
+        "horizontal_overflow_failures": 0,
+        "duplicate_id_failures": 0,
+        "missing_same_page_anchor_failures": 0,
+        "single_h1_failures": 0
+      },
+      {
+        "width": 768,
+        "routes": 29,
+        "page_errors": 0,
+        "horizontal_overflow_failures": 0,
+        "duplicate_id_failures": 0,
+        "missing_same_page_anchor_failures": 0,
+        "single_h1_failures": 0
+      },
+      {
+        "width": 1440,
+        "routes": 29,
+        "page_errors": 0,
+        "horizontal_overflow_failures": 0,
+        "duplicate_id_failures": 0,
+        "missing_same_page_anchor_failures": 0,
+        "single_h1_failures": 0
+      }
+    ],
+    "interaction_assertions": 100,
+    "interaction_passed": 100,
+    "additional_modal_assertions": 24,
+    "additional_modal_passed": 24,
+    "popover_cases": 15,
+    "popover_cases_passed": 15,
+    "expanded_table_cases": 9,
+    "expanded_table_cases_passed": 9,
+    "funding_maintenance_result_widths": [
+      390,
+      1440
+    ],
+    "transport": "Offline set_content, real DOM/components, local assets. Next navigation/image/font APIs shimmed. No production requests.",
+    "not_tested": [
+      "real Next SSR/hydration",
+      "full browser route transitions and hosting redirects",
+      "actual PDF download using installed jsPDF",
+      "real email delivery",
+      "Safari/iOS",
+      "production analytics",
+      "live API feature flags and WAF"
+    ]
+  },
+  "full_next_lint_typecheck_build": {
+    "status": "not_run",
+    "reason": "npm ci could not install dependencies because registry DNS resolution failed (EAI_AGAIN). No pass inferred from transpilation or baseline export."
+  },
+  "new_research_or_price_policy": false,
+  "release_status": "Implemented; staging full build/browser gates required before deployment"
+}

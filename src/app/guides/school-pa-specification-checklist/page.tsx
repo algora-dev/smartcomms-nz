@@ -110,6 +110,7 @@ export default function SpecificationChecklistPage() {
         tags={["PA specification", "Paging checklist", "School bells", "Emergency coverage", "Quote comparison"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
         secondaryCta={{ label: "Check school funding", href: "/tools/funding-check" }}
+        help={{"label": "Ask about your specification", "mode": "quote_help", "sourceTopic": "school_specification"}}
         reviewed={reviewedLabel("/guides/school-pa-specification-checklist")}
         note="Attach to tender documents"
         breadcrumb={[{ name: "Guides", href: "/guides" }, { name: "School PA Specification Checklist" }]}
@@ -122,7 +123,7 @@ export default function SpecificationChecklistPage() {
           { label: "Next step", value: "Use the checklist, then compare pricing and funding options" },
         ]}
       />
-      <article className="sc-container max-w-[800px] py-8 sc-prose">
+      <article className="sc-container sc-container-prose py-8 sc-prose">
       {SECTIONS.map((section) => (
         <section key={section.title} className="sc-card p-6 not-prose">
           <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">{section.title}</h2>
@@ -150,6 +151,7 @@ export default function SpecificationChecklistPage() {
         <Link href="/tools/funding-check">funding checker</Link> for an indicative read.
       </p>
       <ContinuePlanning
+        help={{"title": "Want help preparing or comparing a scope?", "description": "Tell us what the proposed system needs to achieve and which parts of the specification are still unclear.", "buttonLabel": "Ask about your specification", "mode": "quote_help", "sourceTopic": "school_specification"}}
         items={[
           { title: "Pricing guide", desc: "Indicative NZ installed ranges so you can sanity-check every quote.", href: "/pricing" },
           { title: "5YA funding guide", desc: "How a clearly specified project fits the property funding process.", href: "/funding" },

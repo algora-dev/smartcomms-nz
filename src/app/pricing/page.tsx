@@ -1,3 +1,6 @@
+import { PageContents } from "@/components/content/PageContents";
+import { ProjectHelpPanel } from "@/components/content/ProjectHelpPanel";
+import { ProjectHelpLauncher } from "@/components/enquiry/ProjectHelpLauncher";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
@@ -40,27 +43,28 @@ export default function PricingPage() {
         { name: "SmartComms NZ", url: site.url },
         { name: "Pricing", url: `${site.url}/pricing` },
       ])) }} />
-      <div className="sc-container max-w-4xl py-16">
+      <div className="sc-container sc-container-reading py-16">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">New Zealand pricing guide</p>
-          <h1 className="mt-2 text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">
+          <h1 className="sc-title mt-2">
             What does an IP paging, PA or intercom system cost?
           </h1>
-          <p className="mt-4 text-lg leading-relaxed text-[var(--sc-slate)]">
+          <p className="sc-lead mt-4">
             There is no single installed price because site size, cabling, speaker quantities and functionality vary. The examples below use the same pricing assumptions as the SmartComms calculator so you can see the likely order of magnitude before requesting a formal quote.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-6 sc-actions">
             <Link href="/pricing-tool" className="sc-btn-primary">Calculate your site</Link>
             <Link href="/tools/funding-check" className="sc-btn-secondary">Check school funding potential</Link>
             <Link href="/financing" className="sc-btn-secondary">Explore finance / leasing</Link>
           </div>
+          <ProjectHelpLauncher mode="quote_help" sourceTopic="pricing_guide" buttonLabel="Get help with a formal quote" className="sc-text-action mt-3" />
           <p className="mt-4 text-xs text-[var(--sc-slate)]">Indicative only, ex GST. SmartComms pricing is a planning model informed by supplier pricing, product information and installation/project information available to us - it shows a realistic order of magnitude for the modelled scope, not a market average or a quote from every brand. Assumptions last reviewed {pricingConfig.reviewedAtLabel}. See <Link href="/about/methodology">how we get our pricing</Link>.</p>
         </div>
       </div>
 
       <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-14">
-        <div className="sc-container max-w-4xl">
-          <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">Indicative installed system examples</h2>
+        <div className="sc-container sc-container-reading">
+          <h2 id="pricing-examples" className="sc-section-title">Indicative installed system examples</h2>
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--sc-slate)]">
             Every example includes a central control/platform allowance for the modelled system (modelled at {formatNZD(pricingConfig.headendPrice)} ex GST). Depending on manufacturer and architecture, equivalent functionality may be provided through a central controller, software, gateways, licences or distributed endpoints, so this allowance is a SmartComms planning assumption rather than a universal market price. These are configuration examples, not market averages or formal quotes.
           </p>
@@ -84,8 +88,8 @@ export default function PricingPage() {
       </section>
 
 
-      <section className="sc-container max-w-4xl py-14">
-        <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">Indicative school PA and paging costs</h2>
+      <section className="sc-container sc-container-reading py-14">
+        <h2 id="school-costs" className="sc-section-title">Indicative school PA and paging costs</h2>
         <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--sc-slate)]">
           For school planning, it is often more useful to think in broad site sizes. These ranges combine different room counts, cabling scenarios and feature levels so a school can understand the likely order of magnitude before a site-specific design is prepared.
         </p>
@@ -103,14 +107,14 @@ export default function PricingPage() {
             </div>
           ))}
         </div>
-        <div className="mt-5 flex flex-wrap gap-3">
+        <div className="mt-5 sc-actions">
           <Link href="/schools" className="sc-btn-secondary">School systems guide</Link>
           <Link href="/pricing-tool" className="sc-btn-primary">Price your own site</Link>
         </div>
       </section>
 
-      <section className="sc-container max-w-4xl py-14">
-        <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">What changes the price?</h2>
+      <section className="sc-container sc-container-reading py-14">
+        <h2 id="cost-drivers" className="sc-section-title">What changes the price?</h2>
         <p className="mt-3 max-w-3xl text-[var(--sc-slate)]">
           Network readiness is one of the main cost drivers: a site with suitable cabling and switch capacity installs for far less than one needing new infrastructure. See the <Link href="/guides/ip-paging-network-readiness">network readiness checklist</Link> to see where your site sits.
         </p>
@@ -124,11 +128,11 @@ export default function PricingPage() {
         </div>
 
         <div className="mt-10 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6">
-          <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">Get a range for your own site</h2>
+          <h2 id="your-estimate" className="text-xl font-semibold text-[var(--sc-blue-900)]">Get a range for your own site</h2>
           <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">
             The calculator asks only three things: the site situation, the areas you need covered and the capability level you want. You can refine it further if you know more, but you do not need technical knowledge to get started.
           </p>
-          <div className="mt-4 flex flex-wrap gap-3">
+          <div className="mt-4 sc-actions">
             <Link href="/pricing-tool" className="sc-btn-primary">Get a ballpark price</Link>
             <Link href="/funding" className="sc-btn-secondary">School funding guide</Link>
             <Link href="/financing" className="sc-btn-secondary">Finance & leasing guide</Link>
@@ -140,12 +144,15 @@ export default function PricingPage() {
           <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">
             The next question is how the project will be paid for. NZ schools can investigate relevant funding pathways, while schools and other organisations may also want to explore equipment finance or leasing.
           </p>
-          <div className="mt-4 flex flex-wrap gap-3">
+          <div className="mt-4 sc-actions">
             <Link href="/tools/funding-check" className="sc-btn-secondary">Check school funding</Link>
             <Link href="/tools/finance-check" className="sc-btn-primary">Check finance options</Link>
           </div>
         </div>
       </section>
+      <div className="sc-container sc-container-reading pb-12">
+        <ProjectHelpPanel {...{"title": "Ready to discuss a price for your site?", "description": "Tell us what needs coverage, what is already installed and any questions about your project budget.", "buttonLabel": "Get help with a formal quote", "mode": "quote_help", "sourceTopic": "pricing_guide"}} />
+      </div>
     </div>
   );
 }

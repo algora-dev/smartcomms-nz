@@ -11,7 +11,7 @@ export function ProjectHelpLauncher({
   mode = "project_help",
   sourceTopic,
   buttonLabel = "Help me take the next step",
-  className = "sc-btn-primary mt-6 inline-flex cursor-pointer",
+  className = "sc-btn-help mt-6",
   estimateSummary,
   estimateLink,
   context,
@@ -27,7 +27,8 @@ export function ProjectHelpLauncher({
   const [open, setOpen] = useState(false);
   return (
     <>
-      <button type="button" onClick={() => setOpen(true)} className={className}>
+      <button type="button" aria-haspopup="dialog" data-enquiry-mode={mode} data-enquiry-source={sourceTopic}
+        onClick={() => setOpen(true)} className={className}>
         {buttonLabel}
       </button>
       <ProjectEnquiryModal

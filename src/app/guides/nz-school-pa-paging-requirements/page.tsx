@@ -24,6 +24,8 @@ export default function NzSchoolPaRequirementsPage() {
         tags={["Ministry guidance", "School PA requirements", "5YA", "10YPP", "Safety communication"]}
         primaryCta={{ label: "Check potential funding", href: "/tools/funding-check" }}
         secondaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
+        help={{"label": "Ask about your school’s project", "mode": "funding_help", "sourceTopic": "school_requirements"}}
+        contents={[["#property-design", "Where paging sits in Ministry property guidance"], ["#design-principles", "Design principles the guidance points to"], ["#cabling", "Cabling and network expectations"], ["#funding-process", "The funding connection: 10YPP and 5YA"], ["#procurement", "Procurement expectations"], ["#what-to-do", "Practical next steps for a school"], ["#sources", "Primary sources to consult directly"]]}
         reviewed={reviewedLabel("/guides/nz-school-pa-paging-requirements")}
         note="Independent synthesis, not Ministry advice"
         breadcrumb={[{ name: "Guides", href: "/guides" }, { name: "NZ School PA & Paging Requirements" }]}
@@ -36,7 +38,7 @@ export default function NzSchoolPaRequirementsPage() {
           { label: "Next step", value: "Check funding potential or build an indicative budget" },
         ]}
       />
-      <article className="sc-container max-w-[800px] py-8 sc-prose">
+      <article className="sc-container sc-container-prose py-8 sc-prose">
       <p className="text-sm border-l-4 border-[var(--sc-teal)] pl-4">
         <strong>Note:</strong> this is our synthesis of publicly available Ministry material. It is
         not Ministry policy advice. Always confirm current requirements on{" "}
@@ -149,6 +151,7 @@ export default function NzSchoolPaRequirementsPage() {
         </li>
       </ul>
       <ContinuePlanning
+        help={{"title": "Need help turning the requirements into a brief?", "description": "Tell us about the school, current system and the scope you are considering.", "buttonLabel": "Ask about your school’s project", "mode": "funding_help", "sourceTopic": "school_requirements"}}
         items={[
           { title: "5YA funding guide", desc: "How fixed communications may fit the 5YA / 10YPP property process, with real published examples.", href: "/funding" },
           { title: "Specification checklist", desc: "Turn these requirements into a scope suppliers must quote against.", href: "/guides/school-pa-specification-checklist" },

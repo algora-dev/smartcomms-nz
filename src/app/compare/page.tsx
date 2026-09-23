@@ -1,3 +1,4 @@
+import { ProjectHelpPanel } from "@/components/content/ProjectHelpPanel";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
@@ -46,12 +47,12 @@ const COMPARISONS = [
 export default function CompareHubPage() {
   return (
     <div>
-      <section className="sc-container max-w-[1150px] pb-6 pt-10">
+      <section className="sc-container sc-container-wide pb-6 pt-10">
         <div className="rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] px-6 py-10 sm:px-10 sm:py-12">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">
             System comparisons
           </p>
-          <h1 className="mt-3 text-[2.1rem] font-bold leading-[1.1] tracking-tight text-[var(--sc-blue-900)] sm:text-[3rem]">
+          <h1 className="sc-title mt-3">
             Compare Systems for Your Type of Site
           </h1>
           <p className="mt-5 max-w-3xl text-[1.125rem] leading-relaxed text-[var(--sc-slate)] sm:text-lg">
@@ -61,7 +62,7 @@ export default function CompareHubPage() {
         </div>
       </section>
 
-      <section className="sc-container max-w-[1150px] pb-16">
+      <section className="sc-container sc-container-wide pb-16">
         <ul className="grid gap-6 md:grid-cols-2">
           {COMPARISONS.map((item) => (
             <li key={item.href}>
@@ -72,7 +73,7 @@ export default function CompareHubPage() {
                 <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">
                   {item.tag}
                 </p>
-                <h2 className="mt-3 text-xl font-bold leading-snug tracking-tight text-[var(--sc-blue-900)] transition-colors duration-200 group-hover:text-[var(--sc-teal)]">
+                <h2 className="mt-3 text-xl font-bold leading-snug tracking-tight text-[var(--sc-blue-900)] transition-colors duration-200 group-hover:text-[var(--sc-teal-strong)]">
                   {item.title}
                 </h2>
                 <p className="mt-3 flex-1 leading-relaxed text-[var(--sc-slate)]">{item.desc}</p>
@@ -84,7 +85,7 @@ export default function CompareHubPage() {
                     </li>
                   ))}
                 </ul>
-                <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--sc-blue-700)] transition-all duration-200 group-hover:gap-2.5 group-hover:text-[var(--sc-teal)]">
+                <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--sc-blue-700)] transition-all duration-200 group-hover:gap-2.5 group-hover:text-[var(--sc-teal-strong)]">
                   View comparison <span aria-hidden>→</span>
                 </span>
               </Link>
@@ -115,6 +116,9 @@ export default function CompareHubPage() {
           ]),
         }}
       />
+      <div className="sc-container sc-container-reading pb-12">
+      <ProjectHelpPanel {...{"title": "Not sure which comparison fits your site?", "description": "Tell us what you need the system to do and we can help you work out the next step.", "buttonLabel": "Ask about your site", "mode": "system_selection", "sourceTopic": "compare_hub"}} />
+      </div>
     </div>
   );
 }

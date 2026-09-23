@@ -1,3 +1,4 @@
+import { ProjectHelpPanel } from "@/components/content/ProjectHelpPanel";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
@@ -103,12 +104,12 @@ const RESOURCES = [
 export default function SystemsPage() {
   return (
     <div>
-      <section className="sc-container max-w-[1150px] pb-6 pt-10">
+      <section className="sc-container sc-container-wide pb-6 pt-10">
         <div className="rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] px-6 py-10 sm:px-10 sm:py-12">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">
             System architecture guide
           </p>
-          <h1 className="mt-3 text-[2.1rem] font-bold leading-[1.1] tracking-tight text-[var(--sc-blue-900)] sm:text-[3rem]">
+          <h1 className="sc-title mt-3">
             Paging, PA, Bell &amp; Intercom System Types
           </h1>
           <p className="mt-5 max-w-3xl text-[1.125rem] leading-relaxed text-[var(--sc-slate)] sm:text-lg">
@@ -116,7 +117,7 @@ export default function SystemsPage() {
             IP and hybrid networks combining paging, bells, emergency messages and two-way intercom.
             Start with the architecture, then explore the functions your site actually needs.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8 sc-actions">
             <Link href="/pricing-tool" className="sc-btn-primary">Estimate project cost</Link>
             <Link href="/compare/schools" className="sc-btn-secondary">Compare platforms</Link>
           </div>
@@ -126,8 +127,8 @@ export default function SystemsPage() {
         </div>
       </section>
 
-      <section className="sc-container max-w-[1150px] py-10">
-        <h2 className="text-3xl font-bold tracking-tight text-[var(--sc-blue-900)]">
+      <section className="sc-container sc-container-wide py-10">
+        <h2 className="sc-section-title">
           Three architecture options
         </h2>
         <p className="mt-3 max-w-3xl text-lg text-[var(--sc-slate)]">
@@ -167,8 +168,8 @@ export default function SystemsPage() {
       </section>
 
       <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-14">
-        <div className="sc-container max-w-[1150px]">
-          <h2 className="text-3xl font-bold tracking-tight text-[var(--sc-blue-900)]">
+        <div className="sc-container sc-container-wide">
+          <h2 className="sc-section-title">
             What the system needs to do
           </h2>
           <p className="mt-3 max-w-3xl text-lg text-[var(--sc-slate)]">
@@ -188,8 +189,8 @@ export default function SystemsPage() {
         </div>
       </section>
 
-      <section className="sc-container max-w-[1150px] py-14">
-        <h2 className="text-3xl font-bold tracking-tight text-[var(--sc-blue-900)]">Planning resources</h2>
+      <section className="sc-container sc-container-wide py-14">
+        <h2 className="sc-section-title">Planning resources</h2>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {RESOURCES.map((r) => (
             <Link key={r.href} href={r.href} className="sc-card group p-6">
@@ -201,6 +202,7 @@ export default function SystemsPage() {
           ))}
         </div>
       </section>
+      <ProjectHelpPanel {...{"title": "Need help choosing a system type?", "description": "Tell us about your site and what you need to hear, announce or communicate.", "buttonLabel": "Ask about your requirements", "mode": "system_selection", "sourceTopic": "systems_hub"}} />
     </div>
   );
 }

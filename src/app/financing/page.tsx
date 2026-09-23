@@ -1,3 +1,6 @@
+import { PageContents } from "@/components/content/PageContents";
+import { ProjectHelpPanel } from "@/components/content/ProjectHelpPanel";
+import { ProjectHelpLauncher } from "@/components/enquiry/ProjectHelpLauncher";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -81,28 +84,30 @@ export default function FinancingPage() {
         })),
       }) }} />
 
-      <header className="sc-container max-w-4xl py-16">
+      <header className="sc-container sc-container-reading py-16">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">New Zealand project payment options</p>
-          <h1 className="mt-2 text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">
+          <h1 className="sc-title mt-2">
             Finance and leasing for paging, PA, bell and intercom systems
           </h1>
-          <p className="mt-4 text-lg leading-relaxed text-[var(--sc-slate)]">
+          <p className="sc-lead mt-4">
             Paying the full project cost upfront is not the only possible route. Commercial equipment finance, leasing and lease-to-own-style structures may let an eligible organisation spread the cost of a communications-system project over regular payments.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-6 sc-actions">
             <Suspense><IndustryAwareToolLink to="/tools/finance-check" className="sc-btn-primary">Check whether finance is worth exploring</IndustryAwareToolLink></Suspense>
             <Suspense><IndustryAwareToolLink to="/pricing-tool" className="sc-btn-secondary">Estimate the project cost first</IndustryAwareToolLink></Suspense>
           </div>
+          <ProjectHelpLauncher mode="finance_help" sourceTopic="financing_guide" buttonLabel="Discuss finance options" className="sc-text-action mt-3" />
           <p className="mt-4 text-xs leading-relaxed text-[var(--sc-slate)]">
             Last reviewed {reviewed}. SmartComms does not provide finance, quote interest rates or make credit decisions. Actual options and approval are determined by the relevant finance provider.
           </p>
         </div>
+        <PageContents items={[["#finance-structures", "Types of finance"], ["#finance-scope", "Project scope"], ["#finance-school-scope", "School considerations"], ["#finance-next-step", "What happens next"], ["#finance-questions", "Finance questions"]]} />
       </header>
 
       <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-14">
-        <div className="sc-container max-w-4xl">
-          <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">The short version</h2>
+        <div className="sc-container sc-container-reading">
+          <h2 className="sc-section-title">The short version</h2>
           <div className="mt-6 grid gap-5 md:grid-cols-3">
             <div className="sc-card bg-white p-5">
               <h3 className="font-semibold text-[var(--sc-blue-900)]">1. Work out the rough project value</h3>
@@ -120,13 +125,13 @@ export default function FinancingPage() {
         </div>
       </section>
 
-      <article className="sc-container max-w-3xl py-14 sc-prose">
+      <article className="sc-container sc-container-prose py-14 sc-prose">
         <h2>What can equipment finance help with?</h2>
         <p>
           Commercial equipment finance is used to spread the cost of business and organisational assets over time. In New Zealand, finance providers publicly offer finance and leasing for technology, audio-visual equipment, security systems, medical equipment and other commercial assets. A paging or intercom project may include a mixture of hardware, software, installation and related work, so the exact financeable scope needs to be confirmed with the provider.
         </p>
 
-        <h2>Finance lease, rental or equipment loan?</h2>
+        <h2 id="finance-structures">Finance lease, rental or equipment loan?</h2>
         <p>
           Different providers use different structures. Common NZ commercial-equipment options include finance leases, business rentals and commercial equipment loans. “Lease to own” is also used in the market for some finance-lease arrangements where ownership transfers at the end of the agreed term. The right structure depends on the organisation and transaction, so SmartComms does not attempt to choose the contract type inside the checker.
         </p>
@@ -141,12 +146,12 @@ export default function FinancingPage() {
           That is one of the main reasons to investigate finance or leasing. An organisation may want to preserve cash, spread the project cost, stage an upgrade or compare finance against another capital pathway. A low upfront contribution does not automatically mean there is no option: some NZ providers advertise up to 100% equipment finance for qualifying transactions, while other providers or structures may require different terms.
         </p>
 
-        <h2>Schools: funding and finance are different questions</h2>
+        <h2 id="finance-school-scope">Schools: funding and finance are different questions</h2>
         <p>
           New Zealand state schools may have property or capital-funding pathways for eligible projects, while finance or leasing is a separate commercial arrangement. School boards can also have specific governance, accounting and borrowing requirements. A school should therefore check the relevant Ministry/property position and the proposed finance structure rather than treating finance as a substitute for a funding approval.
         </p>
 
-        <h2>What parts of a PA, paging or intercom project may be financed?</h2>
+        <h2 id="finance-scope">What parts of a PA, paging or intercom project may be financed?</h2>
         <p>
           Depending on the provider and transaction, a communications project can include items such as central paging or control hardware, IP paging speakers and horns, PA amplifiers and passive speakers, school bell and scheduling hardware or software, intercom and entrance communication equipment, network interfaces and gateways, installation and commissioning where accepted by the finance provider, and related project equipment. The finance provider decides which equipment, services and project costs it will include. SmartComms does not determine what is financeable.
         </p>
@@ -189,7 +194,7 @@ export default function FinancingPage() {
         </div>
         <p>These examples do not mean every organisation in these categories qualifies for finance. Provider assessment and approval criteria always apply.</p>
 
-        <h2>What happens after the finance check?</h2>
+        <h2 id="finance-next-step">What happens after the finance check?</h2>
         <ol>
           <li><strong>Get your preliminary result.</strong> SmartComms shows whether a specialist finance conversation looks useful.</li>
           <li><strong>Ask SmartComms for the next step.</strong> If you want help, send enough information for the SmartComms team to understand the project.</li>
@@ -197,7 +202,7 @@ export default function FinancingPage() {
         </ol>
 
         <p>
-          Useful companions along the way: estimate the project first with the <Link href="/pricing-tool">pricing calculator</Link> or the <Link href="/pricing">pricing guide</Link>, check the <Link href="/tools/funding-check">school funding checker</Link> if a funding pathway may apply, compare equipment options in the <Link href="/compare/schools">platform comparison</Link>, or revisit the <Link href="/systems/ip-paging-pa">IP paging architecture guide</Link>.
+          Useful companions along the way: estimate the project first with the <Link href="/pricing-tool">pricing calculator</Link> or the <Link href="/pricing">pricing guide</Link>, check the <Link href="/tools/funding-check">school funding checker</Link> if a funding pathway may apply, compare equipment options in the <Link href="/compare">platform comparison</Link>, or revisit the <Link href="/systems/ip-paging-pa">IP paging architecture guide</Link>.
         </p>
 
         <div className="not-prose mt-10 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6">
@@ -231,8 +236,8 @@ export default function FinancingPage() {
       </article>
 
       <section className="border-t border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-14">
-        <div className="sc-container max-w-3xl">
-          <h2 className="text-2xl font-bold text-[var(--sc-blue-900)]">Finance & leasing FAQs</h2>
+        <div className="sc-container sc-container-prose">
+          <h2 id="finance-questions" className="sc-section-title">Finance & leasing FAQs</h2>
           <div className="mt-6 space-y-4">
             {faqs.map((faq) => (
               <div key={faq.q} className="rounded-xl border border-[var(--sc-border)] bg-white p-5">
@@ -243,6 +248,9 @@ export default function FinancingPage() {
           </div>
         </div>
       </section>
+      <div className="sc-container sc-container-reading pb-12">
+        <ProjectHelpPanel {...{"title": "Prefer to discuss payment options directly?", "description": "Tell us the rough project value and what you need help understanding. You do not need to finish the checker first.", "buttonLabel": "Discuss finance options", "mode": "finance_help", "sourceTopic": "financing_guide"}} />
+      </div>
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { TableRegion } from "@/components/ui/TableRegion";
+import { ProjectHelpPanel } from "@/components/content/ProjectHelpPanel";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
@@ -42,28 +44,30 @@ export default function TraditionalVsIpPage() {
         description="Replacing an old PA system does not always mean replacing every speaker and cable. This guide compares traditional 100V, full-IP and hybrid paging systems so you can decide what is worth retaining and what should change."
         tags={["Traditional 100V PA", "IP paging", "Hybrid systems", "Staged upgrades", "Network readiness"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
-        secondaryCta={{ label: "Compare platforms", href: "/compare/schools" }}
+        secondaryCta={{ label: "Compare platforms", href: "/compare" }}
+        help={{"label": "Ask about keeping your existing PA", "mode": "system_selection", "sourceTopic": "traditional_vs_ip"}}
         reviewed={reviewedLabel("/systems/traditional-vs-ip")}
         note="NZ-focused guidance"
         breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "Traditional vs IP" }]}
       />
 
-      <article className="sc-container max-w-[900px] py-10 sc-prose">
+      <article className="sc-container sc-container-reading py-10 sc-prose">
         <h2>Quick comparison</h2>
-        <div className="overflow-x-auto">
-          <table>
+        <TableRegion label="Traditional 100V, IP and hybrid architecture comparison">
+          <table className="sc-standard-table min-w-[660px]">
+            <caption className="sr-only">Traditional 100V, full IP and hybrid system capabilities</caption>
             <thead>
               <tr>
-                <th>Factor</th>
-                <th>Traditional 100V</th>
-                <th>Full IP</th>
-                <th>Hybrid</th>
+                <th scope="col">Factor</th>
+                <th scope="col">Traditional 100V</th>
+                <th scope="col">Full IP</th>
+                <th scope="col">Hybrid</th>
               </tr>
             </thead>
             <tbody>
               {COMPARISON.map((row) => (
                 <tr key={row.factor}>
-                  <td className="font-medium">{row.factor}</td>
+                  <th scope="row" className="font-medium">{row.factor}</th>
                   <td>{row.traditional}</td>
                   <td>{row.ip}</td>
                   <td>{row.hybrid}</td>
@@ -71,7 +75,7 @@ export default function TraditionalVsIpPage() {
               ))}
             </tbody>
           </table>
-        </div>
+        </TableRegion>
         <p className="text-sm">
           Capabilities vary by product and platform, so treat this as an architectural comparison
           rather than a guarantee about any specific system.
@@ -153,10 +157,11 @@ export default function TraditionalVsIpPage() {
           <li><strong>Consider hybrid when:</strong> useful existing infrastructure should be retained while controls and features are modernised, or the upgrade needs to be staged.</li>
         </ul>
 
-        <div className="mt-10 flex flex-wrap gap-3 not-prose">
+        <div className="mt-10 sc-actions not-prose">
           <Link href="/pricing-tool" className="sc-btn-primary">Estimate project cost</Link>
           <Link href="/systems" className="sc-btn-secondary">Back to system types</Link>
         </div>
+      <ProjectHelpPanel {...{"title": "Not sure what can be retained?", "description": "Describe your current equipment and what the upgraded system needs to do.", "buttonLabel": "Ask about keeping your existing PA", "mode": "system_selection", "sourceTopic": "traditional_vs_ip"}} />
       </article>
 
       <script

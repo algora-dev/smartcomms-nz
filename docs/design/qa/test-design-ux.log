@@ -1,0 +1,62 @@
+PASS retained brand token --sc-navy
+PASS retained brand token --sc-teal
+PASS retained brand token --sc-accent
+PASS retained brand token --sc-teal-strong
+PASS retained brand token --sc-slate
+PASS retained brand token --sc-blue-50
+PASS base and component cascade layers exist
+PASS prose excludes embedded components
+PASS three intentional container widths
+PASS existing Inter integration retained
+PASS skip link targets main landmark
+PASS reduced motion supported
+PASS minimum primary control target
+PASS viewport-aware dialog size
+PASS site-wide same portal access
+PASS navigation announces current location
+PASS src/app/compare/schools/page.tsx: shared comparison presentation
+PASS src/app/compare/schools/page.tsx: no duplicate comparison helpers
+PASS src/app/compare/schools/page.tsx: source register still exists
+PASS src/app/compare/schools/page.tsx: contents navigation
+PASS src/app/industries/aged-care-retirement-villages/page.tsx: shared comparison presentation
+PASS src/app/industries/aged-care-retirement-villages/page.tsx: no duplicate comparison helpers
+PASS src/app/industries/aged-care-retirement-villages/page.tsx: source register still exists
+PASS src/app/industries/aged-care-retirement-villages/page.tsx: contents navigation
+PASS src/app/industries/warehouses-manufacturing-industrial/page.tsx: shared comparison presentation
+PASS src/app/industries/warehouses-manufacturing-industrial/page.tsx: no duplicate comparison helpers
+PASS src/app/industries/warehouses-manufacturing-industrial/page.tsx: source register still exists
+PASS src/app/industries/warehouses-manufacturing-industrial/page.tsx: contents navigation
+PASS table keyboard access reflects actual overflow
+PASS overflow hint is conditional
+PASS enquiry dialog portalled to body
+PASS native focus containment
+PASS dialog uses unique accessible name
+PASS dialog scroll and focus reset
+PASS dialog personal data masked
+PASS same enquiry API
+PASS recommendation-only privacy preserved
+PASS no obsolete handoff copy
+PASS form errors announced
+PASS restart confirmation uses native dialog
+PASS src/app/systems/school-bell-announcements/page.tsx: contextual help
+PASS src/app/systems/ip-paging-pa/page.tsx: contextual help
+PASS src/app/systems/ip-intercom/page.tsx: contextual help
+PASS src/app/systems/traditional-vs-ip/page.tsx: contextual help
+PASS src/app/guides/ip-paging-network-readiness/page.tsx: contextual help
+PASS src/app/guides/school-pa-specification-checklist/page.tsx: contextual help
+PASS src/app/guides/nz-school-pa-paging-requirements/page.tsx: contextual help
+PASS src/app/funding/page.tsx: contextual help
+PASS src/app/financing/page.tsx: contextual help
+PASS src/app/pricing/page.tsx: contextual help
+PASS src/app/privacy/page.tsx: no forced body sales panel
+PASS src/app/about/disclosure/page.tsx: no forced body sales panel
+PASS src/app/about/editorial-policy/page.tsx: no forced body sales panel
+PASS src/app/about/methodology/page.tsx: no forced body sales panel
+PASS pricing intro hidden on result only
+PASS pricing result has one main result title
+PASS finance result uses tool title
+PASS funding intro is supplied to interactive shell
+PASS design authority documented
+PASS homepage styles do not collide with shared actions
+
+Design/UX structural checks: 60 passed. Browser and full Next.js checks are separate release gates.

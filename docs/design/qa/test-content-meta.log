@@ -1,0 +1,34 @@
+(node:11546) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("/mnt/data/smartcomms_design_work/audit-loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS  /industries/warehouses-manufacturing-industrial
+PASS  /
+PASS  /schools
+PASS  /systems
+PASS  /systems/ip-paging-pa
+PASS  /systems/school-bell-announcements
+PASS  /systems/emergency-lockdown
+PASS  /systems/ip-intercom
+PASS  /systems/traditional-vs-ip
+PASS  /guides
+PASS  /guides/nz-school-pa-paging-requirements
+PASS  /guides/ip-paging-network-readiness
+PASS  /guides/school-pa-specification-checklist
+PASS  /pricing
+PASS  /pricing-tool
+PASS  /funding
+PASS  /tools
+PASS  /tools/funding-check
+PASS  /financing
+PASS  /tools/finance-check
+PASS  /compare
+PASS  /compare/schools
+PASS  /industries/aged-care-retirement-villages
+PASS  /about
+PASS  /about/methodology
+PASS  /about/disclosure
+PASS  /about/editorial-policy
+PASS  /privacy
+PASS  /contact
+
+content-meta tests: all 29 sitemap routes registered

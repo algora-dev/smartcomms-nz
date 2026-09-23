@@ -1,0 +1,98 @@
+[
+  {
+    "test": "portal at body 320",
+    "pass": true
+  },
+  {
+    "test": "background protected 320",
+    "pass": true
+  },
+  {
+    "test": "error announced 320",
+    "pass": true
+  },
+  {
+    "test": "fields kept after error 320",
+    "pass": true
+  },
+  {
+    "test": "reverse tab trapped 320",
+    "pass": true
+  },
+  {
+    "test": "focus returned after error 320",
+    "pass": true
+  },
+  {
+    "test": "modal clean reopen 320",
+    "pass": true
+  },
+  {
+    "test": "backdrop closes 320",
+    "pass": true
+  },
+  {
+    "test": "portal at body 390",
+    "pass": true
+  },
+  {
+    "test": "background protected 390",
+    "pass": true
+  },
+  {
+    "test": "error announced 390",
+    "pass": true
+  },
+  {
+    "test": "fields kept after error 390",
+    "pass": true
+  },
+  {
+    "test": "reverse tab trapped 390",
+    "pass": true
+  },
+  {
+    "test": "focus returned after error 390",
+    "pass": true
+  },
+  {
+    "test": "modal clean reopen 390",
+    "pass": true
+  },
+  {
+    "test": "backdrop closes 390",
+    "pass": true
+  },
+  {
+    "test": "portal at body 1440",
+    "pass": true
+  },
+  {
+    "test": "background protected 1440",
+    "pass": true
+  },
+  {
+    "test": "error announced 1440",
+    "pass": true
+  },
+  {
+    "test": "fields kept after error 1440",
+    "pass": true
+  },
+  {
+    "test": "reverse tab trapped 1440",
+    "pass": true
+  },
+  {
+    "test": "focus returned after error 1440",
+    "pass": true
+  },
+  {
+    "test": "modal clean reopen 1440",
+    "pass": true
+  },
+  {
+    "test": "backdrop closes 1440",
+    "pass": true
+  }
+]

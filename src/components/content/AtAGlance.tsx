@@ -4,7 +4,7 @@ export default function AtAGlance({
   items: { label: string; value: string }[];
 }) {
   return (
-    <section className="sc-container max-w-[1150px] pb-2" aria-label="At a glance">
+    <section className="sc-container sc-container-wide pb-2" aria-label="At a glance">
       <div className="grid gap-px overflow-hidden rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-border)] sm:grid-cols-2 lg:grid-cols-4">
         {items.map((item) => (
           <div key={item.label} className="bg-white p-5">

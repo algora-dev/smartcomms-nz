@@ -1,3 +1,4 @@
+import { ProjectHelpPanel } from "@/components/content/ProjectHelpPanel";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
@@ -45,19 +46,20 @@ export default function PricingToolPage() {
   return (
     <div>
       <div id="top" className="sc-container py-12">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="text-3xl font-bold tracking-tight text-[var(--sc-navy)] sm:text-4xl">Ballpark system cost calculator</h1>
+        <PricingTool introduction={
+        <div className="mb-10 text-center">
+          <h1 className="sc-tool-title">Ballpark system cost calculator</h1>
           <p className="mt-3 text-[var(--sc-slate)]">
             Answer three quick questions and get an indicative installed price range for an IP paging, PA, bell and intercom system. No technical knowledge needed.
           </p>
           <p className="mt-2 text-xs text-[var(--sc-slate)]">Indicative only, ex GST. Not a formal quote.</p>
         </div>
-        <div className="mt-10"><PricingTool /></div>
+        } />
       </div>
 
       <section className="border-t border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-14">
-        <div className="sc-container max-w-3xl">
-          <h2 className="text-2xl font-bold text-[var(--sc-navy)]">Indicative installed system examples in New Zealand</h2>
+        <div className="sc-container sc-container-prose">
+          <h2 className="sc-section-title">Indicative installed system examples in New Zealand</h2>
           <p className="mt-3 text-sm text-[var(--sc-slate)]">
             The main cost drivers are the number of areas to cover, speaker quantities, existing network cabling and the emergency/intercom functionality required. Every example includes a central control/platform allowance for the modelled system (a SmartComms planning assumption; other architectures distribute these costs differently). These examples use the same pricing config as the calculator and are not presented as market averages.
           </p>
@@ -85,8 +87,8 @@ export default function PricingToolPage() {
       </section>
 
       <section className="py-14" id="faqs">
-        <div className="sc-container max-w-3xl">
-          <h2 className="text-2xl font-bold text-[var(--sc-navy)]">Frequently asked questions</h2>
+        <div className="sc-container sc-container-prose">
+          <h2 className="sc-section-title">Frequently asked questions</h2>
           <div className="mt-6 space-y-4">
             {faqs.map((f) => (
               <div key={f.q} className="rounded-xl border border-[var(--sc-border)] bg-white p-5">
@@ -97,6 +99,11 @@ export default function PricingToolPage() {
           </div>
         </div>
       </section>
+
+      <div className="sc-container sc-container-prose pb-12">
+        <ProjectHelpPanel title="Need help understanding the scope?" description="Tell us what you need the system to do or which parts of the estimate need clarification."
+          buttonLabel="Ask about your estimate" mode="quote_help" sourceTopic="pricing_tool_questions" />
+      </div>
 
       <script
         type="application/ld+json"

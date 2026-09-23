@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { PageContents } from "@/components/content/PageContents";
+import { SectionHeading, TableRegion, Badge, EvidenceReferences } from "@/components/ui/comparison";
 import { ProjectHelpLauncher } from "@/components/enquiry/ProjectHelpLauncher";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
@@ -30,43 +32,15 @@ const platformNames = Object.fromEntries(carePlatforms.map(({ id, name }) => [id
 const mainPlatforms = carePlatforms.filter((p) => p.id !== "frontrow");
 const linkClass = "rounded font-semibold text-[var(--sc-blue-700)] underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4";
 
-function Sources({ ids }: { ids: readonly CareSourceId[] }) {
-  if (!ids.length) return null;
-  return (
-    <span className="mt-2 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-xs leading-relaxed text-[var(--sc-slate)]">
-      <span>Evidence:</span>
-      {ids.map((id) => (
-        <a key={id} href={careSources[id].href} target="_blank" rel="noopener noreferrer" className={linkClass}
-          aria-label={`${careSources[id].label}, source ${numbers[id]} (opens in a new tab)`}
-          title={`${careSources[id].kind}: ${careSources[id].label}`}>[{numbers[id]}]</a>
-      ))}
-    </span>
-  );
+function Sources({ ids, label = "Evidence" }: { ids: readonly CareSourceId[]; label?: string }) {
+  return <EvidenceReferences label={label} items={ids.map((id) => ({ id, ...careSources[id], number: numbers[id] }))} />;
 }
-function Badge({ children }: { children: ReactNode }) {
-  return <span className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold leading-relaxed text-slate-700">{children}</span>;
-}
-function SectionHeading({ id, eyebrow, children, description }: { id: string; eyebrow: string; children: ReactNode; description?: string }) {
-  return <div className="max-w-4xl">
-    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">{eyebrow}</p>
-    <h2 id={id} className="mt-2 text-2xl font-bold tracking-tight text-[var(--sc-blue-900)] md:text-3xl">{children}</h2>
-    {description && <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">{description}</p>}
-  </div>;
-}
-function TableRegion({ label, children }: { label: string; children: ReactNode }) {
-  return (
-    <div className="mt-6">
-      <p className="mb-2 text-xs text-[var(--sc-slate)] lg:hidden">Scroll across the table to compare all columns.</p>
-      <div role="region" aria-label={label} tabIndex={0}
-        className="overflow-x-auto rounded-xl border border-[var(--sc-border)] bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--sc-blue-700)]">
-        {children}
-      </div>
-    </div>
-  );
-}
+
+
+
 function Help({ useCase, label = "Ask who to contact", className }: { useCase: string; label?: string; className?: string }) {
   return <ProjectHelpLauncher mode="system_selection" sourceTopic="aged_care_retirement_villages" buttonLabel={label}
-    className={className ?? "sc-btn-primary cursor-pointer"}
+    className={className ?? "sc-btn-help"}
     context={{ industry: "Aged care / retirement village", sourcePage: AGED_CARE_PATH, topic: useCase }} />;
 }
 function JsonLd({ data }: { data: unknown }) {
@@ -106,31 +80,27 @@ export default function AgedCareRetirementVillagesPage() {
   };
   return (
     <article aria-labelledby="care-title">
-      <header className="sc-container max-w-5xl py-12 md:py-16">
+      <header className="sc-container sc-container-reading py-12 md:py-16">
         <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">New Zealand · Aged care & retirement villages</p>
-        <h1 id="care-title" className="mt-3 max-w-4xl text-4xl font-bold tracking-tight text-[var(--sc-blue-900)] md:text-5xl">{AGED_CARE_HEADLINE}</h1>
-        <p className="mt-5 max-w-4xl text-lg leading-relaxed text-[var(--sc-slate)]">
+        <h1 id="care-title" className="sc-title mt-3">{AGED_CARE_HEADLINE}</h1>
+        <p className="sc-lead mt-5">
           Planning a rest-home PA upgrade, retirement-village announcement system or entrance intercom? Compare the systems against the job you need done: reaching the right areas, answering visitors, supporting staff and keeping everyday communication easy to manage.
         </p>
         <p className="mt-4 max-w-4xl leading-relaxed text-[var(--sc-slate)]">
           Compare <strong>Axis, SPON, 2N, Algo, TOA, Bosch PROSPERO and ITC</strong> for common areas, visitor access and general two-way calling. The right shortlist changes with the brief, and specialist nurse call is explained separately.
         </p>
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-6 sc-actions">
           <Link href={pricingHref} className="sc-btn-primary">Estimate project cost</Link>
           <a href="#care-shortlists" className="sc-btn-secondary">Compare the shortlist</a>
         </div>
         <p className="mt-5 text-xs leading-relaxed text-[var(--sc-slate)]">
           SmartComms editorial guide · Reviewed <time dateTime={reviewedDate(AGED_CARE_PATH)}>{reviewedLabel(AGED_CARE_PATH)}</time> · Document-based recommendations, not hands-on test scores. <a href="#care-methodology" className={linkClass}>How we compare</a>
         </p>
-        <nav aria-label="Aged-care guide contents" className="mt-7 border-t border-[var(--sc-border)] pt-5">
-          <ul className="flex flex-wrap gap-x-5 gap-y-3 text-sm">
-            {[["#care-shortlists", "Which system fits?"], ["#care-capabilities", "Feature comparison"], ["#care-scope", "PA or nurse call?"], ["#care-platforms", "Platform profiles"], ["#care-design", "What to demonstrate"], ["#care-cost", "Cost example"], ["#care-finance", "Finance & leasing"], ["#care-questions", "Buyer questions"], ["#care-sources", "Sources"]].map(([href, label]) => <li key={href}><a href={href} className={linkClass}>{label}</a></li>)}
-          </ul>
-        </nav>
+        <PageContents label="Aged-care guide contents" items={[["#care-shortlists", "Which system fits?"], ["#care-capabilities", "Feature comparison"], ["#care-scope", "PA or nurse call?"], ["#care-platforms", "Platform profiles"], ["#care-design", "What to demonstrate"], ["#care-cost", "Cost example"], ["#care-finance", "Finance & leasing"], ["#care-questions", "Buyer questions"], ["#care-sources", "Sources"]]} />
       </header>
 
       <section id="care-shortlists" aria-labelledby="care-shortlists-title" className="scroll-mt-24 border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-12">
-        <div className="sc-container max-w-6xl">
+        <div className="sc-container sc-container-wide">
           <SectionHeading id="care-shortlists-title" eyebrow="Start with the job, not the logo">
             Which system belongs on your aged-care or retirement-village shortlist?
           </SectionHeading>
@@ -182,7 +152,7 @@ export default function AgedCareRetirementVillagesPage() {
         </div>
       </section>
 
-      <section id="care-capabilities" aria-labelledby="care-capabilities-title" className="sc-container max-w-6xl scroll-mt-24 py-12">
+      <section id="care-capabilities" aria-labelledby="care-capabilities-title" className="sc-container sc-container-wide scroll-mt-24 py-12">
         <SectionHeading id="care-capabilities-title" eyebrow="Apples to apples" description="These entries describe how the relevant current product family can deliver the function. They are not whole-brand scores, and clinical nurse call is outside this table.">
           Paging, intercom, visitor access and system reuse compared
         </SectionHeading>
@@ -210,7 +180,7 @@ export default function AgedCareRetirementVillagesPage() {
       </section>
 
       <section id="care-scope" aria-labelledby="care-scope-title" className="scroll-mt-24 border-y border-[var(--sc-border)] bg-slate-50 py-12">
-        <div className="sc-container max-w-5xl">
+        <div className="sc-container sc-container-reading">
           <SectionHeading id="care-scope-title" eyebrow="Define the system before the brand">
             PA, staff paging and nurse call are different jobs
           </SectionHeading>
@@ -255,7 +225,7 @@ export default function AgedCareRetirementVillagesPage() {
         </div>
       </section>
 
-      <section id="care-platforms" aria-labelledby="care-platforms-title" className="sc-container max-w-5xl scroll-mt-24 py-12">
+      <section id="care-platforms" aria-labelledby="care-platforms-title" className="sc-container sc-container-reading scroll-mt-24 py-12">
         <SectionHeading id="care-platforms-title" eyebrow="The system behind the brand" description="Compare the actual product family and the supported design. A NZ listing establishes a route for enquiry, not guaranteed stock, nationwide service or a care-sector market share.">
           Detailed platform comparison and New Zealand support evidence
         </SectionHeading>
@@ -302,7 +272,7 @@ export default function AgedCareRetirementVillagesPage() {
       </section>
 
       <section id="care-alternatives" aria-labelledby="care-alternatives-title" className="scroll-mt-24 border-y border-[var(--sc-border)] bg-slate-50 py-10">
-        <div className="sc-container max-w-5xl">
+        <div className="sc-container sc-container-reading">
           <SectionHeading id="care-alternatives-title" eyebrow="When the brief changes">
             Specialist and alternative architectures
           </SectionHeading>
@@ -331,7 +301,7 @@ export default function AgedCareRetirementVillagesPage() {
         </div>
       </section>
 
-      <section id="care-design" aria-labelledby="care-design-title" className="sc-container max-w-5xl scroll-mt-24 py-12">
+      <section id="care-design" aria-labelledby="care-design-title" className="sc-container sc-container-reading scroll-mt-24 py-12">
         <SectionHeading id="care-design-title" eyebrow="Design around people">What should the installer demonstrate?</SectionHeading>
         <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">Our suggested acceptance brief is based on staff tasks rather than a generic speaker count. Include your care, facilities and IT teams where the scope crosses their responsibilities.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
@@ -347,7 +317,7 @@ export default function AgedCareRetirementVillagesPage() {
       </section>
 
       <section id="care-cost" aria-labelledby="care-cost-title" className="scroll-mt-24 border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-12">
-        <div className="sc-container max-w-5xl">
+        <div className="sc-container sc-container-reading">
           <SectionHeading id="care-cost-title" eyebrow="A useful starting budget">What could an aged-care PA and intercom upgrade cost?</SectionHeading>
           <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">The SmartComms calculator can model the <strong>general paging and optional intercom</strong> part of the project. Start with the actual rooms and outdoor areas that need coverage, then adjust calling and other options. It is not a per-bed price or a quotation for the entire care-communications system.</p>
           <div className="mt-6 rounded-2xl border border-[var(--sc-border)] bg-white p-5 md:p-7">
@@ -357,7 +327,7 @@ export default function AgedCareRetirementVillagesPage() {
             <p className="mt-5 text-3xl font-bold tracking-tight text-[var(--sc-blue-900)] md:text-4xl">{formatNZD(example.low)}–{formatNZD(example.high)}<span className="mt-1 block text-sm font-medium tracking-normal text-[var(--sc-slate)]">NZD, excluding GST · indicative installed planning range</span></p>
             <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">Calculated from the existing SmartComms model, including its central-platform and installation allowances. It is not a measured multi-brand average or a promise of a provider quote at this price. Different architectures and site conditions can fall outside it.</p>
             <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]"><strong>Not included:</strong> site-wide cabling, a clinical nurse-call/pendant system, a complete door/access-control project or an engineered fire/evacuation system. Those require their own scope. Confirm network capacity, installation access and any additional works.</p>
-            <div className="mt-5 flex flex-wrap gap-3">
+            <div className="mt-5 sc-actions">
               <Link href={careExamplePricingHref()} className="sc-btn-primary">Adjust this example</Link>
               <Link href={pricingHref} className="sc-btn-secondary">Start my own estimate</Link>
               <Link href={exampleFinanceHref} className="sc-btn-secondary">Explore payment options</Link>
@@ -367,12 +337,12 @@ export default function AgedCareRetirementVillagesPage() {
         </div>
       </section>
 
-      <section id="care-finance" aria-labelledby="care-finance-title" className="sc-container max-w-5xl scroll-mt-24 py-12">
+      <section id="care-finance" aria-labelledby="care-finance-title" className="sc-container sc-container-reading scroll-mt-24 py-12">
         <SectionHeading id="care-finance-title" eyebrow="Payment options">Finance and leasing for a village communications upgrade</SectionHeading>
         <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">An equipment-finance conversation may be useful when the organisation prefers to spread a project’s cost. NZ providers publish technology/AV and healthcare equipment-finance offerings. The actual borrower, equipment, installation costs, security and ownership terms still need assessment by the provider.</p>
         <Sources ids={["finance-market"]} />
         <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">The SmartComms check asks for a little project and budget context; it does not approve finance, quote repayments or reject an enquiry because the deposit or budget is uncertain. You can request the next step at every result level.</p>
-        <div className="mt-5 flex flex-wrap gap-3">
+        <div className="mt-5 sc-actions">
           <Link href={financeHref} className="sc-btn-primary">Explore payment options</Link>
           <Link href={financingHref} className="sc-btn-secondary">Read about finance and leasing</Link>
         </div>
@@ -380,7 +350,7 @@ export default function AgedCareRetirementVillagesPage() {
       </section>
 
       <section id="care-questions" aria-labelledby="care-questions-title" className="scroll-mt-24 border-y border-[var(--sc-border)] bg-slate-50 py-12">
-        <div className="sc-container max-w-4xl">
+        <div className="sc-container sc-container-reading">
           <SectionHeading id="care-questions-title" eyebrow="Buyer questions">Rest-home and retirement-village communications FAQs</SectionHeading>
           <div className="mt-5 divide-y divide-[var(--sc-border)]">
             {careQuestions.map((faq) => <section id={faq.id} key={faq.id} className="scroll-mt-24 py-5" aria-labelledby={`${faq.id}-title`}>
@@ -393,19 +363,19 @@ export default function AgedCareRetirementVillagesPage() {
       </section>
 
       <section aria-labelledby="care-next-title" className="bg-[var(--sc-blue-900)] py-12 text-white">
-        <div className="sc-container max-w-4xl text-center">
-          <h2 id="care-next-title" className="text-3xl font-bold">Define what the site needs. Then choose the system.</h2>
-          <p className="mx-auto mt-4 max-w-3xl leading-relaxed text-blue-100">Tell us what needs to happen, what is already installed and your region. The SmartComms team can review the enquiry and reply with the provider or providers we think are most relevant to contact.</p>
+        <div className="sc-container sc-container-reading text-center">
+          <h2 id="care-next-title" className="sc-section-title  text-white">Define what the site needs. Then choose the system.</h2>
+          <p className="mx-auto mt-4 max-w-3xl leading-relaxed text-white/85">Tell us what needs to happen, what is already installed and your region. The SmartComms team can review the enquiry and reply with the provider or providers we think are most relevant to contact.</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Help useCase="Aged-care or retirement-village project next step" label="Ask SmartComms who to contact" className="inline-flex cursor-pointer items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[var(--sc-blue-900)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4" />
-            <Link href={pricingHref} className="inline-flex items-center justify-center rounded-full border border-white/50 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10">Estimate project cost</Link>
-            <Link href={financeHref} className="inline-flex items-center justify-center rounded-full border border-white/50 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10">Explore payment options</Link>
+            <Help useCase="Aged-care or retirement-village project next step" label="Ask SmartComms who to contact" className="sc-btn-light" />
+            <Link href={pricingHref} className="sc-btn-outline-light">Estimate project cost</Link>
+            <Link href={financeHref} className="sc-btn-outline-light">Explore payment options</Link>
           </div>
-          <p className="mx-auto mt-5 max-w-3xl text-sm leading-relaxed text-blue-100">Your enquiry stays with SmartComms. Please describe the facilities project without including resident names, medical details or security-sensitive records.</p>
+          <p className="mx-auto mt-5 max-w-3xl text-sm leading-relaxed text-white/85">Your enquiry stays with SmartComms. Please describe the facilities project without including resident names, medical details or security-sensitive records.</p>
         </div>
       </section>
 
-      <section id="care-methodology" aria-labelledby="care-methodology-title" className="sc-container max-w-5xl scroll-mt-24 py-10">
+      <section id="care-methodology" aria-labelledby="care-methodology-title" className="sc-container sc-container-reading scroll-mt-24 py-10">
         <h2 id="care-methodology-title" className="text-xl font-bold text-[var(--sc-blue-900)]">How we reached these recommendations</h2>
         <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">We matched documented product functions to six defined care/village communications briefs, then checked for a NZ-facing supply or integration route. The order favours a direct fit with the stated task; different integration needs can reverse it. We have not conducted a hands-on group test, measured market share or compared complete competitive tenders.</p>
         <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">Manufacturer documents support capability, not universal superiority. Local listings and overseas case studies have their limits labelled. Editorial coverage is separate from SmartComms’ selected provider network, which does not cover the entire market. No business named here is being represented as a partner or endorser merely because it is cited. Clinical nurse call is outside the compared scope. See our <Link href="/about/editorial-policy" className={linkClass}>editorial policy</Link> and <Link href="/about/disclosure" className={linkClass}>commercial disclosure</Link>.</p>

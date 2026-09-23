@@ -33,6 +33,7 @@ export default function EmergencyLockdownPage() {
           />
         }
         secondaryCta={{ label: "Check school funding", href: "/tools/funding-check" }}
+        contents={[["#why-paging", "Why the paging system is central to school emergencies"], ["#capabilities", "Common emergency capabilities on modern platforms"], ["#redundancy", "Redundancy and failure modes to ask about"], ["#vs-other-channels", "How paging fits with other emergency channels"], ["#specifying", "What to specify"], ["#cost-funding", "Costs and funding"], ["#more", "Related resources"]]}
         reviewed={reviewedLabel("/systems/emergency-lockdown")}
         note="Planning guidance, not procedure advice"
         breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "Emergency & Lockdown Communication" }]}
@@ -45,13 +46,13 @@ export default function EmergencyLockdownPage() {
           { label: "Next step", value: "Review coverage gaps or investigate funding" },
         ]}
       />
-      <div className="sc-container max-w-[1150px] pt-6">
+      <div className="sc-container sc-container-wide pt-6">
         <p className="rounded-xl border border-[var(--sc-teal)] bg-[var(--sc-blue-50)] px-5 py-4 text-sm font-medium text-[var(--sc-slate)]">
           Paging and PA systems support emergency communication but do not replace required fire
           alarm systems, emergency procedures or specialist life-safety systems.
         </p>
       </div>
-      <article className="sc-container max-w-[800px] py-8 sc-prose">
+      <article className="sc-container sc-container-prose py-8 sc-prose">
       <h2 id="why-paging">Why the paging system is central to school emergencies</h2>
       <p>
         In a lockdown or evacuation, the fastest way to reach every classroom, outdoor area and
@@ -135,6 +136,7 @@ export default function EmergencyLockdownPage() {
         <li><Link href="/guides/nz-school-pa-paging-requirements">NZ school PA and paging requirements</Link></li>
       </ul>
       <ContinuePlanning
+        help={{"title": "Need help defining the communications brief?", "description": "Tell us about the site, current system and messages that need to reach staff or occupants.", "buttonLabel": "Ask about your communications requirements", "mode": "system_selection", "sourceTopic": "emergency_lockdown"}}
         items={[
           { title: "NZ school PA requirements", desc: "Ministry design, cabling, funding and procurement context for school communications.", href: "/guides/nz-school-pa-paging-requirements" },
           { title: "School systems overview", desc: "Features, indicative costs and upgrade decisions for school communications.", href: "/schools" },

@@ -11,8 +11,8 @@ export const metadata: Metadata = buildMetadata({
 
 export default function EditorialPolicyPage() {
   return (
-    <div className="sc-container max-w-3xl py-16 sc-prose">
-      <h1 className="text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">Editorial policy</h1>
+    <div className="sc-container sc-container-prose py-16 sc-prose">
+      <h1 className="sc-title">Editorial policy</h1>
       <p className="mt-4 text-lg text-[var(--sc-slate)]">
         SmartComms NZ exists to make a technically confusing category easier to understand. The site should be useful enough that a buyer can make a better next decision, while being clear about what is indicative and what still needs professional confirmation.
       </p>

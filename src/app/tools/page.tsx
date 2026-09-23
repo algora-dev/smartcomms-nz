@@ -1,3 +1,4 @@
+import { ProjectHelpPanel } from "@/components/content/ProjectHelpPanel";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
@@ -11,9 +12,9 @@ export const metadata: Metadata = buildMetadata({
 
 export default function ToolsPage() {
   return (
-    <div className="sc-container max-w-4xl py-16">
-      <h1 className="text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">SmartComms tools</h1>
-      <p className="mt-4 max-w-3xl text-lg text-[var(--sc-slate)]">
+    <div className="sc-container sc-container-reading py-16">
+      <h1 className="sc-tool-title">SmartComms tools</h1>
+      <p className="sc-lead mt-4">
         Three quick tools for the questions that often stop a communications project early: what might it cost, is there a school funding pathway, and is finance or leasing worth exploring?
       </p>
 
@@ -52,6 +53,7 @@ export default function ToolsPage() {
           Start wherever the project is clearest: estimate the likely cost, check a school funding pathway, or explore finance and leasing. The tools are indicative and designed to make the next conversation with the right specialist easier.
         </p>
       </div>
+      <ProjectHelpPanel {...{"title": "Prefer to ask a question first?", "description": "You do not need to complete a tool before asking about your project.", "buttonLabel": "Ask SmartComms", "mode": "project_help", "sourceTopic": "tools_hub"}} />
     </div>
   );
 }

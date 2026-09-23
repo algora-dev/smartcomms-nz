@@ -56,7 +56,6 @@ function InfoDot({ text }: { text: string }) {
     <span
       className="ml-1.5 inline-flex cursor-help text-[var(--sc-slate)]"
       title={text}
-      tabIndex={0}
     >
       <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
         <circle cx="12" cy="12" r="9" />
@@ -124,7 +123,7 @@ function fundingContext(answers: AssessmentAnswers, result: AssessmentResult): R
   };
 }
 
-export function FundingCheckTool() {
+export function FundingCheckTool({ introduction }: { introduction?: ReactNode }) {
   const searchParams = useSearchParams();
   const carriedEstimateLow = parseMoneyParam(searchParams.get("estimateLow"));
   const carriedEstimateHigh = parseMoneyParam(searchParams.get("estimateHigh"));
@@ -155,6 +154,7 @@ export function FundingCheckTool() {
     if (first) return; // initial page load: keep natural position
     // Scrollbar to absolute maximum height (scrollY 0), instantly.
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    if (result) resultRef.current?.querySelector<HTMLElement>("h1")?.focus({ preventScroll: true });
   }, [screen, result]);
 
   useEffect(() => {
@@ -225,7 +225,7 @@ export function FundingCheckTool() {
 
     return (
       <div ref={resultRef} className="scroll-mt-6">
-        <h1 className="text-3xl font-bold tracking-tight text-[var(--sc-blue-900)]">{result.headline}</h1>
+        <h1 tabIndex={-1} className="sc-tool-title outline-none">{result.headline}</h1>
         <ProjectEnquiryModal
           open={enquiry !== null}
           mode={enquiry ?? "funding_help"}
@@ -241,13 +241,13 @@ export function FundingCheckTool() {
         </div>
 
         {result.maintenanceNote && (
-          <div className="mt-4 rounded-lg border border-[#c9a227]/40 bg-[#fdf8ec] p-4 leading-relaxed text-[var(--sc-charcoal)]">
+          <div className="mt-4 rounded-lg border border-[var(--sc-caution-border)]/40 bg-[var(--sc-caution-surface)] p-4 leading-relaxed text-[var(--sc-charcoal)]">
             {result.maintenanceNote}
           </div>
         )}
 
         {result.positiveOverrideMessage && (
-          <div className="mt-4 rounded-lg border border-[var(--sc-teal-accent)] bg-[#eefaf8] p-4 text-[var(--sc-charcoal)]">
+          <div className="mt-4 rounded-lg border border-[var(--sc-teal-accent)] bg-[var(--sc-teal-50)] p-4 text-[var(--sc-charcoal)]">
             {result.positiveOverrideMessage}
           </div>
         )}
@@ -369,6 +369,8 @@ export function FundingCheckTool() {
 
   return (
     <div ref={toolTopRef} className="scroll-mt-6">
+      {introduction}
+      <p role="status" className="sr-only">Step {screen + 1} of {totalScreens}</p>
       <div className="mb-6">
         <div className="flex items-center justify-between text-xs font-medium text-[var(--sc-slate)]">
           <span>Step {screen + 1} of {totalScreens}</span>

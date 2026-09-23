@@ -1,3 +1,4 @@
+import { ProjectHelpPanel } from "@/components/content/ProjectHelpPanel";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
@@ -69,9 +70,9 @@ const GUIDES = [
 
 export default function GuidesPage() {
   return (
-    <div className="sc-container max-w-4xl py-16">
-      <h1 className="text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">Practical guides</h1>
-      <p className="mt-4 max-w-3xl text-lg text-[var(--sc-slate)]">
+    <div className="sc-container sc-container-reading py-16">
+      <h1 className="sc-title">Practical guides</h1>
+      <p className="sc-lead mt-4">
         Plain-language resources for planning, pricing and reviewing paging, PA, bell, intercom and emergency communication systems in New Zealand.
       </p>
       <div className="mt-10 grid gap-6 sm:grid-cols-2">
@@ -84,10 +85,11 @@ export default function GuidesPage() {
           </Link>
         ))}
       </div>
-      <div className="mt-10 flex flex-wrap gap-3">
+      <div className="mt-10 sc-actions">
         <Link href="/pricing-tool" className="sc-btn-primary">Get a ballpark price</Link>
         <Link href="/tools/funding-check" className="sc-btn-secondary">Check school funding</Link>
       </div>
+      <ProjectHelpPanel {...{"title": "Have a question about your own site?", "description": "Tell us what you are trying to work out and which part needs a clearer next step.", "buttonLabel": "Ask about your project", "mode": "project_help", "sourceTopic": "guides_hub"}} />
     </div>
   );
 }

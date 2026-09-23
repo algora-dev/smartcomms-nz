@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { PageContents } from "@/components/content/PageContents";
+import { SectionHeading, TableRegion, Badge, EvidenceReferences } from "@/components/ui/comparison";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
@@ -677,61 +679,14 @@ function platformName(id: string): string {
 }
 
 function Sources({ ids, label = "Evidence" }: { ids: readonly EvidenceId[]; label?: string }) {
-  if (ids.length === 0) return null;
-  return (
-    <span className="mt-2 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-xs leading-relaxed text-[var(--sc-slate)]">
-      <span>{label}:</span>
-      {ids.map((id) => (
-        <a
-          key={id}
-          href={evidence[id].href}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`${evidence[id].label} (source ${sourceNumbers[id]}, opens in a new tab)`}
-          title={`${evidence[id].kind}: ${evidence[id].label}`}
-          className="rounded font-semibold text-[var(--sc-blue-700)] underline decoration-slate-300 underline-offset-2 hover:decoration-current focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
-        >
-          [{sourceNumbers[id]}]
-        </a>
-      ))}
-    </span>
-  );
+  return <EvidenceReferences label={label} items={ids.map((id) => ({ id, ...evidence[id], number: sourceNumbers[id] }))} />;
 }
 
-function Badge({ children, tone = "blue" }: { children: ReactNode; tone?: "blue" | "teal" | "slate" }) {
-  const colours = tone === "teal"
-    ? "bg-[var(--sc-teal-50)] text-[var(--sc-teal-strong)]"
-    : tone === "slate"
-      ? "bg-slate-100 text-slate-700"
-      : "bg-[var(--sc-blue-50)] text-[var(--sc-blue-900)]";
-  return <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold leading-relaxed ${colours}`}>{children}</span>;
-}
 
-function SectionHeading({ id, eyebrow, children, description }: { id: string; eyebrow: string; children: ReactNode; description?: string }) {
-  return (
-    <div className="max-w-4xl">
-      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">{eyebrow}</p>
-      <h2 id={id} className="mt-2 text-2xl font-bold tracking-tight text-[var(--sc-blue-900)] md:text-3xl">{children}</h2>
-      {description && <p className="mt-3 leading-relaxed text-[var(--sc-slate)]">{description}</p>}
-    </div>
-  );
-}
 
-function TableRegion({ label, children }: { label: string; children: ReactNode }) {
-  return (
-    <div className="mt-6">
-      <p className="mb-2 text-xs text-[var(--sc-slate)] lg:hidden">Scroll across the table to compare all columns.</p>
-      <div
-        role="region"
-        aria-label={label}
-        tabIndex={0}
-        className="overflow-x-auto rounded-xl border border-[var(--sc-border)] bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--sc-blue-700)]"
-      >
-        {children}
-      </div>
-    </div>
-  );
-}
+
+
+
 
 function JsonLd({ data }: { data: unknown }) {
   // Serialize < as the literal \u003c escape so a value containing </script>
@@ -776,27 +731,25 @@ export default function ComparePage() {
 
   return (
     <article aria-labelledby="compare-title">
-      <header className="sc-container max-w-5xl py-12 md:py-16">
+      <header className="sc-container sc-container-reading py-12 md:py-16">
         <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">New Zealand · School and multi-zone communications</p>
-        <h1 id="compare-title" className="mt-3 max-w-4xl text-4xl font-bold tracking-tight text-[var(--sc-blue-900)] md:text-5xl">
+        <h1 id="compare-title" className="sc-title mt-3">
           {ARTICLE_HEADLINE}
         </h1>
-        <p className="mt-5 max-w-4xl text-lg leading-relaxed text-[var(--sc-slate)]">
+        <p className="sc-lead mt-5">
           A school needs more than a speaker brand. It needs bells that follow the timetable, clear announcements in the right places, reliable emergency controls and a system staff can actually use. This 2026 guide compares <strong>SPON, FrontRow, Algo, Bosch PROSPERO, ITC, Axis and TOA</strong> for that job, with <strong>2N</strong> considered separately for current intercom needs and existing paging installations. The strongest starting point depends on the brief — use the shortlists below, not a universal winner.
         </p>
         <p className="mt-4 max-w-4xl leading-relaxed text-[var(--sc-slate)]">
           Compare the complete design: software, indoor and outdoor coverage, room calling, network requirements, installation and NZ support. Not every platform delivers these in the same way—and not every school needs every feature.
         </p>
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-6 sc-actions">
           <Link href="/pricing-tool" className="sc-btn-primary">Estimate NZ project cost</Link>
           <a href="#shortlist" className="sc-btn-secondary">Compare the shortlist</a>
         </div>
         <p className="mt-5 text-xs leading-relaxed text-[var(--sc-slate)]">
           SmartComms NZ editorial guide · Reviewed <time dateTime={REVIEW_DATE}>{REVIEW_LABEL}</time>. Evidence-led recommendations, not hands-on test scores or supplier quotes. <a href="#methodology" className="font-semibold underline underline-offset-2">How we compare</a>
         </p>
-        <nav aria-label="On this comparison page" className="mt-7 border-t border-[var(--sc-border)] pt-5">
-          <ul className="flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold text-[var(--sc-blue-700)]">
-            {[
+        <PageContents label="On this comparison page" items={[
               ["#shortlist", "Which system fits?"],
               ["#capabilities", "Feature comparison"],
               ["#platforms", "Platform profiles"],
@@ -806,13 +759,11 @@ export default function ComparePage() {
               ["#nz-school-examples", "NZ project examples"],
               ["#questions", "Buyer questions"],
               ["#sources", "Sources"],
-            ].map(([href, text]) => <li key={href}><a href={href} className="rounded hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">{text}</a></li>)}
-          </ul>
-        </nav>
+            ]} />
       </header>
 
       <section id="shortlist" aria-labelledby="shortlist-title" className="scroll-mt-24 border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-12">
-        <div className="sc-container max-w-6xl">
+        <div className="sc-container sc-container-wide">
           <SectionHeading id="shortlist-title" eyebrow="Start with the job, not the logo">
             Which system belongs on your shortlist?
           </SectionHeading>
@@ -866,10 +817,14 @@ export default function ComparePage() {
           <p className="mt-4 text-sm leading-relaxed text-[var(--sc-slate)]">
             <a href="#2n" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">2N has a different role</a>: current IP intercom plus a legacy school-paging history. <a href="#other-architectures" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">Traditional 100V, AtlasIED and Bosch PRAESENSA</a> are covered below where simpler PA or specialist requirements change the brief.
           </p>
+          <div className="mt-5 text-sm text-[var(--sc-slate)]">
+            Want help narrowing the options? <ProjectHelpLauncher mode="system_selection" sourceTopic="school_comparison_shortlist"
+              buttonLabel="Ask about your school’s requirements" className="sc-text-action" />
+          </div>
         </div>
       </section>
 
-      <section id="capabilities" aria-labelledby="capabilities-title" className="sc-container max-w-6xl scroll-mt-24 py-12">
+      <section id="capabilities" aria-labelledby="capabilities-title" className="sc-container sc-container-wide scroll-mt-24 py-12">
         <SectionHeading id="capabilities-title" eyebrow="Apples to apples" description="These entries identify how the function is delivered, not a score for the whole brand. Accessories, software and integrations must be included in the proposed system.">
           Bells, paging, intercom and integration compared
         </SectionHeading>
@@ -899,7 +854,7 @@ export default function ComparePage() {
       </section>
 
       <section id="platforms" aria-labelledby="platforms-title" className="scroll-mt-24 border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-12">
-        <div className="sc-container max-w-5xl">
+        <div className="sc-container sc-container-reading">
           <SectionHeading id="platforms-title" eyebrow="The system behind the brand" description="The profiles pair documented capability with local evidence. A NZ listing shows an available route for enquiry; it does not prove stock, school-market share or guaranteed support.">
             Detailed platform comparison and NZ market fit
           </SectionHeading>
@@ -948,7 +903,7 @@ export default function ComparePage() {
         </div>
       </section>
 
-      <section id="2n" aria-labelledby="2n-title" className="sc-container max-w-5xl scroll-mt-24 py-12">
+      <section id="2n" aria-labelledby="2n-title" className="sc-container sc-container-reading scroll-mt-24 py-12">
         <SectionHeading id="2n-title" eyebrow="A specialist role, not an irrelevant brand">
           2N: current IP intercom and legacy school paging
         </SectionHeading>
@@ -974,7 +929,7 @@ export default function ComparePage() {
       </section>
 
       <section id="other-architectures" aria-labelledby="alternatives-title" className="scroll-mt-24 border-y border-[var(--sc-border)] bg-slate-50 py-10">
-        <div className="sc-container max-w-5xl">
+        <div className="sc-container sc-container-reading">
           <SectionHeading id="alternatives-title" eyebrow="When the brief changes">
             Traditional 100V, AtlasIED and Bosch PRAESENSA
           </SectionHeading>
@@ -999,7 +954,7 @@ export default function ComparePage() {
         </div>
       </section>
 
-      <section id="costs" aria-labelledby="costs-title" className="sc-container max-w-5xl scroll-mt-24 py-12">
+      <section id="costs" aria-labelledby="costs-title" className="sc-container sc-container-reading scroll-mt-24 py-12">
         <SectionHeading id="costs-title" eyebrow="Price, ease and value" description="There is no verified, like-for-like public NZ price set covering all these systems. A numerical league table would suggest a level of certainty the evidence does not support.">
           Compare complete project cost—not isolated speakers
         </SectionHeading>
@@ -1031,14 +986,14 @@ export default function ComparePage() {
             <p className="mt-3">No intercom price is shown unless the required audio and calling hardware are clear: a call button alone is not a complete two-way endpoint. Overseas prices have not been converted to NZD or multiplied into hypothetical school totals.</p>
           </div>
         </details>
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-6 sc-actions">
           <Link href="/pricing-tool" className="sc-btn-primary">Get an indicative NZ installed range</Link>
           <Link href="/guides/school-pa-specification-checklist" className="sc-btn-secondary">Compare quotes like for like</Link>
         </div>
       </section>
 
       <section id="school-scenario" aria-labelledby="scenario-title" className="scroll-mt-24 border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-12">
-        <div className="sc-container max-w-5xl">
+        <div className="sc-container sc-container-reading">
           <SectionHeading id="scenario-title" eyebrow="Make the comparison practical">
             A 30-area school: one brief, comparable proposals
           </SectionHeading>
@@ -1068,7 +1023,7 @@ export default function ComparePage() {
         </div>
       </section>
 
-      <section id="nz-school-examples" aria-labelledby="nz-school-examples-title" className="sc-container max-w-5xl scroll-mt-24 py-12">
+      <section id="nz-school-examples" aria-labelledby="nz-school-examples-title" className="sc-container sc-container-reading scroll-mt-24 py-12">
         <SectionHeading
           id="nz-school-examples-title"
           eyebrow="Published NZ projects"
@@ -1130,7 +1085,7 @@ export default function ComparePage() {
         </div>
       </section>
 
-      <section id="questions" aria-labelledby="questions-title" className="sc-container max-w-4xl scroll-mt-24 py-12">
+      <section id="questions" aria-labelledby="questions-title" className="sc-container sc-container-reading scroll-mt-24 py-12">
         <SectionHeading id="questions-title" eyebrow="Buyer questions">
           Choosing a school paging, bell or intercom system
         </SectionHeading>
@@ -1150,23 +1105,23 @@ export default function ComparePage() {
       </section>
 
       <section aria-labelledby="next-step-title" className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-900)] py-12 text-white">
-        <div className="sc-container max-w-4xl text-center">
-          <h2 id="next-step-title" className="text-3xl font-bold">Define the requirement. Then choose the platform.</h2>
-          <p className="mx-auto mt-4 max-w-3xl leading-relaxed text-blue-100">Start with the areas to cover, the equipment worth retaining and what staff need to do every day. Use the same brief for each proposal so a lower price does not hide missing coverage, intercom, licences or support.</p>
+        <div className="sc-container sc-container-reading text-center">
+          <h2 id="next-step-title" className="sc-section-title  text-white">Define the requirement. Then choose the platform.</h2>
+          <p className="mx-auto mt-4 max-w-3xl leading-relaxed text-white/85">Start with the areas to cover, the equipment worth retaining and what staff need to do every day. Use the same brief for each proposal so a lower price does not hide missing coverage, intercom, licences or support.</p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-            <Link href="/pricing-tool" className="inline-flex items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[var(--sc-blue-900)]">Estimate project cost</Link>
+            <Link href="/pricing-tool" className="sc-btn-light">Estimate project cost</Link>
             <ProjectHelpLauncher
               mode="system_selection"
               sourceTopic="compare"
               buttonLabel="Not sure which shortlist fits your site?"
-              className="inline-flex items-center justify-center rounded-lg border border-white/40 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10 cursor-pointer"
+              className="sc-btn-outline-light"
             />
-            <Link href="/tools/funding-check" className="inline-flex items-center justify-center rounded-lg border border-white/40 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10">Check funding pathways</Link>
+            <Link href="/tools/funding-check" className="sc-btn-outline-light">Check funding pathways</Link>
           </div>
         </div>
       </section>
 
-      <section id="methodology" aria-labelledby="methodology-title" className="sc-container max-w-5xl scroll-mt-24 py-10">
+      <section id="methodology" aria-labelledby="methodology-title" className="sc-container sc-container-reading scroll-mt-24 py-10">
         <h2 id="methodology-title" className="text-xl font-bold text-[var(--sc-blue-900)]">How this comparison was prepared</h2>
         <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">We prioritise manufacturer documentation for capability and lifecycle, then NZ distributors and integrators for the products and projects they publish. Local catalogue and case-study statements are attributed, not treated as independently measured market share. Unverified features are labelled for confirmation rather than marked absent.</p>
         <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">The recommendations are editorial judgements for a typical school brief. This is not a hands-on group test, a review-score aggregate or a complete-system pricing study. SmartComms NZ is a research and enquiry resource. Where a user asks for practical help, SmartComms may suggest suitable providers to contact from its selected network; inclusion in this comparison is not a manufacturer endorsement or evidence of a provider relationship.</p>

@@ -9,8 +9,8 @@ export const metadata: Metadata = buildMetadata({
 
 export default function PrivacyPage() {
   return (
-    <div className="sc-container max-w-3xl py-16 sc-prose">
-      <h1 className="text-4xl font-bold tracking-tight text-[var(--sc-blue-900)]">Privacy</h1>
+    <div className="sc-container sc-container-prose py-16 sc-prose">
+      <h1 className="sc-title">Privacy</h1>
       <p className="mt-4 text-lg text-[var(--sc-slate)]">
         SmartComms NZ collects information that you choose to submit through this website, including project, pricing,
         funding and finance enquiry forms.
