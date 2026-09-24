@@ -3,15 +3,17 @@ import Link from "next/link";
 import AuthorityHero from "@/components/content/AuthorityHero";
 import AtAGlance from "@/components/content/AtAGlance";
 import ContinuePlanning from "@/components/content/ContinuePlanning";
+import { PublishedEvidenceCards } from "@/components/content/PublishedEvidenceCards";
+import { NZ_PUBLIC_EVIDENCE } from "@/lib/content/nz-public-evidence";
 import { ProjectHelpLauncher } from "@/components/enquiry/ProjectHelpLauncher";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "School Emergency & Lockdown Systems",
+  title: "School Lockdown & Emergency Communication Systems NZ",
   description:
-    "Learn how school paging supports lockdown, evacuation and emergency messages, including coverage, zoning and intelligibility.",
+    "Plan NZ school lockdown and emergency communication: paging, distinct alerts, live/prerecorded messages, indoor/outdoor coverage, redundancy and specification questions.",
   path: "/systems/emergency-lockdown",
 });
 
@@ -20,8 +22,8 @@ export default function EmergencyLockdownPage() {
     <div>
       <AuthorityHero
         eyebrow="School Safety Communication Guide"
-        title="Emergency, Lockdown & Safety Announcement Systems"
-        description="A school emergency communication system needs to deliver clear, fast and intelligible messages to the right areas during lockdowns, evacuations and other incidents. This guide explains the role of paging, zoning, prerecorded messages, live announcements, outdoor coverage and system resilience."
+        title="School Lockdown & Emergency Communication Systems"
+        description="A school lockdown and emergency communication system needs to deliver clear, fast and intelligible instructions to the right areas during lockdowns, evacuations and other incidents. This NZ guide explains paging, distinct alert signals, prerecorded and live messages, indoor/outdoor coverage, activation points and resilience."
         tags={["Lockdown announcements", "Emergency paging", "Evacuation messages", "Safety warnings", "Site-wide coverage"]}
         primaryCta={{ label: "Discuss the technical scope", href: "/contact" }}
         primaryCtaNode={
@@ -33,7 +35,7 @@ export default function EmergencyLockdownPage() {
           />
         }
         secondaryCta={{ label: "Check school funding", href: "/tools/funding-check" }}
-        contents={[["#why-paging", "Why the paging system is central to school emergencies"], ["#capabilities", "Common emergency capabilities on modern platforms"], ["#redundancy", "Redundancy and failure modes to ask about"], ["#vs-other-channels", "How paging fits with other emergency channels"], ["#specifying", "What to specify"], ["#cost-funding", "Costs and funding"], ["#more", "Related resources"]]}
+        contents={[["#why-paging", "Why the paging system matters"], ["#nz-guidance", "What NZ emergency guidance says"], ["#capabilities", "Common emergency capabilities"], ["#nz-examples", "Published NZ school examples"], ["#redundancy", "Redundancy and failure modes"], ["#vs-other-channels", "How paging fits with other emergency channels"], ["#specifying", "What to specify"], ["#cost-funding", "Costs and funding"], ["#lockdown-faq", "Lockdown communication FAQs"], ["#more", "Related resources"]]}
         reviewed={reviewedLabel("/systems/emergency-lockdown")}
         note="Planning guidance, not procedure advice"
         breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "Emergency & Lockdown Communication" }]}
@@ -58,9 +60,18 @@ export default function EmergencyLockdownPage() {
         In a lockdown or evacuation, the fastest way to reach every classroom, outdoor area and
         detached building at once is usually the existing speaker system. Unlike emails, apps or
         phone trees, paging reaches rooms instantly and works for visitors and students without any
-        device. That is why emergency capability has become a standard part of school paging
-        specifications in New Zealand.
+        device. That makes paging an important communication layer to consider when a school reviews how urgent instructions will reach occupied indoor and outdoor areas.
       </p>
+      <section id="nz-guidance" className="not-prose mt-10 scroll-mt-28 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-5 sm:p-6">
+        <p className="sc-eyebrow">New Zealand planning context</p>
+        <h2 className="sc-section-title mt-2">What NZ emergency guidance says about communication</h2>
+        <p className="mt-3 leading-relaxed text-[var(--sc-slate)]">
+          Ministry of Education emergency-planning guidance requires schools to maintain an emergency plan and specifically asks schools to consider how alerts are heard inside and outside, how staff communicate during lockdown or shelter-in-place, and whether automatic bells could cause confusion during an emergency. That does not prescribe one paging brand or architecture, but it does make coverage, distinct signals and staff communication practical design questions.
+        </p>
+        <a href="https://www.education.govt.nz/education-professionals/schools-year-0-13/health-safety-and-wellbeing/prepare-emergency-or-traumatic-incident" target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-[var(--sc-blue-700)] underline decoration-[var(--sc-teal)] decoration-2 underline-offset-4 hover:text-[var(--sc-navy)]">
+          Ministry of Education: prepare for an emergency or traumatic incident<span className="sr-only"> (opens in a new tab)</span>
+        </a>
+      </section>
       <h2 id="capabilities">Common emergency capabilities on modern platforms</h2>
       <ul>
         <li>
@@ -93,6 +104,12 @@ export default function EmergencyLockdownPage() {
         <Link href="/systems/ip-paging-pa">IP paging architecture guide</Link> for the underlying
         model.
       </p>
+      <PublishedEvidenceCards
+        id="nz-examples"
+        title="How NZ schools have used paging in emergency planning"
+        description="Published project accounts show how emergency communication can sit alongside normal bells and paging. These are installer/distributor accounts, not SmartComms audits or substitutes for each school's emergency plan."
+        items={[NZ_PUBLIC_EVIDENCE.threeKings, NZ_PUBLIC_EVIDENCE.ormiston]}
+      />
       <h2 id="redundancy">Redundancy and failure modes to ask about</h2>
       <ul>
         <li>What happens to emergency paging if the network switch, server or NVR fails?</li>
@@ -125,10 +142,27 @@ export default function EmergencyLockdownPage() {
       <p>
         Emergency features range from included platform features to significant uplifts when
         redundancy, dedicated hardware and integration are added. Use the{" "}
-        <Link href="/pricing-tool">ballpark calculator</Link> to see how emergency functionality
+        <Link href="/pricing-tool">Pricing Tool</Link> to see how emergency functionality
         affects indicative cost, and the <Link href="/tools/funding-check">funding checker</Link> to
         explore whether a safety-motivated upgrade might fit a property funding route.
       </p>
+      <section id="lockdown-faq" className="not-prose mt-10 scroll-mt-28">
+        <p className="sc-eyebrow">Common questions</p>
+        <h2 className="sc-section-title mt-2">School lockdown communication FAQs</h2>
+        <div className="mt-5 space-y-4">
+          {[
+            ["What is a school lockdown communication system?", "It is the combination of procedures and communication channels used to get clear instructions to staff and students during a lockdown or shelter-in-place event. Paging/PA can be one layer because it reaches fixed indoor and outdoor areas without relying on every person carrying a device."],
+            ["Should lockdown use the same sound as the fire alarm?", "Schools should follow their approved emergency plan. Ministry guidance asks schools to consider distinct warning systems and whether automatic bells could create confusion. Do not assume one tone is suitable for every emergency."],
+            ["Can prerecorded messages be used for lockdowns?", "Many modern paging platforms can store and prioritise prerecorded messages, while still allowing authorised live voice override. The school should decide the approved wording, activation points, cancellation process and testing procedure as part of its emergency plan."],
+            ["Does an emergency paging system replace a fire alarm?", "No. Paging can support spoken instructions and other emergency communication, but it does not automatically satisfy required fire-alarm, evacuation or specialist life-safety obligations."],
+          ].map(([q, a]) => (
+            <div key={q} className="sc-card p-5">
+              <h3 className="sc-card-title">{q}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">{a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
       <h2 id="more">Related resources</h2>
       <ul>
         <li><Link href="/systems/school-bell-announcements">School bells and announcements</Link></li>
@@ -152,7 +186,7 @@ export default function EmergencyLockdownPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             articleSchema({
-              headline: "Emergency & Lockdown Communication Systems for NZ Schools",
+              headline: "School Lockdown & Emergency Communication Systems NZ",
               description:
                 "Planning guidance for school emergency paging, lockdown and evacuation communication in New Zealand: capabilities, activation methods, redundancy and specification.",
               url: `${site.url}/systems/emergency-lockdown`,

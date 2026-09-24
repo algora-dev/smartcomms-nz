@@ -6,7 +6,7 @@ Next.js 16 (App Router) - TypeScript - Tailwind CSS 4 - Vercel
 
 ## Live tools
 
-- `/pricing-tool` - ballpark installed pricing calculator
+- `/pricing-tool` - indicative installed pricing calculator
 - `/tools/funding-check` - NZ school communications funding check
 - `/tools/finance-check` - finance / leasing conversation readiness check
 
@@ -32,6 +32,7 @@ npm run test:validation
 npm run test:assessment
 npm run test:content-meta
 npm run test:industrial
+npm run test:growth
 npm run build
 ```
 
@@ -51,6 +52,7 @@ Add this to normal verification:
 
 ```bash
 npm run test:design-ux
+npm run test:growth
 ```
 
 Browser QA and the full Next.js build remain separate release gates.

@@ -5,11 +5,12 @@ import { buildMetadata } from "@/lib/seo";
 import { PricingTool } from "@/components/pricing/PricingTool";
 import { presetSummaries } from "@/lib/pricing/presets";
 import { pricingConfig } from "@/lib/pricing/config";
+import { ToolSuiteNav } from "@/components/tool-suite-nav";
 
 export const metadata: Metadata = buildMetadata({
-  title: "PA & Intercom System Cost Calculator NZ",
+  title: "PA & Paging Pricing Tool NZ",
   description:
-    "Get an indicative installed price for an IP paging, PA, bell or intercom system in NZ in under a minute. No technical knowledge required.",
+    "Get an indicative installed price range for an IP paging, PA, bell or intercom system in New Zealand. No technical knowledge required.",
   path: "/pricing-tool",
 });
 
@@ -48,11 +49,12 @@ export default function PricingToolPage() {
       <div id="top" className="sc-container py-12">
         <PricingTool introduction={
         <div className="mb-10 text-center">
-          <h1 className="sc-tool-title">Ballpark system cost calculator</h1>
+          <h1 className="sc-tool-title">PA & Paging System Pricing Tool</h1>
           <p className="mt-3 text-[var(--sc-slate)]">
             Answer three quick questions and get an indicative installed price range for an IP paging, PA, bell and intercom system. No technical knowledge needed.
           </p>
           <p className="mt-2 text-xs text-[var(--sc-slate)]">Indicative only, ex GST. Not a formal quote.</p>
+          <ToolSuiteNav current="pricing" className="mt-5 text-left" />
         </div>
         } />
       </div>

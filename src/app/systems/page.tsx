@@ -75,9 +75,9 @@ const FUNCTIONS = [
 
 const RESOURCES = [
   {
-    href: "/compare/schools",
-    title: "Compare platforms",
-    desc: "Side-by-side comparison of leading paging and PA platforms sold in New Zealand.",
+    href: "/compare",
+    title: "Compare systems by site type",
+    desc: "Use-case comparisons for schools, aged care and industrial sites, with platform shortlists matched to the job.",
   },
   {
     href: "/guides/ip-paging-network-readiness",
@@ -99,6 +99,11 @@ const RESOURCES = [
     title: "School funding",
     desc: "Whether fixed communications work may fit a 5YA / 10YPP property pathway.",
   },
+  {
+    href: "/financing",
+    title: "Finance & leasing",
+    desc: "How organisations can explore spreading the cost of eligible communications equipment and projects.",
+  },
 ];
 
 export default function SystemsPage() {
@@ -119,7 +124,7 @@ export default function SystemsPage() {
           </p>
           <div className="mt-8 sc-actions">
             <Link href="/pricing-tool" className="sc-btn-primary">Estimate project cost</Link>
-            <Link href="/compare/schools" className="sc-btn-secondary">Compare platforms</Link>
+            <Link href="/compare" className="sc-btn-secondary">Compare by site type</Link>
           </div>
           <p className="mt-6 text-xs text-[var(--sc-slate)]">
             Last reviewed {reviewedLabel("/systems")}

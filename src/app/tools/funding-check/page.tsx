@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { buildMetadata } from "@/lib/seo";
 import { FundingCheckTool } from "./FundingCheckTool";
+import { ToolSuiteNav } from "@/components/tool-suite-nav";
 
 export const metadata: Metadata = buildMetadata({
   title: "NZ School Communications Funding Check",
@@ -24,6 +25,7 @@ export default function FundingCheckPage() {
         <p className="mt-2 text-xs text-[var(--sc-slate)]">
           Indicative only. This tool does not approve funding. <Link href="/funding" className="underline">Read how the funding pathway works</Link>.
         </p>
+        <ToolSuiteNav current="funding" />
       </div>
   );
   return (

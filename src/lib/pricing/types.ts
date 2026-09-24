@@ -1,4 +1,4 @@
-// Pricing types — SmartComms NZ ballpark pricing tool
+// Pricing types — SmartComms NZ pricing tool
 // Single source of truth shapes; all values live in config.ts
 
 export type Tier = "A" | "B" | "C";

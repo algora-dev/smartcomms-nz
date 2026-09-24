@@ -62,6 +62,11 @@ const GUIDES = [
     href: "/pricing",
   },
   {
+    title: "Finance & Leasing for PA, Paging & Intercom Projects",
+    desc: "How equipment finance and leasing can help NZ organisations spread project cost, plus a quick finance checker.",
+    href: "/financing",
+  },
+  {
     title: "5YA Funding for NZ School Communications",
     desc: "How fixed paging, bells, emergency communication, intercoms and cabling may fit the 5YA / 10YPP property process.",
     href: "/funding",
@@ -86,8 +91,9 @@ export default function GuidesPage() {
         ))}
       </div>
       <div className="mt-10 sc-actions">
-        <Link href="/pricing-tool" className="sc-btn-primary">Get a ballpark price</Link>
+        <Link href="/pricing-tool" className="sc-btn-primary">Use the pricing tool</Link>
         <Link href="/tools/funding-check" className="sc-btn-secondary">Check school funding</Link>
+        <Link href="/tools/finance-check" className="sc-btn-secondary">Check finance options</Link>
       </div>
       <ProjectHelpPanel {...{"title": "Have a question about your own site?", "description": "Tell us what you are trying to work out and which part needs a clearer next step.", "buttonLabel": "Ask about your project", "mode": "project_help", "sourceTopic": "guides_hub"}} />
     </div>

@@ -231,7 +231,7 @@ export function PricingTool({ introduction }: { introduction?: ReactNode }) {
   };
 
   // While a result exists: warn before refresh/leaving, and intercept any
-  // "Get a ballpark price" CTA on the page so it asks before wiping.
+  // "Pricing Tool" restart flow on the page so it asks before wiping.
   useEffect(() => {
     if (step !== 3) return;
     const onBeforeUnload = (e: BeforeUnloadEvent) => {
@@ -578,7 +578,7 @@ export function PricingTool({ introduction }: { introduction?: ReactNode }) {
 
       {/* Restart confirmation changes presentation only; the original reset function is retained. */}
       <ConfirmationDialog open={confirmRestart} title="Start a new estimate?"
-        description="This will clear your current ballpark price. If you want to keep it, download the PDF estimate first — you will not be able to recover it after starting again."
+        description="This will clear your current pricing estimate. If you want to keep it, download the PDF estimate first — you will not be able to recover it after starting again."
         cancelLabel="Keep my estimate" confirmLabel="Start new estimate"
         onCancel={() => setConfirmRestart(false)}
         onConfirm={() => { track("pricing_restart_confirmed"); restartTool(); }} />

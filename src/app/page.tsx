@@ -39,26 +39,6 @@ const INTENT_CARDS = [
     desc: "Compare traditional, full IP and hybrid architectures before a project is specified.",
   },
   {
-    href: "/pricing-tool",
-    title: "Work out a ballpark budget",
-    desc: "Get an indicative installed price range in under a minute without needing technical knowledge.",
-  },
-  {
-    href: "/tools/funding-check",
-    title: "Check school funding potential",
-    desc: "NZ state schools can quickly see whether parts of a proposed project may have a 5YA / 10YPP pathway.",
-  },
-  {
-    href: "/tools/finance-check",
-    title: "Explore finance or leasing",
-    desc: "See whether spreading the project cost through equipment finance or leasing looks worth discussing.",
-  },
-  {
-    href: "/funding",
-    title: "Understand 5YA / 10YPP funding",
-    desc: "See why fixed school communications infrastructure may fit and what the school needs to do next.",
-  },
-  {
     href: "/industries/aged-care-retirement-villages",
     title: "Aged care & retirement village systems",
     desc: "PA, paging, entrance intercom and staff communication guidance for rest homes and villages, with use-case shortlists and indicative costs.",
@@ -76,36 +56,10 @@ const INTENT_CARDS = [
 ];
 
 const UTILITY_LINKS = [
-  {
-    href: "/pricing",
-    label: "Indicative NZ pricing ranges",
-    event: "pricing_guide_cta_clicked",
-  },
-  {
-    href: "/funding",
-    label: "Documented school funding examples",
-    event: "funding_guide_cta_clicked",
-  },
-  {
-    href: "/compare",
-    label: "Compare systems by site type",
-    event: "compare_cta_clicked",
-  },
-  {
-    href: "/pricing-tool",
-    label: "Pricing calculator",
-    event: "homepage_pricing_tool_clicked",
-  },
-  {
-    href: "/tools/funding-check",
-    label: "Funding checker",
-    event: "homepage_funding_tool_clicked",
-  },
-  {
-    href: "/tools/finance-check",
-    label: "Finance checker",
-    event: "homepage_finance_tool_clicked",
-  },
+  { href: "/pricing-tool", label: "Pricing Tool", event: "homepage_pricing_tool_clicked" },
+  { href: "/tools/funding-check", label: "Funding Checker", event: "homepage_funding_tool_clicked" },
+  { href: "/tools/finance-check", label: "Finance Checker", event: "homepage_finance_tool_clicked" },
+  { href: "/compare", label: "Compare systems by site type", event: "compare_cta_clicked" },
 ];
 
 export default function HomePage() {
@@ -137,9 +91,9 @@ export default function HomePage() {
       <section className="sc-container py-16">
         <Reveal>
           <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">Free planning tools</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">Plan your project</p>
             <h2 className="sc-section-title mt-2">
-              Start with cost, funding or finance
+              Pricing, funding and finance in one place
             </h2>
             <p className="mt-3 text-lg text-[var(--sc-slate)]">
               You do not need to know the products or technical design first. Use whichever question matters most right now, then move between the tools as the project becomes clearer.
@@ -148,18 +102,18 @@ export default function HomePage() {
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             <div className="sc-card p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">30-60 seconds</p>
-              <h3 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Ballpark Cost Calculator</h3>
+              <h3 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Pricing Tool</h3>
               <p className="mt-2 text-[var(--sc-slate)]">
                 Choose the site situation, areas to cover and feature level to get an indicative installed price range.
               </p>
               <div className="mt-5 sc-actions">
-                <Link href="/pricing-tool" className="sc-btn-primary">Get a ballpark price</Link>
+                <Link href="/pricing-tool" className="sc-btn-primary">Estimate project cost</Link>
                 <Link href="/pricing" className="sc-btn-secondary">See how pricing works</Link>
               </div>
             </div>
             <div className="sc-card p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">NZ schools</p>
-              <h3 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">School Funding Check</h3>
+              <h3 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Funding Checker</h3>
               <p className="mt-2 text-[var(--sc-slate)]">
                 See whether fixed paging, bells, emergency communication, intercoms or cabling may have a potential Ministry 5YA / 10YPP funding pathway.
               </p>
@@ -170,7 +124,7 @@ export default function HomePage() {
             </div>
             <div className="sc-card p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">Schools & organisations</p>
-              <h3 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Finance & Leasing Check</h3>
+              <h3 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Finance Checker</h3>
               <p className="mt-2 text-[var(--sc-slate)]">
                 If paying the full project cost upfront is not ideal, see whether equipment finance or leasing is worth discussing.
               </p>
@@ -187,10 +141,10 @@ export default function HomePage() {
         <div className="sc-container py-16">
           <Reveal>
             <h2 className="sc-section-title">
-              What these systems can cover
+              Choose the path that matches your project
             </h2>
             <p className="mt-3 max-w-3xl text-lg text-[var(--sc-slate)]">
-              SmartComms covers site-wide paging, scheduled bells and messages, emergency communication, fixed intercoms, indoor and outdoor speakers, and the infrastructure that connects them.
+              Start with your site or the problem you are trying to solve. SmartComms covers site-wide paging, scheduled bells and messages, emergency communication, fixed intercoms, indoor and outdoor speakers, and the infrastructure that connects them.
             </p>
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {INTENT_CARDS.map((card) => (

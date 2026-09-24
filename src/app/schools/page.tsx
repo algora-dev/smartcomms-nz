@@ -34,7 +34,7 @@ export default function SchoolsPage() {
         title="School Paging, PA, Bell & Intercom Systems"
         description="Plan a modern school communication system for bells, live announcements, emergency messages, indoor and outdoor coverage, and optional two-way intercom. Compare systems, estimate cost and check potential Ministry funding."
         tags={["School paging", "Bell systems", "Emergency announcements", "Intercom", "5YA funding"]}
-        primaryCta={{ label: "Get a ballpark price", href: "/pricing-tool" }}
+        primaryCta={{ label: "Use the pricing tool", href: "/pricing-tool" }}
         secondaryCta={{ label: "Check school funding", href: "/tools/funding-check" }}
         help={{"label": "Ask about your school project", "mode": "system_selection", "sourceTopic": "schools"}}
         reviewed={reviewedLabel("/schools")}

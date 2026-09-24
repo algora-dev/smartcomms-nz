@@ -3,14 +3,16 @@ import Link from "next/link";
 import AuthorityHero from "@/components/content/AuthorityHero";
 import AtAGlance from "@/components/content/AtAGlance";
 import ContinuePlanning from "@/components/content/ContinuePlanning";
+import { PublishedEvidenceCards } from "@/components/content/PublishedEvidenceCards";
+import { NZ_PUBLIC_EVIDENCE } from "@/lib/content/nz-public-evidence";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "School Bell & Announcement Systems",
+  title: "School Bell, Paging & Announcement Systems NZ",
   description:
-    "Plan school bells, scheduled announcements and zoned paging across classrooms, halls and outdoor areas.",
+    "Plan NZ school bell, paging and announcement systems: schedules, zones, live paging, emergency messages, existing-PA reuse, pricing and funding.",
   path: "/systems/school-bell-announcements",
 });
 
@@ -19,13 +21,13 @@ export default function SchoolBellPage() {
     <div>
       <AuthorityHero
         eyebrow="School Communications Guide"
-        title="School Bell Systems & Daily Announcements"
-        description="Modern school bell systems can combine scheduled bells, live paging, emergency announcements and zoned audio across classrooms, halls and outdoor areas. This guide explains how they work, what schools should specify, and how bell requirements connect to pricing, funding and wider communications planning."
+        title="School Bell, Paging & Announcement Systems"
+        description="Modern school bell and paging systems can combine scheduled bells, live announcements, emergency messages and zoned audio across classrooms, halls and outdoor areas. This NZ guide explains how the systems work, what schools should specify, what can sometimes be retained, and how bells connect to pricing, funding and wider communications planning."
         tags={["School bells", "Scheduled announcements", "Zoned paging", "Emergency messaging", "Outdoor coverage"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
         secondaryCta={{ label: "Check school funding", href: "/tools/funding-check" }}
         help={{"label": "Ask about your school bell project", "mode": "system_selection", "sourceTopic": "school_bell_announcements"}}
-        contents={[["#how", "How modern school bell systems work"], ["#schedules", "What schools typically need from a schedule"], ["#announcements", "Live announcements and daily use"], ["#replacing", "Replacing an aging bell system"], ["#emergency", "Bells and emergency communication"], ["#requirements", "What the Ministry expects"], ["#cost-funding", "Costs and funding"], ["#specifying", "Specifying the system"]]}
+        contents={[["#how", "How modern school bell systems work"], ["#schedules", "What schools typically need from a schedule"], ["#announcements", "Live announcements and daily use"], ["#nz-examples", "Published NZ school examples"], ["#replacing", "Replacing an aging bell system"], ["#emergency", "Bells and emergency communication"], ["#requirements", "What the Ministry expects"], ["#cost-funding", "Costs and funding"], ["#specifying", "Specifying the system"], ["#bell-faq", "School bell FAQs"]]}
         reviewed={reviewedLabel("/systems/school-bell-announcements")}
         note="NZ-focused guidance"
         breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "School Bells & Announcements" }]}
@@ -82,18 +84,21 @@ export default function SchoolBellPage() {
         — where a classroom can respond — are covered in our{" "}
         <Link href="/systems/ip-intercom">IP intercom guide</Link>.
       </p>
+      <PublishedEvidenceCards
+        id="nz-examples"
+        title="What published NZ school projects show"
+        description="Real projects show that a modern school bell system is usually part of a wider communications design rather than a standalone buzzer. These accounts are attributed to the businesses that published them; SmartComms has not independently audited the installations."
+        items={[NZ_PUBLIC_EVIDENCE.threeKings, NZ_PUBLIC_EVIDENCE.ormiston]}
+      />
       <h2 id="replacing">Replacing an aging bell system</h2>
       <p>
-        Common scenarios we hear about from NZ schools: the old timer is failing and no longer
-        supported, a timetable change exposes the limits of a single fixed schedule, or the school
-        wants bells that follow zone-level control. In many cases the existing speakers and cabling
+        Common replacement scenarios include an old timer that is failing or no longer supported, a timetable change that exposes the limits of one fixed schedule, or a school that needs different bell behaviour across separate zones. In many cases the existing speakers and cabling
         can be kept and only the control layer replaced — see{" "}
         <Link href="/systems/traditional-vs-ip">what to keep when replacing an old PA system</Link>.
       </p>
       <h2 id="emergency">Bells and emergency communication</h2>
       <p>
-        Most schools now expect the bell/paging system to also support emergency tones and spoken
-        instructions for lockdown or evacuation. That requirement changes the specification
+        Many school communications briefs ask the bell/paging system to also support emergency tones or spoken instructions for lockdown and evacuation. That requirement changes the specification
         meaningfully — redundant paths, pre-recorded messages and clearly marked activation points.
         Our <Link href="/systems/emergency-lockdown">emergency and lockdown communication guide</Link>{" "}
         covers the planning considerations.
@@ -110,7 +115,7 @@ export default function SchoolBellPage() {
       <p>
         Bell functionality is usually a feature of the platform rather than a separate purchase, so
         cost is driven by endpoint count, zones and cabling state. Use the{" "}
-        <Link href="/pricing-tool">ballpark cost calculator</Link> for indicative figures, and the{" "}
+        <Link href="/pricing-tool">Pricing Tool</Link> for indicative figures, and the{" "}
         <Link href="/tools/funding-check">funding checker</Link> to see whether a project might fit
         a 5YA / 10YPP property funding route. No tool on this site can promise funding outcomes.
       </p>
@@ -121,11 +126,28 @@ export default function SchoolBellPage() {
         <Link href="/guides/school-pa-specification-checklist">specification checklist</Link> gives
         you a like-for-like comparison framework.
       </p>
+      <section id="bell-faq" className="not-prose mt-10 scroll-mt-28">
+        <p className="sc-eyebrow">Common questions</p>
+        <h2 className="sc-section-title mt-2">School bell and paging FAQs</h2>
+        <div className="mt-5 space-y-4">
+          {[
+            ["What replaces a traditional school bell controller?", "On many modern systems, bell schedules are managed in software within the paging platform. The exact controller may be a server, gateway, scheduler or distributed management application, so quotes should identify the actual control component and what happens if it is unavailable."],
+            ["Can a school keep its existing speakers?", "Sometimes. A hybrid design can retain suitable 100V speakers, amplifiers or cabling while replacing the control layer. Reuse depends on condition, coverage, zoning and whether the existing circuits can support the control the school now needs."],
+            ["Can school bells use music or spoken announcements instead of a buzzer?", "Yes on many modern platforms. Scheduled WAV/MP3 audio, tones and prerecorded announcements are common capabilities, but the proposed system should be demonstrated with the school's actual timetable and exception-day requirements."],
+            ["Can the same system handle bells and lockdown messages?", "Often, yes. Many paging platforms can prioritise prerecorded or live emergency messages over routine bells. The school still needs a documented emergency plan, distinct signals and an agreed activation/cancellation process; paging does not replace required fire-alarm or specialist life-safety systems."],
+          ].map(([q, a]) => (
+            <div key={q} className="sc-card p-5">
+              <h3 className="sc-card-title">{q}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">{a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
       <ContinuePlanning
         help={{"title": "Need help with bells or announcements?", "description": "Tell us about your timetable, the areas that need coverage and the system you have now.", "buttonLabel": "Ask about your school bell project", "mode": "system_selection", "sourceTopic": "school_bell_announcements"}}
         items={[
           { title: "Specification checklist", desc: "Define the scope so every quote covers the same bells, zones and emergency functions.", href: "/guides/school-pa-specification-checklist" },
-          { title: "IP intercom & two-way paging", desc: "Add two-way communication at gates, reception and selected classrooms.", href: "/systems/ip-intercom" },
+          { title: "Compare school systems", desc: "See which platforms fit bells, paging, intercom, classroom audio and hybrid upgrades.", href: "/compare/schools" },
           { title: "5YA funding guide", desc: "How school communications upgrades may fit the 10YPP / 5YA property process.", href: "/funding" },
         ]}
       />
@@ -137,9 +159,9 @@ export default function SchoolBellPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             articleSchema({
-              headline: "School Bell Systems & Daily Announcements (NZ)",
+              headline: "School Bell, Paging & Announcement Systems NZ",
               description:
-                "How modern school bell and announcement systems work in New Zealand: automated schedules, zone control, live paging and replacement planning.",
+                "How modern school bell, paging and announcement systems work in New Zealand: schedules, zones, live paging, emergency messages, replacement planning and funding context.",
               url: `${site.url}/systems/school-bell-announcements`,
               datePublished: publishedDate("/systems/school-bell-announcements"),
               dateModified: reviewedDate("/systems/school-bell-announcements"),

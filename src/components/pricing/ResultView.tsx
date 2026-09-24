@@ -10,7 +10,7 @@ import { InquiryModal } from "./InquiryModal";
 import { ToolCrossSell } from "@/components/tool-cross-sell";
 import { track } from "@/lib/analytics";
 
-const pdfLabel = "SmartComms NZ ballpark system estimate";
+const pdfLabel = "SmartComms NZ indicative system estimate";
 
 export function ResultView({
   state,
@@ -183,7 +183,7 @@ export function ResultView({
 
   return (
     <div>
-      <h1 tabIndex={-1} className="sc-tool-title outline-none">Your ballpark installed price</h1>
+      <h1 tabIndex={-1} className="sc-tool-title outline-none">Your indicative installed price</h1>
       <div className="mt-4 rounded-2xl border border-[var(--sc-border)] bg-white p-5 text-center shadow-sm sm:p-8">
         <div className="text-3xl font-bold leading-tight tracking-tight text-[var(--sc-navy)] sm:text-5xl">
           {formatNZD(estimate.low)} – {formatNZD(estimate.high)}{rangeSuffix}

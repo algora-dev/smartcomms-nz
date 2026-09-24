@@ -180,7 +180,7 @@
   .sc-skip-link { position: fixed; top: 0.5rem; left: 1rem; z-index: 100; padding: 0.75rem 1rem; background: #fff; color: var(--sc-navy); border: 2px solid var(--sc-navy); border-radius: 0.5rem; transform: translateY(-200%); }
   .sc-skip-link:focus { transform: translateY(0); }
   .sc-nav-link { display: inline-flex; align-items: center; min-height: 2.75rem; padding-block: 0.5rem; color: var(--sc-slate); font-size: 0.875rem; font-weight: 500; }
-  .sc-nav-link:hover, .sc-nav-link[aria-current="page"] { color: var(--sc-navy); text-decoration: underline; text-decoration-color: var(--sc-teal-strong); text-underline-offset: 0.35em; }
+  .sc-nav-link:hover, .sc-nav-link[aria-current="page"], .sc-nav-link[data-active="true"] { color: var(--sc-navy); text-decoration: underline; text-decoration-color: var(--sc-teal-strong); text-underline-offset: 0.35em; }
 
   @media (min-width: 640px) {
     .sc-container { padding-inline: 1.5rem; }

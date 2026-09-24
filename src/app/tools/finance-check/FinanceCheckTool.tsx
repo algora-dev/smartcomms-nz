@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { track } from "@/lib/analytics";
 import { ProjectEnquiryModal } from "@/components/enquiry/ProjectEnquiryModal";
+import { ToolSuiteNav } from "@/components/tool-suite-nav";
 import {
   DISCLAIMER,
   MONTHLY_BUDGETS,
@@ -313,6 +314,7 @@ export function FinanceCheckTool() {
           <p className="mt-2 text-xs leading-relaxed text-[var(--sc-slate)]">
             Preliminary guidance only — not a finance application, credit assessment or approval. <Link href="/financing" className="underline">Read how equipment finance and leasing can work</Link>.
           </p>
+          <ToolSuiteNav current="finance" />
         </div>
       )}
       <div className="mb-8">

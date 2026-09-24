@@ -118,7 +118,7 @@ export default function NetworkReadinessPage() {
         Network readiness is one of the main cost drivers between otherwise similar quotes. A
         network-ready site means endpoint labour; an unready site means switch upgrades, cabling and
         possible fibre work. Our <Link href="/pricing">pricing guide</Link> reflects this split, and
-        the <Link href="/pricing-tool">ballpark calculator</Link> asks about it directly.
+        the <Link href="/pricing-tool">Pricing Tool</Link> asks about it directly.
       </p>
       <h2 id="funding">Funding note for schools</h2>
       <p>

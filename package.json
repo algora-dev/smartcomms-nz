@@ -16,7 +16,8 @@
     "test:finance": "tsx scripts/test-finance.mjs",
     "test:aged-care": "tsx scripts/test-aged-care.mjs",
     "test:public-project-examples": "node scripts/test-public-project-examples.mjs",
-    "test:design-ux": "node scripts/test-design-ux.mjs"
+    "test:design-ux": "node scripts/test-design-ux.mjs",
+    "test:growth": "node scripts/test-growth-ux.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.116.0",

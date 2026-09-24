@@ -15,7 +15,7 @@ export const runtime = "nodejs";
 /**
  * POST /api/pricing-tool/output-log
  *
- * Server-side proof-of-use logging for the Ballpark Pricing Tool.
+ * Server-side proof-of-use logging for the Pricing Tool.
  * SC-02 (2026-09-20): the server now VALIDATES the incoming state through the
  * shared allowlisted parser and RECOMPUTES the estimate itself via
  * calculateEstimate(). Client-supplied totals/breakdowns are accepted from the

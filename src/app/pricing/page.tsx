@@ -133,7 +133,7 @@ export default function PricingPage() {
             The calculator asks only three things: the site situation, the areas you need covered and the capability level you want. You can refine it further if you know more, but you do not need technical knowledge to get started.
           </p>
           <div className="mt-4 sc-actions">
-            <Link href="/pricing-tool" className="sc-btn-primary">Get a ballpark price</Link>
+            <Link href="/pricing-tool" className="sc-btn-primary">Use the pricing tool</Link>
             <Link href="/funding" className="sc-btn-secondary">School funding guide</Link>
             <Link href="/financing" className="sc-btn-secondary">Finance & leasing guide</Link>
           </div>

@@ -129,7 +129,7 @@ export default function NzSchoolPaRequirementsPage() {
         <li>Check what infrastructure can be retained (speakers, cabling, network)</li>
         <li>Write the scope using the{" "}
           <Link href="/guides/school-pa-specification-checklist">specification checklist</Link></li>
-        <li>Get indicative costs with the <Link href="/pricing-tool">ballpark calculator</Link> and
+        <li>Get indicative costs with the <Link href="/pricing-tool">Pricing Tool</Link> and
           the funding read with the <Link href="/tools/funding-check">funding checker</Link></li>
         <li>Raise the project with your property advisor for 10YPP / 5YA inclusion</li>
         <li>Compare platform options on the <Link href="/compare/schools">comparison guide</Link> and seek

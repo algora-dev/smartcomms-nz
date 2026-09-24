@@ -21,29 +21,29 @@ export default function ToolsPage() {
       <div className="mt-10 grid gap-6 md:grid-cols-3">
         <div className="sc-card p-6">
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">30-60 seconds</p>
-          <h2 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Ballpark Cost Calculator</h2>
+          <h2 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Pricing Tool</h2>
           <p className="mt-2 text-[var(--sc-slate)]">
             Describe the site, areas to cover and desired capability level to get an indicative installed range. No technical design knowledge is required.
           </p>
-          <Link href="/pricing-tool" className="sc-btn-primary mt-5">Get a ballpark price</Link>
+          <Link href="/pricing-tool" className="sc-btn-primary mt-5">Estimate project cost</Link>
         </div>
 
         <div className="sc-card p-6">
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">NZ schools</p>
-          <h2 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">School Communications Funding Check</h2>
+          <h2 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Funding Checker</h2>
           <p className="mt-2 text-[var(--sc-slate)]">
             See which parts of a paging, PA, bell, intercom or communications project may have a potential Ministry 5YA / 10YPP funding pathway.
           </p>
-          <Link href="/tools/funding-check" className="sc-btn-primary mt-5">Check potential funding</Link>
+          <Link href="/tools/funding-check" className="sc-btn-primary mt-5">Check funding</Link>
         </div>
 
         <div className="sc-card p-6">
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">About a minute</p>
-          <h2 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Finance & Leasing Check</h2>
+          <h2 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Finance Checker</h2>
           <p className="mt-2 text-[var(--sc-slate)]">
             Tell us who the project is for, the rough value and what sort of regular payment feels manageable. Get a practical starting point without completing a finance application.
           </p>
-          <Link href="/tools/finance-check" className="sc-btn-primary mt-5">Check finance options</Link>
+          <Link href="/tools/finance-check" className="sc-btn-primary mt-5">Check finance</Link>
         </div>
       </div>
 

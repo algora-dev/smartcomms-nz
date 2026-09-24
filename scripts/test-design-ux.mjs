@@ -57,7 +57,7 @@ for(const [file,context] of [
 ])check(`${file}: contextual help`,text(file).includes(context));
 for(const file of ['src/app/privacy/page.tsx','src/app/about/disclosure/page.tsx','src/app/about/editorial-policy/page.tsx','src/app/about/methodology/page.tsx'])check(`${file}: no forced body sales panel`,!text(file).includes('ProjectHelpPanel'));
 check('pricing intro hidden on result only',text('src/components/pricing/PricingTool.tsx').includes('{step !== 3 && introduction}'));
-check('pricing result has one main result title',text('src/components/pricing/ResultView.tsx').includes('<h1 tabIndex={-1} className="sc-tool-title outline-none">Your ballpark installed price</h1>'));
+check('pricing result has one main result title',text('src/components/pricing/ResultView.tsx').includes('<h1 tabIndex={-1} className="sc-tool-title outline-none">Your indicative installed price</h1>'));
 check('finance result uses tool title',text('src/app/tools/finance-check/FinanceCheckTool.tsx').includes('<h1 tabIndex={-1} className="sc-tool-title mt-4 outline-none">{result.headline}</h1>'));
 check('funding intro is supplied to interactive shell',text('src/app/tools/funding-check/page.tsx').includes('<FundingCheckTool introduction={'));
 check('design authority documented',existsSync(join(root,'docs/design/SMARTCOMMS_DESIGN_UX_STANDARD.md')));

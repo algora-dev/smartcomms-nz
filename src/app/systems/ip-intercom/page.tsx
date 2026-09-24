@@ -3,14 +3,16 @@ import Link from "next/link";
 import AuthorityHero from "@/components/content/AuthorityHero";
 import AtAGlance from "@/components/content/AtAGlance";
 import ContinuePlanning from "@/components/content/ContinuePlanning";
+import { PublishedEvidenceCards } from "@/components/content/PublishedEvidenceCards";
+import { NZ_PUBLIC_EVIDENCE } from "@/lib/content/nz-public-evidence";
 import { articleSchema, breadcrumbSchema, buildMetadata } from "@/lib/seo";
-import { publishedDate, reviewedLabel } from "@/lib/content-meta";
+import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "IP Intercom & Two-Way Paging",
+  title: "School & IP Intercom Systems NZ | Two-Way Paging",
   description:
-    "What IP intercoms add to a paging system: two-way audio, SIP integration, classroom call points, gate entry and what to consider when specifying intercom for NZ sites.",
+    "Plan IP intercom systems for NZ schools and sites: classroom call points, SIP/VoIP integration, gate and video entry, two-way paging, current NZ examples and pricing considerations.",
   path: "/systems/ip-intercom",
 });
 
@@ -19,13 +21,13 @@ export default function IpIntercomPage() {
     <div>
       <AuthorityHero
         eyebrow="Two-Way Communication Guide"
-        title="IP Intercom & Two-Way Paging Systems"
-        description="IP intercom systems add two-way communication to a wider paging network, allowing reception, classrooms, gates, offices and other locations to call or speak back. This guide explains fixed call points, SIP intercoms, classroom call buttons, video entry and how intercom functions can share the same infrastructure as paging and announcements."
+        title="IP Intercom Systems for Schools & NZ Sites"
+        description="IP intercom systems add two-way communication to a wider paging network, allowing reception, classrooms, gates, offices and other locations to call or speak back. This NZ guide explains fixed call points, SIP/VoIP integration, classroom call buttons, video entry and how intercom can share infrastructure with paging and announcements."
         tags={["IP intercom", "Two-way paging", "SIP intercom", "Call points", "Video entry"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
         secondaryCta={{ label: "Compare system platforms", href: "/compare" }}
         help={{"label": "Ask about your intercom requirements", "mode": "system_selection", "sourceTopic": "ip_intercom"}}
-        contents={[["#how", "How IP intercom works"], ["#school-use", "Where intercom earns its place in schools"], ["#sip", "SIP, Teams and VoIP integration"], ["#vs-one-way", "Two-way vs one-way: specifying the mix"], ["#cost", "Cost impact"], ["#more", "Related resources"]]}
+        contents={[["#how", "How IP intercom works"], ["#school-use", "Where intercom earns its place in schools"], ["#sip", "SIP, Teams and VoIP integration"], ["#nz-examples", "Published NZ examples"], ["#vs-one-way", "Two-way vs one-way: specifying the mix"], ["#cost", "Cost impact"], ["#intercom-faq", "IP intercom FAQs"], ["#more", "Related resources"]]}
         reviewed={reviewedLabel("/systems/ip-intercom")}
         note="NZ-focused guidance"
         breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "IP Intercom & Two-Way Paging" }]}
@@ -79,12 +81,19 @@ export default function IpIntercomPage() {
       </p>
       <h2 id="sip">SIP, Teams and VoIP integration</h2>
       <p>
-        Because most IP intercom speaks SIP, it can integrate with a school or business phone
-        system: a gate call can ring a reception handset, a classroom call can appear on a Teams or
-        VoIP client, and missed intercom calls can follow voicemail paths. When specifying, state
+        Many IP intercom platforms support SIP, which can allow calls to integrate with a school or
+        business phone environment. A gate call may ring a reception handset or SIP client, while
+        Microsoft Teams integration can require compatible telephony, an SBC/gateway or another
+        supported service rather than working directly from every intercom. When specifying, state
         clearly which phone environment the intercom must integrate with and who supports that
         integration — the paging installer, the phone system vendor, or both.
       </p>
+      <PublishedEvidenceCards
+        id="nz-examples"
+        title="What current NZ intercom evidence shows"
+        description="Intercom requirements vary from a single visitor entrance to a wider paging/calling workflow. These examples show a current local product channel and a published NZ project where intercom was designed alongside access control and other security systems."
+        items={[NZ_PUBLIC_EVIDENCE.sektorVerso, NZ_PUBLIC_EVIDENCE.summersetStJohns]}
+      />
       <h2 id="vs-one-way">Two-way vs one-way: specifying the mix</h2>
       <p>
         Most deployments do not need intercom at every speaker location. A common pattern is one-way
@@ -97,11 +106,28 @@ export default function IpIntercomPage() {
       <h2 id="cost">Cost impact</h2>
       <p>
         Intercom uplift depends on endpoint count and integration work. The{" "}
-        <Link href="/pricing-tool">ballpark calculator</Link> lets you model feature scope against
-        indicative NZ installed cost ranges, and the{" "}
-        <Link href="/tools/funding-check">funding checker</Link> indicates whether an intercom
-        component might fit a school property funding route.
+        <Link href="/pricing-tool">Pricing Tool</Link> lets you model feature scope against
+        indicative NZ installed cost ranges. For a school project, the{" "}
+        <Link href="/tools/funding-check">Funding Checker</Link> can indicate whether a property pathway is worth investigating; other organisations can use the{" "}
+        <Link href="/tools/finance-check">Finance Checker</Link> to explore finance or leasing.
       </p>
+      <section id="intercom-faq" className="not-prose mt-10 scroll-mt-28">
+        <p className="sc-eyebrow">Common questions</p>
+        <h2 className="sc-section-title mt-2">IP intercom FAQs</h2>
+        <div className="mt-5 space-y-4">
+          {[
+            ["What is an IP intercom?", "An IP intercom is a network-connected call point with a microphone and speaker, often with a call button, camera or access-control interface. It establishes a two-way call to a reception station, phone, software client or other compatible endpoint."],
+            ["Do school classrooms all need two-way intercom?", "Usually not. Many projects use one-way paging throughout the site and reserve two-way endpoints for reception, gates, selected classrooms or specialist rooms. The right mix depends on who needs to call whom and how those calls are answered."],
+            ["Can an IP intercom work with the existing phone system?", "Often, if the intercom and phone environment share compatible SIP/telephony support. Confirm registration, call routing, licences and support responsibility for the exact PBX or hosted phone service rather than assuming brand-level compatibility."],
+            ["Can gate intercom include video and door release?", "Yes on suitable products. A complete entrance design can combine video, two-way audio and relay/access-control functions, but those elements should be quoted and tested as one workflow including the answering location and after-hours behaviour."],
+          ].map(([q, a]) => (
+            <div key={q} className="sc-card p-5">
+              <h3 className="sc-card-title">{q}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">{a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
       <h2 id="more">Related resources</h2>
       <ul>
         <li><Link href="/systems/school-bell-announcements">School bells and announcements</Link></li>
@@ -125,11 +151,12 @@ export default function IpIntercomPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             articleSchema({
-              headline: "IP Intercom & Two-Way Paging Systems (NZ)",
+              headline: "School & IP Intercom Systems NZ",
               description:
                 "What IP intercoms add to a paging system: two-way audio, SIP integration, classroom call points, gate entry and specification considerations.",
               url: `${site.url}/systems/ip-intercom`,
               datePublished: publishedDate("/systems/ip-intercom"),
+              dateModified: reviewedDate("/systems/ip-intercom"),
             })
           ),
         }}

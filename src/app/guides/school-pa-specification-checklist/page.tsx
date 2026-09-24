@@ -140,7 +140,7 @@ export default function SpecificationChecklistPage() {
         <li>Require a compliance response per section (&quot;complies / partially / not included + price&quot;)</li>
         <li>Score on lifecycle and support, not just the bottom line — see the{" "}
           <Link href="/compare/schools">platform comparison</Link> for the dimensions that matter</li>
-        <li>Check indicative market pricing with the <Link href="/pricing-tool">ballpark calculator</Link>{" "}
+        <li>Check indicative market pricing with the <Link href="/pricing-tool">Pricing Tool</Link>{" "}
           before accepting anything outlier-high or suspiciously low</li>
       </ol>
       <h2 id="funding">Connecting to funding</h2>

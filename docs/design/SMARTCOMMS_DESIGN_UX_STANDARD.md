@@ -1,7 +1,7 @@
 # SmartComms NZ — Design & UX Standard
 
-Version: **1.0.0** · implementation baseline: **23 September 2026**  
-Derived from: `smartcomms-nz-current-source-2026-09-23.zip`, committed baseline `840b6dd61256f9f66d6a3895ad544dc6d2eda187`.
+Version: **1.1.0** · implementation baseline: **23 September 2026**  
+Derived from the current SmartComms 23 September 2026 Design/UX baseline and updated after the navigation, tool-discovery and Search Console growth pass.
 
 This is the **internal SmartComms standard**, not a claim of third-party certification. It complements, rather than replaces, `docs/agent-ready/SMARTCOMMS_PROFILE.md`. It governs presentation and human journeys; it does not authorise pricing, product, funding, finance, privacy-policy or API changes.
 
@@ -27,6 +27,8 @@ Use approved patterns rather than inventing a new visual language for each page.
 | Every project enquiry trigger | `src/components/enquiry/ProjectHelpLauncher.tsx` |
 | The actual enquiry form and process | `src/components/enquiry/ProjectEnquiryModal.tsx` |
 | Navigation/footer | `src/components/site-header.tsx`, `src/components/site-footer.tsx` |
+| Planning-tool mini-navigation | `src/components/tool-suite-nav.tsx` |
+| Published NZ evidence cards on authority pages | `src/components/content/PublishedEvidenceCards.tsx` |
 | Business rules, public facts and dates | Existing `src/lib/*` authorities; never the design system |
 
 Do not extract a component for every paragraph. Extract a pattern when there is a repeated interaction, repeated semantics, or repeated complex styling that needs to remain identical. Page-specific source wrappers may adapt their own typed evidence registers to the shared renderer.
@@ -214,3 +216,53 @@ Reviewed 23 September 2026. These support implementation patterns, not commercia
 ## 14. Verification status
 
 See `IMPLEMENTATION_AND_QA.md` in this directory for the exact tests executed in this workspace, isolated-preview limitations, production merge checks and rollback guidance. The standard alone is not proof of a successful build or deployment.
+
+## 19. Navigation information architecture (v1.1)
+
+The desktop header keeps a small number of top-level choices. Do not add a new top-level navigation item for every future page. Use these groups:
+
+- **Systems** — system architecture and function guides.
+- **Compare** — site-type comparison hub plus current school, aged-care and industrial comparisons.
+- **Tools** — Pricing Tool, Funding Checker, Finance Checker and the tools hub.
+- **Guides** — practical planning resources.
+- **About** — ownership/methodology entry point.
+- **Ask SmartComms** — persistent human-help action; opens the shared enquiry portal.
+
+Desktop uses compact disclosure menus; mobile uses the hamburger plus expandable groups. Navigation labels describe the destination plainly. Generic comparison links go to `/compare`; school-specific links may still go to `/compare/schools`.
+
+Do not restore a standalone pricing button to the main header merely because pricing is important: the Tools group and homepage tool suite provide deliberate discovery without recreating header clutter.
+
+## 20. Planning-tool suite
+
+Treat **Pricing Tool**, **Funding Checker** and **Finance Checker** as one recognisable suite.
+
+Naming:
+
+- **Pricing Tool** — navigation/card/tool title. “Ballpark” may remain descriptive body copy explaining the estimate, but is not the primary product name.
+- **Funding Checker** — explicitly scoped to eligible NZ school/property pathways.
+- **Finance Checker** — broader finance/leasing conversation screener.
+
+Each tool introduction includes the same compact tool-suite navigation. A completed result remains the most prominent result content; cross-tool next actions stay contextual rather than forcing the user back through a hub.
+
+Homepage tool cards use the same names and make the three routes visually equal.
+
+## 21. Search-growth page pattern
+
+For existing pages that begin earning relevant Search Console impressions, strengthen the **answer and evidence before creating a new page**. The preferred sequence is:
+
+1. align title/H1/description with the genuine query intent without keyword stuffing;
+2. answer the question clearly near the top;
+3. fill substantive information gaps;
+4. add visible FAQs only where they answer real adjacent questions;
+5. improve internal links to the relevant comparison/tool;
+6. add published NZ examples or official guidance when they materially improve the answer;
+7. preserve the contextual SmartComms enquiry route.
+
+Do not rewrite a page solely because its early ranking is low. New-site crawl/index lag and small impression counts are not evidence of poor content.
+
+## 22. Evidence diversity for authority pages
+
+For technical capability claims, prefer first-party manufacturer/official documentation. For New Zealand project or supply context, use genuine local evidence from the organisation that published the project/listing. Do not make NZAV, Sound Choice Pro Audio, or any other preferred partner the default source when independent local evidence exists.
+
+Published examples should identify who published the account and its limitations. They are evidence of a published project/application, not SmartComms performance audits or proof of current product availability unless the source actually supports that claim.
+

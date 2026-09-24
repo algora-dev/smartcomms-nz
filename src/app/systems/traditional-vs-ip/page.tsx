@@ -146,7 +146,7 @@ export default function TraditionalVsIpPage() {
           <li>Integration requirements such as fire, lockdown or access systems</li>
         </ul>
         <p>
-          Use the <Link href="/pricing-tool">ballpark cost calculator</Link> to get an indicative
+          Use the <Link href="/pricing-tool">Pricing Tool</Link> to get an indicative
           installed range for your own configuration.
         </p>
 

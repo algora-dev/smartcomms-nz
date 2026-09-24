@@ -6,11 +6,13 @@ import { site } from "@/lib/site";
 import AuthorityHero from "@/components/content/AuthorityHero";
 import AtAGlance from "@/components/content/AtAGlance";
 import ContinuePlanning from "@/components/content/ContinuePlanning";
+import { PublishedEvidenceCards } from "@/components/content/PublishedEvidenceCards";
+import { NZ_PUBLIC_EVIDENCE } from "@/lib/content/nz-public-evidence";
 
 export const metadata: Metadata = buildMetadata({
-  title: "IP Paging & Network PA Systems",
+  title: "IP Paging & PA Systems NZ | Network & Hybrid Guide",
   description:
-    "Learn how IP paging and network PA systems work, what infrastructure they need, and when full-IP or hybrid designs make sense.",
+    "Understand IP paging and PA systems in New Zealand: PoE speakers, zones, schedules, SIP, existing-PA reuse, hybrid designs, NZ examples and indicative pricing.",
   path: "/systems/ip-paging-pa",
 });
 
@@ -19,7 +21,7 @@ export default function IpPagingPaPage() {
     <div>
       <AuthorityHero
         eyebrow="IP Paging & PA System Guide"
-        title="IP Paging & Network PA Systems"
+        title="IP Paging & PA Systems in New Zealand"
         description="Modern IP paging systems use the data network to deliver live announcements, scheduled messages, emergency audio and zoned communication across classrooms, offices, warehouses and multi-building sites. This guide explains how the architecture works, when full-IP or hybrid systems make sense, and what to consider before specifying one."
         tags={["IP paging", "Network PA", "PoE speakers", "Zoned announcements", "Hybrid systems"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
@@ -113,6 +115,12 @@ export default function IpPagingPaPage() {
         <Link href="/systems/traditional-vs-ip">what to keep when replacing an old PA</Link> deals
         specifically with reuse.
       </p>
+      <PublishedEvidenceCards
+        id="nz-examples"
+        title="What published NZ paging projects show"
+        description="There is no single correct architecture for every site. These published examples show direct network paging, network control feeding amplifier zones, and a conventional warehouse paging design where coverage and acoustics mattered more than forcing every endpoint onto IP."
+        items={[NZ_PUBLIC_EVIDENCE.richmondRoad, NZ_PUBLIC_EVIDENCE.ormiston, NZ_PUBLIC_EVIDENCE.sanitarium]}
+      />
       <h2 id="cost">What IP paging tends to cost</h2>
       <p>
         Endpoint count, indoor/outdoor mix, cabling state and network readiness are the main cost
@@ -130,6 +138,23 @@ export default function IpPagingPaPage() {
         the requirements and shortlist differ. For warehouse announcements, shift bells and noisy work areas, see the{" "}
         <Link href="/industries/warehouses-manufacturing-industrial">warehouse and industrial comparison</Link>.
       </p>
+      <section id="ip-paging-faq" className="not-prose mt-10 scroll-mt-28">
+        <p className="sc-eyebrow">Common questions</p>
+        <h2 className="sc-section-title mt-2">IP paging and PA FAQs</h2>
+        <div className="mt-5 space-y-4">
+          {[
+            ["What is an IP paging system?", "An IP paging system sends live or prerecorded audio over the data network to network speakers, intercoms, gateways or other endpoints. Zones and schedules are usually software-defined rather than fixed by one amplifier circuit."],
+            ["Does IP paging require a VoIP phone system?", "No. Some systems use SIP phones or a PBX for convenient paging, but scheduling and multicast paging can also operate without a phone system on suitable platforms. Confirm the exact control workflow in the proposed design."],
+            ["Can IP paging use existing 100V speakers?", "Often, yes. A gateway or network audio bridge can feed a compatible amplifier so useful existing speaker circuits are retained. The trade-off is that speakers sharing one analogue circuit cannot gain individual endpoint control without changing the downstream architecture."],
+            ["Is full IP always better than a hybrid system?", "No. Full IP provides flexible endpoint control, but a hybrid can be the better-value answer when existing speakers, amplifiers or cabling are in good condition and still suit the required zones."],
+          ].map(([q, a]) => (
+            <div key={q} className="sc-card p-5">
+              <h3 className="sc-card-title">{q}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">{a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
       <h2 id="next">Next steps</h2>
       <ul>
         <li>
@@ -141,8 +166,10 @@ export default function IpPagingPaPage() {
           <Link href="/guides/school-pa-specification-checklist">specification checklist</Link>
         </li>
         <li>
-          Get an indicative cost with the <Link href="/pricing-tool">ballpark calculator</Link>, or{" "}
-          <Link href="/tools/funding-check">check potential school funding</Link>
+          Get an indicative cost with the <Link href="/pricing-tool">Pricing Tool</Link>
+        </li>
+        <li>
+          For a school project, <Link href="/tools/funding-check">check potential funding</Link>; other organisations can also <Link href="/tools/finance-check">explore finance or leasing</Link>
         </li>
       </ul>
       <ContinuePlanning
@@ -162,9 +189,9 @@ export default function IpPagingPaPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             articleSchema({
-              headline: "IP Paging & Network PA Systems",
+              headline: "IP Paging & PA Systems in New Zealand",
               description:
-                "A plain-language explanation of IP paging and network PA systems for NZ sites: Audio over IP, PoE endpoints, zoning, scheduling and architecture trade-offs.",
+                "A plain-language explanation of IP paging and PA systems for NZ sites: Audio over IP, PoE endpoints, zoning, scheduling, hybrid reuse, published NZ examples and architecture trade-offs.",
               url: `${site.url}/systems/ip-paging-pa`,
               datePublished: publishedDate("/systems/ip-paging-pa"),
               dateModified: reviewedDate("/systems/ip-paging-pa"),
