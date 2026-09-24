@@ -110,6 +110,9 @@ export default function EmergencyLockdownPage() {
         description="Published project accounts show how emergency communication can sit alongside normal bells and paging. These are installer/distributor accounts, not SmartComms audits or substitutes for each school's emergency plan."
         items={[NZ_PUBLIC_EVIDENCE.threeKings, NZ_PUBLIC_EVIDENCE.ormiston]}
       />
+      <p className="not-prose mt-4 text-sm leading-relaxed text-[var(--sc-slate)]">
+        For a broader evidence view, <Link href="/guides/nz-school-paging-projects" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">compare five published NZ school paging projects</Link> and see which accounts explicitly describe bells, zoning, outdoor coverage, lockdown or two-way communication.
+      </p>
       <h2 id="redundancy">Redundancy and failure modes to ask about</h2>
       <ul>
         <li>What happens to emergency paging if the network switch, server or NVR fails?</li>

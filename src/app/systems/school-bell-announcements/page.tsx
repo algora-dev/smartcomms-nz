@@ -90,6 +90,9 @@ export default function SchoolBellPage() {
         description="Real projects show that a modern school bell system is usually part of a wider communications design rather than a standalone buzzer. These accounts are attributed to the businesses that published them; SmartComms has not independently audited the installations."
         items={[NZ_PUBLIC_EVIDENCE.threeKings, NZ_PUBLIC_EVIDENCE.ormiston]}
       />
+      <p className="not-prose mt-4 text-sm leading-relaxed text-[var(--sc-slate)]">
+        Want the wider picture? <Link href="/guides/nz-school-paging-projects" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">Compare five published NZ school paging projects</Link> across bells, zoning, outdoor coverage, emergency messaging, intercom and product lifecycle.
+      </p>
       <h2 id="replacing">Replacing an aging bell system</h2>
       <p>
         Common replacement scenarios include an old timer that is failing or no longer supported, a timetable change that exposes the limits of one fixed schedule, or a school that needs different bell behaviour across separate zones. In many cases the existing speakers and cabling

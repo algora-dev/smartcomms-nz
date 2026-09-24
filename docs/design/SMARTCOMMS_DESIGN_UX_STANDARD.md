@@ -1,7 +1,7 @@
 # SmartComms NZ — Design & UX Standard
 
-Version: **1.1.0** · implementation baseline: **23 September 2026**  
-Derived from the current SmartComms 23 September 2026 Design/UX baseline and updated after the navigation, tool-discovery and Search Console growth pass.
+Version: **1.2.0** · implementation baseline: **24 September 2026**  
+Derived from the current SmartComms Design/UX baseline and updated after the navigation/tool-discovery growth pass and the first multi-source NZ project-analysis page.
 
 This is the **internal SmartComms standard**, not a claim of third-party certification. It complements, rather than replaces, `docs/agent-ready/SMARTCOMMS_PROFILE.md`. It governs presentation and human journeys; it does not authorise pricing, product, funding, finance, privacy-policy or API changes.
 
@@ -109,6 +109,11 @@ Use `AuthorityHero`, where already present, then the existing facts/sections in 
 
 ### Detailed comparisons
 Shared hero typography → contents navigation → use-case shortlists → tables → existing profiles and alternatives → practical example/cost → FAQs → final CTA → methodology/sources. Preserve individual content order where there is a reason. Use shared heading/badge/table/evidence primitives. Do not change rankings or source data during a visual pass.
+
+### Multi-source project analysis / synthesis pages
+Use these when SmartComms can add value that no single installer/manufacturer case study provides. Recommended rhythm: `AuthorityHero` → `AtAGlance` → one-minute synthesis → cross-project comparison table → project cards that clearly separate **published facts** from **SmartComms analysis** → cross-project lessons → official policy/safety boundary where relevant → buyer checklist → contextual help → FAQs → methodology/evidence register → `ContinuePlanning`.
+
+Do not create a derivative “SmartComms case study” by closely paraphrasing one provider. The page must contribute original organisation, comparison, current lifecycle checking and buyer-facing analysis. Project-specific facts remain attributed to the public source. Do not reuse third-party photographs, diagrams or substantial case-study prose without permission/licence. “Not stated” in a cross-project matrix means the public project account did not establish the feature; it is not a negative product score.
 
 ### Pricing/funding/finance authority pages
 Keep their different subject matter and existing examples. Add direct contextual help so a completed calculator is not mandatory. School funding remains explicitly school-scoped. Industry-aware links preserve the existing finance pathway for non-school contexts.
@@ -265,4 +270,12 @@ Do not rewrite a page solely because its early ranking is low. New-site crawl/in
 For technical capability claims, prefer first-party manufacturer/official documentation. For New Zealand project or supply context, use genuine local evidence from the organisation that published the project/listing. Do not make NZAV, Sound Choice Pro Audio, or any other preferred partner the default source when independent local evidence exists.
 
 Published examples should identify who published the account and its limitations. They are evidence of a published project/application, not SmartComms performance audits or proof of current product availability unless the source actually supports that claim.
+
+For project-synthesis pages, distinguish three evidence roles explicitly where relevant:
+
+- **project account** — establishes what the publisher says happened at that named site;
+- **manufacturer/lifecycle source** — establishes current capability, replacement or discontinuation status;
+- **official guidance** — establishes policy/safety context rather than product suitability.
+
+Write SmartComms' own synthesis and buyer lessons from those facts. Do not reproduce another publisher's images or closely rewrite its narrative. A useful synthesis page should remain materially valuable because of its cross-project organisation and analysis, not merely because it points to the original articles.
 

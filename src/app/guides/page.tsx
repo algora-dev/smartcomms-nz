@@ -12,6 +12,11 @@ export const metadata: Metadata = buildMetadata({
 
 const GUIDES = [
   {
+    title: "Real NZ School Paging Projects",
+    desc: "Five published NZ school projects compared across bells, zoning, lockdown messages, outdoor coverage, intercom and current product lifecycle.",
+    href: "/guides/nz-school-paging-projects",
+  },
+  {
     title: "Warehouse, Factory & Industrial PA Comparison",
     desc: "Shift bells, announcements, horns, intercom and existing-PA reuse, with noise considerations, use-case shortlists and pricing.",
     href: "/industries/warehouses-manufacturing-industrial",

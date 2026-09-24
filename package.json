@@ -12,6 +12,7 @@
     "test:assessment": "tsx scripts/test-assessment.mjs",
     "test:content-meta": "tsx scripts/test-content-meta.mjs",
     "test:industrial": "tsx scripts/test-industrial.mjs",
+    "test:school-projects": "node scripts/test-school-projects.mjs",
     "indexnow": "node scripts/indexnow.mjs",
     "test:finance": "tsx scripts/test-finance.mjs",
     "test:aged-care": "tsx scripts/test-aged-care.mjs",

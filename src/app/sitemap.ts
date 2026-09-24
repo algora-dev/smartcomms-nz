@@ -13,6 +13,7 @@ export const SITEMAP_ROUTES: { path: string; priority: number }[] = [
   { path: "/systems/ip-intercom", priority: 0.8 },
   { path: "/systems/traditional-vs-ip", priority: 0.8 },
   { path: "/guides", priority: 0.8 },
+  { path: "/guides/nz-school-paging-projects", priority: 0.92 },
   { path: "/guides/nz-school-pa-paging-requirements", priority: 0.9 },
   { path: "/guides/ip-paging-network-readiness", priority: 0.85 },
   { path: "/guides/school-pa-specification-checklist", priority: 0.9 },

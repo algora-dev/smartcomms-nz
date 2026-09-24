@@ -23,6 +23,7 @@ export const CONTENT_META: Record<string, ContentMeta> = {
   "/systems/ip-intercom": { published: "2026-09-12", reviewed: "2026-09-23" },
   "/systems/traditional-vs-ip": { published: "2026-09-11", reviewed: "2026-09-13" },
   "/guides": { published: "2026-09-12", reviewed: "2026-09-23" },
+  "/guides/nz-school-paging-projects": { published: "2026-09-24", reviewed: "2026-09-24" },
   "/guides/nz-school-pa-paging-requirements": { published: "2026-09-12", reviewed: "2026-09-12" },
   "/guides/ip-paging-network-readiness": { published: "2026-09-12", reviewed: "2026-09-12" },
   "/guides/school-pa-specification-checklist": { published: "2026-09-12", reviewed: "2026-09-12" },

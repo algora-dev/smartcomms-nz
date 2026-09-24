@@ -1073,6 +1073,11 @@ export default function ComparePage() {
             </p>
           </article>
         </div>
+        <div className="mt-6 rounded-xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-5">
+          <p className="text-sm leading-relaxed text-[var(--sc-slate)]">
+            These are two examples from a wider evidence set. <Link href="/guides/nz-school-paging-projects" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">Compare five published NZ school paging projects</Link> across bells, zoning, outdoor coverage, emergency messaging, intercom and lifecycle.
+          </p>
+        </div>
         <div className="mt-6">
           <p className="text-sm leading-relaxed text-[var(--sc-slate)]">Planning a similar upgrade? Tell us what you need the system to do.</p>
           <ProjectHelpLauncher

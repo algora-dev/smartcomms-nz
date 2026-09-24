@@ -16,6 +16,7 @@ Next.js 16 (App Router) - TypeScript - Tailwind CSS 4 - Vercel
 - `/funding` - crawlable NZ 5YA / 10YPP school funding guide
 - `/systems` - system architectures
 - `/guides` - published resource hub
+- `/guides/nz-school-paging-projects` - multi-source analysis of five published NZ school paging projects
 - `/compare` - comparison hub (school guide: `/compare/schools`)
 
 ## Development / tests
@@ -32,6 +33,7 @@ npm run test:validation
 npm run test:assessment
 npm run test:content-meta
 npm run test:industrial
+npm run test:school-projects
 npm run test:growth
 npm run build
 ```
