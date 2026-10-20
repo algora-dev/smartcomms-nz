@@ -5,12 +5,12 @@ import { breadcrumbSchema, buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 /**
- * SmartComms NZ /compare hub — index of the industry-by-industry system
+ * SmartComms NZ /compare hub - index of the industry-by-industry system
  * comparison guides. Each card links to a full comparison page.
  */
 const PAGE_TITLE = "Compare PA, Paging & Intercom Systems by Industry";
 const PAGE_DESCRIPTION =
-  "Side-by-side comparisons of PA, paging, bell and intercom systems sold in New Zealand, matched to the site they serve — schools, aged care, warehouses and manufacturing.";
+  "Side-by-side comparisons of PA, paging, bell and intercom systems sold in New Zealand, matched to the site they serve - schools, aged care, warehouses and manufacturing.";
 
 export const metadata: Metadata = buildMetadata({
   title: PAGE_TITLE,
@@ -56,8 +56,8 @@ export default function CompareHubPage() {
             Compare Systems for Your Type of Site
           </h1>
           <p className="mt-5 max-w-3xl text-[1.125rem] leading-relaxed text-[var(--sc-slate)] sm:text-lg">
-            The right paging, PA or intercom system depends on where it lives. We compare systems and architectures relevant to New Zealand buyers, using manufacturer documentation and NZ market evidence where it is available, for the jobs they actually suit — schools, aged care
-            facilities, warehouses and manufacturing sites — so you can shortlist with confidence.
+            The right paging, PA or intercom system depends on where it lives. We compare systems and architectures relevant to New Zealand buyers, using manufacturer documentation and NZ market evidence where it is available, for the jobs they actually suit - schools, aged care
+            facilities, warehouses and manufacturing sites - so you can shortlist with confidence.
           </p>
         </div>
       </section>

@@ -6,7 +6,7 @@ export const BUSINESS_ID = "smartcomms-nz" as const;
 export const ASSESSMENT_SCHEMA_VERSION = 1;
 
 /** Canonical domain status set (Agent-Ready standard). "not_supported" is the
- * ONLY unsupported-status name — do not introduce "unsupported". */
+ * ONLY unsupported-status name - do not introduce "unsupported". */
 export type DomainStatus =
   | "ok"
   | "needs_input"
@@ -16,7 +16,7 @@ export type DomainStatus =
 
 export type AssessmentType = "pricing" | "funding" | "finance";
 
-/** Known verticals for optional context. Contextual only — never merged into
+/** Known verticals for optional context. Contextual only - never merged into
  * calculator state. */
 export const KNOWN_INDUSTRIES = ["schools", "aged-care", "industrial", "commercial"] as const;
 export type Industry = (typeof KNOWN_INDUSTRIES)[number];

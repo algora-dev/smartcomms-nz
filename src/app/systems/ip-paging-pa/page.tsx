@@ -88,7 +88,7 @@ export default function IpPagingPaPage() {
         </li>
       </ul>
       <p>
-        For schools, these capabilities map directly onto bell and announcement requirements — see
+        For schools, these capabilities map directly onto bell and announcement requirements - see
         our <Link href="/systems/school-bell-announcements">school bells and announcements guide</Link>.
       </p>
       <h2 id="emergency">Emergency and lockdown capability</h2>
@@ -109,7 +109,7 @@ export default function IpPagingPaPage() {
       <p>
         A full IP system gives the most flexibility but assumes a capable network. A traditional
         100V system is simple and cheap for basic paging but limited. A hybrid keeps working 100V
-        speakers and cabling while replacing the control layer with IP — often the most
+        speakers and cabling while replacing the control layer with IP - often the most
         cost-effective path for staged upgrades. The{" "}
         <Link href="/systems">architecture comparison</Link> covers the trade-offs, and{" "}
         <Link href="/systems/traditional-vs-ip">what to keep when replacing an old PA</Link> deals
@@ -181,7 +181,7 @@ export default function IpPagingPaPage() {
         ]}
       />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed {reviewedLabel("/systems/ip-paging-pa")}. General information only — not design or compliance advice for any
+        Last reviewed {reviewedLabel("/systems/ip-paging-pa")}. General information only - not design or compliance advice for any
         specific site.
       </p>
       <script

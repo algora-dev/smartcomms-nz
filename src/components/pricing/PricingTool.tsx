@@ -194,7 +194,7 @@ export function PricingTool({ introduction }: { introduction?: ReactNode }) {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }
   /** Central navigation helper: the scroll itself happens in a post-render
-   *  effect on [step] — scrolling from inside the click handler races React
+   *  effect on [step] - scrolling from inside the click handler races React
    *  (the next screen's ref may not exist yet), which silently cancels it. */
   function goToStep(next: number) {
     setStep(next);
@@ -334,7 +334,7 @@ export function PricingTool({ introduction }: { introduction?: ReactNode }) {
         ))}
       </div>}
 
-      {/* STEP 1 — installation */}
+      {/* STEP 1 - installation */}
       {step === 0 && (
         <div>
           <h2 className="sc-section-title">What best describes the site?</h2>
@@ -358,7 +358,7 @@ export function PricingTool({ introduction }: { introduction?: ReactNode }) {
         </div>
       )}
 
-      {/* STEP 2 — areas */}
+      {/* STEP 2 - areas */}
       {step === 1 && (
         <div>
           <h2 className="sc-section-title">Roughly how many areas need coverage?</h2>
@@ -412,7 +412,7 @@ export function PricingTool({ introduction }: { introduction?: ReactNode }) {
         </div>
       )}
 
-      {/* STEP 3 — feature level + optional fine-tune */}
+      {/* STEP 3 - feature level + optional fine-tune */}
       {step === 2 && (
         <div>
           <h2 className="sc-section-title">How capable do you want the system to be?</h2>
@@ -578,7 +578,7 @@ export function PricingTool({ introduction }: { introduction?: ReactNode }) {
 
       {/* Restart confirmation changes presentation only; the original reset function is retained. */}
       <ConfirmationDialog open={confirmRestart} title="Start a new estimate?"
-        description="This will clear your current pricing estimate. If you want to keep it, download the PDF estimate first — you will not be able to recover it after starting again."
+        description="This will clear your current pricing estimate. If you want to keep it, download the PDF estimate first - you will not be able to recover it after starting again."
         cancelLabel="Keep my estimate" confirmLabel="Start new estimate"
         onCancel={() => setConfirmRestart(false)}
         onConfirm={() => { track("pricing_restart_confirmed"); restartTool(); }} />

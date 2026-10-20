@@ -31,7 +31,7 @@ export const runtime = "nodejs";
 
 const RECORD_SCHEMA_VERSION = 2;
 /** Hard byte bound on the request body, checked BEFORE parsing (SC-02.B). */
-const MAX_BODY_BYTES = 16 * 1024; // 16 KiB — validated state is ~1 KB
+const MAX_BODY_BYTES = 16 * 1024; // 16 KiB - validated state is ~1 KB
 
 // Minimal typing so supabase-js accepts our table (no generated types in this repo)
 type Db = {

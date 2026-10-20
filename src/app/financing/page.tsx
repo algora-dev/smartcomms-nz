@@ -164,7 +164,7 @@ export default function FinancingPage() {
           </div>
           <div className="sc-card bg-white p-5">
             <h3 className="font-semibold text-[var(--sc-blue-900)]">Funding</h3>
-            <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Relevant mainly where a genuine funding or capital pathway applies — particularly the <Link href="/funding">school property pathways</Link> covered elsewhere on SmartComms.</p>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Relevant mainly where a genuine funding or capital pathway applies - particularly the <Link href="/funding">school property pathways</Link> covered elsewhere on SmartComms.</p>
           </div>
           <div className="sc-card bg-white p-5">
             <h3 className="font-semibold text-[var(--sc-blue-900)]">Finance / leasing</h3>
@@ -208,7 +208,7 @@ export default function FinancingPage() {
         <div className="not-prose mt-10 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6">
           <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">Check in about a minute</h2>
           <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">
-            Tell us who the project is for, roughly how much finance may be needed and what sort of regular payment feels manageable. The result is designed to show whether a specialist conversation looks useful — not to decide whether finance will be approved.
+            Tell us who the project is for, roughly how much finance may be needed and what sort of regular payment feels manageable. The result is designed to show whether a specialist conversation looks useful - not to decide whether finance will be approved.
           </p>
           <Link href="/tools/finance-check" className="sc-btn-primary mt-4 inline-flex">Run the finance check</Link>
         </div>
@@ -218,10 +218,10 @@ export default function FinancingPage() {
           The descriptions above are based on publicly available New Zealand equipment-finance information. They establish that these kinds of commercial structures exist; they do not mean SmartComms has a commercial relationship with every provider referenced.
         </p>
         <ul>
-          <li><a href="https://www.eleasing.co.nz/customers/">eLeasing — NZ commercial equipment finance and leasing options</a></li>
-          <li><a href="https://www.westpac.co.nz/business/loans-and-finance/equipment-finance/">Westpac NZ — business equipment finance</a></li>
-          <li><a href="https://mtlfinance.co.nz/">MTL Finance — equipment leasing for NZ schools and businesses</a></li>
-          <li><a href="https://www.education.govt.nz/education-professionals/schools-year-0-13/funding-and-financials/day-day-financial-management">Ministry of Education — school financial management and borrowing guidance</a></li>
+          <li><a href="https://www.eleasing.co.nz/customers/">eLeasing - NZ commercial equipment finance and leasing options</a></li>
+          <li><a href="https://www.westpac.co.nz/business/loans-and-finance/equipment-finance/">Westpac NZ - business equipment finance</a></li>
+          <li><a href="https://mtlfinance.co.nz/">MTL Finance - equipment leasing for NZ schools and businesses</a></li>
+          <li><a href="https://www.education.govt.nz/education-professionals/schools-year-0-13/funding-and-financials/day-day-financial-management">Ministry of Education - school financial management and borrowing guidance</a></li>
         </ul>
 
         <div className="not-prose mt-8 rounded-xl border border-[var(--sc-border)] bg-white p-5 text-sm leading-relaxed text-[var(--sc-slate)]">

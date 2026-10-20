@@ -9,7 +9,7 @@ import { site } from "@/lib/site";
 import { ProjectHelpLauncher } from "@/components/enquiry/ProjectHelpLauncher";
 
 /**
- * SmartComms NZ /compare — server component: all comparisons, details and
+ * SmartComms NZ /compare - server component: all comparisons, details and
  * source links render in HTML. Review date lives in lib/content-meta
  * (single source of truth).
  * Editorial fit is not a lab rating or a verified complete-system price ranking.
@@ -40,7 +40,7 @@ const evidence = {
     "kind": "Manufacturer"
   },
   "spon-nz": {
-    "label": "Sound Choice Pro Audio NZ — SPON range",
+    "label": "Sound Choice Pro Audio NZ - SPON range",
     "href": "https://www.scpaudio.co.nz/brand/spon/",
     "kind": "NZ supply evidence"
   },
@@ -60,17 +60,17 @@ const evidence = {
     "kind": "Manufacturer"
   },
   "frontrow-nz": {
-    "label": "Pacific AV — FrontRow and named NZ schools",
+    "label": "Pacific AV - FrontRow and named NZ schools",
     "href": "https://www.pacificav.co.nz/brands/frontrow/",
     "kind": "NZ integrator evidence"
   },
   "frontrow-devices": {
-    "label": "Pacific AV — CM900 and CM800 interfaces",
+    "label": "Pacific AV - CM900 and CM800 interfaces",
     "href": "https://www.pacificav.co.nz/product/frontrow-networked-audio-devices/",
     "kind": "NZ product / integration evidence"
   },
   "frontrow-server": {
-    "label": "Pacific AV — Conductor administrative station",
+    "label": "Pacific AV - Conductor administrative station",
     "href": "https://www.pacificav.co.nz/product/conductor-administrative-station/",
     "kind": "NZ product listing"
   },
@@ -100,22 +100,22 @@ const evidence = {
     "kind": "Manufacturer documentation"
   },
   "algo-nz": {
-    "label": "Everlea NZ — Algo paging and scheduling",
+    "label": "Everlea NZ - Algo paging and scheduling",
     "href": "https://www.everlea.co.nz/ip-paging-solutions/voip-paging/algo-8301-paging-adapter-and-scheduler/",
     "kind": "NZ supply evidence"
   },
   "algo-training": {
-    "label": "Everlea — Algo configuration training",
+    "label": "Everlea - Algo configuration training",
     "href": "https://www.everlea.co.nz/everlea-training/",
     "kind": "NZ support / training evidence"
   },
   "itc-system": {
-    "label": "itc manufacturer — 78-series system architecture",
+    "label": "itc manufacturer - 78-series system architecture",
     "href": "https://www.itctech.com.cn/case/index/art/1914.html",
     "kind": "Manufacturer; overseas installation"
   },
   "itc-nz": {
-    "label": "Sound Choice Pro Audio NZ — ITC range",
+    "label": "Sound Choice Pro Audio NZ - ITC range",
     "href": "https://www.scpaudio.co.nz/brand/itc/",
     "kind": "NZ product listings"
   },
@@ -125,7 +125,7 @@ const evidence = {
     "kind": "NZ product / integration evidence"
   },
   "itc-edwards": {
-    "label": "Edwards NZ — ITC PA systems",
+    "label": "Edwards NZ - ITC PA systems",
     "href": "https://www.edwardsnz.co.nz/itc",
     "kind": "NZ supply evidence"
   },
@@ -145,7 +145,7 @@ const evidence = {
     "kind": "Manufacturer"
   },
   "axis-nz": {
-    "label": "JD Security NZ — Axis audio management",
+    "label": "JD Security NZ - Axis audio management",
     "href": "https://www.jdsecurity.co.nz/axis/axis-ip-audio/axis-audio-manager-edge/",
     "kind": "NZ integrator evidence"
   },
@@ -155,7 +155,7 @@ const evidence = {
     "kind": "Manufacturer documentation"
   },
   "bosch-prospero-nz": {
-    "label": "Pacific AV NZ — Bosch PROSPERO school paging and bells",
+    "label": "Pacific AV NZ - Bosch PROSPERO school paging and bells",
     "href": "https://www.pacificav.co.nz/product/bosch-prospero-ip-based-paging-and-bell-system/",
     "kind": "NZ integrator / product evidence"
   },
@@ -175,7 +175,7 @@ const evidence = {
     "kind": "Manufacturer"
   },
   "toa-nz": {
-    "label": "Australis Music NZ — TOA",
+    "label": "Australis Music NZ - TOA",
     "href": "https://www.australismusic.co.nz/brands/toa",
     "kind": "NZ brand / channel evidence"
   },
@@ -185,22 +185,22 @@ const evidence = {
     "kind": "Manufacturer documentation"
   },
   "2n-nz": {
-    "label": "Sektor NZ — IP Verso 2.0 listing",
+    "label": "Sektor NZ - IP Verso 2.0 listing",
     "href": "https://www.sektor.co.nz/Product/SEAX02907001",
     "kind": "NZ product listing"
   },
   "2n-legacy": {
-    "label": "2N — discontinued Net Audio Systems",
+    "label": "2N - discontinued Net Audio Systems",
     "href": "https://www.2n.com/en-GB/products/discontinued/2n-net-audio-systems/",
     "kind": "Manufacturer lifecycle notice"
   },
   "2n-mic": {
-    "label": "2N SIP Mic — APAC discontinuation notice",
+    "label": "2N SIP Mic - APAC discontinuation notice",
     "href": "https://www.2n.com/en-AU/newsroom/2n-sip-mic-discontinuation-notice-new-chapter-begins/",
     "kind": "Manufacturer lifecycle notice"
   },
   "2n-school": {
-    "label": "Edwards — Three Kings Primary project, March 2024",
+    "label": "Edwards - Three Kings Primary project, March 2024",
     "href": "https://www.edwardsnz.co.nz/school-uses-paging-system-for-tighter-lockdown-procedures",
     "kind": "Historical NZ school installation"
   },
@@ -210,7 +210,7 @@ const evidence = {
     "kind": "Manufacturer"
   },
   "atlas-nz": {
-    "label": "NAS — AtlasIED distribution in Australia and NZ",
+    "label": "NAS - AtlasIED distribution in Australia and NZ",
     "href": "https://nz.nas.solutions/atlas-ied-now-distributed-by-nas",
     "kind": "NZ distribution evidence"
   },
@@ -220,22 +220,22 @@ const evidence = {
     "kind": "Manufacturer documentation"
   },
   "algo-price-core": {
-    "label": "VoIP Supply — 8301 displayed US selling price",
+    "label": "VoIP Supply - 8301 displayed US selling price",
     "href": "https://www.voipsupply.com/algo-8301",
     "kind": "International price example"
   },
   "algo-price-speaker": {
-    "label": "VoIP Supply — 8188 displayed US selling price",
+    "label": "VoIP Supply - 8188 displayed US selling price",
     "href": "https://www.voipsupply.com/algo-8188-sip-ceiling-speaker",
     "kind": "International price example"
   },
   "toa-price": {
-    "label": "Northamber — IP-A1PG displayed UK price",
+    "label": "Northamber - IP-A1PG displayed UK price",
     "href": "https://www.northamber.com/audio-visual/professional-audio/audio-over-ip/ip-paging-gateway-25-w",
     "kind": "International price example"
   },
   "frontrow-ormiston-project": {
-    "label": "Pacific AV — Ormiston Junior College project, August 2017",
+    "label": "Pacific AV - Ormiston Junior College project, August 2017",
     "href": "https://www.pacificav.co.nz/ormiston-junior-college-auckland/",
     "kind": "Historical NZ project account; Australasian Audio Engineering named as dealer"
   }
@@ -283,7 +283,7 @@ const platforms: readonly Platform[] = [
     "category": "Integrated school platform",
     "fit": "A strong all-round option for an integrated school brief",
     "verdict": "A strong first quote for bells, zoned paging and optional room calling in one managed system.",
-    "summary": "SPON is a strong all-round school shortlist when the aim is one managed environment for daily announcements, schedules and two-way communication. Its school solution documents zoned announcements, automated bells and priority messages; XC-9000 adds central device management, intercom and integration controls. That breadth is the reason to consider it—not an unverified claim that it is always cheapest.",
+    "summary": "SPON is a strong all-round school shortlist when the aim is one managed environment for daily announcements, schedules and two-way communication. Its school solution documents zoned announcements, automated bells and priority messages; XC-9000 adds central device management, intercom and integration controls. That breadth is the reason to consider it, not an unverified claim that it is always cheapest.",
     "bells": "Central scheduling and zoned paging in the specified management package.",
     "talkback": "Supported intercom / microphone-equipped endpoints; not every speaker is two-way.",
     "integration": "XC-9000 documents SIP trunking and HTTP APIs. Confirm endpoint and software compatibility.",
@@ -321,7 +321,7 @@ const platforms: readonly Platform[] = [
     "category": "School and classroom integration",
     "fit": "Strongest fit when classroom audio is part of the brief",
     "verdict": "An important NZ school comparison when campus communication must work with classroom voice and AV systems.",
-    "summary": "FrontRow Conductor is a direct school-wide competitor, not just a classroom microphone product. It combines campus paging, bell schedules, intercom and alerts with compatible FrontRow classroom systems. The relevant comparison is a Conductor-based school package—not a standalone Juno or classroom amplifier priced against a whole-campus platform.",
+    "summary": "FrontRow Conductor is a direct school-wide competitor, not just a classroom microphone product. It combines campus paging, bell schedules, intercom and alerts with compatible FrontRow classroom systems. The relevant comparison is a Conductor-based school package, not a standalone Juno or classroom amplifier priced against a whole-campus platform.",
     "bells": "Conductor server and administrative controls provide school schedules, zones and alerts.",
     "talkback": "Compatible classroom audio and intercom interfaces; specify the microphone / call control.",
     "integration": "FrontRow campus/classroom ecosystem. Confirm any telephone gateway or SIP requirement explicitly.",
@@ -484,7 +484,7 @@ const platforms: readonly Platform[] = [
     "operations": "Browser-based zoning, schedules, user roles and health checks are well documented.",
     "setup": "Edge limits, network design and integration still need engineering; larger designs may need another management tier.",
     "value": "Included Edge management and reuse of an existing Axis environment may reduce additional system components.",
-    "costWatch": "Price the actual speaker mix, C6110, bridges and any larger-site management—not just an entry speaker.",
+    "costWatch": "Price the actual speaker mix, C6110, bridges and any larger-site management, not just an entry speaker.",
     "strengths": [
       "A well-documented browser workflow and built-in management make it a useful usability benchmark.",
       "C8110 bridging and C6110 calling allow more than a simple set of standalone network speakers."
@@ -607,7 +607,7 @@ const faqs: readonly Question[] = [
   {
     "id": "easiest-system",
     "question": "Which system is easiest for school staff to use?",
-    "answer": "Axis provides a well-documented browser interface; FrontRow is designed around school and classroom operation. Algo provides browser scheduling, while SPON and the NZ-listed ITC system offer central controls. None has been given a hands-on usability score here. Ask an administrator—not just the installer—to change a timetable, make a zoned page and manage a room call before accepting the system.",
+    "answer": "Axis provides a well-documented browser interface; FrontRow is designed around school and classroom operation. Algo provides browser scheduling, while SPON and the NZ-listed ITC system offer central controls. None has been given a hands-on usability score here. Ask an administrator, not just the installer, to change a timetable, make a zoned page and manage a room call before accepting the system.",
     "sources": [
       "axis-edge",
       "frontrow",
@@ -631,7 +631,7 @@ const sourceNumbers = Object.fromEntries(sourceEntries.map(([id], index) => [id,
 
 /**
  * Use-case shortlists (editorial, evidence-bound). The strongest fit is listed
- * first where the reviewed evidence supports a clear reason — this is not a
+ * first where the reviewed evidence supports a clear reason - this is not a
  * measured 1–3 ranking, and no brand is guaranteed a place by code.
  */
 const USE_CASES: { id: string; whatMatters: string; startingPoints: string[]; why: string }[] = [
@@ -737,10 +737,10 @@ export default function ComparePage() {
           {ARTICLE_HEADLINE}
         </h1>
         <p className="sc-lead mt-5">
-          A school needs more than a speaker brand. It needs bells that follow the timetable, clear announcements in the right places, reliable emergency controls and a system staff can actually use. This 2026 guide compares <strong>SPON, FrontRow, Algo, Bosch PROSPERO, ITC, Axis and TOA</strong> for that job, with <strong>2N</strong> considered separately for current intercom needs and existing paging installations. The strongest starting point depends on the brief — use the shortlists below, not a universal winner.
+          A school needs more than a speaker brand. It needs bells that follow the timetable, clear announcements in the right places, reliable emergency controls and a system staff can actually use. This 2026 guide compares <strong>SPON, FrontRow, Algo, Bosch PROSPERO, ITC, Axis and TOA</strong> for that job, with <strong>2N</strong> considered separately for current intercom needs and existing paging installations. The strongest starting point depends on the brief - use the shortlists below, not a universal winner.
         </p>
         <p className="mt-4 max-w-4xl leading-relaxed text-[var(--sc-slate)]">
-          Compare the complete design: software, indoor and outdoor coverage, room calling, network requirements, installation and NZ support. Not every platform delivers these in the same way—and not every school needs every feature.
+          Compare the complete design: software, indoor and outdoor coverage, room calling, network requirements, installation and NZ support. Not every platform delivers these in the same way, and not every school needs every feature.
         </p>
         <div className="mt-6 sc-actions">
           <Link href="/pricing-tool" className="sc-btn-primary">Estimate NZ project cost</Link>
@@ -771,7 +771,7 @@ export default function ComparePage() {
             There is no single universal winner. The right shortlist changes depending on whether the project prioritises
             integrated school workflows, classroom audio, SIP/VoIP, retained analogue PA, browser/security integration,
             room intercom or life-safety architecture. SPON is a strong all-round option for an integrated school brief
-            covering bells, zoned paging and optional intercom — and the shortlists below change with the job, not the logo.
+            covering bells, zoned paging and optional intercom - and the shortlists below change with the job, not the logo.
             Planning for a rest home or retirement village?{" "}
             <Link href="/industries/aged-care-retirement-villages" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">Use the aged-care comparison</Link>,
             where the requirements and shortlist differ.
@@ -779,7 +779,7 @@ export default function ComparePage() {
           <div className="mt-6">
             <TableRegion label="Use-case shortlists. Editorial starting points, not measured rankings.">
               <table className="w-full min-w-[720px] text-left text-sm leading-relaxed">
-                <caption className="border-b border-[var(--sc-border)] px-4 py-3 text-left text-xs text-[var(--sc-slate)]">Editorial shortlists drawn from the evidence on this page. The strongest fit is listed first where a clear reason exists — this is not a measured 1–3 ranking.</caption>
+                <caption className="border-b border-[var(--sc-border)] px-4 py-3 text-left text-xs text-[var(--sc-slate)]">Editorial shortlists drawn from the evidence on this page. The strongest fit is listed first where a clear reason exists - this is not a measured 1–3 ranking.</caption>
                 <thead className="bg-[var(--sc-blue-900)] text-white"><tr>
                   <th scope="col" className="w-1/3 px-4 py-3">What matters most</th>
                   <th scope="col" className="px-4 py-3">Strong starting points</th>
@@ -956,9 +956,9 @@ export default function ComparePage() {
 
       <section id="costs" aria-labelledby="costs-title" className="sc-container sc-container-reading scroll-mt-24 py-12">
         <SectionHeading id="costs-title" eyebrow="Price, ease and value" description="There is no verified, like-for-like public NZ price set covering all these systems. A numerical league table would suggest a level of certainty the evidence does not support.">
-          Compare complete project cost—not isolated speakers
+          Compare complete project cost, not isolated speakers
         </SectionHeading>
-        <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">SPON’s integrated feature coverage makes it a strong value candidate. FrontRow may offer better value when its classroom functions are needed; Algo or another hybrid design may win by retaining good existing equipment; Bosch PROSPERO should be priced as its own school-focused architecture rather than through PRAESENSA component costs. The deciding evidence is an itemised quote against the same operational brief—not a brand-wide “cheap” or “premium” label.</p>
+        <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">SPON’s integrated feature coverage makes it a strong value candidate. FrontRow may offer better value when its classroom functions are needed; Algo or another hybrid design may win by retaining good existing equipment; Bosch PROSPERO should be priced as its own school-focused architecture rather than through PRAESENSA component costs. The deciding evidence is an itemised quote against the same operational brief, not a brand-wide “cheap” or “premium” label.</p>
         <div className="mt-5 grid gap-4 md:grid-cols-3">
           {[
             ["Equipment and software", "Include controllers, licences, indoor/outdoor audio, intercom microphones or buttons, consoles, mounts and visual endpoints."],
@@ -997,7 +997,7 @@ export default function ComparePage() {
           <SectionHeading id="scenario-title" eyebrow="Make the comparison practical">
             A 30-area school: one brief, comparable proposals
           </SectionHeading>
-          <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">Consider an illustrative school with <strong>24 classrooms, two administration areas, a hall and three outdoor coverage areas</strong>. It needs timetable bells, live zoned paging, priority messages and optional classroom calls. These are 30 coverage areas—not necessarily 30 speakers, 30 cable circuits or 30 software zones. Speaker quantities and placement require a coverage design.</p>
+          <p className="mt-4 leading-relaxed text-[var(--sc-slate)]">Consider an illustrative school with <strong>24 classrooms, two administration areas, a hall and three outdoor coverage areas</strong>. It needs timetable bells, live zoned paging, priority messages and optional classroom calls. These are 30 coverage areas, not necessarily 30 speakers, 30 cable circuits or 30 software zones. Speaker quantities and placement require a coverage design.</p>
           <div className="mt-5 grid gap-4 md:grid-cols-2">
             <div className="sc-card bg-white p-5">
               <h3 className="font-semibold text-[var(--sc-blue-900)]">Quote A: network endpoints where needed</h3>
@@ -1037,7 +1037,7 @@ export default function ComparePage() {
               Edwards Sound Systems · Published <time dateTime="2024-03-01">1 March 2024</time>
             </p>
             <h3 id="example-three-kings-title" className="mt-2 text-lg font-semibold text-[var(--sc-blue-900)]">
-              Three Kings Primary — zoned paging and school bells
+              Three Kings Primary - zoned paging and school bells
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">
               Edwards describes a 2N network-paging installation with classroom and outdoor coverage, selectable zones, scheduled bells and prerecorded emergency messages. This is a historical project example, not confirmation that the same equipment is supplied today.
@@ -1057,7 +1057,7 @@ export default function ComparePage() {
               Pacific AV · Published <time dateTime="2017-08-23">23 August 2017</time>
             </p>
             <h3 id="example-ormiston-title" className="mt-2 text-lg font-semibold text-[var(--sc-blue-900)]">
-              Ormiston Junior College — FrontRow paging and bells
+              Ormiston Junior College - FrontRow paging and bells
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">
               Pacific AV&rsquo;s account names Australasian Audio Engineering as the dealer. It describes a FrontRow system in which 21 network decoders feed amplifier-driven speaker zones, with paging and bell schedules managed by a server.

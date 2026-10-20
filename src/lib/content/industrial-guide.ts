@@ -11,22 +11,22 @@ export const INDUSTRIAL_RESEARCH_DATE = "2026-09-20";
 
 export const industrialSources = {
   "noise": {
-    "label": "WorkSafe NZ — how noisy is your workplace?",
+    "label": "WorkSafe NZ - how noisy is your workplace?",
     "href": "https://www.worksafe.govt.nz/topic-and-industry/noise/how-noisy-is-your-workplace/",
     "kind": "NZ workplace guidance"
   },
   "noise-controls": {
-    "label": "WorkSafe NZ — managing noise risks",
+    "label": "WorkSafe NZ - managing noise risks",
     "href": "https://www.worksafe.govt.nz/topic-and-industry/noise/managing-noise-risks/managing-noise-risks/",
     "kind": "NZ workplace guidance"
   },
   "emergency": {
-    "label": "WorkSafe NZ — workplace emergency plans",
+    "label": "WorkSafe NZ - workplace emergency plans",
     "href": "https://www.worksafe.govt.nz/managing-health-and-safety/businesses/general-requirements-for-workplaces/emergency-plans/",
     "kind": "NZ workplace guidance"
   },
   "hazardous": {
-    "label": "EWRB — hazardous-area electrical work",
+    "label": "EWRB - hazardous-area electrical work",
     "href": "https://www.ewrb.govt.nz/registration/endorsed-class-of-registration/what-the-endorsed-areas-cover/",
     "kind": "NZ specialist electrical guidance"
   },
@@ -56,7 +56,7 @@ export const industrialSources = {
     "kind": "Manufacturer guidance"
   },
   "algo-nz": {
-    "label": "Everlea NZ — Algo 8196",
+    "label": "Everlea NZ - Algo 8196",
     "href": "https://www.everlea.co.nz/algo-8196/",
     "kind": "NZ supplier listing"
   },
@@ -96,7 +96,7 @@ export const industrialSources = {
     "kind": "Manufacturer; specialist product"
   },
   "axis-nz": {
-    "label": "JD Security NZ — Axis network-audio management",
+    "label": "JD Security NZ - Axis network-audio management",
     "href": "https://www.jdsecurity.co.nz/axis/axis-ip-audio/axis-audio-manager-edge/",
     "kind": "NZ integrator information"
   },
@@ -121,7 +121,7 @@ export const industrialSources = {
     "kind": "Manufacturer"
   },
   "spon-nz": {
-    "label": "Sound Choice Pro Audio NZ — GEN-6393 horn listing",
+    "label": "Sound Choice Pro Audio NZ - GEN-6393 horn listing",
     "href": "https://www.scpaudio.co.nz/shop/ip-paging/speakers-ip-speaker/gen-6393a01/",
     "kind": "NZ supplier listing"
   },
@@ -156,7 +156,7 @@ export const industrialSources = {
     "kind": "Manufacturer"
   },
   "toa-nz": {
-    "label": "Australis Music NZ — TOA brand channel",
+    "label": "Australis Music NZ - TOA brand channel",
     "href": "https://www.australismusic.co.nz/brands/toa",
     "kind": "NZ brand-channel evidence"
   },
@@ -171,17 +171,17 @@ export const industrialSources = {
     "kind": "Manufacturer"
   },
   "atlas-nz": {
-    "label": "NAS — AtlasIED Australia and NZ distribution",
+    "label": "NAS - AtlasIED Australia and NZ distribution",
     "href": "https://nz.nas.solutions/atlas-ied-now-distributed-by-nas",
     "kind": "ANZ distribution announcement"
   },
   "prospero": {
-    "label": "Bosch PROSPERO IP PA — Australia & NZ",
+    "label": "Bosch PROSPERO IP PA - Australia & NZ",
     "href": "https://www.keenfinity-group.com/au/en/solutions/public-address-solutions/public-address-and-voice-alarm-systems/prospero/",
     "kind": "Manufacturer"
   },
   "prospero-nz": {
-    "label": "Pacific AV NZ — Bosch PROSPERO",
+    "label": "Pacific AV NZ - Bosch PROSPERO",
     "href": "https://www.pacificav.co.nz/product/bosch-prospero-ip-based-paging-and-bell-system/",
     "kind": "NZ supplier information"
   },
@@ -191,7 +191,7 @@ export const industrialSources = {
     "kind": "Manufacturer; overseas architecture example"
   },
   "itc-nz": {
-    "label": "Sound Choice Pro Audio NZ — ITC T-7800A / Luna",
+    "label": "Sound Choice Pro Audio NZ - ITC T-7800A / Luna",
     "href": "https://www.scpaudio.co.nz/shop/commercial/t-7800a-ip-intercom-pa-system-server/",
     "kind": "NZ catalogue; generation to confirm"
   },
@@ -201,7 +201,7 @@ export const industrialSources = {
     "kind": "Manufacturer"
   },
   "2n-nz": {
-    "label": "Sektor NZ — 2N IP Verso 2.0 listing",
+    "label": "Sektor NZ - 2N IP Verso 2.0 listing",
     "href": "https://www.sektor.co.nz/Product/SEAX02907001",
     "kind": "NZ channel evidence; not a Force 2.0 listing"
   },
@@ -211,7 +211,7 @@ export const industrialSources = {
     "kind": "Manufacturer"
   },
   "netbell-nz": {
-    "label": "Edwards NZ — Netbell network multi-tone buzzer",
+    "label": "Edwards NZ - Netbell network multi-tone buzzer",
     "href": "https://www.edwardsnz.co.nz/netbell-kmb-network-multi-tone-buzzer-system",
     "kind": "NZ supplier listing"
   },
@@ -226,22 +226,22 @@ export const industrialSources = {
     "kind": "Manufacturer; regional approvals require checking"
   },
   "case-nz": {
-    "label": "Audio Connect — Sanitarium Auckland warehouse PA",
+    "label": "Audio Connect - Sanitarium Auckland warehouse PA",
     "href": "https://audioconnect.co.nz/blogs/news/sanitarium-warehouse-pa-system",
     "kind": "Published NZ installer account; September 2026"
   },
   "case-axis": {
-    "label": "Axis — Cesari-Terloc logistics terminal, Brazil",
+    "label": "Axis - Cesari-Terloc logistics terminal, Brazil",
     "href": "https://www.axis.com/en-gb/customer-story/ip-speakers-logistics",
     "kind": "Manufacturer case study; Brazil, 2021"
   },
   "case-toa": {
-    "label": "TOA — MELOX plant, France",
+    "label": "TOA - MELOX plant, France",
     "href": "https://www.toa.eu/references/melox-marcoule-nuclear-site/",
     "kind": "Manufacturer case study; France"
   },
   "finance-nz": {
-    "label": "eLeasing NZ — equipment finance customer information",
+    "label": "eLeasing NZ - equipment finance customer information",
     "href": "https://www.eleasing.co.nz/customers/",
     "kind": "NZ finance-provider information; not a SmartComms offer"
   }
@@ -621,7 +621,7 @@ export const industrialUseCases: readonly IndustrialUseCase[] = [
       "axis"
     ],
     "why": "TOA N-8000 and CX-1000 deserve first consideration for defined station-to-station calling. SPON is compelling when calling sits inside a wider PA design; Axis can suit console-to-endpoint operation.",
-    "changes": "Choose the actual handset, button, microphone and receiving workflow—not a brand-wide claim about noise performance.",
+    "changes": "Choose the actual handset, button, microphone and receiving workflow, not a brand-wide claim about noise performance.",
     "sources": [
       "toa-intercom",
       "toa-cx",
@@ -791,7 +791,7 @@ export const industrialQuestions: readonly IndustrialQuestion[] = [
   {
     "id": "provider",
     "question": "Who can help specify and install an industrial paging system?",
-    "answer": "Look for a provider able to assess acoustics, the network, existing PA and the operating environment—not only supply speakers. Send SmartComms your region, current system and main requirement. We can reply with providers from our selected network to contact and why they may suit; we do not send your enquiry to those providers.",
+    "answer": "Look for a provider able to assess acoustics, the network, existing PA and the operating environment, not only supply speakers. Send SmartComms your region, current system and main requirement. We can reply with providers from our selected network to contact and why they may suit; we do not send your enquiry to those providers.",
     "sources": []
   }
 ];

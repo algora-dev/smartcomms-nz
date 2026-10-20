@@ -44,8 +44,8 @@ export default function IpIntercomPage() {
       <h2 id="how">How IP intercom works</h2>
       <p>
         An IP intercom endpoint is a network device with a speaker, a microphone and a call button
-        (or a hook-off handset). When activated, it establishes a two-way audio session — usually
-        SIP, the same protocol used by VoIP phone systems — to a target: a desk console, a phone
+        (or a hook-off handset). When activated, it establishes a two-way audio session - usually
+        SIP, the same protocol used by VoIP phone systems - to a target: a desk console, a phone
         handset, a software client, or a group of them. Because it rides the network, an intercom
         zone can include any mix of endpoints and can be reconfigured without re-cabling.
       </p>
@@ -72,7 +72,7 @@ export default function IpIntercomPage() {
         </li>
         <li>
           <strong>Checking in during lockdown.</strong> Selected endpoints allow rooms to report
-          status to the office — subject to your emergency plan&apos;s design.
+          status to the office - subject to your emergency plan&apos;s design.
         </li>
       </ul>
       <p>
@@ -86,7 +86,7 @@ export default function IpIntercomPage() {
         Microsoft Teams integration can require compatible telephony, an SBC/gateway or another
         supported service rather than working directly from every intercom. When specifying, state
         clearly which phone environment the intercom must integrate with and who supports that
-        integration — the paging installer, the phone system vendor, or both.
+        integration - the paging installer, the phone system vendor, or both.
       </p>
       <PublishedEvidenceCards
         id="nz-examples"

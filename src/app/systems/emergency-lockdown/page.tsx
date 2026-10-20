@@ -100,7 +100,7 @@ export default function EmergencyLockdownPage() {
         </li>
       </ul>
       <p>
-        These capabilities are features of IP-based platforms in particular — see the{" "}
+        These capabilities are features of IP-based platforms in particular - see the{" "}
         <Link href="/systems/ip-paging-pa">IP paging architecture guide</Link> for the underlying
         model.
       </p>
@@ -127,7 +127,7 @@ export default function EmergencyLockdownPage() {
       </p>
       <h2 id="vs-other-channels">How paging fits with other emergency channels</h2>
       <p>
-        Paging handles the immediate, in-the-moment instruction. It complements — not replaces —
+        Paging handles the immediate, in-the-moment instruction. It complements - not replaces -
         text/email notification systems for parents, and duress alarms that alert police or
         security monitoring. A complete school plan considers all three layers. When specifying,
         ask whether the paging platform can be triggered by or integrated with your existing
@@ -181,7 +181,7 @@ export default function EmergencyLockdownPage() {
         ]}
       />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed {reviewedLabel("/systems/emergency-lockdown")}. System-planning information only — not emergency procedure advice.
+        Last reviewed {reviewedLabel("/systems/emergency-lockdown")}. System-planning information only - not emergency procedure advice.
         Follow your school&apos;s emergency management plan and official Ministry/NZ Police guidance.
       </p>
       <script

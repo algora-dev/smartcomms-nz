@@ -31,7 +31,7 @@ const FLOW_LINES = [
   "M0 50 H20 C50 50 50 90 80 90 H100",
 ];
 /**
- * SmartComms animated hero — audience-flow version (handoff 2026-09-06).
+ * SmartComms animated hero - audience-flow version (handoff 2026-09-06).
  * 20s loop: one audience at a time on the left, all five systems on the right,
  * connected by five teal paths revealed spatially via a single shared clock.
  * Static accessible markup renders server-side; the timeline runs in this

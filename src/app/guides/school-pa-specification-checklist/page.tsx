@@ -51,7 +51,7 @@ const SECTIONS = [
       "Number and location of activation points, and who is authorised",
       "Zone-targeted emergency messaging requirements",
       "Redundancy: endpoint-local message storage, UPS backup, multi-path activation",
-      "Integration with existing security, duress or notification systems — or state clearly none is required",
+      "Integration with existing security, duress or notification systems - or state clearly none is required",
     ],
   },
   {
@@ -67,14 +67,14 @@ const SECTIONS = [
     items: [
       "State what may be retained: existing speakers, 100V cabling, network switching",
       "Require testing evidence for any reused cabling in the quote",
-      "Specify IP, hybrid or traditional — or require bidders to price the trade-off explicitly",
+      "Specify IP, hybrid or traditional - or require bidders to price the trade-off explicitly",
     ],
   },
   {
     title: "7. Network readiness (for IP/hybrid)",
     items: [
       "Attach your completed network readiness checklist to the tender documents",
-      "State clearly who provisions VLANs, QoS and PoE — installer or IT partner",
+      "State clearly who provisions VLANs, QoS and PoE - installer or IT partner",
       "Require the PoE power budget calculation in the quote",
     ],
   },
@@ -138,7 +138,7 @@ export default function SpecificationChecklistPage() {
       <ol>
         <li>Send the checklist with the same maps, photos and network information to every bidder</li>
         <li>Require a compliance response per section (&quot;complies / partially / not included + price&quot;)</li>
-        <li>Score on lifecycle and support, not just the bottom line — see the{" "}
+        <li>Score on lifecycle and support, not just the bottom line - see the{" "}
           <Link href="/compare/schools">platform comparison</Link> for the dimensions that matter</li>
         <li>Check indicative market pricing with the <Link href="/pricing-tool">Pricing Tool</Link>{" "}
           before accepting anything outlier-high or suspiciously low</li>
@@ -159,7 +159,7 @@ export default function SpecificationChecklistPage() {
         ]}
       />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed {reviewedLabel("/guides/school-pa-specification-checklist")}. Procurement-support guidance only — follow your school&apos;s and
+        Last reviewed {reviewedLabel("/guides/school-pa-specification-checklist")}. Procurement-support guidance only - follow your school&apos;s and
         the Ministry&apos;s procurement rules for any formal tender.
       </p>
       <script

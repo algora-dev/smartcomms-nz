@@ -33,7 +33,7 @@ const GUIDES = [
   },
   {
     title: "IP Paging Network Readiness Checklist",
-    desc: "PoE budget, VLANs, QoS, cabling state and support responsibility — check these before asking for IP paging quotes.",
+    desc: "PoE budget, VLANs, QoS, cabling state and support responsibility - check these before asking for IP paging quotes.",
     href: "/guides/ip-paging-network-readiness",
   },
   {

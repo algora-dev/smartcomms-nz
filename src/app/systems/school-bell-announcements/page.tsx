@@ -104,7 +104,7 @@ export default function SchoolBellPage() {
         </li>
         <li>
           <strong>Custom tones and music.</strong> Distinct sounds for end of interval, lockout of
-          wet weather, or music played at interval — not just one buzzer for everything.
+          wet weather, or music played at interval - not just one buzzer for everything.
         </li>
         <li>
           <strong>Override controls.</strong> A front-desk console or phone that can pause, advance
@@ -120,7 +120,7 @@ export default function SchoolBellPage() {
         Beyond bells, the same system carries daily announcements. Modern platforms let office
         staff page any zone from a desk console, a phone handset or a software client, with
         priority levels so routine announcements never preempt emergency messaging. Two-way options
-        — where a classroom can respond — are covered in our{" "}
+        - where a classroom can respond - are covered in our{" "}
         <Link href="/systems/ip-intercom">IP intercom guide</Link>.
       </p>
       <PublishedEvidenceCards
@@ -135,13 +135,13 @@ export default function SchoolBellPage() {
       <h2 id="replacing">Replacing an aging bell system</h2>
       <p>
         Common replacement scenarios include an old timer that is failing or no longer supported, a timetable change that exposes the limits of one fixed schedule, or a school that needs different bell behaviour across separate zones. In many cases the existing speakers and cabling
-        can be kept and only the control layer replaced — see{" "}
+        can be kept and only the control layer replaced - see{" "}
         <Link href="/systems/traditional-vs-ip">what to keep when replacing an old PA system</Link>.
       </p>
       <h2 id="emergency">Bells and emergency communication</h2>
       <p>
         Many school communications briefs ask the bell/paging system to also support emergency tones or spoken instructions for lockdown and evacuation. That requirement changes the specification
-        meaningfully — redundant paths, pre-recorded messages and clearly marked activation points.
+        meaningfully - redundant paths, pre-recorded messages and clearly marked activation points.
         Our <Link href="/systems/emergency-lockdown">emergency and lockdown communication guide</Link>{" "}
         covers the planning considerations.
       </p>
@@ -162,7 +162,7 @@ export default function SchoolBellPage() {
       </p>
       <h2 id="specifying">Specifying the system</h2>
       <p>
-        When comparing quotes, make sure every proposal covers the same bell and announcement scope —
+        When comparing quotes, make sure every proposal covers the same bell and announcement scope -
         schedules, zones, override points and emergency tones. The{" "}
         <Link href="/guides/school-pa-specification-checklist">specification checklist</Link> gives
         you a like-for-like comparison framework.
@@ -193,7 +193,7 @@ export default function SchoolBellPage() {
         ]}
       />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed {reviewedLabel("/systems/school-bell-announcements")}. General information for NZ schools — not Ministry policy advice.
+        Last reviewed {reviewedLabel("/systems/school-bell-announcements")}. General information for NZ schools - not Ministry policy advice.
       </p>
       <script
         type="application/ld+json"

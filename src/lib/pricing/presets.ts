@@ -1,5 +1,5 @@
 // Representative example configurations for the crawlable pricing section.
-// Numbers are COMPUTED from the same config as the calculator — never duplicated as literals.
+// Numbers are COMPUTED from the same config as the calculator - never duplicated as literals.
 
 import type { CalculatorState } from "./types";
 import { calculateEstimate } from "./calculate";

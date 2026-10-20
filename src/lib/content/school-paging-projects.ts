@@ -3,77 +3,77 @@ export const SCHOOL_PAGING_PROJECTS_RESEARCH_DATE = "2026-09-24" as const;
 
 export const schoolProjectSources = {
   "moe-emergency": {
-    label: "Ministry of Education — prepare for an emergency or traumatic incident",
+    label: "Ministry of Education - prepare for an emergency or traumatic incident",
     href: "https://www.education.govt.nz/education-professionals/schools-year-0-13/health-safety-and-wellbeing/prepare-emergency-or-traumatic-incident",
     kind: "NZ government guidance",
   },
   "moe-emergency-guide": {
-    label: "Ministry of Education — Planning and preparing for emergencies (April 2026)",
+    label: "Ministry of Education - Planning and preparing for emergencies (April 2026)",
     href: "https://web-assets.education.govt.nz/s3fs-public/2026-08/Planning%20and%20preparing%20for%20emergencies%20310826.pdf",
     kind: "NZ government emergency-planning guide",
   },
   "three-kings": {
-    label: "Edwards Sound Systems — Three Kings Primary project",
+    label: "Edwards Sound Systems - Three Kings Primary project",
     href: "https://www.edwardsnz.co.nz/school-uses-paging-system-for-tighter-lockdown-procedures",
     kind: "Published NZ project account",
   },
   "2n-net-audio-eol": {
-    label: "2N — discontinued Net Audio Systems",
+    label: "2N - discontinued Net Audio Systems",
     href: "https://www.2n.com/en-GB/products/discontinued/2n-net-audio-systems/",
     kind: "Manufacturer lifecycle notice",
   },
   "2n-sip-mic-eol": {
-    label: "2N — SIP Mic discontinuation notice",
+    label: "2N - SIP Mic discontinuation notice",
     href: "https://www.2n.com/en-US/newsroom/2n_sip_mic_discontinuation_notice_new_chapter_begins/",
     kind: "Manufacturer lifecycle notice",
   },
   ormiston: {
-    label: "Pacific AV — Ormiston Junior College project",
+    label: "Pacific AV - Ormiston Junior College project",
     href: "https://www.pacificav.co.nz/ormiston-junior-college-auckland/",
     kind: "Published NZ distributor account",
   },
   "frontrow-current": {
-    label: "FrontRow — current Conductor platform",
+    label: "FrontRow - current Conductor platform",
     href: "https://www.gofrontrow.co.nz/products/conductor/",
     kind: "Manufacturer",
   },
   "frontrow-cm900": {
-    label: "Pacific AV — FrontRow networked audio devices",
+    label: "Pacific AV - FrontRow networked audio devices",
     href: "https://www.pacificav.co.nz/product/frontrow-networked-audio-devices/",
     kind: "NZ product / lifecycle evidence",
   },
   lincoln: {
-    label: "NZAV — Lincoln High School project",
+    label: "NZAV - Lincoln High School project",
     href: "https://www.nzav.nz/audio-visual-projects/",
     kind: "Published NZ integrator account",
   },
   "spon-current": {
-    label: "SPON — current smart PA solution for schools",
+    label: "SPON - current smart PA solution for schools",
     href: "https://sponcomm.com/solution-detail/smart-pa-solution-for-schools",
     kind: "Manufacturer",
   },
   cotswold: {
-    label: "AV Integration — Cotswold Mātāhae School project",
+    label: "AV Integration - Cotswold Mātāhae School project",
     href: "https://www.avintegration.co.nz/project/modernising-bell-and-paging/",
     kind: "Published NZ integrator account",
   },
   "zycoo-current": {
-    label: "ZYCOO — current IAS-L100 / IP Audio Center documentation",
+    label: "ZYCOO - current IAS-L100 / IP Audio Center documentation",
     href: "https://www.zycoo.com/downloads/p/ias-l100/",
     kind: "Manufacturer documentation",
   },
   thorndon: {
-    label: "CIE Group — Thorndon Primary School project (integrator: Pure Tech)",
+    label: "CIE Group - Thorndon Primary School project (integrator: Pure Tech)",
     href: "https://cie-group.com/projects/thorndon-primary",
     kind: "Published project account",
   },
   "axis-current": {
-    label: "Axis — current Audio Manager Edge",
+    label: "Axis - current Audio Manager Edge",
     href: "https://www.axis.com/products/axis-audio-manager-edge",
     kind: "Manufacturer",
   },
   "axis-c3003-eol": {
-    label: "Axis — C3003-E discontinuation statement",
+    label: "Axis - C3003-E discontinuation statement",
     href: "https://www.axis.com/dam/public/7a/09/8b/discontinuation-statement-for-axis-c3003-e-en-US-116158.pdf",
     kind: "Manufacturer lifecycle notice",
   },
@@ -160,7 +160,7 @@ export const schoolPagingProjects: readonly SchoolPagingProject[] = [
     designAngle: "Network control with 21 decoders feeding 21 conventional amplifier channels",
     evidenceLabel: "Published NZ distributor account",
     summary:
-      "A network-controlled school-wide design that used FrontRow decoders and server control while still driving amplifier-fed speaker zones — a useful example of IP control without requiring a powered IP speaker in every space.",
+      "A network-controlled school-wide design that used FrontRow decoders and server control while still driving amplifier-fed speaker zones - a useful example of IP control without requiring a powered IP speaker in every space.",
     publishedFacts: [
       "Pacific AV describes a paging microphone, audio encoder and 21 network decoders feeding 21 amplifier channels.",
       "The server handled zone paging and bell schedules, while the published GUI could select zones and activate lockdown tones, strobes and external triggers.",

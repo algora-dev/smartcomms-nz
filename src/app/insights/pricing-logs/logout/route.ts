@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 
 export const runtime = "nodejs";
 
-/** POST /insights/pricing-logs/logout — clears the internal session cookie. */
+/** POST /insights/pricing-logs/logout - clears the internal session cookie. */
 export async function POST(req: Request) {
   const jar = await cookies();
   jar.delete("pricing_logs_session");

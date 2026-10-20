@@ -369,7 +369,7 @@ export function FinanceCheckTool({ introduction }: { introduction?: ReactNode })
 
           {projectValueUnknown && (
             <div className="mt-6 rounded-xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-5">
-              <h3 className="font-semibold text-[var(--sc-blue-900)]">No problem — roughly how many areas?</h3>
+              <h3 className="font-semibold text-[var(--sc-blue-900)]">No problem - roughly how many areas?</h3>
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 {SITE_SIZE_BANDS.map((item) => (
                   <OptionCard

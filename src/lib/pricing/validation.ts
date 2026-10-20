@@ -1,7 +1,7 @@
 // Boundary validation for calculator state (SC-02).
 // All untrusted CalculatorState input (URL cfg links, logger requests, future
 // API assessments) must pass through parseCalculatorState. Produces a fresh
-// allowlisted CalculatorState — never a cast of the untrusted object.
+// allowlisted CalculatorState - never a cast of the untrusted object.
 
 import type {
   AreaQuantities,

@@ -10,7 +10,7 @@ export type NzPublicEvidenceItem = {
 export const NZ_PUBLIC_EVIDENCE = {
   threeKings: {
     id: "three-kings-primary",
-    title: "Three Kings Primary — paging, bells and emergency messages",
+    title: "Three Kings Primary - paging, bells and emergency messages",
     source: "Edwards Sound Systems",
     href: "https://www.edwardsnz.co.nz/school-uses-paging-system-for-tighter-lockdown-procedures",
     summary:
@@ -19,7 +19,7 @@ export const NZ_PUBLIC_EVIDENCE = {
   },
   ormiston: {
     id: "ormiston-junior-college",
-    title: "Ormiston Junior College — network bells, paging and lockdown controls",
+    title: "Ormiston Junior College - network bells, paging and lockdown controls",
     source: "Pacific AV",
     href: "https://www.pacificav.co.nz/ormiston-junior-college-auckland/",
     summary:
@@ -28,7 +28,7 @@ export const NZ_PUBLIC_EVIDENCE = {
   },
   richmondRoad: {
     id: "richmond-road-primary",
-    title: "Richmond Road Primary — IP paging over the school network",
+    title: "Richmond Road Primary - IP paging over the school network",
     source: "Edwards Sound Systems",
     href: "https://www.edwardsnz.co.nz/improving-student-engagement-at-richmond-road-primary",
     summary:
@@ -37,7 +37,7 @@ export const NZ_PUBLIC_EVIDENCE = {
   },
   sanitarium: {
     id: "sanitarium-auckland",
-    title: "Sanitarium Auckland — two-zone warehouse paging",
+    title: "Sanitarium Auckland - two-zone warehouse paging",
     source: "Audio Connect",
     href: "https://audioconnect.co.nz/blogs/news/sanitarium-warehouse-pa-system",
     summary:
@@ -46,7 +46,7 @@ export const NZ_PUBLIC_EVIDENCE = {
   },
   summersetStJohns: {
     id: "summerset-st-johns",
-    title: "Summerset St Johns — entrance intercom within a wider security design",
+    title: "Summerset St Johns - entrance intercom within a wider security design",
     source: "G&S Technologies",
     href: "https://gstechnologies.co.nz/case-studies/summerset-st-johns/",
     summary:
@@ -55,7 +55,7 @@ export const NZ_PUBLIC_EVIDENCE = {
   },
   sektorVerso: {
     id: "sektor-2n-verso",
-    title: "2N IP Verso 2.0 — current NZ video-intercom listing",
+    title: "2N IP Verso 2.0 - current NZ video-intercom listing",
     source: "Sektor NZ",
     href: "https://www.sektor.co.nz/Product/SEAX02907001",
     summary:

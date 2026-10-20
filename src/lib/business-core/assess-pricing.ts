@@ -108,7 +108,7 @@ export function buildResult(
 
   // Absolute, agent-safe URLs derived from the central site config (Release 2.1 §5).
   // Known non-school industries (aged-care, industrial) get the finance-check
-  // next step mirroring the website journey — never school funding (cleanup §3).
+  // next step mirroring the website journey - never school funding (cleanup §3).
   const nextActions = [
     {
       label: "Open this configuration in the SmartComms pricing tool",

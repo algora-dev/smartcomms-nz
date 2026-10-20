@@ -6,8 +6,8 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic"; // stateless, never cached
 
 /**
- * POST /api/business/v1/assessments — read-only, versioned pricing assessment.
- * GET — capability discovery.
+ * POST /api/business/v1/assessments - read-only, versioned pricing assessment.
+ * GET - capability discovery.
  *
  * Canonical request (Release 2.1):
  *   { "assessment_type": "pricing", "input": { "state": <cfg-format calculator state>, "industry": "aged-care"? } }

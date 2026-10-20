@@ -37,7 +37,7 @@ export const SITEMAP_ROUTES: { path: string; priority: number }[] = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Each route appears exactly once; lastModified comes from the central
-  // content-metadata registry via the STRICT helper — a public sitemap route
+  // content-metadata registry via the STRICT helper - a public sitemap route
   // without a registry entry throws at build time instead of silently
   // omitting or fabricating a review date (Release 2.1 §9).
   return SITEMAP_ROUTES.map((route) => ({

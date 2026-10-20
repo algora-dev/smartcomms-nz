@@ -19,7 +19,7 @@ const CHECKS = [
     title: "Switch ports and locations",
     items: [
       "Count available ports at each switch location near where endpoints will be installed",
-      "Identify buildings or blocks with no nearby switch — these may need a new switch or fibre/uplink work",
+      "Identify buildings or blocks with no nearby switch - these may need a new switch or fibre/uplink work",
       "Note port speeds: most IP speakers and intercoms are happy on 100 Mbps, but gigabit future-proofs",
     ],
   },
@@ -37,7 +37,7 @@ const CHECKS = [
     items: [
       "Decide whether paging endpoints sit on a dedicated voice/IoT VLAN or the general LAN",
       "Confirm enough IP addresses are available in the chosen scope",
-      "Document DHCP vs static addressing — many installers prefer static or reserved addresses for endpoints",
+      "Document DHCP vs static addressing - many installers prefer static or reserved addresses for endpoints",
     ],
   },
   {
@@ -50,15 +50,15 @@ const CHECKS = [
   {
     title: "Cabling state",
     items: [
-      "Test existing Cat5e/6 runs to endpoints that will reuse cabling — age and workmanship vary widely in NZ school buildings",
+      "Test existing Cat5e/6 runs to endpoints that will reuse cabling - age and workmanship vary widely in NZ school buildings",
       "Identify runs over 90–100m, which need an intermediate switch or re-route",
-      "New cabling work is usually a property works item — see the funding implications on our funding page",
+      "New cabling work is usually a property works item - see the funding implications on our funding page",
     ],
   },
   {
     title: "Core infrastructure resilience",
     items: [
-      "Ask what happens to paging if the switch, server or controller fails — endpoint-local storage of emergency messages is a common mitigation",
+      "Ask what happens to paging if the switch, server or controller fails - endpoint-local storage of emergency messages is a common mitigation",
       "Confirm UPS coverage for core switches and any paging server",
       "Check that a WAN outage does not take down on-site paging (local survivability matters for emergency use)",
     ],
@@ -66,7 +66,7 @@ const CHECKS = [
   {
     title: "Wi-Fi independence",
     items: [
-      "IP paging endpoints use cabled connections — do not plan paging over Wi-Fi",
+      "IP paging endpoints use cabled connections - do not plan paging over Wi-Fi",
       "If a site has poor cabling but good Wi-Fi, that is a cabling project signal, not a wireless paging plan",
     ],
   },
@@ -143,7 +143,7 @@ export default function NetworkReadinessPage() {
         ]}
       />
       <p className="mt-8 text-xs text-[var(--sc-slate)]">
-        Last reviewed {reviewedLabel("/guides/ip-paging-network-readiness")}. General guidance — always confirm specifics with your network
+        Last reviewed {reviewedLabel("/guides/ip-paging-network-readiness")}. General guidance - always confirm specifics with your network
         administrator and installer.
       </p>
       <script

@@ -36,7 +36,7 @@ import {
 /** Single source of truth for how a pathway is labelled everywhere it is serialised or displayed. */
 const PATHWAY_SUMMARY_LABEL: Record<PathwayKind, string> = {
   five_ya: "5YA / 10YPP capital pathway",
-  maintenance_only: "Maintenance-only — not a current 5YA pathway",
+  maintenance_only: "Maintenance-only - not a current 5YA pathway",
   state_integrated: "State-integrated property pathway",
   private: "Private-school capital / other funding",
   new_build: "New build / major capital project",

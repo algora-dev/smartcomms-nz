@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-/** Section reveal on scroll — soft fade/slide, once. Content is fully
+/** Section reveal on scroll - soft fade/slide, once. Content is fully
  *  rendered in HTML (just opacity/transform), so SEO and no-JS are unaffected. */
 export function Reveal({ children, delay = 0 }: { children: ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);

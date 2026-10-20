@@ -109,7 +109,7 @@ export default function AgedCareRetirementVillagesPage() {
           </p>
           <TableRegion label="Aged-care use-case shortlists. Editorial starting points, not measured rankings.">
             <table className="w-full min-w-[760px] text-left text-sm leading-relaxed">
-              <caption className="border-b border-[var(--sc-border)] px-4 py-3 text-left text-xs text-[var(--sc-slate)]">Editorial shortlists drawn from the evidence on this page. The strongest fit is listed first where a clear reason exists — this is not a measured 1–3 ranking.</caption>
+              <caption className="border-b border-[var(--sc-border)] px-4 py-3 text-left text-xs text-[var(--sc-slate)]">Editorial shortlists drawn from the evidence on this page. The strongest fit is listed first where a clear reason exists - this is not a measured 1–3 ranking.</caption>
               <thead className="bg-[var(--sc-blue-900)] text-white"><tr>
                 <th scope="col" className="w-1/3 px-4 py-3">What matters most</th>
                 <th scope="col" className="px-4 py-3">Strong starting points</th>
@@ -190,13 +190,13 @@ export default function AgedCareRetirementVillagesPage() {
             {[
               ["PA and announcements", "Live or scheduled audio to chosen common areas, staff areas or outdoor locations. This is the main cost/comparison scope here."],
               ["Entrance and general intercom", "Two-way communication with a defined answering point. Quote visitor video, access hardware and optional room calling explicitly."],
-              ["Nurse call and staff alerts", "Resident assistance, pendants, call escalation or staff-device alerts need a separately specified response system—not just a speaker with a microphone."],
+              ["Nurse call and staff alerts", "Resident assistance, pendants, call escalation or staff-device alerts need a separately specified response system, not just a speaker with a microphone."],
             ].map(([title, text]) => <div key={title} className="sc-card p-5"><h3 className="font-bold text-[var(--sc-blue-900)]">{title}</h3><p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">{text}</p></div>)}
           </div>
           <article id="care-example-summerset-st-johns" aria-labelledby="care-example-summerset-st-johns-title" className="mt-6 scroll-mt-24 rounded-xl border border-[var(--sc-border)] bg-white p-5">
             <p className="text-xs leading-relaxed text-[var(--sc-slate)]">Published NZ project account · G&amp;S Technologies</p>
             <h3 id="care-example-summerset-st-johns-title" className="mt-2 text-lg font-semibold text-[var(--sc-blue-900)]">
-              Summerset St Johns — nurse call and entrance intercom
+              Summerset St Johns - nurse call and entrance intercom
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">
               G&amp;S Technologies describes an Austco nurse-call system with call points, staff consoles and displays at Summerset St Johns. Its account separately lists Gallagher access control and Aiphone GT intercoms.
@@ -323,7 +323,7 @@ export default function AgedCareRetirementVillagesPage() {
           <div className="mt-6 rounded-2xl border border-[var(--sc-border)] bg-white p-5 md:p-7">
             <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">Illustrative common-area project · not a real installation</p>
             <h3 className="mt-2 text-xl font-bold text-[var(--sc-blue-900)]">Six small indoor areas, one large lounge, one outdoor area and one voice-entry point</h3>
-            <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">Assumes suitable existing data cabling, the Essential package, no room-call buttons and no monitoring service. These are eight audio coverage areas plus an entrance—not nine speakers or nine software zones. The calculator applies its normal speaker-quantity assumptions.</p>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">Assumes suitable existing data cabling, the Essential package, no room-call buttons and no monitoring service. These are eight audio coverage areas plus an entrance, not nine speakers or nine software zones. The calculator applies its normal speaker-quantity assumptions.</p>
             <p className="mt-5 text-3xl font-bold tracking-tight text-[var(--sc-blue-900)] md:text-4xl">{formatNZD(example.low)}–{formatNZD(example.high)}<span className="mt-1 block text-sm font-medium tracking-normal text-[var(--sc-slate)]">NZD, excluding GST · indicative installed planning range</span></p>
             <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]">Calculated from the existing SmartComms model, including its central-platform and installation allowances. It is not a measured multi-brand average or a promise of a provider quote at this price. Different architectures and site conditions can fall outside it.</p>
             <p className="mt-3 text-sm leading-relaxed text-[var(--sc-slate)]"><strong>Not included:</strong> site-wide cabling, a clinical nurse-call/pendant system, a complete door/access-control project or an engineered fire/evacuation system. Those require their own scope. Confirm network capacity, installation access and any additional works.</p>

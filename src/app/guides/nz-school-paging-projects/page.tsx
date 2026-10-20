@@ -84,7 +84,7 @@ export default function NzSchoolPagingProjectsPage() {
       "@type": "ListItem",
       position: index + 1,
       url: `${pageUrl}#${project.id}`,
-      name: `${project.school} — ${project.system}`,
+      name: `${project.school} - ${project.system}`,
       description: project.summary,
     })),
   };
@@ -104,7 +104,7 @@ export default function NzSchoolPagingProjectsPage() {
       <AuthorityHero
         eyebrow="NZ project evidence"
         title="How NZ schools are using paging systems for bells, lockdowns & emergency communication"
-        description="Five published New Zealand projects show how schools are combining automated bells, zoned paging, outdoor coverage, emergency messages and — in some cases — two-way classroom communication. SmartComms compares the projects side by side, adds current lifecycle context and extracts the questions another school should ask before copying the architecture."
+        description="Five published New Zealand projects show how schools are combining automated bells, zoned paging, outdoor coverage, emergency messages and - in some cases - two-way classroom communication. SmartComms compares the projects side by side, adds current lifecycle context and extracts the questions another school should ask before copying the architecture."
         tags={["5 published NZ projects", "School bells", "Zoned paging", "Lockdown messaging", "Intercom"]}
         primaryCta={{ label: "Compare school systems", href: "/compare/schools" }}
         secondaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
@@ -358,7 +358,7 @@ export default function NzSchoolPagingProjectsPage() {
           </SectionHeading>
           <div className="mt-6 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-5 md:p-6">
             <p className="leading-relaxed text-[var(--sc-slate)]">
-              Ministry of Education guidance says school boards must maintain an emergency management plan, including roles, evacuation procedures and communication arrangements. Its emergency-planning guidance also asks schools to consider whether distinct alert signals can be heard inside and outside the site. For a communications project, that means the brief should begin with the school&apos;s approved procedures and the areas/people that must receive each message — not with a brand or speaker count.
+              Ministry of Education guidance says school boards must maintain an emergency management plan, including roles, evacuation procedures and communication arrangements. Its emergency-planning guidance also asks schools to consider whether distinct alert signals can be heard inside and outside the site. For a communications project, that means the brief should begin with the school&apos;s approved procedures and the areas/people that must receive each message - not with a brand or speaker count.
             </p>
             <Sources ids={["moe-emergency", "moe-emergency-guide"]} label="Official guidance" />
           </div>
@@ -376,7 +376,7 @@ export default function NzSchoolPagingProjectsPage() {
             <ol className="mt-6 grid gap-4 md:grid-cols-2">
               {[
                 "Which rooms, blocks and outdoor areas must be independently addressable?",
-                "Which messages are routine, priority or emergency — and who is allowed to trigger each one?",
+                "Which messages are routine, priority or emergency - and who is allowed to trigger each one?",
                 "Do any classrooms need two-way calling, or is one-way paging sufficient?",
                 "What existing speakers, amplifiers, cabling or network infrastructure are worth keeping?",
                 "What still works if the internet, a server, a switch or mains power fails?",
@@ -456,7 +456,7 @@ export default function NzSchoolPagingProjectsPage() {
             <ContinuePlanning
               help={{
                 title: "Need to turn the research into your own school brief?",
-                description: "Use the comparison, pricing and funding tools — or ask SmartComms about the requirement you are trying to solve.",
+                description: "Use the comparison, pricing and funding tools - or ask SmartComms about the requirement you are trying to solve.",
                 buttonLabel: "Ask about your school project",
                 mode: "system_selection",
                 sourceTopic: "nz_school_paging_projects",

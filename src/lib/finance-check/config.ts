@@ -1,5 +1,5 @@
 /** Rule-set version + provenance (SC-03.A). Conversation-readiness guidance
- * only — not lending eligibility, approval probability, or credit assessment. */
+ * only - not lending eligibility, approval probability, or credit assessment. */
 export const FINANCE_MODEL_VERSION = "smartcomms-nz-finance-v1";
 
 export const ORGANISATION_TYPES = [
@@ -98,7 +98,7 @@ export const RESULT_COPY = {
     eyebrow: "Tailored finance discussion recommended",
     headline: "This looks like a project worth discussing directly with a specialist",
     body:
-      "Larger or less-defined projects often need a tailored structure rather than a simple online estimate. That does not rule finance out — it just means the next useful step is a conversation about the organisation, project and available options.",
+      "Larger or less-defined projects often need a tailored structure rather than a simple online estimate. That does not rule finance out - it just means the next useful step is a conversation about the organisation, project and available options.",
   },
   early: {
     eyebrow: "Worth a conversation",
