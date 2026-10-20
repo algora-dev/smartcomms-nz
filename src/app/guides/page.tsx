@@ -27,13 +27,13 @@ const GUIDES = [
     href: "/industries/aged-care-retirement-villages",
   },
   {
-    title: "NZ School PA & Paging Requirements",
-    desc: "What Ministry design, cabling, funding and procurement guidance means for school PA, bells, intercom and emergency communications.",
+    title: "NZ School PA, Paging & Bell Requirements Guide",
+    desc: "A deep specification guide combining Ministry requirements, real NZ school projects and supplier approaches for coverage, bells, emergency messaging, networking, reuse and support.",
     href: "/guides/nz-school-pa-paging-requirements",
   },
   {
     title: "IP Paging Network Readiness Checklist",
-    desc: "PoE budget, VLANs, QoS, cabling state and support responsibility - check these before asking for IP paging quotes.",
+    desc: "PoE budget, VLANs, QoS, cabling state and support responsibility; check these before asking for IP paging quotes.",
     href: "/guides/ip-paging-network-readiness",
   },
   {

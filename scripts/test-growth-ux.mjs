@@ -9,16 +9,18 @@ let checks=0;
 function check(name,condition){assert.ok(condition,name);checks++;console.log('PASS '+name);}
 
 const header=text('src/components/site-header.tsx');
-for(const label of ['Systems','Compare','Tools']) check(`grouped nav: ${label}`,header.includes(`label: "${label}"`));
-for(const label of ['Pricing Tool','Funding Checker','Finance Checker']) check(`tools menu: ${label}`,header.includes(`label: "${label}"`));
+for(const label of ['Systems','Compare']) check(`grouped nav: ${label}`,header.includes(`label: "${label}"`));
+check('tools removed from ordinary grouped nav',!header.includes('label: "Tools"'));
+check('free planning tools promoted beside project help',header.includes('Free planning tools')&&header.includes('buttonLabel="Get project help"'));
+for(const label of ['Get a price estimate','Check school funding','Check finance options']) check(`planning tools menu: ${label}`,header.includes(`label: "${label}"`));
 check('header no legacy ballpark CTA',!header.includes('Get a ballpark price'));
 check('desktop uses grouped disclosures',header.includes('aria-expanded={expanded}')&&header.includes('setDesktopOpen'));
 check('mobile uses expandable nav groups',header.includes('<details')&&header.includes('<summary'));
 
 const home=text('src/app/page.tsx');
-for(const label of ['Pricing Tool','Funding Checker','Finance Checker']) check(`homepage planning suite: ${label}`,home.includes(`>${label}<`));
-check('homepage planning section named',home.includes('Plan your project'));
-check('homepage utility strip contains three tools',home.includes('homepage_pricing_tool_clicked')&&home.includes('homepage_funding_tool_clicked')&&home.includes('homepage_finance_tool_clicked'));
+for(const label of ['Get a price estimate','Check a funding pathway','Explore finance options']) check(`homepage planning suite: ${label}`,home.includes(`>${label}<`));
+check('homepage promotes free planning tools immediately after hero',home.indexOf('Free planning tools') > home.indexOf('<SmartcommsHero />') && home.indexOf('Free planning tools') < home.indexOf('Ready for a human next step?'));
+check('homepage explains tool value before supplier contact',home.includes('questions that can otherwise take hours of research and calls'));
 
 const toolNav=text('src/components/tool-suite-nav.tsx');
 for(const label of ['Pricing Tool','Funding Checker','Finance Checker']) check(`tool suite nav: ${label}`,toolNav.includes(`label: "${label}"`));
@@ -30,6 +32,11 @@ check('pricing result leads with provider recommendation',text('src/components/p
 check('funding result offers scope help',text('src/app/tools/funding-check/FundingCheckTool.tsx').includes('Get help scoping this project'));
 check('finance checker is scoped to communications projects',text('src/app/tools/finance-check/page.tsx').includes('Communications System Finance Checker NZ')&&text('src/app/tools/finance-check/page.tsx').includes('Communications system finance checker'));
 check('school bell guide compares three upgrade approaches',text('src/app/systems/school-bell-announcements/page.tsx').includes('Three common upgrade approaches'));
+const requirements=text('src/app/guides/nz-school-pa-paging-requirements/page.tsx');
+check('school requirements mega guide uses current Ministry design guidance',requirements.includes('Designing standards for New Zealand schools')&&requirements.includes('clear speech intelligibility'));
+check('school requirements mega guide compares retain hybrid and network paths',requirements.includes('Modernise control, keep the sounders')&&requirements.includes('Use network control with retained PA')&&requirements.includes('Move to distributed network audio'));
+for(const school of ['Three Kings Primary School','Ormiston Junior College','Thorndon Primary School']) check(`school requirements project evidence: ${school}`,requirements.includes(school));
+check('school requirements mega guide includes quote brief',requirements.includes('What to put in the supplier brief')&&requirements.includes('Ask the bidder to return'));
 
 const targets=[
   ['src/app/systems/school-bell-announcements/page.tsx','School Bell & Paging Systems NZ','threeKings'],
@@ -56,6 +63,7 @@ for(const [route,date] of [
   ['/systems/emergency-lockdown','2026-10-20'],
   ['/systems/ip-paging-pa','2026-09-23'],
   ['/systems/ip-intercom','2026-09-23'],
+  ['/guides/nz-school-pa-paging-requirements','2026-10-20'],
 ]){
  const escaped=route.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
  check(`review date current: ${route}`,new RegExp(`"${escaped}"[^\n]+reviewed: "${date}"`).test(meta));

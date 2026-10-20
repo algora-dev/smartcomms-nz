@@ -55,46 +55,80 @@ const INTENT_CARDS = [
   },
 ];
 
-const UTILITY_LINKS = [
-  { href: "/pricing-tool", label: "Pricing Tool", event: "homepage_pricing_tool_clicked" },
-  { href: "/tools/funding-check", label: "Funding Checker", event: "homepage_funding_tool_clicked" },
-  { href: "/tools/finance-check", label: "Finance Checker", event: "homepage_finance_tool_clicked" },
-  { href: "/compare", label: "Compare systems by site type", event: "compare_cta_clicked" },
-];
 
 export default function HomePage() {
   return (
     <>
       <SmartcommsHero />
 
-      <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)]" aria-label="Popular planning resources">
-        <div className="sc-container py-6">
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">
-              Popular planning resources
-            </p>
-            {UTILITY_LINKS.map((link) => (
-              <TrackedLink
-                key={link.href}
-                href={link.href}
-                event={link.event}
-                payload={{ source: "homepage_strip" }}
-                className="text-sm font-medium text-[var(--sc-blue-700)] underline decoration-[var(--sc-teal)] decoration-2 underline-offset-4 hover:text-[var(--sc-navy)]"
-              >
-                {link.label}
-              </TrackedLink>
-            ))}
-          </div>
+      <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)]" aria-labelledby="free-planning-tools">
+        <div className="sc-container py-12 sm:py-16">
+          <Reveal>
+            <div className="max-w-4xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">Free planning tools</p>
+              <h2 id="free-planning-tools" className="sc-section-title mt-2">
+                Get a price estimate, check funding, then explore finance
+              </h2>
+              <p className="mt-3 max-w-3xl text-lg text-[var(--sc-slate)]">
+                Three quick tools answer the questions that can otherwise take hours of research and calls. Use one or all three. Results are indicative, there is no sales call required, and you can ask SmartComms who to contact when you are ready to move forward.
+              </p>
+            </div>
+
+            <div className="mt-8 grid gap-5 lg:grid-cols-3">
+              <div className="sc-card bg-white p-6">
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">1 · Start here</p>
+                  <span className="rounded-full bg-[var(--sc-blue-50)] px-2.5 py-1 text-xs font-semibold text-[var(--sc-blue-700)]">30–60 sec</span>
+                </div>
+                <h3 className="mt-3 text-xl font-semibold text-[var(--sc-blue-900)]">Get a price estimate</h3>
+                <p className="mt-2 text-[var(--sc-slate)]">
+                  Describe the site, coverage and capability level to get an indicative installed project range before requesting formal quotes.
+                </p>
+                <Link href="/pricing-tool" className="sc-btn-primary mt-5">Estimate project cost</Link>
+              </div>
+
+              <div className="sc-card bg-white p-6">
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">2 · NZ schools</p>
+                  <span className="rounded-full bg-[var(--sc-blue-50)] px-2.5 py-1 text-xs font-semibold text-[var(--sc-blue-700)]">Funding</span>
+                </div>
+                <h3 className="mt-3 text-xl font-semibold text-[var(--sc-blue-900)]">Check a funding pathway</h3>
+                <p className="mt-2 text-[var(--sc-slate)]">
+                  See whether fixed paging, bells, emergency communication, intercom or cabling may have a potential school property-funding pathway.
+                </p>
+                <Link href="/tools/funding-check" className="sc-btn-primary mt-5">Check potential funding</Link>
+              </div>
+
+              <div className="sc-card bg-white p-6">
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">3 · If useful</p>
+                  <span className="rounded-full bg-[var(--sc-blue-50)] px-2.5 py-1 text-xs font-semibold text-[var(--sc-blue-700)]">Finance</span>
+                </div>
+                <h3 className="mt-3 text-xl font-semibold text-[var(--sc-blue-900)]">Explore finance options</h3>
+                <p className="mt-2 text-[var(--sc-slate)]">
+                  Use the estimated project value to see whether equipment finance or leasing may be worth discussing instead of paying the full cost upfront.
+                </p>
+                <Link href="/tools/finance-check" className="sc-btn-primary mt-5">Check finance options</Link>
+              </div>
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-[var(--sc-slate)]">
+              <span><strong className="text-[var(--sc-navy)]">Use the tools in any order.</strong> Funding is school-specific; pricing and finance can also help other organisations.</span>
+              <Link href="/tools" className="font-semibold text-[var(--sc-blue-700)] underline decoration-[var(--sc-teal)] decoration-2 underline-offset-4 hover:text-[var(--sc-navy)]">
+                See how the three tools work together
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="sc-container py-10 sm:py-12">
         <Reveal>
           <div className="rounded-2xl bg-[var(--sc-navy)] p-6 sm:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/70">Need a provider?</p>
-            <h2 className="sc-section-title mt-2 text-white">Start with SmartComms before you start calling installers</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/70">Ready for a human next step?</p>
+            <h2 className="sc-section-title mt-2 text-white">Ask SmartComms who we think you should contact first</h2>
             <p className="mt-3 max-w-3xl leading-relaxed text-white/85">
-              Tell us what you are planning, what is already installed and your region. We will review the project and reply with the provider or providers in our selected New Zealand network that we think are best suited, including their public contact details and why they may fit. You decide who to contact.
+              Send us the project, or complete one of the free tools first. We will review what you need, what is already installed and your region, then reply with the provider or providers in our selected New Zealand network that we think are best suited, including public contact details and why they may fit. You decide who to contact.
             </p>
             <div className="mt-5 flex flex-wrap items-center gap-4">
               <ProjectHelpLauncher
@@ -104,55 +138,6 @@ export default function HomePage() {
                 className="sc-btn-light"
               />
               <Link href="/about/disclosure" className="text-sm font-semibold text-white underline decoration-white/50 underline-offset-4 hover:decoration-white">How recommendations work</Link>
-            </div>
-          </div>
-        </Reveal>
-      </section>
-
-      <section className="sc-container py-16">
-        <Reveal>
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">Plan your project</p>
-            <h2 className="sc-section-title mt-2">
-              Pricing, funding and finance in one place
-            </h2>
-            <p className="mt-3 text-lg text-[var(--sc-slate)]">
-              You do not need to know the products or technical design first. Use whichever question matters most right now, then move between the tools as the project becomes clearer.
-            </p>
-          </div>
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            <div className="sc-card p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">30-60 seconds</p>
-              <h3 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Pricing Tool</h3>
-              <p className="mt-2 text-[var(--sc-slate)]">
-                Choose the site situation, areas to cover and feature level to get an indicative installed price range.
-              </p>
-              <div className="mt-5 sc-actions">
-                <Link href="/pricing-tool" className="sc-btn-primary">Estimate project cost</Link>
-                <Link href="/pricing" className="sc-btn-secondary">See how pricing works</Link>
-              </div>
-            </div>
-            <div className="sc-card p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">NZ schools</p>
-              <h3 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Funding Checker</h3>
-              <p className="mt-2 text-[var(--sc-slate)]">
-                See whether fixed paging, bells, emergency communication, intercoms or cabling may have a potential Ministry 5YA / 10YPP funding pathway.
-              </p>
-              <div className="mt-5 sc-actions">
-                <Link href="/tools/funding-check" className="sc-btn-primary">Check potential funding</Link>
-                <Link href="/funding" className="sc-btn-secondary">Read the funding guide</Link>
-              </div>
-            </div>
-            <div className="sc-card p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">Schools & organisations</p>
-              <h3 className="mt-2 text-xl font-semibold text-[var(--sc-blue-900)]">Finance Checker</h3>
-              <p className="mt-2 text-[var(--sc-slate)]">
-                If paying the full project cost upfront is not ideal, see whether equipment finance or leasing is worth discussing.
-              </p>
-              <div className="mt-5 sc-actions">
-                <Link href="/tools/finance-check" className="sc-btn-primary">Check finance options</Link>
-                <Link href="/financing" className="sc-btn-secondary">How finance can work</Link>
-              </div>
             </div>
           </div>
         </Reveal>

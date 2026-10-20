@@ -20,6 +20,7 @@ check('minimum primary control target',css.includes('min-height: 2.75rem'));
 check('viewport-aware dialog size',css.includes('100dvh'));
 const header=text('src/components/site-header.tsx');
 check('site-wide same portal access',header.includes('ProjectHelpLauncher')&&header.includes('buttonLabel="Get project help"'));
+check('free planning tools promoted in header',header.includes('Free planning tools')&&header.includes('Get a price estimate')&&header.includes('Check school funding')&&header.includes('Check finance options'));
 check('navigation announces current location',header.includes('aria-current'));
 for(const file of ['src/app/compare/schools/page.tsx','src/app/industries/aged-care-retirement-villages/page.tsx','src/app/industries/warehouses-manufacturing-industrial/page.tsx']){
  const s=text(file);

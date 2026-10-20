@@ -31,15 +31,12 @@ const NAV_GROUPS: readonly NavGroup[] = [
       { href: "/industries/warehouses-manufacturing-industrial", label: "Warehouses & industrial", desc: "Shift bells, horns, paging and yard coverage" },
     ],
   },
-  {
-    label: "Tools",
-    items: [
-      { href: "/tools", label: "All tools", desc: "Pricing, funding and finance in one place" },
-      { href: "/pricing-tool", label: "Pricing Tool", desc: "Estimate an indicative installed project range" },
-      { href: "/tools/funding-check", label: "Funding Checker", desc: "NZ school property-funding pathway check" },
-      { href: "/tools/finance-check", label: "Finance Checker", desc: "Explore finance and leasing options" },
-    ],
-  },
+];
+
+const PLANNING_TOOLS: readonly NavItem[] = [
+  { href: "/pricing-tool", label: "Get a price estimate", desc: "Indicative installed project pricing in a few minutes" },
+  { href: "/tools/funding-check", label: "Check school funding", desc: "See whether a NZ school project may fit common property-funding pathways" },
+  { href: "/tools/finance-check", label: "Check finance options", desc: "Explore whether finance or leasing is worth discussing for the project" },
 ];
 
 const TOP_LINKS: readonly NavItem[] = [
@@ -53,6 +50,7 @@ export function SiteHeader() {
   const pathname = usePathname();
   const toggleRef = useRef<HTMLButtonElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
+  const toolsRef = useRef<HTMLDivElement>(null);
 
   const active = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
     || (href === "/compare" && pathname.startsWith("/industries/"))
@@ -70,7 +68,11 @@ export function SiteHeader() {
 
   useEffect(() => {
     const onPointer = (event: MouseEvent) => {
-      if (desktopOpen && navRef.current && !navRef.current.contains(event.target as Node)) setDesktopOpen(null);
+      if (
+        desktopOpen
+        && !navRef.current?.contains(event.target as Node)
+        && !toolsRef.current?.contains(event.target as Node)
+      ) setDesktopOpen(null);
     };
     const onKey = (event: KeyboardEvent) => {
       if (event.key !== "Escape") return;
@@ -143,6 +145,44 @@ export function SiteHeader() {
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
+          <div ref={toolsRef} className="relative hidden sm:block">
+            <button
+              type="button"
+              onClick={() => setDesktopOpen(desktopOpen === "Free planning tools" ? null : "Free planning tools")}
+              aria-expanded={desktopOpen === "Free planning tools"}
+              className="sc-btn-primary gap-1.5 px-3 text-sm"
+            >
+              Free planning tools
+              <svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" className={`transition-transform ${desktopOpen === "Free planning tools" ? "rotate-180" : ""}`}>
+                <path d="m2.5 4.5 3.5 3 3.5-3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+            {desktopOpen === "Free planning tools" ? (
+              <div className="absolute right-0 top-full z-50 mt-2 w-[22rem] rounded-2xl border border-[var(--sc-border)] bg-white p-2 shadow-[0_16px_40px_rgb(11_45_91_/_14%)]">
+                <div className="px-3 pb-2 pt-2">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">Free planning tools</p>
+                  <p className="mt-1 text-xs leading-relaxed text-[var(--sc-slate)]">Price the project, check a school funding pathway, or explore finance before you start calling suppliers.</p>
+                </div>
+                {PLANNING_TOOLS.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={active(item.href) ? "page" : undefined}
+                    className="block rounded-xl px-3 py-2.5 no-underline hover:bg-[var(--sc-blue-50)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--sc-blue-700)]"
+                  >
+                    <span className="block text-sm font-semibold text-[var(--sc-navy)]">{item.label}</span>
+                    {item.desc ? <span className="mt-0.5 block text-xs leading-relaxed text-[var(--sc-slate)]">{item.desc}</span> : null}
+                  </Link>
+                ))}
+                <div className="mt-1 border-t border-[var(--sc-grey)] p-2">
+                  <Link href="/tools" className="block rounded-lg px-2 py-2 text-sm font-semibold text-[var(--sc-blue-700)] no-underline hover:bg-[var(--sc-blue-50)]">
+                    View all planning tools →
+                  </Link>
+                </div>
+              </div>
+            ) : null}
+          </div>
+          <Link href="/tools" className="sc-btn-primary px-3 sm:hidden">Free tools</Link>
           <ProjectHelpLauncher buttonLabel="Get project help" sourceTopic="site_header" className="sc-btn-secondary hidden sm:inline-flex" />
           <ProjectHelpLauncher buttonLabel="Get help" sourceTopic="site_header_mobile" className="sc-btn-secondary sm:hidden" />
           <button ref={toggleRef} type="button" onClick={() => setMobileOpen((value) => !value)} aria-expanded={mobileOpen}
@@ -158,6 +198,18 @@ export function SiteHeader() {
       {mobileOpen ? (
         <nav id="sc-nav-menu" aria-label="Mobile navigation" className="max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-[var(--sc-border)] bg-white lg:hidden">
           <div className="sc-container py-3">
+            <div className="mb-2 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-3">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">Free planning tools</p>
+              <p className="mt-1 text-xs leading-relaxed text-[var(--sc-slate)]">Get useful project answers before you speak to a supplier.</p>
+              <div className="mt-2">
+                {PLANNING_TOOLS.map((item) => (
+                  <Link key={item.href} href={item.href} className="block rounded-lg px-2 py-2 no-underline hover:bg-white">
+                    <span className="block text-sm font-semibold text-[var(--sc-navy)]">{item.label}</span>
+                    {item.desc ? <span className="mt-0.5 block text-xs leading-relaxed text-[var(--sc-slate)]">{item.desc}</span> : null}
+                  </Link>
+                ))}
+              </div>
+            </div>
             {NAV_GROUPS.map((group) => (
               <details key={group.label} className="border-b border-[var(--sc-grey)] py-1" open={groupActive(group)}>
                 <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between py-2 text-base font-semibold text-[var(--sc-navy)] marker:content-none">

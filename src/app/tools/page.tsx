@@ -13,9 +13,9 @@ export const metadata: Metadata = buildMetadata({
 export default function ToolsPage() {
   return (
     <div className="sc-container sc-container-reading py-16">
-      <h1 className="sc-tool-title">SmartComms tools</h1>
+      <h1 className="sc-tool-title">Free planning tools: pricing, funding & finance</h1>
       <p className="sc-lead mt-4">
-        Three quick tools for the questions that often stop a communications project early: what might it cost, is there a school funding pathway, and is finance or leasing worth exploring?
+        Get useful answers to three project questions in a few minutes: what might the system cost, could a NZ school project fit a property-funding pathway, and is finance or leasing worth exploring? Use one tool or move through all three before you start calling suppliers.
       </p>
 
       <div className="mt-10 grid gap-6 md:grid-cols-3">
