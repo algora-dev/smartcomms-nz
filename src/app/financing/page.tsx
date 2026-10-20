@@ -97,7 +97,7 @@ export default function FinancingPage() {
             <Suspense><IndustryAwareToolLink to="/tools/finance-check" className="sc-btn-primary">Check whether finance is worth exploring</IndustryAwareToolLink></Suspense>
             <Suspense><IndustryAwareToolLink to="/pricing-tool" className="sc-btn-secondary">Estimate the project cost first</IndustryAwareToolLink></Suspense>
           </div>
-          <ProjectHelpLauncher mode="finance_help" sourceTopic="financing_guide" buttonLabel="Discuss finance options" className="sc-text-action mt-3" />
+          <ProjectHelpLauncher mode="finance_help" sourceTopic="financing_guide" buttonLabel="Ask who to contact about finance" className="sc-text-action mt-3" />
           <p className="mt-4 text-xs leading-relaxed text-[var(--sc-slate)]">
             Last reviewed {reviewed}. SmartComms does not provide finance, quote interest rates or make credit decisions. Actual options and approval are determined by the relevant finance provider.
           </p>
@@ -249,7 +249,7 @@ export default function FinancingPage() {
         </div>
       </section>
       <div className="sc-container sc-container-reading pb-12">
-        <ProjectHelpPanel {...{"title": "Prefer to discuss payment options directly?", "description": "Tell us the rough project value and what you need help understanding. You do not need to finish the checker first.", "buttonLabel": "Discuss finance options", "mode": "finance_help", "sourceTopic": "financing_guide"}} />
+        <ProjectHelpPanel {...{"title": "Need the right person to discuss finance with?", "description": "Tell SmartComms the rough project value and what you need help understanding. We will review it and reply with a suitable finance specialist or provider for you to contact.", "buttonLabel": "Ask who to contact about finance", "mode": "finance_help", "sourceTopic": "financing_guide"}} />
       </div>
     </div>
   );

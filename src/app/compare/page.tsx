@@ -117,7 +117,7 @@ export default function CompareHubPage() {
         }}
       />
       <div className="sc-container sc-container-reading pb-12">
-      <ProjectHelpPanel {...{"title": "Not sure which comparison fits your site?", "description": "Tell us what you need the system to do and we can help you work out the next step.", "buttonLabel": "Ask about your site", "mode": "system_selection", "sourceTopic": "compare_hub"}} />
+      <ProjectHelpPanel {...{"title": "Not sure which approach or provider fits your site?", "description": "Tell SmartComms what the system needs to do and your region. We will review it and reply with the providers we think are worth contacting first.", "buttonLabel": "Ask SmartComms who to contact", "mode": "system_selection", "sourceTopic": "compare_hub"}} />
       </div>
     </div>
   );

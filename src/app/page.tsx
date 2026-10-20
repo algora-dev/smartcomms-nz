@@ -88,6 +88,27 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="sc-container py-10 sm:py-12">
+        <Reveal>
+          <div className="rounded-2xl bg-[var(--sc-navy)] p-6 sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/70">Need a provider?</p>
+            <h2 className="sc-section-title mt-2 text-white">Start with SmartComms before you start calling installers</h2>
+            <p className="mt-3 max-w-3xl leading-relaxed text-white/85">
+              Tell us what you are planning, what is already installed and your region. We will review the project and reply with the provider or providers in our selected New Zealand network that we think are best suited, including their public contact details and why they may fit. You decide who to contact.
+            </p>
+            <div className="mt-5 flex flex-wrap items-center gap-4">
+              <ProjectHelpLauncher
+                mode="project_help"
+                sourceTopic="homepage_provider_referral"
+                buttonLabel="Ask SmartComms who to contact"
+                className="sc-btn-light"
+              />
+              <Link href="/about/disclosure" className="text-sm font-semibold text-white underline decoration-white/50 underline-offset-4 hover:decoration-white">How recommendations work</Link>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
       <section className="sc-container py-16">
         <Reveal>
           <div className="max-w-3xl">
@@ -180,7 +201,7 @@ export default function HomePage() {
         <Reveal>
           <h2 className="sc-section-title">Built to make the next step easier</h2>
           <p className="mt-3 max-w-3xl text-lg text-[var(--sc-slate)]">
-            Whether you are researching a future project or already talking to an installer, the site is designed to help you understand the architecture, budget, funding possibilities and questions worth resolving before a final quote.
+            Whether you are researching a future project or ready to ask for quotes, SmartComms helps you understand the architecture, budget, funding possibilities and questions worth resolving. When you want a human next step, we can also review the project and tell you which providers we think are worth contacting first.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link href="/systems" className="sc-btn-secondary">Compare system architectures</Link>
@@ -188,7 +209,7 @@ export default function HomePage() {
             <ProjectHelpLauncher
               mode="project_help"
               sourceTopic="homepage_bottom_cta"
-              buttonLabel="Tell us about your project"
+              buttonLabel="Ask who we recommend"
               className="sc-btn-primary"
             />
           </div>

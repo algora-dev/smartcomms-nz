@@ -27,7 +27,7 @@ export type EnquiryMode =
 const HELP_OPTIONS = [
   { value: "choosing_system", label: "Help choosing a system" },
   { value: "understanding_estimate", label: "Help understanding an estimate" },
-  { value: "formal_quote", label: "Formal quote / installer" },
+  { value: "formal_quote", label: "Provider recommendation / formal quote" },
   { value: "site_assessment", label: "Site assessment" },
   { value: "funding_scope", label: "Funding / project-scope question" },
   { value: "finance_options", label: "Finance / leasing question" },
@@ -53,52 +53,48 @@ const EXISTING_PROVIDER_OPTIONS = [
   { value: "unsure", label: "Not sure" },
 ] as const;
 
-/** How enquiries are actually handled: recommendation only, no forwarding. */
-const ENQUIRY_PROCESS_COPY =
-  "Your enquiry goes to the SmartComms team. We'll review the information you provide to understand what you need, then respond with the provider or providers we think are best suited to help you take the next step.";
-
 const MODE_COPY: Record<EnquiryMode, { title: string; blurb: string; submit: string }> = {
   project_help: {
-    title: "Help me take the next step",
+    title: "Get project help",
     blurb:
-      "Tell us a little about the site and what you need the system to do. We'll review it and suggest the most useful next step, or a suitable provider from our selected New Zealand network.",
-    submit: "Send enquiry",
+      "Tell us enough to understand the project. SmartComms will review it and reply with the provider or providers in our selected New Zealand network that look best suited, including their public contact details and why they may fit. You decide who to contact.",
+    submit: "Send project for review",
   },
   quote_help: {
-    title: "Get help with a formal quote",
+    title: "Find providers for a formal quote",
     blurb:
-      "Send us enough information to understand the project and we can suggest suitable providers from our selected New Zealand network for a formal quote.",
-    submit: "Send enquiry",
+      "Your project information comes to SmartComms, not an installer. We'll review it and reply with the providers we think are best suited to quote the project, with their public contact details.",
+    submit: "Send project for provider recommendations",
   },
   funding_help: {
-    title: "Discuss the technical scope and budget",
+    title: "Get help scoping the project",
     blurb:
-      "A provider can help document the existing system, technical scope and indicative budget. The school, Property Advisor / 10YPP process and Ministry requirements determine the funding pathway and approval.",
-    submit: "Send enquiry",
+      "SmartComms cannot approve or confirm Ministry funding. We can review the technical scope and suggest providers who may be able to help turn it into a quote-ready project. We'll send their contact details to you.",
+    submit: "Send project for scope review",
   },
   finance_help: {
-    title: "Discuss finance or leasing options",
+    title: "Find the right finance contact",
     blurb:
-      "Tell us a little about the project. We'll review the information and, where appropriate, suggest a finance specialist or next step from our selected New Zealand network.",
-    submit: "Send finance enquiry",
+      "Tell us a little about the communications project. We'll review it and, where appropriate, reply with a finance specialist or provider from our selected New Zealand network for you to contact directly.",
+    submit: "Send finance question",
   },
   site_assessment: {
-    title: "Ask about a site assessment",
+    title: "Find help with a site assessment",
     blurb:
-      "A short site review usually narrows the estimate considerably. Tell us about the site and region and we can suggest an appropriate next step or provider.",
-    submit: "Ask about a site assessment",
+      "A short site review can narrow the scope and estimate. Tell us about the site and region and we'll reply with the provider or providers we think are best suited to assess it.",
+    submit: "Find a site-assessment provider",
   },
   cabling_help: {
-    title: "Network / cabling question",
+    title: "Find help with network cabling",
     blurb:
-      "Site-wide structured cabling is excluded from our calculator and must be scoped separately by an appropriate ICT / cabling contractor. Give us a few details and we can point you to the right people for your site and region.",
-    submit: "Send enquiry",
+      "Site-wide structured cabling is excluded from our calculator and needs separate scoping. Give us a few details and we'll reply with suitable people for your site and region.",
+    submit: "Find a cabling provider",
   },
   system_selection: {
-    title: "Find the right system",
+    title: "Get help choosing the right system",
     blurb:
-      "Tell us what the system needs to do, your region and what infrastructure already exists. We'll review it and suggest suitable options or a next step.",
-    submit: "Send enquiry",
+      "Tell us what the system needs to do, your region and what is already installed. We'll review it and reply with the next step or suitable providers for you to contact.",
+    submit: "Send project for review",
   },
   general_message: {
     title: "Send us a message",
@@ -139,6 +135,8 @@ export function ProjectEnquiryModal({
   const descriptionId = useId();
   const successId = useId();
   const isProject = mode !== "general_message";
+  const showHelpType = mode === "project_help";
+  const hasStructuredContext = Boolean(estimateSummary || Object.values(context ?? {}).some(Boolean));
   const [helpType, setHelpType] = useState<string>(DEFAULT_HELP[mode]);
   const [existingProvider, setExistingProvider] = useState<string>("");
   const [providerName, setProviderName] = useState("");
@@ -185,12 +183,6 @@ export function ProjectEnquiryModal({
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // Strategically important routing answer: partner-sent prospects must not
-    // be silently treated as new leads, so project enquiries require it.
-    if (isProject && !existingProvider) {
-      setError("Please tell us whether you are already working with an installer, IT provider or consultant (or choose Not sure).");
-      return;
-    }
     // Validate attachments against the honest hosting-supported limit before
     // upload (SC-05.A): 4MB combined across all files.
     const chosen = [...e.currentTarget.querySelectorAll<HTMLInputElement>('input[name="attachments"]')]
@@ -254,7 +246,7 @@ export function ProjectEnquiryModal({
         {done ? (
           <div className="py-8 text-center">
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[var(--sc-teal)]/10 text-2xl text-[var(--sc-teal)]">✓</div>
-            <h3 id={successId} ref={successRef} tabIndex={-1} className="sc-dialog-title mt-4 text-xl font-semibold text-[var(--sc-navy)]">Thanks — we&apos;ve received your enquiry</h3>
+            <h3 id={successId} ref={successRef} tabIndex={-1} className="sc-dialog-title mt-4 text-xl font-semibold text-[var(--sc-navy)]">Thanks, we&apos;ve received your enquiry</h3>
             <p className="mt-2 text-sm text-[var(--sc-slate)]">
               The SmartComms team will review what you sent and reply with the provider or providers we think are the
               best fit, including their public contact details and why they may suit your requirements.
@@ -298,7 +290,7 @@ export function ProjectEnquiryModal({
                 <label>Website<input name="company_website" tabIndex={-1} autoComplete="off" /></label>
               </div>
 
-              {isProject && (
+              {showHelpType && (
                 <label className="block text-sm">
                   <span className="font-medium text-[var(--sc-charcoal)]">What help do you need? *</span>
                   <select
@@ -346,84 +338,87 @@ export function ProjectEnquiryModal({
               </div>
               {isProject ? (
                 <>
-                  <div className="grid gap-4 sm:grid-cols-2">
+                  {!hasStructuredContext && (
                     <label className="block text-sm">
-                      <span className="font-medium text-[var(--sc-charcoal)]">Phone (optional)</span>
-                      <input name="phone" type="tel" className={inputClass} placeholder="021 234 5678 (optional)" autoComplete="tel" />
+                      <span className="font-medium text-[var(--sc-charcoal)]">What are you trying to improve? *</span>
+                      <textarea required name="comments" rows={3} className={inputClass} placeholder="For example: replace unreliable bells, improve outdoor paging, or get a site-specific quote" />
                     </label>
-                    <label className="block text-sm">
-                      <span className="font-medium text-[var(--sc-charcoal)]">Brand / product preference (optional)</span>
-                      <input name="brandPreference" className={inputClass} placeholder="e.g. SPON, Bosch, no preference" />
-                    </label>
-                  </div>
+                  )}
 
-                  <fieldset className="rounded-xl border border-[var(--sc-border)] p-3">
-                    <legend className="px-1 text-sm font-medium text-[var(--sc-charcoal)]">
-                      Are you already working with an installer, IT provider or consultant? *
-                    </legend>
-                    <div className="mt-1 flex flex-wrap gap-3">
-                      {EXISTING_PROVIDER_OPTIONS.map((o) => (
-                        <label key={o.value} className="flex min-h-11 cursor-pointer items-center gap-2 text-sm text-[var(--sc-slate)]">
+                  <details className="rounded-xl border border-[var(--sc-border)] bg-white p-3">
+                    <summary className="min-h-11 cursor-pointer py-2 text-sm font-semibold text-[var(--sc-blue-700)]">
+                      Add more project details (optional)
+                    </summary>
+                    <div className="mt-3 space-y-4 border-t border-[var(--sc-border)] pt-4">
+                      <fieldset className="rounded-xl border border-[var(--sc-border)] p-3">
+                        <legend className="px-1 text-sm font-medium text-[var(--sc-charcoal)]">Already working with an installer, IT provider or consultant?</legend>
+                        <div className="mt-1 flex flex-wrap gap-3">
+                          {EXISTING_PROVIDER_OPTIONS.map((o) => (
+                            <label key={o.value} className="flex min-h-11 cursor-pointer items-center gap-2 text-sm text-[var(--sc-slate)]">
+                              <input
+                                type="radio"
+                                name="existingProviderChoice"
+                                value={o.value}
+                                checked={existingProvider === o.value}
+                                onChange={() => setExistingProvider(o.value)}
+                                className="accent-[var(--sc-teal-strong)]"
+                              />
+                              {o.label}
+                            </label>
+                          ))}
+                        </div>
+                        {existingProvider === "yes" && (
                           <input
-                            type="radio"
-                            name="existingProviderChoice"
-                            value={o.value}
-                            checked={existingProvider === o.value}
-                            onChange={() => setExistingProvider(o.value)}
-                            className="accent-[var(--sc-teal-strong)]"
+                            name="providerName"
+                            value={providerName}
+                            onChange={(e) => setProviderName(e.target.value)}
+                            className={`${inputClass} mt-2`}
+                            placeholder="Provider name (optional)"
+                            aria-label="Existing provider name"
                           />
-                          {o.label}
+                        )}
+                      </fieldset>
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <label className="block text-sm">
+                          <span className="font-medium text-[var(--sc-charcoal)]">Phone</span>
+                          <input name="phone" type="tel" className={inputClass} placeholder="021 234 5678" autoComplete="tel" />
                         </label>
-                      ))}
+                        <label className="block text-sm">
+                          <span className="font-medium text-[var(--sc-charcoal)]">Brand / product preference</span>
+                          <input name="brandPreference" className={inputClass} placeholder="e.g. Bosch, no preference" />
+                        </label>
+                      </div>
+                      {hasStructuredContext && (
+                        <label className="block text-sm">
+                          <span className="font-medium text-[var(--sc-charcoal)]">Project note</span>
+                          <textarea name="comments" rows={3} className={inputClass} placeholder="Anything else we should know about the site or project" />
+                        </label>
+                      )}
+                      <label className="block text-sm">
+                        <span className="font-medium text-[var(--sc-charcoal)]">Attach plans / documents</span>
+                        <input
+                          type="file"
+                          name="attachments"
+                          multiple
+                          accept=".pdf,.png,.jpg,.jpeg,.webp,.dwg,.heic"
+                          className="mt-1 w-full cursor-pointer rounded-lg border border-dashed border-[var(--sc-border)] px-3 py-2.5 text-sm text-[var(--sc-slate)] file:mr-3 file:cursor-pointer file:rounded-full file:border-0 file:bg-[var(--sc-blue-50)] file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-[var(--sc-navy)] hover:border-[var(--sc-teal)]"
+                        />
+                        <span className="mt-1 block text-xs text-[var(--sc-slate)]">PDFs, images or plans. Up to 4MB total across all files.</span>
+                      </label>
                     </div>
-                    {existingProvider === "yes" && (
-                      <input
-                        name="providerName"
-                        value={providerName}
-                        onChange={(e) => setProviderName(e.target.value)}
-                        className={`${inputClass} mt-2`}
-                        placeholder="Provider name (optional)"
-                        aria-label="Existing provider name"
-                      />
-                    )}
-                  </fieldset>
+                  </details>
+
+                  <p className="rounded-lg border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-3 text-xs leading-relaxed text-[var(--sc-slate)]">
+                    SmartComms replies to you with recommended providers and their public contact details. We do not send your contact details, project information or attachments to the providers we recommend.
+                  </p>
                 </>
-              ) : null}
-
-              <label className="block text-sm">
-                <span className="font-medium text-[var(--sc-charcoal)]">
-                  {isProject ? "Project note (optional)" : "Message *"}
-                </span>
-                <textarea
-                  required={!isProject}
-                  name={isProject ? "comments" : "message"}
-                  rows={3}
-                  className={inputClass}
-                  placeholder={
-                    isProject
-                      ? "Anything else we should know about the site or project"
-                      : "Your question, correction or project details"
-                  }
-                />
-              </label>
-
-              {isProject && (
+              ) : (
                 <label className="block text-sm">
-                  <span className="font-medium text-[var(--sc-charcoal)]">Attach plans / documents (optional)</span>
-                  <input
-                    type="file"
-                    name="attachments"
-                    multiple
-                    accept=".pdf,.png,.jpg,.jpeg,.webp,.dwg,.heic"
-                    className="mt-1 w-full cursor-pointer rounded-lg border border-dashed border-[var(--sc-border)] px-3 py-2.5 text-sm text-[var(--sc-slate)] file:mr-3 file:cursor-pointer file:rounded-full file:border-0 file:bg-[var(--sc-blue-50)] file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-[var(--sc-navy)] hover:border-[var(--sc-teal)]"
-                  />
-                  <span className="mt-1 block text-xs text-[var(--sc-slate)]">PDFs, images or plans. Up to 4MB total across all files.</span>
+                  <span className="font-medium text-[var(--sc-charcoal)]">Message *</span>
+                  <textarea required name="message" rows={4} className={inputClass} placeholder="Your question, correction or project details" />
                 </label>
               )}
 
-              <p className="rounded-lg border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-3 text-xs leading-relaxed text-[var(--sc-slate)]">
-                {ENQUIRY_PROCESS_COPY}
-              </p>
               {error && <p role="alert" className="rounded-lg bg-[var(--sc-warning-surface)] p-3 text-sm text-[var(--sc-warning-text)]">{error}</p>}
               <button
                 type="submit"
@@ -433,9 +428,7 @@ export function ProjectEnquiryModal({
                 {sending ? "Sending…" : submitLabel}
               </button>
               <p className="text-center text-xs leading-relaxed text-[var(--sc-slate)]">
-                Your enquiry stays with SmartComms. We use it to respond and identify suitable next steps. We do not
-                send your contact details, project information or attachments to the providers we recommend.{" "}
-                <Link href="/privacy" className="underline">Privacy</Link>.
+                Your enquiry stays with SmartComms and is used to respond to you. <Link href="/privacy" className="underline">Privacy</Link>.
               </p>
             </form>
           </>

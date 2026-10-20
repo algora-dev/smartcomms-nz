@@ -14,8 +14,7 @@ export default function ContactPage() {
     <div className="sc-container sc-container-prose py-16 sc-prose">
       <h1 className="sc-title">Contact</h1>
       <p className="mt-4 text-lg text-[var(--sc-slate)]">
-        Ask a question, suggest a correction or tell us about a project. If you need practical project help, give us
-        enough information to understand the site and we&apos;ll work out the most useful next step.
+        Ask a question, suggest a correction or tell us about a project. If you need practical help, send us enough information to understand the site. SmartComms will review it and reply with the provider or providers we think are best suited for you to contact.
       </p>
       <div className="not-prose mt-8 grid gap-4 sm:grid-cols-2">
         <div className="rounded-2xl border border-[var(--sc-border)] bg-white p-5">
@@ -28,9 +27,9 @@ export default function ContactPage() {
         <div className="rounded-2xl border border-[var(--sc-border)] bg-white p-5">
           <h2 className="font-semibold text-[var(--sc-blue-900)]">Project help</h2>
           <p className="mt-2 text-sm text-[var(--sc-slate)]">
-            A quote or installer, site assessment, system selection, or a funding / project-scope question. The SmartComms team reviews the enquiry and replies with the next step or provider we think is most appropriate to contact.
+            Need a formal quote, site assessment, system recommendation or help with a project scope? SmartComms reviews the enquiry and replies to you with the provider or providers we think are the best fit, including their public contact details. We do not forward your enquiry to them.
           </p>
-          <ProjectHelpLauncher buttonLabel="Tell us about your project" className="sc-btn-help mt-6" />
+          <ProjectHelpLauncher buttonLabel="Ask SmartComms who to contact" className="sc-btn-help mt-6" />
         </div>
       </div>
     </div>

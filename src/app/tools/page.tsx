@@ -50,10 +50,10 @@ export default function ToolsPage() {
       <div className="mt-8 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-6">
         <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">The tools work together</h2>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[var(--sc-slate)]">
-          Start wherever the project is clearest: estimate the likely cost, check a school funding pathway, or explore finance and leasing. The tools are indicative and designed to make the next conversation with the right specialist easier.
+          Start wherever the project is clearest: estimate the likely cost, check a school funding pathway, or explore finance and leasing. The tools are indicative and designed to make the next conversation easier. When you are ready, SmartComms can review the result and tell you which providers we think are worth contacting first.
         </p>
       </div>
-      <ProjectHelpPanel {...{"title": "Prefer to ask a question first?", "description": "You do not need to complete a tool before asking about your project.", "buttonLabel": "Ask SmartComms", "mode": "project_help", "sourceTopic": "tools_hub"}} />
+      <ProjectHelpPanel {...{"title": "Prefer to ask SmartComms who to contact?", "description": "You do not need to complete a tool first. Tell us about the project and region and we will reply with the providers we think are best suited for you to contact.", "buttonLabel": "Get a provider recommendation", "mode": "project_help", "sourceTopic": "tools_hub"}} />
     </div>
   );
 }

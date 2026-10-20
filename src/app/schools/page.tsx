@@ -32,11 +32,11 @@ export default function SchoolsPage() {
       <AuthorityHero
         eyebrow="New Zealand school communications"
         title="School Paging, PA, Bell & Intercom Systems"
-        description="Plan a modern school communication system for bells, live announcements, emergency messages, indoor and outdoor coverage, and optional two-way intercom. Compare systems, estimate cost and check potential Ministry funding."
+        description="Plan a modern school communication system for bells, live announcements, emergency messages, indoor and outdoor coverage, and optional two-way intercom. Compare approaches, estimate cost, check potential Ministry funding and ask SmartComms who is best suited to help with the next step."
         tags={["School paging", "Bell systems", "Emergency announcements", "Intercom", "5YA funding"]}
         primaryCta={{ label: "Use the pricing tool", href: "/pricing-tool" }}
         secondaryCta={{ label: "Check school funding", href: "/tools/funding-check" }}
-        help={{"label": "Ask about your school project", "mode": "system_selection", "sourceTopic": "schools"}}
+        help={{"label": "Ask SmartComms who to contact", "mode": "system_selection", "sourceTopic": "schools"}}
         reviewed={reviewedLabel("/schools")}
         note="Indicative pricing and funding guidance"
         breadcrumb={[{ name: "Schools", href: "/schools" }]}
@@ -46,10 +46,40 @@ export default function SchoolsPage() {
           { label: "Typical use", value: "Bells, announcements, emergency messages and site-wide communication" },
           { label: "Best fit", value: "Primary, intermediate and secondary schools upgrading or replacing legacy PA and bell systems" },
           { label: "Planning options", value: "Full IP, traditional PA or hybrid upgrades" },
-          { label: "Next step", value: "Estimate project cost or check funding potential" },
+          { label: "Next step", value: "Estimate cost, check funding or ask SmartComms who to contact" },
         ]}
       />
       <div className="h-8" />
+
+      <section className="sc-container sc-container-reading pb-14">
+        <p className="sc-eyebrow">Start with the problem</p>
+        <h2 className="sc-section-title mt-2">Choose the part of the school system you need to solve first</h2>
+        <p className="mt-3 max-w-3xl text-[var(--sc-slate)]">
+          A school does not need to decide on a brand before it can define the job. Start with the weak point, then compare the upgrade approaches that solve it without replacing working infrastructure unnecessarily.
+        </p>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <Link href="/systems/school-bell-announcements" className="sc-card block p-5 hover:border-[var(--sc-teal)]">
+            <h3 className="font-semibold text-[var(--sc-blue-900)]">Bells or timetable control are the main problem</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Compare scheduler-only, hybrid and integrated bell/paging upgrades, including when existing speakers or bell hardware may still be useful.</p>
+            <span className="mt-3 inline-flex text-sm font-semibold text-[var(--sc-blue-700)]">Compare school bell options →</span>
+          </Link>
+          <Link href="/systems/emergency-lockdown" className="sc-card block p-5 hover:border-[var(--sc-teal)]">
+            <h3 className="font-semibold text-[var(--sc-blue-900)]">Emergency messages or lockdown coverage are the concern</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Review fixed paging coverage, distinct alerts, live and prerecorded messages, activation points and resilience alongside the school emergency plan.</p>
+            <span className="mt-3 inline-flex text-sm font-semibold text-[var(--sc-blue-700)]">Review emergency communication →</span>
+          </Link>
+          <Link href="/systems/ip-paging-pa" className="sc-card block p-5 hover:border-[var(--sc-teal)]">
+            <h3 className="font-semibold text-[var(--sc-blue-900)]">Announcements, zones or coverage need improvement</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Understand IP paging, network audio and hybrid designs before deciding whether the school needs a full replacement or a staged upgrade.</p>
+            <span className="mt-3 inline-flex text-sm font-semibold text-[var(--sc-blue-700)]">Understand paging architecture →</span>
+          </Link>
+          <Link href="/pricing-tool" className="sc-card block p-5 hover:border-[var(--sc-teal)]">
+            <h3 className="font-semibold text-[var(--sc-blue-900)]">The immediate question is budget</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">Build an indicative installed range first. The calculator result can then be sent to SmartComms so we can recommend providers for a real site-specific quote.</p>
+            <span className="mt-3 inline-flex text-sm font-semibold text-[var(--sc-blue-700)]">Estimate the project cost →</span>
+          </Link>
+        </div>
+      </section>
 
       <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-14">
         <div className="sc-container sc-container-reading">
@@ -113,7 +143,7 @@ export default function SchoolsPage() {
 
       <section className="sc-container sc-container-reading py-14">
       <ContinuePlanning
-        help={{"title": "Ready to discuss your school’s requirements?", "description": "Tell us what needs to work better, what is already installed and your region.", "buttonLabel": "Ask about your school project", "mode": "system_selection", "sourceTopic": "schools"}}
+        help={{"title": "Ready to turn the research into a real project?", "description": "Tell SmartComms what needs to work better, what is already installed and your region. We will review it and reply with the providers we think are best suited for you to contact first.", "buttonLabel": "Ask SmartComms who to contact", "mode": "system_selection", "sourceTopic": "schools"}}
         items={[
           { title: "NZ school requirements", desc: "Ministry design, cabling and procurement guidance for school PA and paging.", href: "/guides/nz-school-pa-paging-requirements" },
           { title: "Specification checklist", desc: "Define scope so every quote covers the same things and compares fairly.", href: "/guides/school-pa-specification-checklist" },

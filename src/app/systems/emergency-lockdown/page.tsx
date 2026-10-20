@@ -25,12 +25,12 @@ export default function EmergencyLockdownPage() {
         title="School Lockdown & Emergency Communication Systems"
         description="A school lockdown and emergency communication system needs to deliver clear, fast and intelligible instructions to the right areas during lockdowns, evacuations and other incidents. This NZ guide explains paging, distinct alert signals, prerecorded and live messages, indoor/outdoor coverage, activation points and resilience."
         tags={["Lockdown announcements", "Emergency paging", "Evacuation messages", "Safety warnings", "Site-wide coverage"]}
-        primaryCta={{ label: "Discuss the technical scope", href: "/contact" }}
+        primaryCta={{ label: "Ask SmartComms who to contact", href: "/contact" }}
         primaryCtaNode={
           <ProjectHelpLauncher
             mode="system_selection"
             sourceTopic="emergency_lockdown"
-            buttonLabel="Discuss the technical scope"
+            buttonLabel="Ask SmartComms who to contact"
             className="sc-btn-primary"
           />
         }
@@ -45,7 +45,7 @@ export default function EmergencyLockdownPage() {
           { label: "Typical use", value: "Lockdown, evacuation and urgent safety communication" },
           { label: "Best fit", value: "Schools needing reliable site-wide emergency messaging alongside normal paging" },
           { label: "Works with", value: "Paging platforms, bells, fixed speakers, outdoor horns and approved safety procedures" },
-          { label: "Next step", value: "Review coverage gaps or investigate funding" },
+          { label: "Next step", value: "Review coverage gaps, check funding or ask SmartComms who to contact" },
         ]}
       />
       <div className="sc-container sc-container-wide pt-6">
@@ -57,10 +57,10 @@ export default function EmergencyLockdownPage() {
       <article className="sc-container sc-container-prose py-8 sc-prose">
       <h2 id="why-paging">Why the paging system is central to school emergencies</h2>
       <p>
-        In a lockdown or evacuation, the fastest way to reach every classroom, outdoor area and
-        detached building at once is usually the existing speaker system. Unlike emails, apps or
-        phone trees, paging reaches rooms instantly and works for visitors and students without any
-        device. That makes paging an important communication layer to consider when a school reviews how urgent instructions will reach occupied indoor and outdoor areas.
+        A school lockdown communication system is not one alarm or one device. It is the combination of approved procedures and communication channels used to get clear instructions to staff, students and visitors during an incident. Paging and PA are often an important fixed layer because they can reach occupied indoor and outdoor areas without relying on every person carrying a device.
+      </p>
+      <p>
+        In a lockdown or evacuation, the existing speaker system can distribute a message across classrooms, outdoor areas and detached buildings at the same time. The design question is whether that system provides the coverage, intelligibility, distinct alerts, activation options and resilience the school&apos;s emergency plan actually requires.
       </p>
       <section id="nz-guidance" className="not-prose mt-10 scroll-mt-28 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-5 sm:p-6">
         <p className="sc-eyebrow">New Zealand planning context</p>
@@ -173,7 +173,7 @@ export default function EmergencyLockdownPage() {
         <li><Link href="/guides/nz-school-pa-paging-requirements">NZ school PA and paging requirements</Link></li>
       </ul>
       <ContinuePlanning
-        help={{"title": "Need help defining the communications brief?", "description": "Tell us about the site, current system and messages that need to reach staff or occupants.", "buttonLabel": "Ask about your communications requirements", "mode": "system_selection", "sourceTopic": "emergency_lockdown"}}
+        help={{"title": "Need the right provider to review the communications brief?", "description": "Tell SmartComms about the site, current system and messages that need to reach staff or occupants. We will review the project and reply with the providers we think are best suited for you to contact.", "buttonLabel": "Ask SmartComms who to contact", "mode": "system_selection", "sourceTopic": "emergency_lockdown"}}
         items={[
           { title: "NZ school PA requirements", desc: "Ministry design, cabling, funding and procurement context for school communications.", href: "/guides/nz-school-pa-paging-requirements" },
           { title: "School systems overview", desc: "Features, indicative costs and upgrade decisions for school communications.", href: "/schools" },

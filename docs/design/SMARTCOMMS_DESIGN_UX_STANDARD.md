@@ -1,7 +1,7 @@
 # SmartComms NZ — Design & UX Standard
 
-Version: **1.2.0** · implementation baseline: **24 September 2026**  
-Derived from the current SmartComms Design/UX baseline and updated after the navigation/tool-discovery growth pass and the first multi-source NZ project-analysis page.
+Version: **1.3.0** · implementation baseline: **20 October 2026**  
+Derived from the current SmartComms Design/UX baseline and updated after the navigation/tool-discovery growth pass, the first multi-source NZ project-analysis page and the referral/conversion simplification pass.
 
 This is the **internal SmartComms standard**, not a claim of third-party certification. It complements, rather than replaces, `docs/agent-ready/SMARTCOMMS_PROFILE.md`. It governs presentation and human journeys; it does not authorise pricing, product, funding, finance, privacy-policy or API changes.
 
@@ -140,11 +140,11 @@ A substantive article usually needs two well-placed help opportunities; long com
 
 Every enquiry trigger uses the same `ProjectHelpLauncher` / `ProjectEnquiryModal`, with an appropriate `mode`, stable `sourceTopic`, and non-personal context. No duplicated forms or parallel email API. Do not send free text or contact data into analytics events.
 
-Approved wording examples: school bells — “Ask about your school bell project”; pricing — “Get help with a formal quote”; funding — “Ask about your project pathway”; finance — “Discuss finance options”; technical scope — “Ask about your site”. The modal, not every CTA card, explains the provider-recommendation process.
+Approved wording examples: school bells and technical scope, “Ask SmartComms who to contact”; pricing, “Recommend providers for this project” or “Ask who should quote this project”; funding, “Get help scoping this project”; finance, “Ask who to contact about finance”. CTA copy should state the next-step value rather than use vague labels such as “Find out more”. The modal carries the full provider-recommendation and privacy explanation.
 
 ## 8. Enquiries, dialogs and form controls
 
-The operating model is unchanged: enquiry to SmartComms only → team replies with suggested providers and public contact details → visitor decides whether to contact them. No provider data transfer.
+The operating model is unchanged: enquiry to SmartComms only → team reviews the project and replies with the provider or providers it considers best suited, their public contact details and useful context → visitor decides whether to contact them. SmartComms does not forward the visitor’s contact details, project information or attachments to recommended providers.
 
 - Portal the shared dialog to `document.body` so transformed cards/ancestors and prose styles cannot trap or recolour it.
 - Use the browser's native modal dialog for focus containment and inert background behaviour.
@@ -152,7 +152,7 @@ The operating model is unchanged: enquiry to SmartComms only → team replies wi
 - On success, focus the success heading and reset to the top; the dialog retains a valid accessible name.
 - On close, restore focus to the invoking control without jumping the page.
 - Escape and the visible close control close it. Backdrop close must not trigger from a click inside the form.
-- Retain validated required fields, attachment limits, error handling and submit API.
+- Retain validated required fields, attachment limits, error handling and submit API. Keep the initial visible form short; context-specific help modes should not ask the visitor to restate the help type, and optional phone/notes/preferences/files may sit behind progressive disclosure.
 - Text/select controls use `sc-input`: full width, 16px text (avoid mobile zoom), 44px minimum height, visible keyboard focus. Quantity steppers are 44px; compact inline information buttons use a deliberate 24px minimum with spacing and keyboard/click access.
 - Errors use a visible error/status region; never clear all user input after a failed request.
 - Responsive max-height uses dynamic viewport units with a fallback; scrolling is confined to the dialog panel.
@@ -173,7 +173,7 @@ Use native `details/summary` for extra design and evidence detail. Summary has a
 ## 10. Navigation, motion and accessibility
 
 - Visible-on-focus “Skip to content” link targets the one main landmark.
-- Header shows active location and has a modest “Ask SmartComms” action; the same action remains visible in the mobile header.
+- Header shows active location and has a modest “Get project help” action; a short “Get help” version remains visible in the mobile header.
 - Mobile menu is scrollable within the viewport, closes after selection/Escape and does not cut off its last links.
 - Normal navigation, tool state transitions, explicit anchors and modal scrolling are separate responsibilities. Preserve intentional anchors and existing saved-estimate links.
 - Hover elevation belongs to clickable cards, not every static information card.
@@ -231,7 +231,7 @@ The desktop header keeps a small number of top-level choices. Do not add a new t
 - **Tools** — Pricing Tool, Funding Checker, Finance Checker and the tools hub.
 - **Guides** — practical planning resources.
 - **About** — ownership/methodology entry point.
-- **Ask SmartComms** — persistent human-help action; opens the shared enquiry portal.
+- **Get project help**: persistent human-help action; opens the shared enquiry portal and explains that SmartComms will reply with best-fit provider recommendations for the visitor to contact.
 
 Desktop uses compact disclosure menus; mobile uses the hamburger plus expandable groups. Navigation labels describe the destination plainly. Generic comparison links go to `/compare`; school-specific links may still go to `/compare/schools`.
 

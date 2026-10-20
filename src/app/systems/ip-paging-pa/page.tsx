@@ -26,7 +26,7 @@ export default function IpPagingPaPage() {
         tags={["IP paging", "Network PA", "PoE speakers", "Zoned announcements", "Hybrid systems"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
         secondaryCta={{ label: "Compare paging platforms", href: "/compare" }}
-        help={{"label": "Ask about your site", "mode": "system_selection", "sourceTopic": "ip_paging_pa"}}
+        help={{"label": "Ask SmartComms who to contact", "mode": "system_selection", "sourceTopic": "ip_paging_pa"}}
         contents={[["#what-is", "What \"Audio over IP\" actually means"], ["#poe", "Power over Ethernet (PoE) endpoints"], ["#zoning", "Zoning, scheduling and per-endpoint control"], ["#emergency", "Emergency and lockdown capability"], ["#intercom", "Two-way communication and intercom"], ["#vs-traditional", "IP vs traditional vs hybrid"], ["#cost", "What IP paging tends to cost"], ["#platforms", "Choosing a platform"], ["#next", "Next steps"]]}
         reviewed={reviewedLabel("/systems/ip-paging-pa")}
         note="NZ-focused guidance"
@@ -173,7 +173,7 @@ export default function IpPagingPaPage() {
         </li>
       </ul>
       <ContinuePlanning
-        help={{"title": "Not sure which paging approach fits?", "description": "Describe the areas to cover and the equipment worth keeping. You do not need a finished specification.", "buttonLabel": "Ask about your site", "mode": "system_selection", "sourceTopic": "ip_paging_pa"}}
+        help={{"title": "Not sure which paging approach or provider fits?", "description": "Describe the areas to cover, your region and the equipment worth keeping. SmartComms will review it and reply with suitable providers for you to contact.", "buttonLabel": "Ask SmartComms who to contact", "mode": "system_selection", "sourceTopic": "ip_paging_pa"}}
         items={[
           { title: "Compare paging platforms", desc: "Use-case shortlists for integrated school platforms, SIP-first paging, hybrid migration and specialist architectures.", href: "/compare" },
           { title: "Network readiness checklist", desc: "Check cabling, PoE and switch capacity before requesting IP paging quotes.", href: "/guides/ip-paging-network-readiness" },

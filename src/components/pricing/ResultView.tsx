@@ -172,7 +172,7 @@ export function ResultView({
         ? "This is a general paging and intercom planning estimate for a care-site project, not a complete nurse-call or certified evacuation-system quote. "
         : "") +
       (isIndustrial ? industrialScope + " " : "") +
-      disclaimer + " This document is an indicative estimate from a SmartComms planning model, not a formal quote. For a formal quote, SmartComms can review the project information and suggest an appropriate provider to contact from its selected network.",
+      disclaimer + " This document is an indicative estimate from a SmartComms planning model, not a formal quote. For a formal quote, SmartComms can review the project information and reply with suitable providers from its selected network for you to contact directly.",
       W - 100,
     );
     if (y + lines.length * 11 > 780) { doc.addPage(); y = 60; }
@@ -192,21 +192,34 @@ export function ResultView({
         <p className="mt-3 text-sm text-[var(--sc-slate)]">
           SmartComms uses a range-based planning model to give a realistic order-of-magnitude estimate for the
           configuration you entered. Actual product, installation and site costs can sit above or below the range
-          depending on the platform, existing infrastructure, supplier and project conditions. A site review can
-          confirm the final equipment quantities, cabling requirements and installed price.
+          depending on the platform, existing infrastructure, supplier and project conditions.
         </p>
-        <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <button
-            type="button"
-            onClick={() => {
-              track("pricing_connect_opened", { installation_tier: state.tier });
-              setInquiry("connect");
-            }}
-            className="sc-btn-help w-full sm:w-auto"
-          >
-            Want more information?
-          </button>
-          <span className="text-xs text-[var(--sc-slate)]">We can suggest the provider or providers we think are most relevant for your site and region.</span>
+        <div className="mx-auto mt-5 max-w-2xl rounded-xl bg-[var(--sc-blue-50)] p-4 text-left">
+          <h2 className="font-semibold text-[var(--sc-navy)]">Ready to turn this estimate into a real quote?</h2>
+          <p className="mt-1 text-sm leading-relaxed text-[var(--sc-slate)]">
+            Send SmartComms this estimate. We will review your calculator answers and reply with the provider or providers we think are best suited to quote the project, including their public contact details. Your project details stay with SmartComms.
+          </p>
+          <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+            <button
+              type="button"
+              onClick={() => {
+                track("pricing_connect_opened", { installation_tier: state.tier });
+                track("pricing_quote_opened");
+                setInquiry("quote");
+              }}
+              className="sc-btn-help w-full sm:w-auto"
+            >
+              Recommend providers for this project
+            </button>
+            <button
+              type="button"
+              onClick={downloadPdf}
+              className="sc-btn-secondary w-full sm:w-auto"
+            >
+              Download my estimate
+            </button>
+          </div>
+          <p className="mt-2 text-xs leading-relaxed text-[var(--sc-slate)]">Your calculator answers are attached automatically. You will not need to enter the project again.</p>
         </div>
       </div>
 
@@ -347,44 +360,25 @@ export function ResultView({
 
       <ToolCrossSell variant="pricing-to-funding" estimateLow={estimate.low} estimateHigh={estimate.high} industry={industry} />
 
-      {/* Quote / assessment CTAs */}
-      <div className="mt-8 rounded-2xl bg-[var(--sc-navy)] p-5 text-center sm:p-8">
-        <div className="text-lg font-semibold text-white">Want a proper number?</div>
-        <p className="mx-auto mt-2 max-w-md text-sm text-white/80">
-          Send us this estimate and the SmartComms team can review the project information and suggest an appropriate provider to contact about a formal quote.
+      {/* Site-assessment option stays secondary after the useful result and planning links. */}
+      <div className="mt-8 rounded-2xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-5 sm:p-6">
+        <div className="font-semibold text-[var(--sc-navy)]">Need the estimate narrowed down first?</div>
+        <p className="mt-1 max-w-2xl text-sm leading-relaxed text-[var(--sc-slate)]">
+          A site assessment can confirm what can be reused, where coverage is needed and whether cabling or network work changes the scope. SmartComms can suggest a suitable provider for that step too.
         </p>
-        <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <button
-            type="button"
-            onClick={() => {
-              track("pricing_quote_opened");
-              setInquiry("quote");
-            }}
-            className="sc-btn-help w-full sm:w-auto"
-          >
-            Get help with a formal quote
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              track("pricing_site_assessment_opened");
-              setInquiry("assessment");
-            }}
-            className="w-full rounded-full border border-white/40 px-6 py-3 text-center text-sm font-semibold text-white hover:bg-white/10 transition-all sm:w-auto cursor-pointer"
-          >
-            Ask about a site assessment
-          </button>
-        </div>
-      </div>
-
-      <div className="mt-6 flex flex-col items-center justify-between gap-4 sm:flex-row">
         <button
           type="button"
-          onClick={downloadPdf}
-          className="text-sm font-medium text-[var(--sc-navy)] underline decoration-[var(--sc-teal)] decoration-2 underline-offset-4 hover:text-[var(--sc-blue-700)] cursor-pointer"
+          onClick={() => {
+            track("pricing_site_assessment_opened");
+            setInquiry("assessment");
+          }}
+          className="sc-btn-secondary mt-4"
         >
-          Download estimate (PDF)
+          Find a site-assessment provider
         </button>
+      </div>
+
+      <div className="mt-6 flex flex-col items-center justify-end gap-4 sm:flex-row">
         <button
           type="button"
           onClick={onEdit}

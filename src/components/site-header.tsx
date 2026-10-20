@@ -143,8 +143,8 @@ export function SiteHeader() {
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <ProjectHelpLauncher buttonLabel="Ask SmartComms" sourceTopic="site_header" className="sc-btn-secondary hidden sm:inline-flex" />
-          <ProjectHelpLauncher buttonLabel="Ask us" sourceTopic="site_header_mobile" className="sc-btn-secondary sm:hidden" />
+          <ProjectHelpLauncher buttonLabel="Get project help" sourceTopic="site_header" className="sc-btn-secondary hidden sm:inline-flex" />
+          <ProjectHelpLauncher buttonLabel="Get help" sourceTopic="site_header_mobile" className="sc-btn-secondary sm:hidden" />
           <button ref={toggleRef} type="button" onClick={() => setMobileOpen((value) => !value)} aria-expanded={mobileOpen}
             aria-controls="sc-nav-menu" aria-label={mobileOpen ? "Close menu" : "Open menu"}
             className="sc-icon-button border border-[var(--sc-border)] lg:hidden">

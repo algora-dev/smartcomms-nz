@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { track } from "@/lib/analytics";
 import { ProjectEnquiryModal } from "@/components/enquiry/ProjectEnquiryModal";
-import { ToolSuiteNav } from "@/components/tool-suite-nav";
 import {
   DISCLAIMER,
   MONTHLY_BUDGETS,
@@ -90,7 +89,7 @@ function labelFrom<T extends readonly { value: string; label: string }[]>(items:
   return items.find((item) => item.value === value)?.label ?? "Not supplied";
 }
 
-export function FinanceCheckTool() {
+export function FinanceCheckTool({ introduction }: { introduction?: ReactNode }) {
   const searchParams = useSearchParams();
   const carriedLow = parseMoneyParam(searchParams.get("estimateLow"));
   const carriedHigh = parseMoneyParam(searchParams.get("estimateHigh"));
@@ -238,12 +237,12 @@ export function FinanceCheckTool() {
                 setEnquiryOpen(true);
                 track("finance_help_opened", { result_level: result.level });
               }}
-              className="sc-btn-primary cursor-pointer"
+              className="sc-btn-help cursor-pointer"
             >
-              Discuss finance options
+              Ask who to contact about finance
             </button>
           </div>
-          <p className="mt-5 text-xs leading-relaxed text-[var(--sc-slate)]">Preliminary guidance only — not an approval or finance offer.</p>
+          <p className="mt-3 max-w-2xl text-xs leading-relaxed text-[var(--sc-slate)]">SmartComms will review your answers and reply with a suitable finance specialist or provider for you to contact directly. We do not forward your enquiry. Preliminary guidance only, not an approval or finance offer.</p>
         </section>
 
         {/* Compact personalised answer summary */}
@@ -302,21 +301,7 @@ export function FinanceCheckTool() {
 
   return (
     <div ref={toolTopRef} className="scroll-mt-6">
-      {!resultReady && (
-        <div className="mb-9">
-          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--sc-blue-700)]">New Zealand equipment finance</p>
-          <h1 className="sc-tool-title mt-2">
-            Is finance or leasing worth exploring for your communications project?
-          </h1>
-          <p className="mt-3 text-[var(--sc-slate)]">
-            Answer three short questions about the organisation, rough project value and budget. We&apos;ll give you a practical starting point and, if you want, help identify an appropriate finance specialist to speak with.
-          </p>
-          <p className="mt-2 text-xs leading-relaxed text-[var(--sc-slate)]">
-            Preliminary guidance only — not a finance application, credit assessment or approval. <Link href="/financing" className="underline">Read how equipment finance and leasing can work</Link>.
-          </p>
-          <ToolSuiteNav current="finance" />
-        </div>
-      )}
+      {introduction}
       <div className="mb-8">
         <div className="flex items-center justify-between text-xs font-medium text-[var(--sc-slate)]">
           <span>Step {screen + 1} of 3</span>

@@ -19,7 +19,7 @@ check('reduced motion supported',css.includes('prefers-reduced-motion: reduce'))
 check('minimum primary control target',css.includes('min-height: 2.75rem'));
 check('viewport-aware dialog size',css.includes('100dvh'));
 const header=text('src/components/site-header.tsx');
-check('site-wide same portal access',header.includes('ProjectHelpLauncher')&&header.includes('buttonLabel="Ask SmartComms"'));
+check('site-wide same portal access',header.includes('ProjectHelpLauncher')&&header.includes('buttonLabel="Get project help"'));
 check('navigation announces current location',header.includes('aria-current'));
 for(const file of ['src/app/compare/schools/page.tsx','src/app/industries/aged-care-retirement-villages/page.tsx','src/app/industries/warehouses-manufacturing-industrial/page.tsx']){
  const s=text(file);
@@ -41,6 +41,10 @@ check('same enquiry API',modal.includes('fetch("/api/inquiry"'));
 check('recommendation-only privacy preserved',modal.replace(/\s+/g, ' ').includes('We do not send your contact details, project information or attachments to the providers we recommend.'));
 check('no obsolete handoff copy',!modal.includes('direct introduction')&&!modal.includes('T3 Labs'));
 check('form errors announced',modal.includes('role="alert"'));
+check('generic project help asks for a short project summary',modal.includes('!hasStructuredContext')&&modal.includes('What are you trying to improve? *'));
+check('tool enquiries reuse structured context',modal.includes('const hasStructuredContext = Boolean(estimateSummary || Object.values(context ?? {}).some(Boolean))'));
+check('optional project detail disclosure',modal.includes('Add more project details (optional)'));
+check('existing provider answer is not a submission gate',!modal.includes('Please tell us whether you already have an installer, IT provider or consultant.'));
 const confirm=text('src/components/ui/ConfirmationDialog.tsx');
 check('restart confirmation uses native dialog',confirm.includes('dialog.showModal()')&&confirm.includes('cancelRef.current?.focus'));
 for(const [file,context] of [

@@ -57,7 +57,7 @@ export default function PricingPage() {
             <Link href="/tools/funding-check" className="sc-btn-secondary">Check school funding potential</Link>
             <Link href="/financing" className="sc-btn-secondary">Explore finance / leasing</Link>
           </div>
-          <ProjectHelpLauncher mode="quote_help" sourceTopic="pricing_guide" buttonLabel="Get help with a formal quote" className="sc-text-action mt-3" />
+          <ProjectHelpLauncher mode="quote_help" sourceTopic="pricing_guide" buttonLabel="Ask who should quote this project" className="sc-text-action mt-3" />
           <p className="mt-4 text-xs text-[var(--sc-slate)]">Indicative only, ex GST. SmartComms pricing is a planning model informed by supplier pricing, product information and installation/project information available to us - it shows a realistic order of magnitude for the modelled scope, not a market average or a quote from every brand. Assumptions last reviewed {pricingConfig.reviewedAtLabel}. See <Link href="/about/methodology">how we get our pricing</Link>.</p>
         </div>
       </div>
@@ -151,7 +151,7 @@ export default function PricingPage() {
         </div>
       </section>
       <div className="sc-container sc-container-reading pb-12">
-        <ProjectHelpPanel {...{"title": "Ready to discuss a price for your site?", "description": "Tell us what needs coverage, what is already installed and any questions about your project budget.", "buttonLabel": "Get help with a formal quote", "mode": "quote_help", "sourceTopic": "pricing_guide"}} />
+        <ProjectHelpPanel {...{"title": "Ready to turn the estimate into a supplier quote?", "description": "Tell SmartComms what needs coverage, what is already installed and your region. We will reply with the providers we think are best suited for you to contact.", "buttonLabel": "Ask who should quote this project", "mode": "quote_help", "sourceTopic": "pricing_guide"}} />
       </div>
     </div>
   );

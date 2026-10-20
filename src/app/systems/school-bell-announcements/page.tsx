@@ -10,9 +10,9 @@ import { publishedDate, reviewedDate, reviewedLabel } from "@/lib/content-meta";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "School Bell, Paging & Announcement Systems NZ",
+  title: "School Bell & Paging Systems NZ",
   description:
-    "Plan NZ school bell, paging and announcement systems: schedules, zones, live paging, emergency messages, existing-PA reuse, pricing and funding.",
+    "Compare NZ school bell and paging systems for schedules, announcements, zones and emergency messages. See upgrade options, existing-system reuse, pricing and funding.",
   path: "/systems/school-bell-announcements",
 });
 
@@ -21,13 +21,13 @@ export default function SchoolBellPage() {
     <div>
       <AuthorityHero
         eyebrow="School Communications Guide"
-        title="School Bell, Paging & Announcement Systems"
-        description="Modern school bell and paging systems can combine scheduled bells, live announcements, emergency messages and zoned audio across classrooms, halls and outdoor areas. This NZ guide explains how the systems work, what schools should specify, what can sometimes be retained, and how bells connect to pricing, funding and wider communications planning."
+        title="School Bell & Paging Systems"
+        description="A modern school bell and paging system can combine scheduled bells, live announcements, zoned audio and emergency messages across classrooms, halls and outdoor areas. This NZ guide compares the main upgrade approaches, what can be retained, what schools should specify, and how to move from planning to suitable providers."
         tags={["School bells", "Scheduled announcements", "Zoned paging", "Emergency messaging", "Outdoor coverage"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
         secondaryCta={{ label: "Check school funding", href: "/tools/funding-check" }}
-        help={{"label": "Ask about your school bell project", "mode": "system_selection", "sourceTopic": "school_bell_announcements"}}
-        contents={[["#how", "How modern school bell systems work"], ["#schedules", "What schools typically need from a schedule"], ["#announcements", "Live announcements and daily use"], ["#nz-examples", "Published NZ school examples"], ["#replacing", "Replacing an aging bell system"], ["#emergency", "Bells and emergency communication"], ["#requirements", "What the Ministry expects"], ["#cost-funding", "Costs and funding"], ["#specifying", "Specifying the system"], ["#bell-faq", "School bell FAQs"]]}
+        help={{"label": "Ask SmartComms who to contact", "mode": "system_selection", "sourceTopic": "school_bell_announcements"}}
+        contents={[["#how", "How modern school bell systems work"], ["#options", "Three common upgrade approaches"], ["#schedules", "What schools typically need from a schedule"], ["#announcements", "Live announcements and daily use"], ["#nz-examples", "Published NZ school examples"], ["#replacing", "Replacing an aging bell system"], ["#emergency", "Bells and emergency communication"], ["#requirements", "What the Ministry expects"], ["#cost-funding", "Costs and funding"], ["#specifying", "Specifying the system"], ["#bell-faq", "School bell FAQs"]]}
         reviewed={reviewedLabel("/systems/school-bell-announcements")}
         note="NZ-focused guidance"
         breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "School Bells & Announcements" }]}
@@ -37,7 +37,7 @@ export default function SchoolBellPage() {
           { label: "Typical use", value: "Scheduled bells, announcements and day-to-day school communication" },
           { label: "Best fit", value: "Schools replacing standalone bells or combining bells and paging into one platform" },
           { label: "Works with", value: "IP speakers, existing PA infrastructure and hybrid systems" },
-          { label: "Next step", value: "Estimate cost or check potential funding" },
+          { label: "Next step", value: "Estimate cost, check funding, or ask SmartComms who should quote" },
         ]}
       />
       <article className="sc-container sc-container-prose py-8 sc-prose">
@@ -53,6 +53,45 @@ export default function SchoolBellPage() {
         The underlying architecture choices are covered in our{" "}
         <Link href="/systems/ip-paging-pa">IP paging and network PA guide</Link>.
       </p>
+      <section id="options" className="not-prose mt-10 scroll-mt-28">
+        <p className="sc-eyebrow">NZ market options</p>
+        <h2 className="sc-section-title mt-2">Three common ways to modernise a school bell system</h2>
+        <p className="mt-3 max-w-3xl leading-relaxed text-[var(--sc-slate)]">
+          The right project is not always a full replacement. Current New Zealand suppliers show several different upgrade patterns, so the first decision should be what problem actually needs solving.
+        </p>
+        <div className="mt-6 grid gap-5">
+          <div className="sc-card p-5">
+            <h3 className="sc-card-title">1. Keep the existing bells and replace the scheduler</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">
+              This can suit a school whose sounders and coverage are still adequate but whose timetable control is awkward or unreliable. NZ services such as SchoolBells.nz focus on web-managed scheduling for existing bell systems, while TimeLab BellMinder publishes PC-based timetable, interview, evacuation and lockdown scheduling options.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+              <a href="https://www.schoolbells.nz/" target="_blank" rel="noopener noreferrer" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">SchoolBells.nz<span className="sr-only"> (opens in a new tab)</span></a>
+              <a href="https://www.timelab.co.nz/bellminder" target="_blank" rel="noopener noreferrer" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">TimeLab BellMinder<span className="sr-only"> (opens in a new tab)</span></a>
+            </div>
+          </div>
+          <div className="sc-card p-5">
+            <h3 className="sc-card-title">2. Add network control while reusing suitable PA or bell infrastructure</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">
+              A hybrid project can keep useful amplifiers, speakers or bell circuits and replace the control layer with a network scheduler or paging gateway. Edwards describes Netbell as a network-based option for scheduled bells, live announcements and emergency alerts, which illustrates this middle ground between a timer replacement and a full endpoint-by-endpoint IP rebuild.
+            </p>
+            <a href="https://www.edwardsnz.co.nz/netbell-ip-public-address-system" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex text-sm font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">Edwards: Netbell IP public address system<span className="sr-only"> (opens in a new tab)</span></a>
+          </div>
+          <div className="sc-card p-5">
+            <h3 className="sc-card-title">3. Combine bells, paging and emergency messages on one IP platform</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--sc-slate)]">
+              This becomes more relevant when the school also needs better zoning, live paging, outdoor coverage, emergency messages or room communication. Pacific AV publishes NZ information for FrontRow and Bosch PROSPERO school paging and bell platforms, both of which show how scheduling can sit inside a wider network communications design.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+              <a href="https://www.pacificav.co.nz/brands/frontrow/" target="_blank" rel="noopener noreferrer" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">Pacific AV: FrontRow<span className="sr-only"> (opens in a new tab)</span></a>
+              <a href="https://www.pacificav.co.nz/product/bosch-prospero-ip-based-paging-and-bell-system/" target="_blank" rel="noopener noreferrer" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">Pacific AV: Bosch PROSPERO<span className="sr-only"> (opens in a new tab)</span></a>
+            </div>
+          </div>
+        </div>
+        <p className="mt-5 text-sm leading-relaxed text-[var(--sc-slate)]">
+          The practical rule is simple: if scheduling is the only real problem, do not buy a campus-wide replacement by default. If coverage, announcements, emergency communication or control are also weak, compare hybrid and integrated platforms against the same brief. SmartComms does not treat editorial inclusion here as a provider recommendation.
+        </p>
+      </section>
       <h2 id="schedules">What schools typically need from a schedule</h2>
       <ul>
         <li>
@@ -116,8 +155,7 @@ export default function SchoolBellPage() {
       </p>
       <h2 id="cost-funding">Costs and funding</h2>
       <p>
-        Bell functionality is usually a feature of the platform rather than a separate purchase, so
-        cost is driven by endpoint count, zones and cabling state. Use the{" "}
+        Project cost depends first on the upgrade path. A scheduler-only project can be very different from a hybrid control upgrade or a campus-wide paging and bell platform; integrated projects are then driven by endpoint count, zones, retained infrastructure and cabling state. Use the{" "}
         <Link href="/pricing-tool">Pricing Tool</Link> for indicative figures, and the{" "}
         <Link href="/tools/funding-check">funding checker</Link> to see whether a project might fit
         a 5YA / 10YPP property funding route. No tool on this site can promise funding outcomes.
@@ -147,7 +185,7 @@ export default function SchoolBellPage() {
         </div>
       </section>
       <ContinuePlanning
-        help={{"title": "Need help with bells or announcements?", "description": "Tell us about your timetable, the areas that need coverage and the system you have now.", "buttonLabel": "Ask about your school bell project", "mode": "system_selection", "sourceTopic": "school_bell_announcements"}}
+        help={{"title": "Want help deciding who should quote the project?", "description": "Tell us about your timetable, coverage gaps, existing system and region. We will review it and reply with the providers we think are worth contacting first.", "buttonLabel": "Ask SmartComms who to contact", "mode": "system_selection", "sourceTopic": "school_bell_announcements"}}
         items={[
           { title: "Specification checklist", desc: "Define the scope so every quote covers the same bells, zones and emergency functions.", href: "/guides/school-pa-specification-checklist" },
           { title: "Compare school systems", desc: "See which platforms fit bells, paging, intercom, classroom audio and hybrid upgrades.", href: "/compare/schools" },
@@ -162,9 +200,9 @@ export default function SchoolBellPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             articleSchema({
-              headline: "School Bell, Paging & Announcement Systems NZ",
+              headline: "School Bell & Paging Systems NZ",
               description:
-                "How modern school bell, paging and announcement systems work in New Zealand: schedules, zones, live paging, emergency messages, replacement planning and funding context.",
+                "How school bell and paging systems work in New Zealand, including scheduler-only upgrades, hybrid reuse, integrated IP platforms, announcements, emergency messages and planning context.",
               url: `${site.url}/systems/school-bell-announcements`,
               datePublished: publishedDate("/systems/school-bell-announcements"),
               dateModified: reviewedDate("/systems/school-bell-announcements"),

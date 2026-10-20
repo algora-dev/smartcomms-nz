@@ -207,7 +207,7 @@ export default function SystemsPage() {
           ))}
         </div>
       </section>
-      <ProjectHelpPanel {...{"title": "Need help choosing a system type?", "description": "Tell us about your site and what you need to hear, announce or communicate.", "buttonLabel": "Ask about your requirements", "mode": "system_selection", "sourceTopic": "systems_hub"}} />
+      <ProjectHelpPanel {...{"title": "Need help choosing a system and who should quote it?", "description": "Tell SmartComms about your site and what you need to hear, announce or communicate. We will review it and reply with suitable providers for you to contact.", "buttonLabel": "Ask SmartComms who to contact", "mode": "system_selection", "sourceTopic": "systems_hub"}} />
     </div>
   );
 }

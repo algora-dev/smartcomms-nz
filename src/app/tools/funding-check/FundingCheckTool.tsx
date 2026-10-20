@@ -297,8 +297,10 @@ export function FundingCheckTool({ introduction }: { introduction?: ReactNode })
         )}
 
         <div className="mt-8 sc-card p-6">
-          <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">Find out more about your project</h2>
-          <p className="mt-2 text-[var(--sc-slate)]">{RESULT_COPY.ctaPrimaryBody}</p>
+          <h2 className="text-xl font-semibold text-[var(--sc-blue-900)]">Turn this into a quote-ready project</h2>
+          <p className="mt-2 text-[var(--sc-slate)]">
+            SmartComms cannot confirm Ministry approval, but we can review the technical scope and reply with providers who may be able to help document the project, inspect the site or prepare a formal quote. You choose who to contact.
+          </p>
           <p className="mt-3 text-sm text-[var(--sc-slate)]">
             The next review can also confirm {result.confirmationsNeeded.slice(0, 2).join(" and ").toLowerCase()}.
           </p>
@@ -317,7 +319,7 @@ export function FundingCheckTool({ introduction }: { introduction?: ReactNode })
                   track("funding_help_opened", { cta: "find_out_more", pathway: result.pathway });
                 }}
               >
-                Find out more
+                Get help scoping this project
               </button>
               <button
                 type="button"
@@ -331,7 +333,7 @@ export function FundingCheckTool({ introduction }: { introduction?: ReactNode })
               </button>
             </div>
           )}
-          <p className="mt-3 text-xs text-[var(--sc-slate)]">Your funding-check answers are attached automatically so the SmartComms team can understand the context. Your enquiry stays with SmartComms; we do not send your details or funding-check answers to the providers we recommend. <Link href="/privacy" className="underline">Privacy</Link>.</p>
+          <p className="mt-3 text-xs text-[var(--sc-slate)]">Your funding-check answers are attached automatically, so you do not need to re-enter the project. SmartComms replies to you with any provider recommendations; we do not send your details or funding-check answers to those providers. <Link href="/privacy" className="underline">Privacy</Link>.</p>
         </div>
 
         <ToolCrossSell

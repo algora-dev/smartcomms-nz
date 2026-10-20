@@ -30,8 +30,8 @@ export default function AboutPage() {
       <ol>
         <li><strong>Research the options.</strong> Use our guides, comparisons and planning tools to understand the system, features and architecture that may suit your site.</li>
         <li><strong>Build a realistic project picture.</strong> Use our pricing and, where relevant, funding or finance tools to understand likely scope, budget and questions that still need answering.</li>
-        <li><strong>Ask SmartComms for help.</strong> If you want to progress the project, send us enough information to understand what you need.</li>
-        <li><strong>Get the right next step.</strong> The SmartComms team reviews the enquiry and, where specialist help is appropriate, replies with the provider or providers we think are most suitable to contact.</li>
+        <li><strong>Ask SmartComms who to contact.</strong> If you want to progress the project, send us enough information to understand what you need and where the site is.</li>
+        <li><strong>Get a best-fit referral.</strong> The SmartComms team reviews the enquiry and replies with the provider or providers we think are most suitable to contact, their public contact details and useful context. You decide who to contact; we do not forward your enquiry to them.</li>
       </ol>
       <p>
         SmartComms does not manufacture or install the systems it researches. Our selected provider network does not include every provider in New Zealand.
@@ -48,7 +48,7 @@ export default function AboutPage() {
       <p>
         We separate indicative calculator assumptions from formal quotes, link funding guidance back to official sources, and avoid presenting configuration examples as market averages. See our <Link href="/about/methodology">research methodology</Link>, <Link href="/about/disclosure">commercial relationships</Link> and <Link href="/about/editorial-policy">editorial policy</Link> for more detail.
       </p>
-      <ProjectHelpPanel {...{"title": "Have a communications project in mind?", "description": "Tell us a little about the site and the question you need help with.", "buttonLabel": "Ask SmartComms", "mode": "project_help", "sourceTopic": "about"}} />
+      <ProjectHelpPanel {...{"title": "Have a communications project in mind?", "description": "Tell SmartComms about the site, region and question you need help with. We will review it and reply with the providers we think are best suited for you to contact.", "buttonLabel": "Ask SmartComms who to contact", "mode": "project_help", "sourceTopic": "about"}} />
     </div>
   );
 }

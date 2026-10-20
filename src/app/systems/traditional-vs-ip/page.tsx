@@ -45,7 +45,7 @@ export default function TraditionalVsIpPage() {
         tags={["Traditional 100V PA", "IP paging", "Hybrid systems", "Staged upgrades", "Network readiness"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
         secondaryCta={{ label: "Compare platforms", href: "/compare" }}
-        help={{"label": "Ask about keeping your existing PA", "mode": "system_selection", "sourceTopic": "traditional_vs_ip"}}
+        help={{"label": "Ask SmartComms who to contact", "mode": "system_selection", "sourceTopic": "traditional_vs_ip"}}
         reviewed={reviewedLabel("/systems/traditional-vs-ip")}
         note="NZ-focused guidance"
         breadcrumb={[{ name: "Systems", href: "/systems" }, { name: "Traditional vs IP" }]}
@@ -161,7 +161,7 @@ export default function TraditionalVsIpPage() {
           <Link href="/pricing-tool" className="sc-btn-primary">Estimate project cost</Link>
           <Link href="/systems" className="sc-btn-secondary">Back to system types</Link>
         </div>
-      <ProjectHelpPanel {...{"title": "Not sure what can be retained?", "description": "Describe your current equipment and what the upgraded system needs to do.", "buttonLabel": "Ask about keeping your existing PA", "mode": "system_selection", "sourceTopic": "traditional_vs_ip"}} />
+      <ProjectHelpPanel {...{"title": "Not sure what can be retained or who should assess it?", "description": "Describe your current equipment, region and what the upgraded system needs to do. SmartComms will reply with suitable providers for you to contact.", "buttonLabel": "Ask SmartComms who to contact", "mode": "system_selection", "sourceTopic": "traditional_vs_ip"}} />
       </article>
 
       <script

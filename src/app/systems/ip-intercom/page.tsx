@@ -26,7 +26,7 @@ export default function IpIntercomPage() {
         tags={["IP intercom", "Two-way paging", "SIP intercom", "Call points", "Video entry"]}
         primaryCta={{ label: "Estimate project cost", href: "/pricing-tool" }}
         secondaryCta={{ label: "Compare system platforms", href: "/compare" }}
-        help={{"label": "Ask about your intercom requirements", "mode": "system_selection", "sourceTopic": "ip_intercom"}}
+        help={{"label": "Ask SmartComms who to contact", "mode": "system_selection", "sourceTopic": "ip_intercom"}}
         contents={[["#how", "How IP intercom works"], ["#school-use", "Where intercom earns its place in schools"], ["#sip", "SIP, Teams and VoIP integration"], ["#nz-examples", "Published NZ examples"], ["#vs-one-way", "Two-way vs one-way: specifying the mix"], ["#cost", "Cost impact"], ["#intercom-faq", "IP intercom FAQs"], ["#more", "Related resources"]]}
         reviewed={reviewedLabel("/systems/ip-intercom")}
         note="NZ-focused guidance"
@@ -135,7 +135,7 @@ export default function IpIntercomPage() {
         <li><Link href="/compare/schools">IP paging platform comparison</Link></li>
       </ul>
       <ContinuePlanning
-        help={{"title": "Work out who needs to call whom", "description": "Tell us about the call points, answering locations and any existing phone or paging system.", "buttonLabel": "Ask about your intercom requirements", "mode": "system_selection", "sourceTopic": "ip_intercom"}}
+        help={{"title": "Need the right provider for the intercom brief?", "description": "Tell SmartComms about the call points, answering locations, region and any existing phone or paging system. We will reply with suitable providers for you to contact.", "buttonLabel": "Ask SmartComms who to contact", "mode": "system_selection", "sourceTopic": "ip_intercom"}}
         items={[
           { title: "Compare system platforms", desc: "Which IP paging and intercom platforms fit NZ sites and budgets.", href: "/compare" },
           { title: "Emergency & lockdown communication", desc: "How intercom call points support school emergency planning.", href: "/systems/emergency-lockdown" },

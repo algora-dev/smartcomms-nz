@@ -213,5 +213,5 @@ export const RESULT_COPY = {
   ctaPrimary: "Review the project scope",
   ctaPrimaryBody:
     "A provider can help document the existing system, technical scope and indicative budget. The school, Property Advisor / 10YPP process and Ministry requirements determine the funding pathway and approval.",
-  ctaSecondary: "Ask about an indicative system quote",
+  ctaSecondary: "Ask who should quote this project",
 } as const;
