@@ -136,7 +136,13 @@ export function ProjectEnquiryModal({
   const successId = useId();
   const isProject = mode !== "general_message";
   const showHelpType = mode === "project_help";
-  const hasStructuredContext = Boolean(estimateSummary || Object.values(context ?? {}).some(Boolean));
+  // A source page, industry or editorial topic is not a completed project brief.
+  // Only tool answers/results should remove the short free-text question.
+  const hasStructuredContext = Boolean(
+    estimateSummary || Object.entries(context ?? {}).some(([key, value]) =>
+      Boolean(value.trim()) && !["sourcepage", "topic", "industry"].includes(key.toLowerCase().replace(/[^a-z]/g, ""))
+    )
+  );
   const [helpType, setHelpType] = useState<string>(DEFAULT_HELP[mode]);
   const [existingProvider, setExistingProvider] = useState<string>("");
   const [providerName, setProviderName] = useState("");
@@ -267,12 +273,13 @@ export function ProjectEnquiryModal({
                 <p id={descriptionId} className="mt-1 text-sm text-[var(--sc-slate)]">{blurb}</p>
                 {estimateSummary && (
                   <p className="mt-2 rounded-full bg-[var(--sc-blue-50)] px-3 py-1 text-xs font-medium text-[var(--sc-navy)]">
-                    Your estimate: {estimateSummary} ex GST
+                    Your estimate: {estimateSummary}
                   </p>
                 )}
                 {contextLines.length > 0 && (
                   <p className="mt-2 rounded-lg bg-[var(--sc-blue-50)] px-3 py-1.5 text-xs leading-relaxed text-[var(--sc-slate)]">
-                    Attached automatically: {contextLines.map(([k]) => k).join(", ")}
+                    {hasStructuredContext ? "Tool answers attached automatically" : "Page context included automatically"}: {contextLines.map(([k]) => k).join(", ")}
+                    {!hasStructuredContext && ". Please briefly describe your own project below."}
                   </p>
                 )}
               </div>

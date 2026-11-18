@@ -79,6 +79,9 @@ export default function SchoolsPage() {
             <span className="mt-3 inline-flex text-sm font-semibold text-[var(--sc-blue-700)]">Estimate the project cost →</span>
           </Link>
         </div>
+        <p className="mt-5 text-sm leading-relaxed text-[var(--sc-slate)]">
+          Need two-way classroom calling, staff-to-office talkback or gate entry instead? See the <Link href="/systems/ip-intercom" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">school IP intercom guide</Link> to define which locations actually need microphones and call buttons.
+        </p>
       </section>
 
       <section className="border-y border-[var(--sc-border)] bg-[var(--sc-blue-50)] py-14">

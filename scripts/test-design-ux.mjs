@@ -43,7 +43,22 @@ check('recommendation-only privacy preserved',modal.replace(/\s+/g, ' ').include
 check('no obsolete handoff copy',!modal.includes('direct introduction')&&!modal.includes('T3 Labs'));
 check('form errors announced',modal.includes('role="alert"'));
 check('generic project help asks for a short project summary',modal.includes('!hasStructuredContext')&&modal.includes('What are you trying to improve? *'));
-check('tool enquiries reuse structured context',modal.includes('const hasStructuredContext = Boolean(estimateSummary || Object.values(context ?? {}).some(Boolean))'));
+check('tool enquiries reuse structured results',modal.includes('estimateSummary || Object.entries(context ?? {}).some('));
+check('editorial context does not silently replace project description',modal.includes('!["sourcepage", "topic", "industry"].includes('));
+check('editorial context requests a personal project summary',modal.includes('Please briefly describe your own project below.'));
+check('estimate does not repeat GST qualifier',modal.includes('Your estimate: {estimateSummary}')&&!modal.includes('Your estimate: {estimateSummary} ex GST'));
+
+// Exercise the exact expression used by the modal against tool and editorial inputs.
+// No browser, messaging or external services required.
+const contextPredicate = modal.match(/const hasStructuredContext = Boolean\(([\s\S]*?)\n  \);/);
+check('modal context predicate remains inspectable',Boolean(contextPredicate));
+const hasProjectAnswers = new Function('estimateSummary', 'context', `return Boolean(${contextPredicate[1]});`);
+check('editorial source and topic do not count as a completed project',!hasProjectAnswers(undefined,{sourcePage:'/compare/schools',topic:'Published NZ examples'}));
+check('industry and editorial use case still require project details',!hasProjectAnswers(undefined,{industry:'Aged care / retirement village',sourcePage:'/industry',topic:'Reception entry'}));
+check('pricing estimate permits short tool enquiry',hasProjectAnswers('$12,000 - $15,000 ex GST',{'Feature package':'Essential'}));
+check('funding results permit short tool enquiry',hasProjectAnswers(undefined,{'Funding pathway':'5YA / 10YPP capital pathway'}));
+check('finance results permit short tool enquiry',hasProjectAnswers(undefined,{'Finance-fit result':'Discuss with a provider'}));
+
 check('optional project detail disclosure',modal.includes('Add more project details (optional)'));
 check('existing provider answer is not a submission gate',!modal.includes('Please tell us whether you already have an installer, IT provider or consultant.'));
 const confirm=text('src/components/ui/ConfirmationDialog.tsx');

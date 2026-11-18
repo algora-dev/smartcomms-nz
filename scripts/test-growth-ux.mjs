@@ -57,6 +57,23 @@ for(const domain of ['edwardsnz.co.nz','pacificav.co.nz','audioconnect.co.nz','g
 check('evidence sources use HTTPS',!evidence.match(/href:\s*"http:\/\//));
 check('generic system comparison points to hub',text('src/app/systems/page.tsx').includes('href="/compare" className="sc-btn-secondary">Compare by site type'));
 
+const schoolCompare=text('src/app/compare/schools/page.tsx');
+check('school comparison preserves extensive technical editorial content',schoolCompare.includes('Seven main comparison options')&&schoolCompare.includes('Detailed platform comparison'));
+check('school comparison offers tools immediately after shortlist',schoolCompare.indexOf('id="school-next-steps"')<schoolCompare.indexOf('id="capabilities"'));
+check('school comparison TOC links to practical project plan',schoolCompare.includes('["#school-next-steps", "Plan your project"]'));
+check('school comparison links to requirements guide',schoolCompare.includes('href="/guides/nz-school-pa-paging-requirements"'));
+for(const [href,label] of [
+  ['/pricing-tool','Estimate project cost'],
+  ['/tools/funding-check','Check funding pathways'],
+  ['/tools/finance-check','Check finance options'],
+]) check(`school comparison next-step ${label}`,schoolCompare.includes(`href="${href}" className="sc-btn`)&&schoolCompare.includes(`>${label}</Link>`));
+check('school comparison human help maintains referral model',schoolCompare.includes('school_comparison_shortlist')&&schoolCompare.includes('We do not forward your enquiry'));
+check('school comparison keeps one shortlist-specific enquiry CTA',schoolCompare.split('sourceTopic="school_comparison_shortlist"').length===2);
+check('school intercom topic has contextual link from school hub and comparison',text('src/app/schools/page.tsx').includes('href="/systems/ip-intercom"')&&schoolCompare.includes('href="/systems/ip-intercom"'));
+const modal=text('src/components/enquiry/ProjectEnquiryModal.tsx');
+check('page-only editorial context still asks for project description',modal.includes('!["sourcepage", "topic", "industry"].includes(')&&modal.includes('What are you trying to improve? *'));
+check('all three tool results still supply answer context',text('src/components/pricing/ResultView.tsx').includes('estimateSummary=')&&text('src/app/tools/funding-check/FundingCheckTool.tsx').includes('context={fundingContext(answers, result)}')&&text('src/app/tools/finance-check/FinanceCheckTool.tsx').includes('context={financeContext}'));
+
 const meta=text('src/lib/content-meta.ts');
 for(const [route,date] of [
   ['/systems/school-bell-announcements','2026-10-20'],

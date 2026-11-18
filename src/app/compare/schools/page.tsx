@@ -751,6 +751,7 @@ export default function ComparePage() {
         </p>
         <PageContents label="On this comparison page" items={[
               ["#shortlist", "Which system fits?"],
+              ["#school-next-steps", "Plan your project"],
               ["#capabilities", "Feature comparison"],
               ["#platforms", "Platform profiles"],
               ["#2n", "2N and legacy systems"],
@@ -817,9 +818,46 @@ export default function ComparePage() {
           <p className="mt-4 text-sm leading-relaxed text-[var(--sc-slate)]">
             <a href="#2n" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">2N has a different role</a>: current IP intercom plus a legacy school-paging history. <a href="#other-architectures" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">Traditional 100V, AtlasIED and Bosch PRAESENSA</a> are covered below where simpler PA or specialist requirements change the brief.
           </p>
-          <div className="mt-5 text-sm text-[var(--sc-slate)]">
-            Want help narrowing the options? <ProjectHelpLauncher mode="system_selection" sourceTopic="school_comparison_shortlist"
-              buttonLabel="Ask about your school’s requirements" className="sc-text-action" />
+          <p className="mt-5 text-sm leading-relaxed text-[var(--sc-slate)]">
+            Mainly replacing unreliable bell scheduling? Start with the <Link href="/systems/school-bell-announcements" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">school bell upgrade approaches</Link>.
+            If classroom talkback or gate calling is the priority, read the <Link href="/systems/ip-intercom" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">school IP intercom guide</Link> before comparing whole-campus systems.
+          </p>
+        </div>
+      </section>
+
+      <section id="school-next-steps" aria-labelledby="school-next-steps-title" className="sc-container sc-container-wide scroll-mt-24 py-10 md:py-12">
+        <div className="rounded-2xl border border-[var(--sc-border)] bg-white p-6 shadow-sm md:p-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--sc-blue-700)]">Put the comparison to work</p>
+          <h2 id="school-next-steps-title" className="mt-2 text-2xl font-semibold text-[var(--sc-blue-900)]">
+            Turn your school shortlist into a practical project plan
+          </h2>
+          <p className="mt-3 max-w-3xl leading-relaxed text-[var(--sc-slate)]">
+            A shortlist is only the start. Give each supplier the same requirements, then estimate the project cost and consider funding.
+            The <Link href="/guides/nz-school-pa-paging-requirements" className="font-semibold text-[var(--sc-blue-700)] underline underline-offset-2">NZ school PA and paging requirements guide</Link> helps you prepare a comparable brief.
+          </p>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            <div className="flex flex-col rounded-xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-5">
+              <h3 className="font-semibold text-[var(--sc-navy)]">Get a price estimate</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--sc-slate)]">See an indicative NZ installed cost range for the areas and functions your school needs.</p>
+              <Link href="/pricing-tool" className="sc-btn-primary mt-4">Estimate project cost</Link>
+            </div>
+            <div className="flex flex-col rounded-xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-5">
+              <h3 className="font-semibold text-[var(--sc-navy)]">Check school funding</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--sc-slate)]">Explore whether your school project may fit a property-funding pathway. This is not an approval.</p>
+              <Link href="/tools/funding-check" className="sc-btn-secondary mt-4">Check funding pathways</Link>
+            </div>
+            <div className="flex flex-col rounded-xl border border-[var(--sc-border)] bg-[var(--sc-blue-50)] p-5">
+              <h3 className="font-semibold text-[var(--sc-navy)]">Explore finance options</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--sc-slate)]">Check whether finance or leasing is worth discussing. This is not a finance approval or offer.</p>
+              <Link href="/tools/finance-check" className="sc-btn-secondary mt-4">Check finance options</Link>
+            </div>
+          </div>
+          <div className="mt-6 border-t border-[var(--sc-border)] pt-5">
+            <p className="text-sm leading-relaxed text-[var(--sc-slate)]">
+              Prefer a human next step? SmartComms can review your school project and reply with providers we think are best suited for you to contact. We do not forward your enquiry to those providers.
+            </p>
+            <ProjectHelpLauncher mode="system_selection" sourceTopic="school_comparison_shortlist"
+              buttonLabel="Ask SmartComms who to contact" className="sc-btn-secondary mt-3" />
           </div>
         </div>
       </section>
